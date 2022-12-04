@@ -1,4 +1,4 @@
-# Otus Electron Team Project
+#  Otus Electron Team Project
 
 ## GYM managment software
 System to manage you fitness center, to engage and support visitors and members, to schedule activities for stuff , class occupancies, manage training processes for visitors. 
