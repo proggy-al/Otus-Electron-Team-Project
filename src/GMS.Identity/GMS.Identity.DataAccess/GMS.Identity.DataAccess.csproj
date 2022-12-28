@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\GMS.Identity.Core\GMS.Identity.Core.csproj" />
+  </ItemGroup>
+
 </Project>
