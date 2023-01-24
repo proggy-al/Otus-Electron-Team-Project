@@ -33,6 +33,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GMS.Communication.WebHost",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GMS.Communication.Test", "src\GMS.Communication\GMS.Communication.Test\GMS.Communication.Test.csproj", "{EB5B5527-CE73-40AB-8063-6EE62632F83B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GMS.Identity.Client", "src\GMS.Identity\GMS.Identity.Client\GMS.Identity.Client\GMS.Identity.Client.csproj", "{913F6797-F82B-46A2-900B-56FAF2C065AF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,6 +89,10 @@ Global
 		{EB5B5527-CE73-40AB-8063-6EE62632F83B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EB5B5527-CE73-40AB-8063-6EE62632F83B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EB5B5527-CE73-40AB-8063-6EE62632F83B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{913F6797-F82B-46A2-900B-56FAF2C065AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{913F6797-F82B-46A2-900B-56FAF2C065AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{913F6797-F82B-46A2-900B-56FAF2C065AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{913F6797-F82B-46A2-900B-56FAF2C065AF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -104,6 +110,7 @@ Global
 		{CD3B211C-B6A3-45DF-B64E-740DE8FDEB7D} = {CA3FB1E9-110B-4A32-8A63-909A6BD4165E}
 		{566B4DCA-D9E3-41E0-81C0-B0F3A08D49C2} = {CA3FB1E9-110B-4A32-8A63-909A6BD4165E}
 		{EB5B5527-CE73-40AB-8063-6EE62632F83B} = {CA3FB1E9-110B-4A32-8A63-909A6BD4165E}
+		{913F6797-F82B-46A2-900B-56FAF2C065AF} = {0530961E-34DF-474B-9B0E-6435784E46A0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F1D55C27-103C-4F25-9202-DB392D2D3B74}

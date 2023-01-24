@@ -1,0 +1,30 @@
+{
+  "SwaggerOptions": {
+    "Doc": {
+      "Name": "v1",
+      "OpenApiInfo": {
+        "Title": "PMS.Identity.App",
+        "Version": "v1"
+      }
+    },
+    "SecurityDefinition": {
+      "Name": "Bearer",
+      "OpenApiSecurityScheme": {
+        "Name": "Authorization",
+        "Type": 0,
+        "Scheme": "Bearer",
+        "BearerFormat": "JWT",
+        "In": 1,
+        "Description": "JWT Authorization header using the Bearer scheme. \r\n\r\n Enter 'Bearer' [space] and then your token in the text input below.\r\n\r\nExample: \"Bearer 1safsfsdfdfd\""
+      }
+    },
+    "SecurityRequirement": {
+      "OpenApiSecurityScheme": {
+        "OpenApiReference": {
+          "Type": 6,
+          "Id": "Bearer"
+        }
+      }
+    }
+  }
+}
