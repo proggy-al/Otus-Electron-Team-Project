@@ -17,21 +17,23 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GMS.Identity", "GMS.Identit
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GMS.Communication", "GMS.Communication", "{CA3FB1E9-110B-4A32-8A63-909A6BD4165E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GMS.Identity.Core", "src\GMS.Identity\GMS.Identity.Core\GMS.Identity.Core.csproj", "{F6B2FCD2-0773-4CE6-8604-2E3609E33DE9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GMS.Identity.Core", "src\GMS.Identity\GMS.Identity.Core\GMS.Identity.Core.csproj", "{F6B2FCD2-0773-4CE6-8604-2E3609E33DE9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GMS.Identity.DataAccess", "src\GMS.Identity\GMS.Identity.DataAccess\GMS.Identity.DataAccess.csproj", "{58E71A9A-C398-4E93-B324-6C68CA6F4F56}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GMS.Identity.DataAccess", "src\GMS.Identity\GMS.Identity.DataAccess\GMS.Identity.DataAccess.csproj", "{58E71A9A-C398-4E93-B324-6C68CA6F4F56}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GMS.Identity.WebHost", "src\GMS.Identity\GMS.Identity.WebHost\GMS.Identity.WebHost.csproj", "{B9699C39-534B-4799-A680-F774537A99DC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GMS.Identity.WebHost", "src\GMS.Identity\GMS.Identity.WebHost\GMS.Identity.WebHost.csproj", "{B9699C39-534B-4799-A680-F774537A99DC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GMS.Identity.Test", "src\GMS.Identity\GMS.Identity.Test\GMS.Identity.Test.csproj", "{AA2F05A4-841D-42B8-836D-88C4914C7949}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GMS.Identity.Test", "src\GMS.Identity\GMS.Identity.Test\GMS.Identity.Test.csproj", "{AA2F05A4-841D-42B8-836D-88C4914C7949}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GMS.Communication.Core", "src\GMS.Communication\GMS.Communication.Core\GMS.Communication.Core.csproj", "{0E41473F-AAC1-4A8E-815C-003DC670C66B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GMS.Communication.Core", "src\GMS.Communication\GMS.Communication.Core\GMS.Communication.Core.csproj", "{0E41473F-AAC1-4A8E-815C-003DC670C66B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GMS.Communication.DataAccess", "src\GMS.Communication\GMS.Communication.DataAccess\GMS.Communication.DataAccess.csproj", "{CD3B211C-B6A3-45DF-B64E-740DE8FDEB7D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GMS.Communication.DataAccess", "src\GMS.Communication\GMS.Communication.DataAccess\GMS.Communication.DataAccess.csproj", "{CD3B211C-B6A3-45DF-B64E-740DE8FDEB7D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GMS.Communication.WebHost", "src\GMS.Communication\GMS.Communication.WebHost\GMS.Communication.WebHost.csproj", "{566B4DCA-D9E3-41E0-81C0-B0F3A08D49C2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GMS.Communication.WebHost", "src\GMS.Communication\GMS.Communication.WebHost\GMS.Communication.WebHost.csproj", "{566B4DCA-D9E3-41E0-81C0-B0F3A08D49C2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GMS.Communication.Test", "src\GMS.Communication\GMS.Communication.Test\GMS.Communication.Test.csproj", "{EB5B5527-CE73-40AB-8063-6EE62632F83B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GMS.Communication.Test", "src\GMS.Communication\GMS.Communication.Test\GMS.Communication.Test.csproj", "{EB5B5527-CE73-40AB-8063-6EE62632F83B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GMS.Identity.Client", "src\GMS.Identity\GMS.Identity.Client\GMS.Identity.Client\GMS.Identity.Client.csproj", "{913F6797-F82B-46A2-900B-56FAF2C065AF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -87,6 +89,10 @@ Global
 		{EB5B5527-CE73-40AB-8063-6EE62632F83B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EB5B5527-CE73-40AB-8063-6EE62632F83B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EB5B5527-CE73-40AB-8063-6EE62632F83B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{913F6797-F82B-46A2-900B-56FAF2C065AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{913F6797-F82B-46A2-900B-56FAF2C065AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{913F6797-F82B-46A2-900B-56FAF2C065AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{913F6797-F82B-46A2-900B-56FAF2C065AF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -104,6 +110,7 @@ Global
 		{CD3B211C-B6A3-45DF-B64E-740DE8FDEB7D} = {CA3FB1E9-110B-4A32-8A63-909A6BD4165E}
 		{566B4DCA-D9E3-41E0-81C0-B0F3A08D49C2} = {CA3FB1E9-110B-4A32-8A63-909A6BD4165E}
 		{EB5B5527-CE73-40AB-8063-6EE62632F83B} = {CA3FB1E9-110B-4A32-8A63-909A6BD4165E}
+		{913F6797-F82B-46A2-900B-56FAF2C065AF} = {0530961E-34DF-474B-9B0E-6435784E46A0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F1D55C27-103C-4F25-9202-DB392D2D3B74}
