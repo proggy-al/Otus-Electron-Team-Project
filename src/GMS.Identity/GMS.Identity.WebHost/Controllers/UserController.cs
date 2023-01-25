@@ -27,12 +27,22 @@ public class UserController : ControllerBase
         _authOptions = authOptions; 
     }
 
+    /// <summary>
+    /// Get user by ID, should be authorize as Admin or System
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    [RequirePrivelege(Priviliges.Administrator, Priviliges.System)]
     [HttpGet(IdentityRouting.GetUser)]
     public async Task<UserApiModel?> GetUser([FromRoute] Guid id)
     {
         return await _userRepository.GetUser(id);
     }
 
+    /// <summary>
+    /// Get all users , should be authorize as Admin or System
+    /// </summary>
+    /// <returns></returns>
     [RequirePrivelege(Priviliges.Administrator, Priviliges.System)]
     [HttpGet(IdentityRouting.GetAllUsers)]
     public async Task<List<UserApiModel>> GetAllUsers()
@@ -43,6 +53,12 @@ public class UserController : ControllerBase
         return res;
     }
 
+    /// <summary>
+    /// Create user, should be authorize as Admin or System
+    /// </summary>
+    /// <param name="user"></param>
+    /// <returns></returns>
+    [RequirePrivelege(Priviliges.Administrator, Priviliges.System)]
     [HttpPost(IdentityRouting.CreateUser)]
     public async Task<ActionResult<UserApiModel>>CreateUser([FromBody] UserCreateApiModel user)
     {
@@ -57,6 +73,12 @@ public class UserController : ControllerBase
         }
     }
 
+    /// <summary>
+    /// Update user, should be authorize as Admin or System
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="user"></param>
+    /// <returns></returns>
     [RequirePrivelege(Priviliges.Administrator, Priviliges.System)]
     [HttpPut(IdentityRouting.PatchUser)]
     public async Task<ActionResult> PatchUser([FromRoute] Guid id, [FromBody] UserPatchApiModel user)
@@ -77,6 +99,11 @@ public class UserController : ControllerBase
         }
     }
 
+    /// <summary>
+    /// Delete user, should be authorize as Admin or System
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
     [RequirePrivelege(Priviliges.Administrator, Priviliges.System)]
     [HttpDelete(IdentityRouting.DeleteUser)]
     public async Task<ActionResult> DeleteUser([FromRoute] Guid id)
@@ -96,7 +123,11 @@ public class UserController : ControllerBase
         }
     }
 
-
+    /// <summary>
+    /// Athorize user, without any restriction
+    /// </summary>
+    /// <param name="user"></param>
+    /// <returns></returns>
     [HttpPost(IdentityRouting.GetToken)]
     public async Task<IActionResult> Token([FromBody] UserAuthorizeApiModel user)
     {
