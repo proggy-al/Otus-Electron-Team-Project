@@ -1,5 +1,6 @@
 ﻿using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
+using System.Reflection;
 
 namespace GMS.Identity.WebHost.Infrastructure;
 
@@ -7,6 +8,8 @@ public class SwaggerOptions
 {
     public static Action<SwaggerGenOptions> SwaggerGenOptions(SwaggerGenOptions options,IConfiguration configuration)
     {
+        var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+        
         return options =>
         {
             options.SwaggerDoc(configuration.GetSection("SwaggerOptions:Doc:Name").Value, new OpenApiInfo { Title = configuration.GetSection("SwaggerOptions:Doc:OpenApiInfo:Title").Value, Version = configuration.GetSection("SwaggerOptions:Doc:OpenApiInfo:Version").Value });
@@ -29,6 +32,9 @@ public class SwaggerOptions
                       new string[] {}
              }
             });
+
+            options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
+
         };
         
 

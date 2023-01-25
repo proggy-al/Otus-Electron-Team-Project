@@ -1,4 +1,5 @@
 using GMS.Identity.WebHost;
+using Microsoft.AspNetCore.Builder;
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
@@ -25,6 +26,7 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    
 }
 
 app.UseHttpsRedirection();
