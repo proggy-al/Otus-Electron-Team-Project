@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -64,8 +65,24 @@ namespace GMS.Identity.Core.Domain.Administration
             return this.UserName == other.UserName;
         }
 
-        public override string ToString()
+        public static bool operator ==(User user1, User user2)
         {
+            if (((object)user1) == null || ((object)user2) == null)
+                return Object.Equals(user1, user2);
+
+            return user1.Equals(user2);
+        }
+
+        public static bool operator !=(User user1, User user2)
+        {
+            if (((object)user1) == null || ((object)user2) == null)
+                return !Object.Equals(user1, user2);
+
+            return !(user1.Equals(user2));
+        }
+
+        public override string ToString()
+        {            
             return $"{this.Id} - {this.UserName} - {this.TelegramUserName}";
         }
     }
