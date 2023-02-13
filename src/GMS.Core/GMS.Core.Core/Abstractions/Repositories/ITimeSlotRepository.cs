@@ -7,10 +7,12 @@ namespace GMS.Core.Core.Abstractions.Repositories
     {
 
         /// <summary>
-        /// Получить список временных интервалов за день
+        /// Получить список временных интервалов за день 
         /// </summary>
         /// <param name="date">дата</param>
+        /// <param name="fitnessClubId">идентификатор фитнес клуба</param>
+        /// <param name="trainerId">идентификатор тренера</param>
         /// <returns>список временных интервалов</returns>
-        Task<List<TimeSlot>> GetAllPerDayAsync(DateOnly date);
+        Task<List<TimeSlot>> GetAllPerDayAsync(DateOnly date, Guid fitnessClubId, Guid trainerId);
     }
 }
