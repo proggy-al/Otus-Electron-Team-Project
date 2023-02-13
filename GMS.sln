@@ -9,7 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GMS.Core", "GMS.Core", "{23
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GMS.Core.WebHost", "src\GMS.Core\GMS.Core.WebHost\GMS.Core.WebHost.csproj", "{752D2B69-20CB-4705-BEDE-E66F2BCA7658}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GMS.Core.DataAccess", "src\GMS.Core\GMS.Core.DataAccess\GMS.Core.DataAccess\GMS.Core.DataAccess.csproj", "{8663781F-4216-45C5-A74B-0D71FDE3EB1A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GMS.Core.DataAccess", "src\GMS.Core\GMS.Core.DataAccess\GMS.Core.DataAccess.csproj", "{8663781F-4216-45C5-A74B-0D71FDE3EB1A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GMS.Core.Test", "src\GMS.Core\GMS.Core.Test\GMS.Core.Test.csproj", "{A53D05E6-77A3-4246-B2BF-1280C7EAAD35}"
 EndProject
