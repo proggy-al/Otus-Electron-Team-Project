@@ -19,6 +19,11 @@ namespace GMS.Core.Core.Domain
         public Guid UserId { get; set; }
 
         /// <summary>
+        /// Временной интервал 
+        /// </summary>
+        public TimeSlot TimeSlot { get; set; }
+
+        /// <summary>
         /// Идентификатор временного интервала
         /// </summary>
         public Guid TimeSlotId { get; set; }
@@ -31,9 +36,6 @@ namespace GMS.Core.Core.Domain
         /// <summary>
         /// Оценка за тренировку
         /// </summary>
-        public uint Points { get; set; }
-
-        [ForeignKey("TimeSlotId")]
-        public TimeSlot TimeSlot { get; set; }
+        public int Points { get; set; }
     }
 }

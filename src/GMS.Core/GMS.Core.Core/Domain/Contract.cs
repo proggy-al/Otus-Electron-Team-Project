@@ -14,6 +14,11 @@ namespace GMS.Core.Core.Domain
         public Guid Id { get; set; }
 
         /// <summary>
+        /// Продукт
+        /// </summary>
+        public Product Product { get; set; }
+
+        /// <summary>
         /// Идентификатор продукта
         /// </summary>
         public Guid ProductId { get; set; }
@@ -29,6 +34,11 @@ namespace GMS.Core.Core.Domain
         public Guid UserId { get; set; }
 
         /// <summary>
+        /// Фитнес клуб
+        /// </summary>
+        public FitnessClub FitnessClub { get; set; }
+
+        /// <summary>
         /// Идентификатор фитнес клуба
         /// </summary>
         public Guid FitnessClubId { get; set; }
@@ -42,11 +52,5 @@ namespace GMS.Core.Core.Domain
         /// Дата завершения контракта
         /// </summary>
         public DateTime EndDate { get; set; }
-
-        [ForeignKey("FitnessClubId")]
-        public FitnessClub FitnessClub { get; set; }
-
-        [ForeignKey("ProductId")]
-        public Product Product { get; set; }
     }
 }

@@ -31,5 +31,26 @@ namespace GMS.Core.Core.Domain
         /// Идентификатор владельца
         /// </summary>
         public Guid OwnerId { get; set; }
+
+
+        /// <summary>
+        /// Зоны
+        /// </summary>
+        public IEnumerable<Area> Areas { get; set; }
+
+        /// <summary>
+        /// Продукты
+        /// </summary>
+        public IEnumerable<Product> Products { get; set; }
+
+        /// <summary>
+        /// Контракты
+        /// </summary>
+        public IEnumerable<Contract> Contracts { get; set; }
+
+        /// <summary>
+        /// Временные интервалы
+        /// </summary>
+        public IEnumerable<TimeSlot> TimeSlots { get; set; }
     }
 }

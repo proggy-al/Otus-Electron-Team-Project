@@ -31,7 +31,7 @@ namespace GMS.Core.Core.Domain
         /// <summary>
         /// длительноть тренировки
         /// </summary>
-        public uint Duration { get; set; }
+        public int Duration { get; set; }
 
         /// <summary>
         /// Идентификатор тренера
@@ -39,19 +39,29 @@ namespace GMS.Core.Core.Domain
         public Guid TrainerId { get; set; }
 
         /// <summary>
+        /// Зона
+        /// </summary>
+        public Area Area { get; set; }
+
+        /// <summary>
         /// Идентификатор зоны
         /// </summary>
         public Guid AreaId { get; set; }
+
+        /// <summary>
+        /// Фитнес клуб
+        /// </summary>
+        public FitnessClub FitnessClub { get; set; }
 
         /// <summary>
         /// Идентификатор фитнес клуба
         /// </summary>
         public Guid FitnessClubId { get; set; }
 
-        [ForeignKey("AreaId")]
-        public Area Area { get; set; }
 
-        [ForeignKey("FitnessClubId")]
-        public FitnessClub FitnessClub { get; set; }
+        /// <summary>
+        /// Тренировка
+        /// </summary>
+        public Training Training { get; set; }
     }
 }

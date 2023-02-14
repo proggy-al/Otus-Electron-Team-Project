@@ -26,19 +26,27 @@ namespace GMS.Core.Core.Domain
         /// <summary>
         /// Количество (тренировок в пакете персональных тренировок, дней в абонементе на свободное посещение, минут в абонементе на солярий)
         /// </summary>
-        public uint Quantity { get; set; }
+        public int Quantity { get; set; }
 
         /// <summary>
         /// Цена
         /// </summary>
-        public uint Price { get; set; }
+        public int Price { get; set; }
+
+        /// <summary>
+        /// Фитнес клуб
+        /// </summary>
+        public FitnessClub FitnessClub { get; set; }
 
         /// <summary>
         /// Идентификатор фитнес клуба
         /// </summary>
         public Guid FitnessClubId { get; set; }
 
-        [ForeignKey("FitnessClubId")]
-        public FitnessClub FitnessClub { get; set; }
+
+        /// <summary>
+        /// Контракт
+        /// </summary>
+        public Contract Contract { get; set; }
     }
 }
