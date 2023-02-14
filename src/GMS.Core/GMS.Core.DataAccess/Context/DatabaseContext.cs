@@ -27,8 +27,6 @@ namespace GMS.Core.DataAccess.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // ToDo: создать ограничения уникальности для всех сущностей
-
             base.OnModelCreating(modelBuilder);
             modelBuilder.HasPostgresExtension("uuid-ossp");
 

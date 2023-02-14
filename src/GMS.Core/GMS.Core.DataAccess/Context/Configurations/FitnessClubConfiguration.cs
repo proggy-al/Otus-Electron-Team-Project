@@ -39,6 +39,7 @@ namespace GMS.Core.DataAccess.Context.Configurations
                    .IsUnicode(false);
             builder.Property(p => p.OwnerId)
                    .IsRequired();
+
             builder.HasIndex(p => p.Name)
                    .IsUnique();
         }

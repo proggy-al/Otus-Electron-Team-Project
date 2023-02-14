@@ -22,7 +22,8 @@ namespace GMS.Core.DataAccess.Context.Configurations
                    .IsUnicode(false);
             builder.Property(p => p.FitnessClubId)
                    .IsRequired();
-            builder.HasIndex(p => p.Name)
+
+            builder.HasIndex(p => new { p.Name, p.FitnessClubId })
                    .IsUnique();
         }
     }
