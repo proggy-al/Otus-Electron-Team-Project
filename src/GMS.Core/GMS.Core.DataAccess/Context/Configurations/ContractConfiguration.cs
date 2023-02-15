@@ -24,6 +24,8 @@ namespace GMS.Core.DataAccess.Context.Configurations
                    .IsRequired();
             builder.Property(p => p.EndDate)
                    .IsRequired();
+            builder.Property(p => p.Deleted)
+                   .HasDefaultValue(false);
 
             // Gold's Gym Venice
             builder.HasData

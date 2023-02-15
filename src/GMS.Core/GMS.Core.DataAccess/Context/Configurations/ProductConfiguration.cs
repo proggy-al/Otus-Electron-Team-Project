@@ -30,6 +30,8 @@ namespace GMS.Core.DataAccess.Context.Configurations
                    .IsRequired();
             builder.Property(p => p.FitnessClubId)
                    .IsRequired();
+            builder.Property(p => p.Deleted)
+                   .HasDefaultValue(false);
 
             builder.HasIndex(p => new { p.Name, p.FitnessClubId })
                    .IsUnique();

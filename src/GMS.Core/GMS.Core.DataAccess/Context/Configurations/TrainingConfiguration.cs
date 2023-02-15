@@ -22,6 +22,8 @@ namespace GMS.Core.DataAccess.Context.Configurations
                    .IsRequired();
             builder.Property(p => p.Points)
                    .IsRequired();
+            builder.Property(p => p.Deleted)
+                   .HasDefaultValue(false);
 
             builder.HasIndex(p => p.TimeSlotId)
                    .IsUnique();
