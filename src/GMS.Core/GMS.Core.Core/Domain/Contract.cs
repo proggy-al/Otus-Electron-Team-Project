@@ -52,5 +52,10 @@ namespace GMS.Core.Core.Domain
         /// Дата завершения контракта
         /// </summary>
         public DateTime EndDate { get; set; }
+
+        /// <summary>
+        /// Удалено
+        /// </summary>
+        public bool Deleted { get; set; }
     }
 }

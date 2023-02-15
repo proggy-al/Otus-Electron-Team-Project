@@ -32,6 +32,11 @@ namespace GMS.Core.Core.Domain
         /// </summary>
         public Guid OwnerId { get; set; }
 
+        /// <summary>
+        /// Удалено
+        /// </summary>
+        public bool Deleted { get; set; }
+
 
         /// <summary>
         /// Зоны

@@ -37,5 +37,10 @@ namespace GMS.Core.Core.Domain
         /// Оценка за тренировку
         /// </summary>
         public int Points { get; set; }
+
+        /// <summary>
+        /// Удалено
+        /// </summary>
+        public bool Deleted { get; set; }
     }
 }

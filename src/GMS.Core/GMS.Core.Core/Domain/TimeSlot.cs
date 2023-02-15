@@ -58,6 +58,11 @@ namespace GMS.Core.Core.Domain
         /// </summary>
         public Guid FitnessClubId { get; set; }
 
+        /// <summary>
+        /// Удалено
+        /// </summary>
+        public bool Deleted { get; set; }
+
 
         /// <summary>
         /// Тренировка
