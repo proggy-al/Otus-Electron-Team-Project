@@ -10,6 +10,8 @@ try
     builder.Services.ConfigureLogger();
     builder.Services.ConfigureMapper();
     builder.Services.AddDbContext<DatabaseContext>();
+    builder.Services.AddRepositories();
+
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.ConfigureSwagger();
     builder.Services.AddAuthorization();
