@@ -1,5 +1,4 @@
 ﻿using GMS.Core.Core.Abstractions.Repositories.Base;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GMS.Core.Core.Domain
 {
