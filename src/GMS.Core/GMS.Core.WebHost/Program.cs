@@ -7,15 +7,16 @@ try
     var builder = WebApplication.CreateBuilder(args);
     builder.Environment.ApplicationName = typeof(Program).Assembly.FullName;
 
-    builder.Services.ConfigureLogger();
-    builder.Services.ConfigureMapper();
-    builder.Services.AddDbContext<DatabaseContext>();
-    builder.Services.AddRepositories();
-
-    builder.Services.AddEndpointsApiExplorer();
-    builder.Services.ConfigureSwagger();
-    builder.Services.AddAuthorization();
-    builder.Services.AddControllers();
+    builder.Services
+        .ConfigureLogger()
+        .ConfigureMapper()
+        .AddDbContext<DatabaseContext>()
+        .AddRepositories()
+        .AddServices()
+        .AddEndpointsApiExplorer()
+        .ConfigureSwagger()
+        .AddAuthorization()
+        .AddControllers();
 
     var app = WebApplicationConfiguration.Configure(builder);
 
