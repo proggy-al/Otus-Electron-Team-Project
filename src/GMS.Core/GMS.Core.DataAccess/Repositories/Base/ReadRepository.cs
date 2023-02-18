@@ -35,7 +35,7 @@ namespace GMS.Core.DataAccess.Repositories.Base
         /// <param name="cancellationToken">Токен отмены</param>
         /// <param name="asNoTracking">Вызвать с AsNoTracking</param>
         /// <returns>Список сущностей</returns>
-        public async Task<List<T>> GetAllAsync(CancellationToken cancellationToken, bool asNoTracking = false)
+        public virtual async Task<List<T>> GetAllAsync(CancellationToken cancellationToken, bool asNoTracking = false)
         {
             return await GetAll(asNoTracking).ToListAsync(cancellationToken);
         }

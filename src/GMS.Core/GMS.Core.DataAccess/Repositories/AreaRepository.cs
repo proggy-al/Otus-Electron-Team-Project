@@ -2,6 +2,7 @@
 using GMS.Core.DataAccess.Repositories.Base;
 using GMS.Core.Core.Domain;
 using Microsoft.EntityFrameworkCore;
+using GMS.Core.DataAccess.Context;
 
 namespace GMS.Core.DataAccess.Repositories
 {
@@ -10,10 +11,7 @@ namespace GMS.Core.DataAccess.Repositories
     /// </summary>
     public class AreaRepository : Repository<Area, Guid>, IAreaRepository
     {
-        public AreaRepository(DbContext context) : base(context)
-        {
-
-        }
+        public AreaRepository(DatabaseContext context) : base(context) { }
 
         /// <summary>
         /// Получить постраничный список

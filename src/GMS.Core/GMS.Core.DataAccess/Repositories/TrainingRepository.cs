@@ -1,5 +1,6 @@
 ﻿using GMS.Core.Core.Abstractions.Repositories;
 using GMS.Core.Core.Domain;
+using GMS.Core.DataAccess.Context;
 using GMS.Core.DataAccess.Repositories.Base;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,10 +11,7 @@ namespace GMS.Core.DataAccess.Repositories
     /// </summary>
     public class TrainingRepository : Repository<Training, Guid>, ITrainingRepository
     {
-        public TrainingRepository(DbContext context) : base(context)
-        {
-
-        }
+        public TrainingRepository(DatabaseContext context) : base(context) { }
 
         /// <summary>
         /// Получить постраничный список
