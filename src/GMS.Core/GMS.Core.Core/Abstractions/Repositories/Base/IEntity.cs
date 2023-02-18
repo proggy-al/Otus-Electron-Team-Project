@@ -10,5 +10,7 @@
         /// Идентификатор
         /// </summary>
         TId Id { get; set; }
+
+        bool Deleted { get; set; }
     }
 }
