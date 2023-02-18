@@ -4,9 +4,9 @@ namespace GMS.Core.WebHost.Configurations
 {
     public static class SwaggerConfiguration
     {
-        public static void ConfigureSwagger(this IServiceCollection services)
+        public static IServiceCollection ConfigureSwagger(this IServiceCollection serviceCollection)
         {
-            services.AddSwaggerGen(options =>
+            serviceCollection.AddSwaggerGen(options =>
             {
                 options.SwaggerDoc("v1", new OpenApiInfo
                 {
@@ -22,7 +22,7 @@ namespace GMS.Core.WebHost.Configurations
                     {
                         Password = new OpenApiOAuthFlow
                         {
-                            TokenUrl = new Uri("https://localhost:5067/user/authorize"),
+                            TokenUrl = new Uri("https://localhost:5067/user/authorize"), // ToDo: перенести в настройки
                             Scopes = new Dictionary<string, string> { }
                         }
                     }
@@ -46,6 +46,7 @@ namespace GMS.Core.WebHost.Configurations
                     }
                 });
             });
+            return serviceCollection;
         }
     }
 }

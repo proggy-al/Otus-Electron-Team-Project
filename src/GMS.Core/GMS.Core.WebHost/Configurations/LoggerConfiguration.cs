@@ -4,8 +4,9 @@ namespace GMS.Core.WebHost.Configurations
 {
     public static class LoggerConfiguration
     {
-        public static void ConfigureLogger(this IServiceCollection services)
+        public static IServiceCollection ConfigureLogger(this IServiceCollection serviceCollection)
         {
+            // ToDo: перенести в настройки
             string UrlSeq = "http://db_seq:5341";
 
             Log.Logger = new Serilog.LoggerConfiguration()
@@ -13,7 +14,9 @@ namespace GMS.Core.WebHost.Configurations
                 .WriteTo.Seq(UrlSeq)
                 .CreateLogger();
 
-            services.AddSingleton(Log.Logger);
+            serviceCollection.AddSingleton(Log.Logger);
+
+            return serviceCollection;
         }
     }
 }
