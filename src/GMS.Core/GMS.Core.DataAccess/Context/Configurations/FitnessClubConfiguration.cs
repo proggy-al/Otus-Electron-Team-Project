@@ -43,8 +43,8 @@ namespace GMS.Core.DataAccess.Context.Configurations
             builder.Property(p => p.Deleted)
                    .HasDefaultValue(false);
 
-            builder.HasIndex(p => p.Name)
-                   .IsUnique();
+            /*builder.HasIndex(p => new { p.Name, p.OwnerId })
+                   .IsUnique();*/
 
 
             var goldsGym = new FitnessClub()
@@ -58,7 +58,8 @@ namespace GMS.Core.DataAccess.Context.Configurations
                 "bodybuilding gym in 1965 to today, Gold’s Gym delivers a dynamic fitness experience focused on " +
                 "strength and performance. View our local gym membership options and join Gold’s Gym Venice now.",
                 Address = "360 Hampton Dr, Venice, CA 90291, USA",
-                OwnerId = Guid.Parse("00000000-0000-0000-0000-000000000001")    //Joe Gold 
+                OwnerId = Guid.Parse("00000000-0000-0000-0000-000000000001"),    //Joe Gold 
+                Deleted = false
             };
 
             var almaz = new FitnessClub()
@@ -73,7 +74,8 @@ namespace GMS.Core.DataAccess.Context.Configurations
                 "Тренера клуба помогут клиентам составить индивидуальные программы тренировок, скорректируют диету, " +
                 "помогут распланировать распорядок дня, для желающих проведут персональные тренировки.",
                 Address = "Россия, Санкт-Петербург, ул. Воскова, д. 16",
-                OwnerId = Guid.Parse("00000000-0000-0000-0000-000000000002")    //Андрей Прокофьев
+                OwnerId = Guid.Parse("00000000-0000-0000-0000-000000000002"),    //Андрей Прокофьев
+                Deleted = false
             };
 
             builder.HasData(goldsGym, almaz);

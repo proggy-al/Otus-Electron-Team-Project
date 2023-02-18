@@ -38,7 +38,8 @@ namespace GMS.Core.DataAccess.Context.Configurations
                     UserId = Guid.Parse("00000000-0000-0000-0001-000000000001"),
                     FitnessClubId = Guid.Parse("f0000000-0000-0000-0000-000000000001"),
                     StartDate = DateTime.UtcNow,
-                    EndDate = DateTime.UtcNow.AddDays(365)
+                    EndDate = DateTime.UtcNow.AddDays(365),
+                    Deleted = false
                 },
                 new Contract
                 {
@@ -48,7 +49,8 @@ namespace GMS.Core.DataAccess.Context.Configurations
                     UserId = Guid.Parse("00000000-0000-0000-0001-000000000001"),
                     FitnessClubId = Guid.Parse("f0000000-0000-0000-0000-000000000001"),
                     StartDate = DateTime.UtcNow,
-                    EndDate = DateTime.UtcNow.AddDays(30)
+                    EndDate = DateTime.UtcNow.AddDays(30),
+                    Deleted = false
                 }
             ); ;
 
@@ -63,7 +65,8 @@ namespace GMS.Core.DataAccess.Context.Configurations
                     UserId = Guid.Parse("00000000-0000-0000-0001-000000000002"),
                     FitnessClubId = Guid.Parse("f0000000-0000-0000-0000-000000000002"),
                     StartDate = DateTime.UtcNow,
-                    EndDate = DateTime.UtcNow.AddDays(30)
+                    EndDate = DateTime.UtcNow.AddDays(30),
+                    Deleted = false
                 },
                 new Contract
                 {
@@ -73,7 +76,8 @@ namespace GMS.Core.DataAccess.Context.Configurations
                     UserId = Guid.Parse("00000000-0000-0000-0001-000000000002"),
                     FitnessClubId = Guid.Parse("f0000000-0000-0000-0000-000000000002"),
                     StartDate = DateTime.UtcNow,
-                    EndDate = DateTime.UtcNow.AddDays(30)
+                    EndDate = DateTime.UtcNow.AddDays(30),
+                    Deleted = false
                 }
             );
         }

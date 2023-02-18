@@ -37,8 +37,8 @@ namespace GMS.Core.DataAccess.Context.Configurations
             builder.Property(p => p.Deleted)
                    .HasDefaultValue(false);
 
-            builder.HasIndex(p => new { p.DateTime, p.TrainerId })
-                   .IsUnique();
+            /*builder.HasIndex(p => new { p.DateTime, p.TrainerId })
+                   .IsUnique();*/
         }
     }
 }

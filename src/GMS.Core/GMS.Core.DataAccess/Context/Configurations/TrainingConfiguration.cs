@@ -25,8 +25,8 @@ namespace GMS.Core.DataAccess.Context.Configurations
             builder.Property(p => p.Deleted)
                    .HasDefaultValue(false);
 
-            builder.HasIndex(p => p.TimeSlotId)
-                   .IsUnique();
+            /*builder.HasIndex(p => p.TimeSlotId)
+                   .IsUnique();*/
         }
     }
 }

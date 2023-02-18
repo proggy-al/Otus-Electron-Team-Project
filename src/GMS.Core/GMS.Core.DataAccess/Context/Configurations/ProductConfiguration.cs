@@ -33,8 +33,8 @@ namespace GMS.Core.DataAccess.Context.Configurations
             builder.Property(p => p.Deleted)
                    .HasDefaultValue(false);
 
-            builder.HasIndex(p => new { p.Name, p.FitnessClubId })
-                   .IsUnique();
+            /*builder.HasIndex(p => new { p.Name, p.FitnessClubId })
+                   .IsUnique();*/
 
             // Gold's Gym Venice
             builder.HasData
@@ -46,7 +46,8 @@ namespace GMS.Core.DataAccess.Context.Configurations
                     Description = "Free access to the club for 30 days",
                     Quantity = 30,
                     Price = 100, // $
-                    FitnessClubId = Guid.Parse("f0000000-0000-0000-0000-000000000001")
+                    FitnessClubId = Guid.Parse("f0000000-0000-0000-0000-000000000001"),
+                    Deleted = false
                 },
                 new Product
                 {
@@ -55,7 +56,8 @@ namespace GMS.Core.DataAccess.Context.Configurations
                     Description = "Free access to the club for 1 year",
                     Quantity = 365,
                     Price = 490,  // $
-                    FitnessClubId = Guid.Parse("f0000000-0000-0000-0000-000000000001")
+                    FitnessClubId = Guid.Parse("f0000000-0000-0000-0000-000000000001"),
+                    Deleted = false
                 },
                 new Product
                 {
@@ -64,7 +66,8 @@ namespace GMS.Core.DataAccess.Context.Configurations
                     Description = "for a month",
                     Quantity = 1,
                     Price = 65,   // $
-                    FitnessClubId = Guid.Parse("f0000000-0000-0000-0000-000000000001")
+                    FitnessClubId = Guid.Parse("f0000000-0000-0000-0000-000000000001"),
+                    Deleted = false
                 },
                 new Product
                 {
@@ -73,7 +76,8 @@ namespace GMS.Core.DataAccess.Context.Configurations
                     Description = "for a month",
                     Quantity = 8,
                     Price = 360,   // $
-                    FitnessClubId = Guid.Parse("f0000000-0000-0000-0000-000000000001")
+                    FitnessClubId = Guid.Parse("f0000000-0000-0000-0000-000000000001"),
+                    Deleted = false
                 }
             );
 
@@ -87,7 +91,8 @@ namespace GMS.Core.DataAccess.Context.Configurations
                     Description = "Свободное посещение клуба в течении 1 дня",
                     Quantity = 1,
                     Price = 500,    // рублей
-                    FitnessClubId = Guid.Parse("f0000000-0000-0000-0000-000000000002")
+                    FitnessClubId = Guid.Parse("f0000000-0000-0000-0000-000000000002"),
+                    Deleted = false
                 },
                 new Product
                 {
@@ -96,7 +101,8 @@ namespace GMS.Core.DataAccess.Context.Configurations
                     Description = "Свободное посещение клуба в течении 30 дней",
                     Quantity = 30,
                     Price = 2000,   // рублей
-                    FitnessClubId = Guid.Parse("f0000000-0000-0000-0000-000000000002")
+                    FitnessClubId = Guid.Parse("f0000000-0000-0000-0000-000000000002"),
+                    Deleted = false
                 },
                 new Product
                 {
@@ -105,7 +111,8 @@ namespace GMS.Core.DataAccess.Context.Configurations
                     Description = "на 1 месяц",
                     Quantity = 1,
                     Price = 2000,   // рублей
-                    FitnessClubId = Guid.Parse("f0000000-0000-0000-0000-000000000002")
+                    FitnessClubId = Guid.Parse("f0000000-0000-0000-0000-000000000002"),
+                    Deleted = false
                 },
                 new Product
                 {
@@ -114,7 +121,8 @@ namespace GMS.Core.DataAccess.Context.Configurations
                     Description = "на 1 месяц",
                     Quantity = 8,
                     Price = 12000,  // рублей
-                    FitnessClubId = Guid.Parse("f0000000-0000-0000-0000-000000000002")
+                    FitnessClubId = Guid.Parse("f0000000-0000-0000-0000-000000000002"),
+                    Deleted = false
                 }
             );
         }
