@@ -1,6 +1,9 @@
-var builder = WebApplication.CreateBuilder(args);
-var app = builder.Build();
+using GMS.Communication.WebHost.Hubs;
 
-app.MapGet("/", () => "Hello World!");
+var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddSignalR();
+var app = builder.Build();
+app.UseRouting();
+app.UseEndpoints(endpoints => endpoints.MapHub<ChatHub>($"/chatHub"));
 
 app.Run();
