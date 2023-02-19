@@ -16,6 +16,7 @@ builder.Services.AddCors(options =>
 
 builder.Configuration.AddJsonFile("identitysettings.json");
 builder.Configuration.AddJsonFile("swaggersettings.json");
+builder.Services.AddSignalR();
 
 Registration.ConfigureServices(builder.Services, builder.Configuration);
 
@@ -26,16 +27,15 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
-    
 }
 
 app.UseHttpsRedirection();
 
 app.UseCors(MyAllowSpecificOrigins);
 
-app.UseAuthentication();   // добавление middleware аутентификации 
+app.UseAuthentication();   // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ middleware пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ 
 
-app.UseAuthorization();   // добавление middleware авторизации 
+app.UseAuthorization();   // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ middleware пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ 
 
 app.MapControllers();
 
