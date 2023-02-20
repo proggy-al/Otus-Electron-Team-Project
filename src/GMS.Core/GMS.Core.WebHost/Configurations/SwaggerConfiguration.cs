@@ -22,7 +22,7 @@ namespace GMS.Core.WebHost.Configurations
                     {
                         Password = new OpenApiOAuthFlow
                         {
-                            TokenUrl = new Uri("https://localhost:5067/user/authorize"), // ToDo: перенести в настройки
+                            TokenUrl = new Uri("https://localhost:32786/user/authorize"), // ToDo: перенести в настройки
                             Scopes = new Dictionary<string, string> { }
                         }
                     }
