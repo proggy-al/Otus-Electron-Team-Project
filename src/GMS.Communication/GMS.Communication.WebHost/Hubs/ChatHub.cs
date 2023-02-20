@@ -8,8 +8,8 @@ namespace GMS.Communication.WebHost.Hubs
         //[Authorize]
         public async Task SendMessage(string message, Guid userId)
         {
-            //await Clients.User(userId).SendAsync("Receive", message, userName);
-            await Clients.All.SendAsync("ReceiveMessage", userId, message);
+            //await Clients.User(userId).SendAsync("Receive", message, userId);
+            await Clients.All.SendAsync("ReceiveMessage", message);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using GMS.Communication.WebHost.Hubs;
+using GMS.Communication.WebHost.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 
@@ -15,12 +16,11 @@ namespace GMS.Communication.WebHost.Controllers
                 _hubContext = hubContext;
         }
 
-        
         [Route("Send")]
         [HttpPost]
-        public IActionResult SendMessage(Guid userId, string message) //TODO Добавить DTO сообщения
+        public IActionResult SendMessage([FromBody]MessageRequestDTO request)
         {
-            _hubContext.Clients.All.SendAsync("ReceiveMessage", userId, message);
+            _hubContext.Clients.All.SendAsync("ReceiveMessage", request.message);
             return Ok();
         }
     }

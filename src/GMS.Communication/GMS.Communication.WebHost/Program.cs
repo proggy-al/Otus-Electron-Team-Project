@@ -5,18 +5,21 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSignalR();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
+builder.Services.AddControllers();
 var app = builder.Build();
 
-//app.UseEndpoints(endpoints => endpoints.MapHub<ChatHub>($"/chatHub"));
-
-// Configure the HTTP request pipeline.
-app.UseSwagger();
-app.UseSwaggerUI(c =>
+if (app.Environment.IsDevelopment())
 {
-    c.SwaggerEndpoint("/swagger/v1/swagger.json", "CommunicationService API V1");
-});
+    app.UseSwagger();
+    app.UseSwaggerUI(options =>
+    {
+        options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
+        options.RoutePrefix = string.Empty;
+    });
+}
+
 app.UseHttpsRedirection();
 app.UseRouting();
-app.UseEndpoints(endpoints => endpoints.MapHub<ChatHub>($"/chatHub"));
+app.MapHub<ChatHub>($"/chatHub");
+app.MapControllers();
 app.Run();
