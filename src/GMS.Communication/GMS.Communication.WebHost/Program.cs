@@ -1,11 +1,12 @@
 using GMS.Communication.WebHost.Hubs;
-using Microsoft.OpenApi.Models;
 
+// TODO добавить реалзицию Stratup для разделения наполнения IoC и Pipeline
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSignalR();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
