@@ -1,6 +1,6 @@
 ﻿using Console = System.Console;
 
-namespace MGS.Gui.Console
+namespace GMS.Gui.Console
 {
     /// <summary>
     /// Примеры функциональности

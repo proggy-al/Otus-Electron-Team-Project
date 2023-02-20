@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MGS.Gui.Console
+namespace GMS.Gui.Console
 {
     /// <summary>
     /// Консольный интерфейс пользователя
