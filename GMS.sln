@@ -33,7 +33,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GMS.Communication.WebHost",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GMS.Communication.Test", "src\GMS.Communication\GMS.Communication.Test\GMS.Communication.Test.csproj", "{EB5B5527-CE73-40AB-8063-6EE62632F83B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GMS.Identity.Client", "src\GMS.Identity\GMS.Identity.Client\GMS.Identity.Client\GMS.Identity.Client.csproj", "{913F6797-F82B-46A2-900B-56FAF2C065AF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GMS.Identity.Client", "src\GMS.Identity\GMS.Identity.Client\GMS.Identity.Client\GMS.Identity.Client.csproj", "{913F6797-F82B-46A2-900B-56FAF2C065AF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
