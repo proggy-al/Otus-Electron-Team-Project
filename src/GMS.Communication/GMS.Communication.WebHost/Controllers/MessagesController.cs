@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.SignalR;
 
 namespace GMS.Communication.WebHost.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class MessagesController : Controller
     {
         private readonly IHubContext<ChatHub> _hubContext;
@@ -13,6 +15,7 @@ namespace GMS.Communication.WebHost.Controllers
                 _hubContext = hubContext;
         }
 
+        
         [Route("Send")]
         [HttpPost]
         public IActionResult SendMessage(Guid userId, string message) //TODO Добавить DTO сообщения
