@@ -20,7 +20,7 @@ namespace GMS.Communication.WebHost.Controllers
         [HttpPost]
         public IActionResult SendMessage([FromBody]MessageRequestDTO request)
         {
-            _hubContext.Clients.All.SendAsync("ReceiveMessage", request.message);
+            _hubContext.Clients.All.SendAsync("ReceiveMessage", request.message, request.userId);
             return Ok();
         }
     }

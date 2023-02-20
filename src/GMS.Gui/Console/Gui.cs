@@ -30,6 +30,7 @@ namespace GMS.Gui.Console
             {
                 if(!executing) break;
                 action.Invoke();
+                System.Console.ReadKey();
             }
         }
     }
