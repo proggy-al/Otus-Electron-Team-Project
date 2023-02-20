@@ -32,15 +32,14 @@ namespace GMS.Gui.Console
                 try
                 {
                     await connection.StartAsync();
+                    System.Console.WriteLine("Ожидание сообщения сообщения от сервера...");
                     break;
                 }
-                catch
+                catch(Exception e)
                 {
-                    await Task.Delay(1000);
+                    System.Console.WriteLine("Ошибка:" + e.Message);
                 }
             }
-
-            System.Console.WriteLine("Ожидание сообщения сообщения от сервера...");
             System.Console.ReadLine();
             // Code of functionality exmaple.
         }
