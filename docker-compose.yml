@@ -1,0 +1,143 @@
+version: '3.4'
+
+# MICROSERVICES
+services:
+  gms.api.core:
+    build:
+      context: .
+      dockerfile: src/GMS.Core/GMS.Core.WebHost/Dockerfile
+    ports:
+      - "5001:80"
+    depends_on:
+      - gms.core.db
+  
+  gms.api.identity:
+    build: 
+      context: .
+      dockerfile: src/GMS.Identity/GMS.Identity.WebHost/Dockerfile
+    ports: 
+      - "6001:80"
+    depends_on:
+      - gms.identity.db
+
+  # DB
+  gms.core.db:
+    image: "postgres:latest"
+    container_name: 'gms.core.db'
+    restart: always
+    ports:
+      - "5433:5432"
+    environment: 
+      POSTGRES_DB: "gmscore"
+      POSTGRES_USER: "postrgesuser"
+      POSTGRES_PASSWORD: "12345678"
+      PGDATA: /var/lib/potgresql/core
+    volumes:
+      - gmscoredb_data:/var/lib/potgresql/core
+  
+  gms.identity.db:
+    image: "postgres:latest"
+    container_name: 'gms.identity.db'
+    restart: always
+    ports:
+      - "5434:5432"
+    environment: 
+      POSTGRES_DB: "gmsidentity"
+      POSTGRES_USER: "postrgesuser"
+      POSTGRES_PASSWORD: "12345678"
+      PGDATA: /var/lib/postgresql/identity
+    volumes:
+      - gmsidentitydb_data:/var/lib/postgresql/identity 
+
+  gms.core.db.admin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: user@mail.com
+      PGADMIN_DEFAULT_PASSWORD: 12345678
+    ports:
+      - "8889:80"
+    volumes:
+      - pgadminvol:/var/lib/postgresql/pgadmin
+
+  # NO SQL DB
+  #TODO
+
+  # REDIS
+  # gms.reddis:
+  #   image: "reddis:7.0.8"
+  #   container_name: gmsreddis
+  #   restart: always
+  #   ports: 
+  #     - "6379:6379"
+    
+
+  # RABBIT MQ
+  # gms.rabbit:
+  #   image: "rabbitmq:3.11.8"
+  #   container_name: gmsreddis
+  #   restart: always
+  #   ports: 
+  #     - "8080:8080"
+  #   environment:
+  #     RABBITMQ_DEFAULT_USER: user
+  #     RABBITMQ_DEFAULT_PASS: 12345678
+  #   volumes:
+  #   - rabbitvol:/var/lib/rabbit
+
+  # LOGGER 
+  gms.elasticsearch:
+    image: elasticsearch:7.17.9
+    container_name: gmselasticsearch
+    restart: always
+    volumes:
+    - elastic_data:/usr/share/elasticsearch/data/
+    environment:
+      ES_JAVA_OPTS: "-Xmx256m -Xms256m"
+      discovery.type: single-node    
+    ports:
+    - '9200:9200'
+    - '9300:9300'
+    networks:
+      - elk
+
+  gms.logstash:
+    image: logstash:7.16.2
+    container_name: gmslogstash
+    restart: always
+    volumes:
+    - ./logstash/:/logstash_dir
+    command: logstash -f /logstash_dir/logstash.conf 
+    depends_on:
+      - gms.elasticsearch
+    ports:
+    - '9600:9600'
+    environment:
+      LS_JAVA_OPTS: "-Xmx256m -Xms256m"    
+    networks:
+      - elk
+
+  gms.kibana:
+    image: kibana:7.17.9
+    container_name: gmskibana
+    restart: always       
+    ports:
+    - '9900:5601'
+    environment:
+      - ELASTICSEARCH_URL=http://elasticsearch:9200  
+    depends_on:
+      - gms.elasticsearch  
+    networks:
+      - elk
+
+volumes:
+  gmscoredb_data:
+  gmsidentitydb_data:
+  pgadminvol:
+  rabbitvol:
+  elastic_data: {}
+
+networks:
+  elk:
+
+# after launch run  docker inspect id where id - postrger container and find "IPAddress": "172.19.0.2" and selected port to connect via pgAdmin
+# or use container_name instead IpAddress

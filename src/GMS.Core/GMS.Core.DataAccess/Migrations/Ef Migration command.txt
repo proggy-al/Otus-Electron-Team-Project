@@ -1,0 +1,4 @@
+Для миграции необходимо выбрать проект GMS.Core.DataAccess и последовательно выполнить команды, используя "Консоль диспетчера пакетов".
+
+Add-Migration Initial -o Migrations -verbose
+Update-Database
