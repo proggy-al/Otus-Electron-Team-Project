@@ -1,4 +1,9 @@
 ﻿using Microsoft.AspNetCore.SignalR.Client;
+using System.Text;
+using System;
+using Newtonsoft.Json;
+using System.Collections.Specialized;
+using GMS.Gui.Console.DTO;
 
 namespace GMS.Gui.Console
 {
@@ -14,6 +19,7 @@ namespace GMS.Gui.Console
         public static List<Action> GetActions() => new List<Action>
         {
             CommunicationServiceSendMessage,
+            IdentityServiceAuthorize
         };
 
         #region Примеры для демонстрации
@@ -21,7 +27,7 @@ namespace GMS.Gui.Console
         {
             System.Console.WriteLine("Демонстрация работы CommunicationService:");
             var connection = new HubConnectionBuilder()
-                .WithUrl("https://localhost:44361/ChatHub")
+                .WithUrl("https://localhost:7090/ChatHub")
                 .Build();
 
             connection.On<string, string>("ReceiveMessage", (message, userId) => System.Console.WriteLine($"{userId}:{message}"));
@@ -35,7 +41,7 @@ namespace GMS.Gui.Console
                     System.Console.WriteLine("Ожидание сообщения сообщения от сервера...");
                     break;
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
                     System.Console.WriteLine("Ошибка:" + e.Message);
                 }
@@ -43,6 +49,28 @@ namespace GMS.Gui.Console
             System.Console.ReadLine();
             // Code of functionality exmaple.
         }
+
+        private static async void IdentityServiceAuthorize()
+        {
+            System.Console.WriteLine("Демонстрация работы IdentityService:");
+
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("https://localhost:7118");
+
+                var cont = new Credential();
+                var json = JsonConvert.SerializeObject(cont);
+                var data = new StringContent(json, Encoding.UTF8, "application/json");
+
+                var result = await client.PostAsync("/user/authorize", data);
+                string resultContent = await result.Content.ReadAsStringAsync();
+                System.Console.WriteLine(resultContent);
+            }
+
+            System.Console.ReadLine();
+        }
+
+
         #endregion
     }
 }
