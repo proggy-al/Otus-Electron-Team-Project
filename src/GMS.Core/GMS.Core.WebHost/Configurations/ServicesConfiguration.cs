@@ -1,5 +1,7 @@
 ﻿using GMS.Core.BusinessLogic.Abstractions;
 using GMS.Core.BusinessLogic.Services;
+using GMS.Core.BusinessLogic.UseCases.Area;
+using MediatR;
 
 namespace GMS.Core.WebHost.Configurations
 {
@@ -9,6 +11,7 @@ namespace GMS.Core.WebHost.Configurations
 
         public static IServiceCollection AddServices(this IServiceCollection services)
         {
+            services.AddMediatR(typeof(GetAreaCase));
             return RegisterServices(services);
         }
 
