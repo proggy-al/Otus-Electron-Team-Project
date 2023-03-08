@@ -8,6 +8,8 @@
 	<UserSecretsId>901815fb-b888-4dd2-8c02-d97b87a3bdbe</UserSecretsId>
 	<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
 	<DockerfileContext>..\..\..</DockerfileContext>
+	<DockerComposeProjectPath>..\..\..\docker-compose.dcproj</DockerComposeProjectPath>
+	<OutputType>Exe</OutputType>
   </PropertyGroup>
 
   <ItemGroup>
