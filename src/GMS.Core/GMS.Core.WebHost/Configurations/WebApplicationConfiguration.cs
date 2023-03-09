@@ -21,8 +21,8 @@ namespace GMS.Core.WebHost.Configurations
                 app.UseSwagger();
                 app.UseSwaggerUI(options =>
                 {
-                    options.SwaggerEndpoint("/swagger/v1/swagger.json", "GMS API v1");
-                    options.RoutePrefix = string.Empty;
+                    //options.SwaggerEndpoint("/swagger/v1/swagger.json", "GMS API v1");
+                    //options.RoutePrefix = string.Empty;
                     //options.DocExpansion(DocExpansion.List);
                     //options.OAuthClientId("clientWebApi");
                     //options.OAuthScopeSeparator(" ");

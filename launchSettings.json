@@ -4,7 +4,11 @@
       "commandName": "DockerCompose",
       "commandVersion": "1.0",
       "serviceActions": {
-        "gms.identity.webhost": "StartDebugging"
+        "gms.api.core": "StartDebugging",
+        "gms.api.identity": "StartDebugging",
+        "gms.core.db": "StartWithoutDebugging",
+        "gms.core.db.admin": "StartWithoutDebugging",
+        "gms.identity.db": "StartWithoutDebugging"
       }
     }
   }
