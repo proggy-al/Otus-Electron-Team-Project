@@ -5,6 +5,7 @@ version: '3.4'
 # MICROSERVICES
 services:
   gms.api.core:
+    image: ${DOCKER_REGISTRY-}gmscorewebhost
     container_name: core-api
     build:
       context: .

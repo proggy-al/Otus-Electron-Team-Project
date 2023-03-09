@@ -7,10 +7,13 @@
     <UserSecretsId>97f04d14-90a1-4832-a4ad-bb36466ce0c3</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerfileContext>..\..</DockerfileContext>
+	<DockerComposeProjectPath>..\..\..\docker-compose.dcproj</DockerComposeProjectPath>
+	<OutputType>library</OutputType>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.17.2" />
+    <PackageReference Include="Ocelot" Version="18.0.0" />
   </ItemGroup>
 
 </Project>
