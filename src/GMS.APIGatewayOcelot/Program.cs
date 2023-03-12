@@ -5,7 +5,7 @@ namespace GMS.APIGatewayOcelot
 {
     public class Program
     {
-        public static async void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
             builder.Configuration.SetBasePath(builder.Environment.ContentRootPath)
@@ -15,7 +15,9 @@ namespace GMS.APIGatewayOcelot
                      
             var app = builder.Build();
             await app.UseOcelot();
-                        
+            //app.UseSwagger();
+            //app.UseSwaggerUI();
+
             app.Run();
         }
     }

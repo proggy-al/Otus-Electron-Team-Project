@@ -4,14 +4,25 @@ version: '3.4'
 
 # MICROSERVICES
 services:
+  gms.api.gateway:
+    image: ${DOCKER_REGISTRY-}gmsapigatewayocelot
+    container_name: api-gateway
+    build:
+      context: .
+      dockerfile: src/GMS.APIGatewayOcelot/Dockerfile
+    ports:
+      - "4001:80"
+    networks:
+      - backend
+
   gms.api.core:
     image: ${DOCKER_REGISTRY-}gmscorewebhost
     container_name: core-api
     build:
       context: .
       dockerfile: src/GMS.Core/GMS.Core.WebHost/Dockerfile
-    ports:
-      - "5001:80"
+    #ports:
+    #  - "5001:80"
     depends_on:
       - gms.core.db
     networks:
@@ -23,8 +34,8 @@ services:
     build:
       context: .
       dockerfile: src/GMS.Identity/GMS.Identity.WebHost/Dockerfile
-    ports: 
-      - "6001:80"  
+    #ports: 
+    #  - "6001:80"  
     depends_on:
       - gms.identity.db
     networks:
@@ -35,8 +46,8 @@ services:
     image: "postgres:latest"
     container_name: gms.core.db
     restart: always
-    ports:
-      - "5433:5432"
+    #ports:
+    #  - "5433:5432"
     environment: 
       POSTGRES_DB: "gmscore"
       POSTGRES_USER: "postrgesuser"
@@ -51,8 +62,8 @@ services:
     image: "postgres:latest"
     container_name: 'gms.identity.db'
     restart: always
-    ports:
-      - "5434:5432"
+    #ports:
+    #  - "5434:5432"
     environment: 
       POSTGRES_DB: "gmsidentity"
       POSTGRES_USER: "postrgesuser"

@@ -2,6 +2,18 @@
   "Routes": [
     //Identity sevice API
     {
+      "UpstreamPathTemplate": "/authorize",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "identity-api",
+          "Port": 80
+        }
+      ],
+      "DownstreamPathTemplate": "/authorize"
+    },
+    {
       "UpstreamPathTemplate": "/user/{id}",
       "UpstreamHttpMethod": [ "Get", "Delete", "Put" ],
       "DownstreamScheme": "http",
@@ -15,7 +27,7 @@
     },
     {
       "UpstreamPathTemplate": "/user",
-      "UpstreamHttpMethod": [ "Get", "Post" ],
+      "UpstreamHttpMethod": [ "Get","Post" ],
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -28,24 +40,24 @@
 
     //Core service API
     {
-      "UpstreamPathTemplate": "/user/{id}",
+      "UpstreamPathTemplate": "/api/user/{id}",
       "UpstreamHttpMethod": [ "Get", "Delete", "Put" ],
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "identity-api",
+          "Host": "core-api",
           "Port": 80
         }
       ],
       "DownstreamPathTemplate": "/user/{id}"
     },
     {
-      "UpstreamPathTemplate": "/user",
+      "UpstreamPathTemplate": "/api/user",
       "UpstreamHttpMethod": [ "Get", "Post" ],
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "identity-api",
+          "Host": "core-api",
           "Port": 80
         }
       ],
