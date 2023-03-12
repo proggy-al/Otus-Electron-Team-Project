@@ -12,7 +12,6 @@ services:
       dockerfile: src/GMS.Core/GMS.Core.WebHost/Dockerfile
     ports:
       - "5001:80"
-      - "5003:443"
     depends_on:
       - gms.core.db
     networks:

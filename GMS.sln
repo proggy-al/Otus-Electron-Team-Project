@@ -51,7 +51,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GMS.APIGatewayOcelot", "GMS
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{4DB9F2E7-54D3-48B0-A346-7E12AE2B880F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GMS.APIGatewayOcelot", "src\GMS.APIGatewayOcelot\GMS.APIGatewayOcelot.csproj", "{81192AC8-B9A0-48FD-A7F6-81DED42A1FEE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GMS.APIGatewayOcelot", "src\GMS.APIGatewayOcelot\GMS.APIGatewayOcelot.csproj", "{81192AC8-B9A0-48FD-A7F6-81DED42A1FEE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -125,8 +125,8 @@ Global
 		{EE510B57-EF3F-4426-BD8A-A80C67687953}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4DB9F2E7-54D3-48B0-A346-7E12AE2B880F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4DB9F2E7-54D3-48B0-A346-7E12AE2B880F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4DB9F2E7-54D3-48B0-A346-7E12AE2B880F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4DB9F2E7-54D3-48B0-A346-7E12AE2B880F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4DB9F2E7-54D3-48B0-A346-7E12AE2B880F}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DB9F2E7-54D3-48B0-A346-7E12AE2B880F}.Release|Any CPU.Build.0 = Debug|Any CPU
 		{81192AC8-B9A0-48FD-A7F6-81DED42A1FEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{81192AC8-B9A0-48FD-A7F6-81DED42A1FEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{81192AC8-B9A0-48FD-A7F6-81DED42A1FEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
