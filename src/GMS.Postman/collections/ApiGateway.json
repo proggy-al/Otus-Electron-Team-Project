@@ -1,0 +1,382 @@
+{
+	"info": {
+		"_postman_id": "2f55b194-a55d-406d-94ab-5ef2ca598fb1",
+		"name": "ApiGateway",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "26253000-2f55b194-a55d-406d-94ab-5ef2ca598fb1"
+	},
+	"item": [
+		{
+			"name": "/user/authorize_SystemUser",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "ec29f87b-ea53-4534-a8fd-389a9de4c03a",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "de272dd1-ea00-466a-9d10-71162c6dbd18",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"userName\": \"System\",\r\n  \"password\": \"123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4001/authorize",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4001",
+					"path": [
+						"authorize"
+					]
+				}
+			},
+			"response": [
+				{
+					"id": "439fecf1-7c5b-4181-a3e7-5b3693c63ca9",
+					"name": "/user/authorize_SystemUser",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userName\": \"System\",\r\n  \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4001/authorize",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4001",
+							"path": [
+								"authorize"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Length",
+							"value": "519"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 12 Mar 2023 19:12:05 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiU3lzdGVtIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiU3lzdGVtIiwiSUQiOiJjMzVlNzFiMS0wMWZlLTRlOTYtYWExMy0zNTM3MWY3OTJhNGYiLCJOYW1lVGVsZWdyYW0iOiJAc3lzdGVtIiwiUm9sZSI6IlN5c3RlbSIsIm5iZiI6MTY3ODY0ODMyNiwiZXhwIjoxNzEwMTg0MzI2LCJpc3MiOiJNeUF1dGhTZXJ2ZXIiLCJhdWQiOiJNeUF1dGhDbGllbnQifQ.cV-BFonhYx_sTcSfjP6pmMQwVEhIWrMQmlIroUf5Fvc\",\n    \"username\": \"System\"\n}"
+				}
+			]
+		},
+		{
+			"name": "All users",
+			"id": "28e304f1-79dd-486f-9981-d9db0b57794b",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "jwt",
+					"jwt": [
+						{
+							"key": "headerPrefix",
+							"value": "Bearer ",
+							"type": "string"
+						},
+						{
+							"key": "algorithm",
+							"value": "HS256",
+							"type": "string"
+						},
+						{
+							"key": "isSecretBase64Encoded",
+							"value": false,
+							"type": "boolean"
+						},
+						{
+							"key": "payload",
+							"value": "{}",
+							"type": "string"
+						},
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						},
+						{
+							"key": "queryParamKey",
+							"value": "token",
+							"type": "string"
+						},
+						{
+							"key": "header",
+							"value": "{}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiU3lzdGVtIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiU3lzdGVtIiwiSUQiOiJjMzVlNzFiMS0wMWZlLTRlOTYtYWExMy0zNTM3MWY3OTJhNGYiLCJOYW1lVGVsZWdyYW0iOiJAc3lzdGVtIiwiUm9sZSI6IlN5c3RlbSIsIm5iZiI6MTY3ODY0ODMyNiwiZXhwIjoxNzEwMTg0MzI2LCJpc3MiOiJNeUF1dGhTZXJ2ZXIiLCJhdWQiOiJNeUF1dGhDbGllbnQifQ.cV-BFonhYx_sTcSfjP6pmMQwVEhIWrMQmlIroUf5Fvc",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:4001/user",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4001",
+					"path": [
+						"user"
+					]
+				}
+			},
+			"response": [
+				{
+					"id": "c6c18236-6b97-4af1-a8e3-2f44a565c9b4",
+					"name": "All users",
+					"originalRequest": {
+						"auth": {
+							"type": "jwt",
+							"jwt": [
+								{
+									"key": "headerPrefix",
+									"value": "Bearer ",
+									"type": "string"
+								},
+								{
+									"key": "algorithm",
+									"value": "HS256",
+									"type": "string"
+								},
+								{
+									"key": "isSecretBase64Encoded",
+									"value": false,
+									"type": "boolean"
+								},
+								{
+									"key": "payload",
+									"value": "{}",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "queryParamKey",
+									"value": "token",
+									"type": "string"
+								},
+								{
+									"key": "header",
+									"value": "{}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiU3lzdGVtIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiU3lzdGVtIiwiSUQiOiJjMzVlNzFiMS0wMWZlLTRlOTYtYWExMy0zNTM3MWY3OTJhNGYiLCJOYW1lVGVsZWdyYW0iOiJAc3lzdGVtIiwiUm9sZSI6IlN5c3RlbSIsIm5iZiI6MTY3ODY0ODMyNiwiZXhwIjoxNzEwMTg0MzI2LCJpc3MiOiJNeUF1dGhTZXJ2ZXIiLCJhdWQiOiJNeUF1dGhDbGllbnQifQ.cV-BFonhYx_sTcSfjP6pmMQwVEhIWrMQmlIroUf5Fvc",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:4001/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4001",
+							"path": [
+								"user"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Length",
+							"value": "521"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 12 Mar 2023 19:18:09 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Access-Control-Expose-Headers",
+							"value": "X-Total-Count"
+						},
+						{
+							"key": "X-Total-Count",
+							"value": "4"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": \"6f35e9ac-2718-4b98-9a39-d3c136217e97\",\n        \"userName\": \"User\",\n        \"telegramUserName\": \"@user\",\n        \"email\": \"user@mail.ru\",\n        \"isActive\": true\n    },\n    {\n        \"id\": \"8699aba2-5ec1-40cf-b186-36ca13c15ea2\",\n        \"userName\": \"Dan\",\n        \"telegramUserName\": \"@dan\",\n        \"email\": \"dan@mail.ru\",\n        \"isActive\": true\n    },\n    {\n        \"id\": \"a24ab827-10a5-47bf-86bd-39adeb89b6c9\",\n        \"userName\": \"Sash\",\n        \"telegramUserName\": \"@sash\",\n        \"email\": \"sash@mail.ru\",\n        \"isActive\": true\n    },\n    {\n        \"id\": \"c35e71b1-01fe-4e96-aa13-35371f792a4f\",\n        \"userName\": \"System\",\n        \"telegramUserName\": \"@system\",\n        \"email\": \"sys@mail.ru\",\n        \"isActive\": true\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "User by Id",
+			"id": "c355c432-736c-46b4-8a2d-25f83061b535",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiU3lzdGVtIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiU3lzdGVtIiwiSUQiOiJjMzVlNzFiMS0wMWZlLTRlOTYtYWExMy0zNTM3MWY3OTJhNGYiLCJOYW1lVGVsZWdyYW0iOiJAc3lzdGVtIiwiUm9sZSI6IlN5c3RlbSIsIm5iZiI6MTY3ODY0ODMyNiwiZXhwIjoxNzEwMTg0MzI2LCJpc3MiOiJNeUF1dGhTZXJ2ZXIiLCJhdWQiOiJNeUF1dGhDbGllbnQifQ.cV-BFonhYx_sTcSfjP6pmMQwVEhIWrMQmlIroUf5Fvc",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:4001/user/6f35e9ac-2718-4b98-9a39-d3c136217e97",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4001",
+					"path": [
+						"user",
+						"6f35e9ac-2718-4b98-9a39-d3c136217e97"
+					]
+				}
+			},
+			"response": [
+				{
+					"id": "fd0343a9-64cf-44c4-a326-51e2a1b1256d",
+					"name": "User by Id",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiU3lzdGVtIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiU3lzdGVtIiwiSUQiOiJjMzVlNzFiMS0wMWZlLTRlOTYtYWExMy0zNTM3MWY3OTJhNGYiLCJOYW1lVGVsZWdyYW0iOiJAc3lzdGVtIiwiUm9sZSI6IlN5c3RlbSIsIm5iZiI6MTY3ODY0ODMyNiwiZXhwIjoxNzEwMTg0MzI2LCJpc3MiOiJNeUF1dGhTZXJ2ZXIiLCJhdWQiOiJNeUF1dGhDbGllbnQifQ.cV-BFonhYx_sTcSfjP6pmMQwVEhIWrMQmlIroUf5Fvc",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:4001/user/6f35e9ac-2718-4b98-9a39-d3c136217e97",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4001",
+							"path": [
+								"user",
+								"6f35e9ac-2718-4b98-9a39-d3c136217e97"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Length",
+							"value": "129"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 12 Mar 2023 19:16:20 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"6f35e9ac-2718-4b98-9a39-d3c136217e97\",\n    \"userName\": \"User\",\n    \"telegramUserName\": \"@user\",\n    \"email\": \"user@mail.ru\",\n    \"isActive\": true\n}"
+				}
+			]
+		},
+		{
+			"name": "http://localhost:4001/user/6f35e9ac-2718-4b98-9a39-d3c136217e97",
+			"id": "cdcd90f5-5dd9-46cc-8ee3-7898d33794df",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiU3lzdGVtIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiU3lzdGVtIiwiSUQiOiJjMzVlNzFiMS0wMWZlLTRlOTYtYWExMy0zNTM3MWY3OTJhNGYiLCJOYW1lVGVsZWdyYW0iOiJAc3lzdGVtIiwiUm9sZSI6IlN5c3RlbSIsIm5iZiI6MTY3ODY0ODMyNiwiZXhwIjoxNzEwMTg0MzI2LCJpc3MiOiJNeUF1dGhTZXJ2ZXIiLCJhdWQiOiJNeUF1dGhDbGllbnQifQ.cV-BFonhYx_sTcSfjP6pmMQwVEhIWrMQmlIroUf5Fvc",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:4001/user/6f35e9ac-2718-4b98-9a39-d3c136217e97",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4001",
+					"path": [
+						"user",
+						"6f35e9ac-2718-4b98-9a39-d3c136217e97"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
