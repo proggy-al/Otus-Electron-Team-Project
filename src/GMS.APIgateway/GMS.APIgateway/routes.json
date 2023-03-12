@@ -1,0 +1,21 @@
+{
+  "routes": [
+    {
+      "endpoint": "/user",
+      "destination": {
+        "path": "https://localhost:7118/user/",
+        "requiresAuthentication": "true"
+      }
+    },
+    {
+      "endpoint": "/user",
+      "destination": {
+        "path": "https://localhost:7118/user/",
+        "requiresAuthentication": "true"
+      }
+    }
+  ],
+  "authenticationService": {
+    "path": "https://localhost:7118/user/authorize"
+  }
+}

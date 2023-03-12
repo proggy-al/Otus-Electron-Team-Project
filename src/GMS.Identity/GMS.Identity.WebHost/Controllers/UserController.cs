@@ -43,7 +43,7 @@ public class UserController : ControllerBase
     /// Get all users , should be authorize as Admin or System
     /// </summary>
     /// <returns></returns>
-    [RequirePrivelege(Priviliges.Administrator, Priviliges.System)]
+    //[RequirePrivelege(Priviliges.Administrator, Priviliges.System)]
     [HttpGet(IdentityRouting.GetAllUsers)]
     public async Task<List<UserApiModel>> GetAllUsers()
     {

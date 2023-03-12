@@ -1,53 +1,32 @@
 version: '3.4'
 
-
-
 # MICROSERVICES
 services:
-  gms.api.gateway:
-    image: ${DOCKER_REGISTRY-}gmsapigatewayocelot
-    container_name: api-gateway
-    build:
-      context: .
-      dockerfile: src/GMS.APIGatewayOcelot/Dockerfile
-    ports:
-      - "4001:80"
-    networks:
-      - backend
-
   gms.api.core:
-    image: ${DOCKER_REGISTRY-}gmscorewebhost
-    container_name: core-api
     build:
       context: .
       dockerfile: src/GMS.Core/GMS.Core.WebHost/Dockerfile
-    #ports:
-    #  - "5001:80"
+    ports:
+      - "5001:80"
     depends_on:
       - gms.core.db
-    networks:
-      - backend
   
   gms.api.identity:
-    image: ${DOCKER_REGISTRY-}gmsidentitywebhost
-    container_name: identity-api
-    build:
+    build: 
       context: .
       dockerfile: src/GMS.Identity/GMS.Identity.WebHost/Dockerfile
-    #ports: 
-    #  - "6001:80"  
+    ports: 
+      - "6001:80"
     depends_on:
       - gms.identity.db
-    networks:
-      - backend
 
-  # DB for MICROSERVICES
+  # DB
   gms.core.db:
     image: "postgres:latest"
-    container_name: gms.core.db
+    container_name: 'gms.core.db'
     restart: always
-    #ports:
-    #  - "5433:5432"
+    ports:
+      - "5433:5432"
     environment: 
       POSTGRES_DB: "gmscore"
       POSTGRES_USER: "postrgesuser"
@@ -55,15 +34,13 @@ services:
       PGDATA: /var/lib/potgresql/core
     volumes:
       - gmscoredb_data:/var/lib/potgresql/core
-    networks:
-      - backend
   
   gms.identity.db:
     image: "postgres:latest"
     container_name: 'gms.identity.db'
     restart: always
-    #ports:
-    #  - "5434:5432"
+    ports:
+      - "5434:5432"
     environment: 
       POSTGRES_DB: "gmsidentity"
       POSTGRES_USER: "postrgesuser"
@@ -71,8 +48,6 @@ services:
       PGDATA: /var/lib/postgresql/identity
     volumes:
       - gmsidentitydb_data:/var/lib/postgresql/identity 
-    networks:
-      - backend
 
   gms.core.db.admin:
     image: dpage/pgadmin4
@@ -83,8 +58,6 @@ services:
       - "8889:80"
     volumes:
       - pgadminvol:/var/lib/postgresql/pgadmin
-    networks:
-      - backend
 
   # NO SQL DB
   #TODO
@@ -112,49 +85,49 @@ services:
   #   - rabbitvol:/var/lib/rabbit
 
   # LOGGER 
-  #gms.elasticsearch:
-  #  image: elasticsearch:7.17.9
-  #  container_name: gmselasticsearch
-  #  restart: always
-  #  volumes:
-  #  - elastic_data:/usr/share/elasticsearch/data/
-  #  environment:
-  #    ES_JAVA_OPTS: "-Xmx256m -Xms256m"
-  #    discovery.type: single-node    
-  #  ports:
-  #  - '9200:9200'
-  #  - '9300:9300'
-  #  networks:
-  #    - elk
+  gms.elasticsearch:
+    image: elasticsearch:7.17.9
+    container_name: gmselasticsearch
+    restart: always
+    volumes:
+    - elastic_data:/usr/share/elasticsearch/data/
+    environment:
+      ES_JAVA_OPTS: "-Xmx256m -Xms256m"
+      discovery.type: single-node    
+    ports:
+    - '9200:9200'
+    - '9300:9300'
+    networks:
+      - elk
 
-  #gms.logstash:
-  #  image: logstash:7.16.2
-  #  container_name: gmslogstash
-  #  restart: always
-  #  volumes:
-  #  - ./logstash/:/logstash_dir
-  #  command: logstash -f /logstash_dir/logstash.conf 
-  #  depends_on:
-  #    - gms.elasticsearch
-  #  ports:
-  #  - '9600:9600'
-  #  environment:
-  #    LS_JAVA_OPTS: "-Xmx256m -Xms256m"    
-  #  networks:
-  #    - elk
+  gms.logstash:
+    image: logstash:7.16.2
+    container_name: gmslogstash
+    restart: always
+    volumes:
+    - ./logstash/:/logstash_dir
+    command: logstash -f /logstash_dir/logstash.conf 
+    depends_on:
+      - gms.elasticsearch
+    ports:
+    - '9600:9600'
+    environment:
+      LS_JAVA_OPTS: "-Xmx256m -Xms256m"    
+    networks:
+      - elk
 
-  #gms.kibana:
-  #  image: kibana:7.17.9
-  #  container_name: gmskibana
-  #  restart: always       
-  #  ports:
-  #  - '9900:5601'
-  #  environment:
-  #    - ELASTICSEARCH_URL=http://elasticsearch:9200  
-  #  depends_on:
-  #    - gms.elasticsearch  
-  #  networks:
-  #    - elk
+  gms.kibana:
+    image: kibana:7.17.9
+    container_name: gmskibana
+    restart: always       
+    ports:
+    - '9900:5601'
+    environment:
+      - ELASTICSEARCH_URL=http://elasticsearch:9200  
+    depends_on:
+      - gms.elasticsearch  
+    networks:
+      - elk
 
 volumes:
   gmscoredb_data:
@@ -165,7 +138,6 @@ volumes:
 
 networks:
   elk:
-  backend:
 
 # after launch run  docker inspect id where id - postrger container and find "IPAddress": "172.19.0.2" and selected port to connect via pgAdmin
 # or use container_name instead IpAddress

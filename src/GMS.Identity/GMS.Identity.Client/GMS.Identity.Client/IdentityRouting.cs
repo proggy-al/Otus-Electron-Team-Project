@@ -13,6 +13,6 @@ namespace GMS.Identity.Client
         public const string CreateUser = "user";
         public const string PatchUser = "user/{id}";
         public const string DeleteUser = "user/{id}";
-        public const string GetToken = "user/authorize";
+        public const string GetToken = "authorize";
     }
 }

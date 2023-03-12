@@ -8,7 +8,7 @@ namespace GMS.Core.WebHost.Configurations
         {
             var app = builder.Build();
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             
             app.UseRouting();
 
@@ -16,19 +16,19 @@ namespace GMS.Core.WebHost.Configurations
 
             app.UseAuthorization();
 
-            if (app.Environment.IsDevelopment())
-            {
+            //if (app.Environment.IsDevelopment())
+            //{
                 app.UseSwagger();
                 app.UseSwaggerUI(options =>
                 {
-                    options.SwaggerEndpoint("/swagger/v1/swagger.json", "GMS API v1");
-                    options.RoutePrefix = string.Empty;
+                    //options.SwaggerEndpoint("/swagger/v1/swagger.json", "GMS API v1");
+                    //options.RoutePrefix = string.Empty;
                     //options.DocExpansion(DocExpansion.List);
                     //options.OAuthClientId("clientWebApi");
                     //options.OAuthScopeSeparator(" ");
                     //options.OAuthClientSecret("36a4d0df-d361-4c3c-a3eb-2e519d4c4391");
                 });
-            }
+            //}
 
             app.UseEndpoints(endpoints =>
             {
