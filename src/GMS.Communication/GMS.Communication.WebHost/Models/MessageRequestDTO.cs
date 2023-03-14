@@ -2,7 +2,13 @@
 {
     public class MessageRequestDTO
     {
-        public Guid userId { get; set; }
-        public string message { get; set; }
+        public Guid RecipientId { get; set; }
+        public Guid SenderId { get; set; }        
+        public string Subject { get; set; }        
+        public string Body { get; set; }
+        public string Type { get; set; }
+        public DateTime CreateDate { get; set;}
+        public DateTime DeliveryDate { get; set;}
+        public string Status { get; set; }
     }
 }

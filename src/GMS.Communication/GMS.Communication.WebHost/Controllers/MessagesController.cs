@@ -13,14 +13,22 @@ namespace GMS.Communication.WebHost.Controllers
 
         public MessagesController(IHubContext<ChatHub> hubContext)
         {
-                _hubContext = hubContext;
+            _hubContext = hubContext;
         }
 
-        [Route("Send")]
+        [Route("SendMessageToAll")]
         [HttpPost]
-        public IActionResult SendMessage([FromBody]MessageRequestDTO request)
+        public async Task<IActionResult> SendMessageToAll([FromBody]MessageRequestDTO request)
         {
-            _hubContext.Clients.All.SendAsync("ReceiveMessage", request.message, request.userId);
+            await _hubContext.Clients.All.SendAsync("ReceiveMessage", request.Subject, request.Body);
+            return Ok();
+        }
+
+        [Route("SendMessageById")]
+        [HttpPost]
+        public async Task<IActionResult> SendMessageById([FromBody]MessageRequestDTO request)
+        {            
+            await _hubContext.Clients.User(request.RecipientId.ToString()).SendAsync("ReceiveMessage", request.Subject, request.Body);
             return Ok();
         }
     }
