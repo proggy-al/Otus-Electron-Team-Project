@@ -1,4 +1,5 @@
 using GMS.Communication.WebHost.Hubs;
+using JWTAuthManager;
 
 // TODO добавить реалзицию Stratup для разделения наполнения IoC и Pipeline
 var builder = WebApplication.CreateBuilder(args);
@@ -6,6 +7,8 @@ builder.Services.AddSignalR();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
+builder.Services.AddCustomJWTAuthentification();    
+
 
 var app = builder.Build();
 
@@ -19,7 +22,7 @@ if (app.Environment.IsDevelopment())
     });
 }
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 app.UseRouting();
 app.MapHub<ChatHub>($"/chatHub");
 app.MapControllers();

@@ -3,6 +3,7 @@ using GMS.Identity.Core.Abstractions.Repositories;
 using GMS.Identity.DataAccess.Context;
 using GMS.Identity.DataAccess.Repositories;
 using GMS.Identity.WebHost.Infrastructure;
+using JWTAuthManager;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Swashbuckle.AspNetCore.SwaggerGen;
@@ -30,10 +31,11 @@ public static class Registration
         services.AddTransient<IUserRepository, UserRepository>();
 
         //Добавляем авторизацию
-        IAuthOptions authOptions = new AuthOptions(configuration);
-        services.AddSingleton(authOptions);
-        services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                    .AddJwtBearer(Infrastructure.JwtBearerOptions.GetJwtBearerOptions(new Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions(), configuration, authOptions));
+        services.AddCustomJWTAuthentification();
+        //IAuthOptions authOptions = new AuthOptions(configuration);
+        //services.AddSingleton(authOptions);
+        //services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+        //            .AddJwtBearer(Infrastructure.JwtBearerOptions.GetJwtBearerOptions(new Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions(), configuration, authOptions));
 
 
         //При старте приложения запускаем миграции

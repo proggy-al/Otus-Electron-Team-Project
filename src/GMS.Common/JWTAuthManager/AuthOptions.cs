@@ -1,8 +1,8 @@
 ﻿using System.Text;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
-namespace GMS.Identity.WebHost.Infrastructure;
+namespace JWTAuthManager;
 
 public class AuthOptions:IAuthOptions
 {

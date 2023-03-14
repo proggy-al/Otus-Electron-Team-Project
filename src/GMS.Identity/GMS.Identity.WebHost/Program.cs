@@ -14,7 +14,7 @@ builder.Services.AddCors(options =>
                       });
 });
 
-builder.Configuration.AddJsonFile("identitysettings.json");
+
 builder.Configuration.AddJsonFile("swaggersettings.json");
 
 Registration.ConfigureServices(builder.Services, builder.Configuration);

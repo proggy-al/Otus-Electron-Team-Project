@@ -14,7 +14,7 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="12.0.1" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="7.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.2">
@@ -27,6 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\GMS.Common\JWTAuthManager\JWTAuthManager.csproj" />
     <ProjectReference Include="..\GMS.Identity.Client\GMS.Identity.Client\GMS.Identity.Client.csproj" />
     <ProjectReference Include="..\GMS.Identity.DataAccess\GMS.Identity.DataAccess.csproj" />
   </ItemGroup>
