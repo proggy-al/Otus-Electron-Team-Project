@@ -1,5 +1,6 @@
 using GMS.Core.DataAccess.Context;
 using GMS.Core.WebHost.Configurations;
+using JWTAuthManager;
 using Serilog;
 
 try
@@ -15,8 +16,9 @@ try
         .AddServices()
         .AddEndpointsApiExplorer()
         .ConfigureSwagger()
-        .AddCustomJWTAuthentification()
         .AddControllers();
+
+    builder.Services.AddCustomJWTAuthentification();
 
 
     var app = WebApplicationConfiguration.Configure(builder);
