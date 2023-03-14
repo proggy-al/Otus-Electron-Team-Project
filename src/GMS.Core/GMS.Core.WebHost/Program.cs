@@ -15,8 +15,9 @@ try
         .AddServices()
         .AddEndpointsApiExplorer()
         .ConfigureSwagger()
-        .AddAuthorization()
+        .AddCustomJWTAuthentification()
         .AddControllers();
+
 
     var app = WebApplicationConfiguration.Configure(builder);
 

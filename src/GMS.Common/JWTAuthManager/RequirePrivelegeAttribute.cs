@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 
-namespace GMS.Identity.WebHost.Infrastructure;
+namespace JWTAuthManager;
 
 /// <summary>
 ///  Привилегии доступные для назначения пользователю, если нужно добавить - добавляем сюда

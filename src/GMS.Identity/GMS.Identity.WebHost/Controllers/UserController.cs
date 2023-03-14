@@ -10,6 +10,7 @@ using GMS.Identity.Core.Abstractions.Repositories;
 using GMS.Identity.WebHost.Infrastructure;
 using GMS.Identity.Client;
 using GMS.Identity.Client.Models;
+using JWTAuthManager;
 
 namespace GMS.Identity.WebHost.Controllers;
 

@@ -1,7 +1,7 @@
 ﻿using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
-namespace GMS.Identity.WebHost.Infrastructure;
+namespace JWTAuthManager;
 
 public interface IAuthOptions
 {
