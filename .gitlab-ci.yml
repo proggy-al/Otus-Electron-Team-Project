@@ -1,0 +1,93 @@
+build-job:
+  stage: build
+  image: docker:20.10.23
+  variables:
+    # When using dind service, you must instruct docker to talk with the
+    # daemon started inside of the service. The daemon is available with
+    # a network connection instead of the default /var/run/docker.sock socket.
+    #
+    # The 'docker' hostname is the alias of the service container as described at
+    # https://docs.gitlab.com/ee/ci/docker/using_docker_images.html#accessing-the-services
+    #
+    # If you're using GitLab Runner 12.7 or earlier with the Kubernetes executor and Kubernetes 1.6 or earlier,
+    # the variable must be set to tcp://localhost:2375 because of how the
+    # Kubernetes executor connects services to the job container
+    #DOCKER_HOST: tcp://localhost:2375
+    #
+    DOCKER_HOST: tcp://docker:2375
+    #
+    # This instructs Docker not to start over TLS.
+    DOCKER_TLS_CERTDIR: ""
+    
+    #DOCKER_DRIVER: overlay2
+  
+
+  services:
+    - name: docker:20.10.23-dind
+      #alias: docker
+      #command: ["--registry-mirror", "https://registry-mirror.example.com"]  # Specify the registry mirror to use
+      #command: ["--tls=false"]
+
+  # This will run a Docker daemon in a container (Docker-In-Docker), which will
+  # be available at thedockerhost:2375. If you make e.g. port 5000 public in Docker
+  # (`docker run -p 5000:5000 yourimage`) it will be exposed at thedockerhost:5000.
+  #services:
+  # - name: docker:dind
+  #   alias: thedockerhost
+
+  #variables:
+    # Tell docker CLI how to talk to Docker daemon; see
+    # https://docs.gitlab.com/ee/ci/docker/using_docker_build.html#use-docker-in-docker-executor
+    #DOCKER_HOST: tcp://thedockerhost:2375/
+    # Use the overlayfs driver for improved performance:
+    #DOCKER_DRIVER: overlay2
+    #DOCKER_TLS_CERTDIR: ""
+
+  script:
+    - cd src/GMS.Identity/GMS.Identity.WebHost/
+    - ls
+    #- dotnet restore Otus.Teaching.PromoCodeFactory.sln --interactive
+    - docker info
+    - DOCKER_BUILDKIT=1 docker build -f Dockerfile --force-rm  -t otusteackingpromocodefactoryapp:dev --target base --label "Homework" --output type=tar,dest=out.tar  .
+    - ls
+    #- dotnet build  --configuration Release
+    #- dotnet publish --configuration Release --output ../publish/
+  artifacts:
+    paths:
+      - src/GMS.Identity/GMS.Identity.WebHost/out.tar
+    expire_in: 1 week
+  tags: [netcoremd]
+
+
+
+#test-job1:
+#  stage: test
+#  image: mcr.microsoft.com/dotnet/sdk:7.0
+#  script:
+#    - cd src/Otus.Teaching.PromoCodeFactory.UnitTests/
+#    - dotnet test --test-adapter-path:. --logger:"junit;LogFilePath=..\artifacts\{assembly}-test-result.xml;MethodFormat=Class;FailureBodyFormat=Verbose"
+#  artifacts:
+#    when: always
+#    paths:
+#      - ./**/*test-result.xml
+#    reports:
+#      junit: ./**/*test-result.xml
+#  tags: [netcoremd]
+
+#test-job2:
+#  stage: test
+#  image: mcr.microsoft.com/dotnet/sdk:7.0
+#  script:
+#    - echo "This job tests something, but takes more time than test-job1."
+#    - echo "After the echo commands complete, it runs the sleep command for 20 seconds"
+#    - echo "which simulates a test that runs 20 seconds longer than test-job1"
+#    - sleep 20
+#  tags: [netcoremd]
+
+#deploy-prod:
+#  stage: deploy
+#  image: mcr.microsoft.com/dotnet/sdk:7.0
+#  script:
+#    - echo "This job deploys something from the $CI_COMMIT_BRANCH branch."
+#  environment: production
+#  tags: [netcoremd]
