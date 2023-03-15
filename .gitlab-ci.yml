@@ -44,7 +44,7 @@ build-job:
     #DOCKER_TLS_CERTDIR: ""
 
   script:
-    - cd src/GMS.Identity\GMS.Identity.WebHost/
+    - cd src/GMS.Identity/GMS.Identity.WebHost/
     - ls
     #- dotnet restore Otus.Teaching.PromoCodeFactory.sln --interactive
     - docker info
@@ -54,7 +54,7 @@ build-job:
     #- dotnet publish --configuration Release --output ../publish/
   artifacts:
     paths:
-      - src/GMS.Identity\GMS.Identity.WebHost/out.tar
+      - src/GMS.Identity/GMS.Identity.WebHost/out.tar
     expire_in: 1 week
   tags: [netcoremd]
 
