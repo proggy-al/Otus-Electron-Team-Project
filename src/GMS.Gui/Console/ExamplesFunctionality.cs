@@ -30,7 +30,7 @@ namespace GMS.Gui.Console
 
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri("http://localhost:5225");
+                client.BaseAddress = new Uri("http://localhost:6001");
 
                 var cont = new Credential();
                 var json = JsonConvert.SerializeObject(cont);
@@ -42,14 +42,14 @@ namespace GMS.Gui.Console
             }
 
             var connection = new HubConnectionBuilder()
-                .WithUrl("http://localhost:5225/ChatHub",
+                .WithUrl("http://localhost:3001/ChatHub",
                 configureHttpConnection: options => options.AccessTokenProvider = () =>
                 {
                     return Task.FromResult(resultContent);
                 })
                 .Build();
 
-            connection.On<string, string>("ReceiveMessage", (message, userId) => System.Console.WriteLine($"{userId}:{message}"));
+            connection.On<string, string>("ReceiveMessage", (subject, body) => System.Console.WriteLine($"{subject}:{body}"));
 
             
 
@@ -77,7 +77,7 @@ namespace GMS.Gui.Console
 
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri("http://localhost:7118");
+                client.BaseAddress = new Uri("http://identity-api");
 
                 var cont = new Credential();
                 var json = JsonConvert.SerializeObject(cont);

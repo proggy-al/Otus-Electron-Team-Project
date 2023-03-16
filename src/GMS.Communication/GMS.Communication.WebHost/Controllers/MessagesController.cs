@@ -39,10 +39,10 @@ namespace GMS.Communication.WebHost.Controllers
         public async Task<IActionResult> SendMessageById([FromBody]MessageRequestDTO request)
         {
             //так мы получаем ID авторизованного юзера
-            var id = User.Claims.FirstOrDefault(a => a.Type == "ID").Value;
+            var id = 111; //User.Claims.FirstOrDefault(a => a.Type == "ID").Value;
 
             //await _hubContext.Clients.User(request.RecipientId.ToString()).SendAsync("ReceiveMessage", request.Subject, request.Body);
-            await _hubContext.Clients.User("System").SendAsync("ReceiveMessage", request.Subject, request.Body);
+            await _hubContext.Clients.User(request.RecipientId.ToString()).SendAsync("ReceiveMessage", "Test", $"Hooray, id:{id}");
             return Ok();
         }
     }
