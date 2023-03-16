@@ -15,14 +15,26 @@ services:
     networks:
       - backend
 
+  gms.api.communication:
+    image: ${DOCKER_REGISTRY-}gmscommunicationwebhost
+    container_name: api-communication
+    build:
+      context: .
+      dockerfile: src/GMS.Communication/GMS.Communication.WebHost/Dockerfile
+    ports:
+      - "3001:80"
+    networks:
+      - backend
+
+
   gms.api.core:
     image: ${DOCKER_REGISTRY-}gmscorewebhost
     container_name: core-api
     build:
       context: .
       dockerfile: src/GMS.Core/GMS.Core.WebHost/Dockerfile
-    #ports:
-    #  - "5001:80"
+    ports:
+      - "5001:80"
     depends_on:
       - gms.core.db
     networks:
@@ -34,8 +46,8 @@ services:
     build:
       context: .
       dockerfile: src/GMS.Identity/GMS.Identity.WebHost/Dockerfile
-    #ports: 
-    #  - "6001:80"  
+    ports: 
+      - "6001:80"  
     depends_on:
       - gms.identity.db
     networks:

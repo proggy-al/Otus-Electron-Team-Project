@@ -19,7 +19,7 @@ namespace GMS.Communication.WebHost.Controllers
             _hubContext = hubContext;
         }
 
-        [RequirePrivelege(Priviliges.Administrator, Priviliges.System)] //ограничения доступа к ручке
+        //[RequirePrivelege(Priviliges.Administrator, Priviliges.System)] //ограничения доступа к ручке
         [Route("SendMessageToAll")]
         [HttpPost]
         public async Task<IActionResult> SendMessageToAll([FromBody]MessageRequestDTO request)
@@ -32,7 +32,8 @@ namespace GMS.Communication.WebHost.Controllers
             return Ok();
         }
 
-        [Authorize] //ограничения доступа к ручке
+        //[Authorize] //ограничения доступа к ручке
+        //[RequirePrivelege(Priviliges.Administrator, Priviliges.System)] //ограничения доступа к ручке
         [Route("SendMessageById")]
         [HttpPost]
         public async Task<IActionResult> SendMessageById([FromBody]MessageRequestDTO request)
@@ -40,7 +41,8 @@ namespace GMS.Communication.WebHost.Controllers
             //так мы получаем ID авторизованного юзера
             var id = User.Claims.FirstOrDefault(a => a.Type == "ID").Value;
 
-            await _hubContext.Clients.User(request.RecipientId.ToString()).SendAsync("ReceiveMessage", request.Subject, request.Body);
+            //await _hubContext.Clients.User(request.RecipientId.ToString()).SendAsync("ReceiveMessage", request.Subject, request.Body);
+            await _hubContext.Clients.User("System").SendAsync("ReceiveMessage", request.Subject, request.Body);
             return Ok();
         }
     }

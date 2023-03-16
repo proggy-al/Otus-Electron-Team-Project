@@ -1,0 +1,19 @@
+{
+  "Authorization": {    
+    "JwtBearerOptions": {
+      "RequireHttpsMetadata": "false",
+      "TokenValidationParameters": {
+        "ValidateIssuer": "true",
+        "ValidateAudience": "true",
+        "ValidateLifetime": "true",
+        "ValidateIssuerSigningKey": "true"
+      }
+    },
+    "AditionalOptions": {
+      "ISSUER": "MyAuthServer",
+      "AUDIENCE": "MyAuthClient",
+      "KEY": "mysupersecret_secretkey!123",
+      "LIFETIME": "525600"
+    }
+  }
+}

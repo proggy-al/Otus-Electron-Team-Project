@@ -19,18 +19,39 @@ namespace GMS.Gui.Console
         public static List<Action> GetActions() => new List<Action>
         {
             CommunicationServiceSendMessage,
-            IdentityServiceAuthorize
+            //IdentityServiceAuthorize
         };
 
         #region Примеры для демонстрации
         private static async void CommunicationServiceSendMessage()
         {
             System.Console.WriteLine("Демонстрация работы CommunicationService:");
+            var resultContent = string.Empty;
+
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("http://localhost:5225");
+
+                var cont = new Credential();
+                var json = JsonConvert.SerializeObject(cont);
+                var data = new StringContent(json, Encoding.UTF8, "application/json");
+                
+                var result = await client.PostAsync("/user/authorize", data);
+                resultContent = await result.Content.ReadAsStringAsync();
+                System.Console.WriteLine(resultContent);               
+            }
+
             var connection = new HubConnectionBuilder()
-                .WithUrl("https://localhost:7090/ChatHub")
+                .WithUrl("http://localhost:5225/ChatHub",
+                configureHttpConnection: options => options.AccessTokenProvider = () =>
+                {
+                    return Task.FromResult(resultContent);
+                })
                 .Build();
 
             connection.On<string, string>("ReceiveMessage", (message, userId) => System.Console.WriteLine($"{userId}:{message}"));
+
+            
 
             // Loop is here to wait until the server is running
             while (true)
@@ -56,12 +77,12 @@ namespace GMS.Gui.Console
 
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri("https://localhost:7118");
+                client.BaseAddress = new Uri("http://localhost:7118");
 
                 var cont = new Credential();
                 var json = JsonConvert.SerializeObject(cont);
                 var data = new StringContent(json, Encoding.UTF8, "application/json");
-
+                
                 var result = await client.PostAsync("/user/authorize", data);
                 string resultContent = await result.Content.ReadAsStringAsync();
                 System.Console.WriteLine(resultContent);
