@@ -26,4 +26,6 @@ var app = builder.Build();
 app.UseRouting();
 app.MapHub<ChatHub>($"/chatHub");
 app.MapControllers();
+app.UseAuthentication();
+app.UseAuthorization();
 app.Run();
