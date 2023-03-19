@@ -64,19 +64,19 @@ build-job:
 
 
 
-#test-job1:
-#  stage: test
-#  image: mcr.microsoft.com/dotnet/sdk:7.0
-#  script:
-#    - cd src/Otus.Teaching.PromoCodeFactory.UnitTests/
-#    - dotnet test --test-adapter-path:. --logger:"junit;LogFilePath=..\artifacts\{assembly}-test-result.xml;MethodFormat=Class;FailureBodyFormat=Verbose"
-#  artifacts:
-#    when: always
-#    paths:
-#      - ./**/*test-result.xml
-#    reports:
-#      junit: ./**/*test-result.xml
-#  tags: [netcoremd]
+test-job1:
+  stage: test
+  image: mcr.microsoft.com/dotnet/sdk:7.0
+  script:
+    - cd src/GMS.Identity/GMS.Identity.Test
+    - dotnet test --test-adapter-path:. --logger:"junit;LogFilePath=..\artifacts\{assembly}-test-result.xml;MethodFormat=Class;FailureBodyFormat=Verbose"
+  artifacts:
+    when: always
+    paths:
+      - ./**/*test-result.xml
+    reports:
+      junit: ./**/*test-result.xml
+  tags: [netcoremd]
 
 #test-job2:
 #  stage: test
