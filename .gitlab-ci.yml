@@ -92,6 +92,20 @@ test-core-service:
       junit: ./**/*test-result.xml
   tags: [netcoremd]
 
+test-communication-service:
+  stage: test
+  image: mcr.microsoft.com/dotnet/sdk:7.0
+  script:
+    - cd src/GMS.Communication/GMS.Communication.Test
+    - dotnet test --test-adapter-path:. --logger:"junit;LogFilePath=..\artifacts\{assembly}-test-result.xml;MethodFormat=Class;FailureBodyFormat=Verbose"
+  artifacts:
+    when: always
+    paths:
+      - ./**/*test-result.xml
+    reports:
+      junit: ./**/*test-result.xml
+  tags: [netcoremd]
+
 #deploy-prod:
 #  stage: deploy
 #  image: mcr.microsoft.com/dotnet/sdk:7.0
