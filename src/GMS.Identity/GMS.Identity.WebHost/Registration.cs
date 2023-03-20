@@ -29,6 +29,7 @@ public static class Registration
         services.AddSingleton(mapper);
 
         services.AddTransient<IUserRepository, UserRepository>();
+        services.AddTransient<CoachRepository, CoachRepository>();
 
         //Добавляем авторизацию
         services.AddCustomJWTAuthentification();

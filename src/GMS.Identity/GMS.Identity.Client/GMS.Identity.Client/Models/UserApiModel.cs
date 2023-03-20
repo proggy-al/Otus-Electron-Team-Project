@@ -16,6 +16,8 @@ public class UserApiModel
 
     public string Email { get; set; }
 
-    public bool IsActive { get; set; }  
+    public bool IsActive { get; set; }
+
+    public string Role { get; set; }
 
 }

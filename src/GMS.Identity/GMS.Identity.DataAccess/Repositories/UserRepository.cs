@@ -11,8 +11,8 @@ namespace GMS.Identity.DataAccess.Repositories
 {
     public class UserRepository:IUserRepository
     {
-        private readonly IdentityContext _context;    
-        private readonly IMapper _mapper;
+        private protected readonly IdentityContext _context;    
+        private protected readonly IMapper _mapper;
     
         public UserRepository(IdentityContext context, IMapper mapper)    
         {       
@@ -42,7 +42,7 @@ namespace GMS.Identity.DataAccess.Repositories
             var userSaltAndPassword=UserHelper.GetSaltAndPassword(createApiModel.Password);
             user.Salt = userSaltAndPassword.salt;
             user.PasswordHash = userSaltAndPassword.pass;
-            user.Role = "User";
+            user.Role = createApiModel.Role;
             user.IsActive= true;
             await _context.Users.AddAsync(user);
             await this._context.SaveChangesAsync();
@@ -64,6 +64,7 @@ namespace GMS.Identity.DataAccess.Repositories
                 currentUser.UserName = user.UserName;
                 currentUser.TelegramUserName = user.TelegramUserName;
                 currentUser.Email= user.Email;
+                currentUser.Role = user.Role;
                 currentUser.IsActive= user.IsActive;
                 var userSaltAndPassword = UserHelper.GetSaltAndPassword(user.Password);
                 currentUser.Salt = userSaltAndPassword.salt;
