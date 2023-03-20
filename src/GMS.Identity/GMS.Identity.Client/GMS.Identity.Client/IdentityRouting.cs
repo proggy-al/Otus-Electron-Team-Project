@@ -14,5 +14,7 @@ namespace GMS.Identity.Client
         public const string PatchUser = "user/{id}";
         public const string DeleteUser = "user/{id}";
         public const string GetToken = "authorize";
+        public const string GetAllCoaches = "coach";
+        public const string GetCoach = "coach/{id}";
     }
 }

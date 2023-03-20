@@ -12,7 +12,13 @@ public enum Priviliges
     System=0,
     Administrator=1,
     User,
-    Spectrator
+    Spectrator,
+    GYMOwner,
+    Coach,
+    Manager,
+    Member,
+    GymDoctor,
+    ChiefCoach
 }
 
 /// <summary>

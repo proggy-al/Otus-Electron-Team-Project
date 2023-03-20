@@ -44,7 +44,7 @@ public class UserController : ControllerBase
     /// Get all users , should be authorize as Admin or System
     /// </summary>
     /// <returns></returns>
-    //[RequirePrivelege(Priviliges.Administrator, Priviliges.System)]
+    [RequirePrivelege(Priviliges.Administrator, Priviliges.System)]
     [HttpGet(IdentityRouting.GetAllUsers)]
     public async Task<List<UserApiModel>> GetAllUsers()
     {
@@ -160,7 +160,8 @@ public class UserController : ControllerBase
                     new Claim(ClaimsIdentity.DefaultRoleClaimType, person.Role),
                     new Claim("ID", person.Id.ToString()),
                     new Claim("NameTelegram", person.TelegramUserName.ToString()),                  
-                    new Claim("Role", person.Role)
+                    new Claim("Role", person.Role),
+                    new Claim("EMail",person.Email)
                 };
             ClaimsIdentity claimsIdentity =
             new ClaimsIdentity(claims, "Token", ClaimsIdentity.DefaultNameClaimType,
