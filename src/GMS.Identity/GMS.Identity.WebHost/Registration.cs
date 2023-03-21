@@ -1,4 +1,7 @@
 ﻿using AutoMapper;
+using FluentValidation;
+using GMS.Identity.Client.Models;
+using GMS.Identity.Client.Validators;
 using GMS.Identity.Core.Abstractions.Repositories;
 using GMS.Identity.DataAccess.Context;
 using GMS.Identity.DataAccess.Repositories;
@@ -30,6 +33,8 @@ public static class Registration
 
         services.AddTransient<IUserRepository, UserRepository>();
         services.AddTransient<CoachRepository, CoachRepository>();
+        //services.AddScoped<IValidator<UserCreateApiModel>, UserCreateValidator>();
+        services.AddValidatorsFromAssemblyContaining<UserCreateValidator>();
 
         //Добавляем авторизацию
         services.AddCustomJWTAuthentification();
