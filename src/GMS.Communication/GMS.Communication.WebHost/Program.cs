@@ -1,8 +1,11 @@
 using GMS.Communication.WebHost.Hubs;
+using GMS.Communication.WebHost.Models;
 using JWTAuthManager;
+using Microsoft.AspNetCore.SignalR;
 
 // TODO добавить реалзицию Stratup для разделения наполнения IoC и Pipeline
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddSingleton<IUserIdProvider, MyUserProvider>();
 builder.Services.AddSignalR();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -24,8 +27,9 @@ var app = builder.Build();
 
 //app.UseHttpsRedirection();
 app.UseRouting();
-app.MapHub<ChatHub>($"/chatHub");
+
 app.MapControllers();
 app.UseAuthentication();
 app.UseAuthorization();
+app.MapHub<ChatHub>($"/chatHub");
 app.Run();

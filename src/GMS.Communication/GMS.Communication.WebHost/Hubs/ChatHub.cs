@@ -17,14 +17,13 @@ namespace GMS.Communication.WebHost.Hubs
         [Authorize]
         public async Task SendMessageById(string message, Guid userId)
         {
-
             await Clients.User("System").SendAsync("Receive", message, userId);
         }
 
         [Authorize]
         public override async Task OnConnectedAsync()
         {        
-            
+            var id= Context.User?.Claims?.FirstOrDefault(a => a.Type == "ID").Value;
             //var userName = Context.User?.Identity?.Name ?? "Anonymous";
             //var connectionId = Context.ConnectionId;
             await base.OnConnectedAsync();
