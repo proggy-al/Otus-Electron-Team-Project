@@ -11,6 +11,8 @@ using GMS.Identity.WebHost.Infrastructure;
 using GMS.Identity.Client;
 using GMS.Identity.Client.Models;
 using JWTAuthManager;
+using FluentValidation;
+using FluentValidation.Results;
 
 namespace GMS.Identity.WebHost.Controllers;
 
@@ -21,11 +23,13 @@ public class UserController : ControllerBase
 
     private readonly IUserRepository _userRepository;
     private readonly IAuthOptions _authOptions;
+    private readonly IValidator _validator;
 
-    public UserController(IUserRepository userRepository, IAuthOptions authOptions)
+    public UserController(IUserRepository userRepository, IAuthOptions authOptions, IValidator<UserCreateApiModel> validator)
     {
         _userRepository = userRepository;
         _authOptions = authOptions; 
+        _validator = validator;
     }
 
     /// <summary>
@@ -63,6 +67,11 @@ public class UserController : ControllerBase
     [HttpPost(IdentityRouting.CreateUser)]
     public async Task<ActionResult<UserApiModel>>CreateUser([FromBody] UserCreateApiModel user)
     {
+        var validationContext = new ValidationContext<UserCreateApiModel>(user);
+        ValidationResult validationResult = await _validator.ValidateAsync(validationContext);
+
+        if (!validationResult.IsValid) { return StatusCode(500, validationResult.Errors.Aggregate("",(a,b)=>$"{a};{b}")); }
+
         try
         {
             var res = await _userRepository.CreateAsync(user);
