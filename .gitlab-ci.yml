@@ -48,41 +48,63 @@ build-job:
     - ls
     #- dotnet restore Otus.Teaching.PromoCodeFactory.sln --interactive
     - docker info
-    - DOCKER_BUILDKIT=1 docker build -f Dockerfile --force-rm  -t otusteackingpromocodefactoryapp:dev --target base --label "Homework" --output type=tar,dest=out.tar  .
+    #- DOCKER_BUILDKIT=1 docker build -f Dockerfile --force-rm  -t gmsidentity:dev --target base --label "GMS.Identity.Service" --output type=tar,dest=out.tar  .
+    #- docker login -u $USER -p $ACCESS_TOKEN $CI_REGISTRY
+    - DOCKER_BUILDKIT=1 docker build -f Dockerfile --force-rm  -t registry.gitlab.com/otus-electron-team/otus-electron-team-project  --target base --label "GMS.Identity.Service" .
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker push registry.gitlab.com/otus-electron-team/otus-electron-team-project 
     - ls
     #- dotnet build  --configuration Release
     #- dotnet publish --configuration Release --output ../publish/
-  artifacts:
-    paths:
-      - src/GMS.Identity/GMS.Identity.WebHost/out.tar
-    expire_in: 1 week
+  #artifacts:
+  #  paths:
+  #    - src/GMS.Identity/GMS.Identity.WebHost/out.tar
+  #  expire_in: 1 week
   tags: [netcoremd]
 
 
 
-#test-job1:
-#  stage: test
-#  image: mcr.microsoft.com/dotnet/sdk:7.0
-#  script:
-#    - cd src/Otus.Teaching.PromoCodeFactory.UnitTests/
-#    - dotnet test --test-adapter-path:. --logger:"junit;LogFilePath=..\artifacts\{assembly}-test-result.xml;MethodFormat=Class;FailureBodyFormat=Verbose"
-#  artifacts:
-#    when: always
-#    paths:
-#      - ./**/*test-result.xml
-#    reports:
-#      junit: ./**/*test-result.xml
-#  tags: [netcoremd]
+test-identity-service:
+  stage: test
+  image: mcr.microsoft.com/dotnet/sdk:7.0
+  script:
+    - cd src/GMS.Identity/GMS.Identity.Test
+    - dotnet test --test-adapter-path:. --logger:"junit;LogFilePath=..\artifacts\{assembly}-test-result.xml;MethodFormat=Class;FailureBodyFormat=Verbose"
+  artifacts:
+    when: always
+    paths:
+      - ./**/*test-result.xml
+    reports:
+      junit: ./**/*test-result.xml
+  tags: [netcoremd]
 
-#test-job2:
-#  stage: test
-#  image: mcr.microsoft.com/dotnet/sdk:7.0
-#  script:
-#    - echo "This job tests something, but takes more time than test-job1."
-#    - echo "After the echo commands complete, it runs the sleep command for 20 seconds"
-#    - echo "which simulates a test that runs 20 seconds longer than test-job1"
-#    - sleep 20
-#  tags: [netcoremd]
+test-core-service:
+  stage: test
+  image: mcr.microsoft.com/dotnet/sdk:7.0
+  script:
+    - cd src/GMS.Core/GMS.Core.Test
+    - dotnet test --test-adapter-path:. --logger:"junit;LogFilePath=..\artifacts\{assembly}-test-result.xml;MethodFormat=Class;FailureBodyFormat=Verbose"
+  artifacts:
+    when: always
+    paths:
+      - ./**/*test-result.xml
+    reports:
+      junit: ./**/*test-result.xml
+  tags: [netcoremd]
+
+test-communication-service:
+  stage: test
+  image: mcr.microsoft.com/dotnet/sdk:7.0
+  script:
+    - cd src/GMS.Communication/GMS.Communication.Test
+    - dotnet test --test-adapter-path:. --logger:"junit;LogFilePath=..\artifacts\{assembly}-test-result.xml;MethodFormat=Class;FailureBodyFormat=Verbose"
+  artifacts:
+    when: always
+    paths:
+      - ./**/*test-result.xml
+    reports:
+      junit: ./**/*test-result.xml
+  tags: [netcoremd]
 
 #deploy-prod:
 #  stage: deploy

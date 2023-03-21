@@ -15,4 +15,6 @@ public class UserJwtTokenModel
     public string Role { get; set; } = "User";
 
     public string TelegramUserName { get; set; }
+
+    public string Email { get; set; }
 }

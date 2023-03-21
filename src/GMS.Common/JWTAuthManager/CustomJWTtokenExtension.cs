@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,7 +16,7 @@ public static class CustomJWTtokenExtension
     public static void AddCustomJWTAuthentification(this IServiceCollection services)
     {
         var builder = WebApplication.CreateBuilder();
-        builder.Configuration.AddJsonFile("identitysettings.json");
+        builder.Configuration.AddJsonFile(Path.Combine(System.IO.Path.GetDirectoryName(Assembly.GetEntryAssembly().Location),"identitysettings.json"));
 
         IAuthOptions authOptions = new AuthOptions(builder.Configuration);
         services.AddSingleton(authOptions);

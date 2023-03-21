@@ -18,8 +18,9 @@ namespace GMS.Gui.Console
         /// <returns></returns>
         public static List<Action> GetActions() => new List<Action>
         {
-            CommunicationServiceSendMessage,
-            //IdentityServiceAuthorize
+            IdentityServiceAuthorize,
+            CommunicationServiceSendMessage
+            
         };
 
         #region Примеры для демонстрации
@@ -42,11 +43,7 @@ namespace GMS.Gui.Console
             }
 
             var connection = new HubConnectionBuilder()
-                .WithUrl("http://localhost:3001/ChatHub",
-                configureHttpConnection: options => options.AccessTokenProvider = () =>
-                {
-                    return Task.FromResult(resultContent);
-                })
+                .WithUrl("https://localhost:7090/ChatHub") //TODO: поменять https  на http  и порт из docker-compose прописать или через apigateway рфботать- ручкапорт соответствующая
                 .Build();
 
             connection.On<string, string>("ReceiveMessage", (subject, body) => System.Console.WriteLine($"{subject}:{body}"));
@@ -77,13 +74,13 @@ namespace GMS.Gui.Console
 
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri("http://identity-api");
+                client.BaseAddress = new Uri("http://localhost:4001");
 
                 var cont = new Credential();
                 var json = JsonConvert.SerializeObject(cont);
                 var data = new StringContent(json, Encoding.UTF8, "application/json");
-                
-                var result = await client.PostAsync("/user/authorize", data);
+
+                var result = await client.PostAsync("/authorize", data);
                 string resultContent = await result.Content.ReadAsStringAsync();
                 System.Console.WriteLine(resultContent);
             }
