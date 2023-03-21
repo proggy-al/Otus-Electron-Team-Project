@@ -15,6 +15,28 @@ services:
     networks:
       - backend
 
+  gms.api.communication:
+    image: ${DOCKER_REGISTRY-}gmscommunicationwebhost
+    container_name: api-communication
+    build:
+      context: .
+      dockerfile: src/GMS.Communication/GMS.Communication.WebHost/Dockerfile
+    ports:
+      - "3001:80"
+    networks:
+      - backend
+
+  #gms.gui.console:
+    #image: ${DOCKER_REGISTRY-}gmsguiconsole
+    #container_name: gui-console
+    #build:
+      #context: .
+      #dockerfile: src/GMS.Gui/Console/Dockerfile
+    ##ports:
+    ##  - "2001:80"
+    #networks:
+      #- backend
+
   gms.api.core:
     image: ${DOCKER_REGISTRY-}gmscorewebhost
     container_name: core-api

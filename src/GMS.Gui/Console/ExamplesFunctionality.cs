@@ -27,11 +27,28 @@ namespace GMS.Gui.Console
         private static async void CommunicationServiceSendMessage()
         {
             System.Console.WriteLine("Демонстрация работы CommunicationService:");
+            var resultContent = string.Empty;
+
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("http://localhost:6001");
+
+                var cont = new Credential();
+                var json = JsonConvert.SerializeObject(cont);
+                var data = new StringContent(json, Encoding.UTF8, "application/json");
+                
+                var result = await client.PostAsync("/user/authorize", data);
+                resultContent = await result.Content.ReadAsStringAsync();
+                System.Console.WriteLine(resultContent);               
+            }
+
             var connection = new HubConnectionBuilder()
                 .WithUrl("https://localhost:7090/ChatHub") //TODO: поменять https  на http  и порт из docker-compose прописать или через apigateway рфботать- ручкапорт соответствующая
                 .Build();
 
-            connection.On<string, string>("ReceiveMessage", (message, userId) => System.Console.WriteLine($"{userId}:{message}"));
+            connection.On<string, string>("ReceiveMessage", (subject, body) => System.Console.WriteLine($"{subject}:{body}"));
+
+            
 
             // Loop is here to wait until the server is running
             while (true)

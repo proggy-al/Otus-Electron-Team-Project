@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "GMS.Gui.Console": {
+      "commandName": "Project"
+    },
+    "Docker": {
+      "commandName": "Docker"
+    }
+  }
+}

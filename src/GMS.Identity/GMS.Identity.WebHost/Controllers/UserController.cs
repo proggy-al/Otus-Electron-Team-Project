@@ -52,6 +52,9 @@ public class UserController : ControllerBase
     [HttpGet(IdentityRouting.GetAllUsers)]
     public async Task<List<UserApiModel>> GetAllUsers()
     {
+        //так мы получаем ID авторизованного юзера
+            var id= User.Claims.FirstOrDefault(a => a.Type == "ID").Value;
+
         var res= await _userRepository.GetUsers();
         Response.Headers.Add("Access-Control-Expose-Headers", "X-Total-Count");
         Response.Headers.Add("X-Total-Count", res.Count.ToString());

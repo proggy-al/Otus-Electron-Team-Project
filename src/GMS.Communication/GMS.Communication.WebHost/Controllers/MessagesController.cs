@@ -19,7 +19,7 @@ namespace GMS.Communication.WebHost.Controllers
             _hubContext = hubContext;
         }
 
-        [RequirePrivelege(Priviliges.Administrator, Priviliges.System)] //ограничения доступа к ручке
+        //[RequirePrivelege(Priviliges.Administrator, Priviliges.System)] //ограничения доступа к ручке
         [Route("SendMessageToAll")]
         [HttpPost]
         public async Task<IActionResult> SendMessageToAll([FromBody]MessageRequestDTO request)
@@ -32,15 +32,18 @@ namespace GMS.Communication.WebHost.Controllers
             return Ok();
         }
 
-        [Authorize] //ограничения доступа к ручке
+        //[Authorize] //ограничения доступа к ручке
+        //[RequirePrivelege(Priviliges.Administrator, Priviliges.System)] //ограничения доступа к ручке
         [Route("SendMessageById")]
         [HttpPost]
-        public async Task<IActionResult> SendMessageById([FromBody]MessageRequestDTO request)
+        public async Task<IActionResult> SendMessageById(string clientId)
         {
             //так мы получаем ID авторизованного юзера
-            var id = User.Claims.FirstOrDefault(a => a.Type == "ID").Value;
-
-            await _hubContext.Clients.User(request.RecipientId.ToString()).SendAsync("ReceiveMessage", request.Subject, request.Body);
+            
+            //await _hubContext.Clients.User(request.RecipientId.ToString()).SendAsync("ReceiveMessage", request.Subject, request.Body);
+            await _hubContext.Clients.User("c35e71b1-01fe-4e96-aa13-35371f792a4f").SendAsync("ReceiveMessage", "Test", $"Hooray, id:c35e71b1-01fe-4e96-aa13-35371f792a4f");
+            //await _hubContext.Clients.User("System").SendAsync("ReceiveMessage", "Test", $"Hooray, id:c35e71b1-01fe-4e96-aa13-35371f792a4f");
+            //await _hubContext.Clients.Client(clientId).SendAsync("ReceiveMessage", "Test", $"Hooray, id:c35e71b1-01fe-4e96-aa13-35371f792a4f");
             return Ok();
         }
     }
