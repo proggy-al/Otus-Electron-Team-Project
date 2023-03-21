@@ -1,6 +1,7 @@
 using GMS.Core.DataAccess.Context;
 using GMS.Core.WebHost.Configurations;
 using JWTAuthManager;
+using Microsoft.EntityFrameworkCore;
 using Serilog;
 
 try
@@ -11,7 +12,10 @@ try
     builder.Services
         .ConfigureLogger()
         .ConfigureMapper()
-        .AddDbContext<DatabaseContext>()
+        .AddDbContext<DatabaseContext>(options =>
+        {
+            options.UseNpgsql("GmsCore");
+        })
         .AddRepositories()
         .AddServices()
         .AddEndpointsApiExplorer()

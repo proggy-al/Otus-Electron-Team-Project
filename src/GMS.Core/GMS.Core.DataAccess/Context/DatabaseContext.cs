@@ -7,7 +7,7 @@ namespace GMS.Core.DataAccess.Context
     public class DatabaseContext : DbContext
     {
         // ToDo: перенести в настройки
-        private readonly string _connectionString = "Host=gms.core.db;Port=5432;Username=postrgesuser;Password=12345678;Database=gmscore;";
+        private readonly string _connectionString = "Host=gms.core.db;Port=5432;Username=postrgesuser;Password=987Ijn++;Database=gmscore;";
         
         public DbSet<FitnessClub> FitnessClubs { get; set; }
         public DbSet<Area> Areas { get; set; }
@@ -20,10 +20,10 @@ namespace GMS.Core.DataAccess.Context
         {
             //Database.EnsureCreated();
         }
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseNpgsql(_connectionString);
-        }
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    //optionsBuilder.UseNpgsql(_connectionString);
+        //}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
