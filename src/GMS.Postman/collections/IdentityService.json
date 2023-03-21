@@ -99,6 +99,44 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "createUser",
+			"id": "7b3e6ed5-f43f-4c37-9cdc-15de8b2b9aa1",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiU3lzdGVtIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiU3lzdGVtIiwiSUQiOiJjMzVlNzFiMS0wMWZlLTRlOTYtYWExMy0zNTM3MWY3OTJhNGYiLCJOYW1lVGVsZWdyYW0iOiJAc3lzdGVtIiwiUm9sZSI6IlN5c3RlbSIsIkVNYWlsIjoic3lzQG1haWwucnUiLCJuYmYiOjE2NzkzNTAwNjEsImV4cCI6MTcxMDg4NjA2MSwiaXNzIjoiTXlBdXRoU2VydmVyIiwiYXVkIjoiTXlBdXRoQ2xpZW50In0.ZVQFVRuHqg1ULlUgSzAeIn9lAB98hYLIQDHnCHP-j9Y",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"userName\": \"test1\",\r\n  \"telegramUserName\": \"string\",\r\n  \"email\": \"string@mail.ru\",\r\n  \"password\": \"string\",\r\n  \"role\": \"Coach\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:6001/user",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "6001",
+					"path": [
+						"user"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
