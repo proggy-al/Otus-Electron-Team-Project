@@ -1,17 +1,22 @@
 using GMS.Core.DataAccess.Context;
 using GMS.Core.WebHost.Configurations;
 using JWTAuthManager;
+using Microsoft.EntityFrameworkCore;
 using Serilog;
 
 try
 {
     var builder = WebApplication.CreateBuilder(args);
     builder.Environment.ApplicationName = typeof(Program).Assembly.FullName;
-
+    
+    var connectionString = builder.Configuration.GetConnectionString("GmsCore");
     builder.Services
         .ConfigureLogger()
         .ConfigureMapper()
-        .AddDbContext<DatabaseContext>()
+        .AddDbContext<DatabaseContext>(options =>
+        {
+            options.UseNpgsql(connectionString);
+        })
         .AddRepositories()
         .AddServices()
         .AddEndpointsApiExplorer()
