@@ -8,13 +8,14 @@ try
 {
     var builder = WebApplication.CreateBuilder(args);
     builder.Environment.ApplicationName = typeof(Program).Assembly.FullName;
-
+    
+    var connectionString = builder.Configuration.GetConnectionString("GmsCore");
     builder.Services
         .ConfigureLogger()
         .ConfigureMapper()
         .AddDbContext<DatabaseContext>(options =>
         {
-            options.UseNpgsql("GmsCore");
+            options.UseNpgsql(connectionString);
         })
         .AddRepositories()
         .AddServices()

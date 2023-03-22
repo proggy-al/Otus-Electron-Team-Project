@@ -1,10 +1,9 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using GMS.Core.WebHost.Configurations;
 using GMS.Core.DataAccess.Context;
-using Microsoft.EntityFrameworkCore;
 using AutoFixture;
 using GMS.Core.Core.Domain;
-using Microsoft.Extensions.Configuration;
+using Microsoft.EntityFrameworkCore;
 
 namespace GMS.Core.Test
 {
@@ -16,22 +15,17 @@ namespace GMS.Core.Test
 
         public TestFixture()
         {
-
-            var builder = new ConfigurationBuilder();
-            var configuration = builder.Build();
-            ServiceCollection = Configuration.GetServices<IServiceCollection>();
-
             var services = new ServiceCollection();
+
             services.ConfigureMapper();
-            services.AddEntityFrameworkInMemoryDatabase()
-                .AddDbContext<DatabaseContext>(options =>
-                {
-                    options.UseInMemoryDatabase($"mock_db_{DateTime.Now.Ticks}");
-                });
+
+            services.AddDbContext<DatabaseContext>(options =>
+            {
+                options.UseInMemoryDatabase("GmsCore");
+            });
 
             services.AddRepositories();
             ServiceProvider = services.BuildServiceProvider();
-            SeedDb();
         }
 
         /// <summary>
