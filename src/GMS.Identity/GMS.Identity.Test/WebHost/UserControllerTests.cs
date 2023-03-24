@@ -65,10 +65,12 @@ namespace GMS.Identity.Test.WebHost
             _userRepositoryMock.Setup(repo => repo.CreateAsync(user)).ReturnsAsync(userReturn);
 
             // Act
-            var result = await _userController.CreateUser(user);
+            var result =await _userController.CreateUser(user);
+
+            var res= (OkObjectResult)result.Result;
 
             // Assert
-            result.Value.Should().NotBeEquivalentTo(userReturn);//NotBeNull();
+            res.Value.Should().BeEquivalentTo(userReturn);//NotBeNull();
         }
 
         
