@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using GMS.Identity.Client.Models;
+using GMS.Identity.Core.Abstractions.Repositories;
 using GMS.Identity.DataAccess.Context;
 using JWTAuthManager;
 using Microsoft.EntityFrameworkCore;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace GMS.Identity.DataAccess.Repositories
 {
-    public class CoachRepository : UserRepository
+    public class CoachRepository : UserRepository,ICoachRepository
     {
         public CoachRepository(IdentityContext context, IMapper mapper) : base(context, mapper)
         {

@@ -56,7 +56,7 @@ namespace GMS.Identity.Test.WebHost
         }
 
         [Fact]
-        public async void CreateUserAsync_PartnerIsNotFound_ReturnsOK()
+        public async void CreateUserAsync_CreateUserCreateApiModel_ReturnsOK()
         {
             // Arrange
             var user = CreateUserCreateApiModel();
@@ -65,14 +65,14 @@ namespace GMS.Identity.Test.WebHost
             _userRepositoryMock.Setup(repo => repo.CreateAsync(user)).ReturnsAsync(userReturn);
 
             // Act
-            var result =await _userController.CreateUser(user);
+            var result = await _userController.CreateUser(user);
 
-            var res= (OkObjectResult)result.Result;
+            var res = (OkObjectResult)result.Result;
 
             // Assert
             res.Should().NotBeNull();
             res.Value.Should().BeEquivalentTo(userReturn);
 
-        
+        }
     }
 }

@@ -32,7 +32,7 @@ public static class Registration
         services.AddSingleton(mapper);
 
         services.AddTransient<IUserRepository, UserRepository>();
-        services.AddTransient<CoachRepository, CoachRepository>();
+        services.AddTransient<ICoachRepository, CoachRepository>();
         //services.AddScoped<IValidator<UserCreateApiModel>, UserCreateValidator>();
         services.AddValidatorsFromAssemblyContaining<UserCreateValidator>();
 
