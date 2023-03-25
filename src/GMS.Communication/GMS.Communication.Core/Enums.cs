@@ -6,7 +6,7 @@ public enum MessageType
     Text = 1,
 }
 
-public enum MesseageStatus
+public enum MessageStatus
 {
     none = 0,
     undelivered = 1,
