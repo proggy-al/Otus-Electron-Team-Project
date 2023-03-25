@@ -1,13 +1,8 @@
 ﻿using GMS.Communication.Core.Abstractons;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GMS.Communication.DataAccess.Repository
 {
-    public class MesseageRepository<T> : IRepository<T> where T : BaseEntity
+    public class MessageRepository<T> : IRepository<T> where T : BaseEntity
     {
         public Task<T> CreateAsync(T entity, CancellationToken cancel = default)
         {
