@@ -1,4 +1,5 @@
 ﻿using GMS.Communication.Core;
+using GMS.Communication.Core.Abstractons;
 using GMS.Communication.Core.Domain;
 using Microsoft.EntityFrameworkCore;
 
@@ -40,6 +41,7 @@ namespace GMS.Communication.DataAccess.Context
                 .Property(s => s.Status)
                 .HasDefaultValue(MessageStatus.none)
                 .IsRequired();
+            modelBuilder.Entity<GmsMessage>().HasKey(x => x.Id);
         }
     }
 }
