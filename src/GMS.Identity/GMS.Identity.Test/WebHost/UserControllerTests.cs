@@ -70,8 +70,8 @@ namespace GMS.Identity.Test.WebHost
             var res= (OkObjectResult)result.Result;
 
             // Assert
-            res.Value.Should().BeEquivalentTo(userReturn);//NotBeNull();
-        }
+            res.Should().NotBeNull();
+            res.Value.Should().BeEquivalentTo(userReturn);
 
         
     }
