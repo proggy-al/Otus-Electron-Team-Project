@@ -7,7 +7,7 @@ namespace GMS.Communication.DataAccess.Context
 {
     public class GmsMessagesDb : DbContext
     {
-        DbSet<GmsMessage>  Messages {get;set;}
+        public DbSet<GmsMessage>  Messages {get;set;}
 
         public GmsMessagesDb(DbContextOptions<GmsMessagesDb> options) : base(options)
         {
