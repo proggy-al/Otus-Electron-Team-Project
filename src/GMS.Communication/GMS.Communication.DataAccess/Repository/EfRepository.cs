@@ -1,4 +1,6 @@
-﻿using GMS.Communication.Core.Abstractons;
+﻿using System.Linq.Expressions;
+using GMS.Communication.Core.Abstractons;
+using GMS.Communication.Core.Domain;
 using GMS.Communication.DataAccess.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -70,10 +72,11 @@ namespace GMS.Communication.DataAccess.Repository
         /// Get all entities
         /// </summary>
         /// <returns></returns>
-        public Task<IEnumerable<T>> GetAllAsync()
+        public Task<IEnumerable<T>> GetAllAsync(Guid userId)
         {
             _logger.LogInformation($"Getting all entities of {_typeName}");
-            var result = Task.FromResult<IEnumerable<T>>(_db.Set<T>().AsSplitQuery());
+
+            var result = Task.FromResult<IEnumerable<T>>(_db.Set<T>());
             return result;
         }
 
@@ -104,6 +107,13 @@ namespace GMS.Communication.DataAccess.Repository
         public Task UpdateAsync(T[] entities, CancellationToken cancel = default)
         {
             throw new NotImplementedException();
+        }
+
+
+        public async Task<ICollection<T>> Get(Expression<Func<T, bool>> where)
+        {
+            var result = await _db.Set<T>().Where(where).ToListAsync();
+            return result;
         }
     }
 }
