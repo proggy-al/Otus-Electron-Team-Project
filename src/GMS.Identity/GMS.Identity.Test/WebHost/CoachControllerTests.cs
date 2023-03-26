@@ -79,7 +79,7 @@ namespace GMS.Identity.Test.WebHost
         }
 
         [Fact]
-        public async void GetCoachAsync_ByNotExistingId_ReturnNull()
+        public async void GetCoachAsync_ByNotExistingId_ReturnNotFound()
         {
             // Arrange
             var coach = CreateUserCreateApiModel();

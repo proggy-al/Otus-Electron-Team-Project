@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace GMS.Identity.Test.WebHost
 {
-    public class UserControllerAsyncTests
+    public class UserControllerAsyncTests:IDisposable
     {
         private readonly Mock<IUserRepository> _userRepositoryMock;
         private readonly UserController _userController;
@@ -28,14 +28,14 @@ namespace GMS.Identity.Test.WebHost
             _userController = fixture.Build<UserController>().OmitAutoProperties().Create();
         }
 
-        public UserCreateApiModel CreateUserCreateApiModel()
+        public UserCreateApiModel CreateUserCreateApiModel(bool isMailCorrect=true, bool isPasswordValid=true)
         {
             var user =new Faker<UserCreateApiModel>()
                 .RuleFor(u=>u.UserName,f=>f.Name.FirstName())
                 .RuleFor(u=>u.TelegramUserName, ()=>"@telegram")
                 .RuleFor(u=>u.Role,()=>"User")
-                .RuleFor(u=>u.Email, ()=>"test@mail.ru")
-                .RuleFor(u=>u.Password,()=>"123456");
+                .RuleFor(u=>u.Email, ()=> isMailCorrect?"test@mail.ru":"xxxxx")
+                .RuleFor(u=>u.Password,()=>isPasswordValid?"123456":"12345");
 
             return user.Generate();
         }
@@ -55,6 +55,7 @@ namespace GMS.Identity.Test.WebHost
             return user;
         }
 
+
         [Fact]
         public async void CreateUserAsync_CreateUserCreateApiModel_ReturnsOK()
         {
@@ -73,6 +74,31 @@ namespace GMS.Identity.Test.WebHost
             res.Should().NotBeNull();
             res.Value.Should().BeEquivalentTo(userReturn);
 
+        }
+
+        //[Fact]
+        //public async void CreateUserAsync_CreateUserCreateApiModelWithNotValidEmail_ReturnsBadRequest()
+        //{
+        //    // Arrange
+        //    var user = CreateUserCreateApiModel(false,false);
+        //    var userReturn = CreateUserApiModel(user);
+
+        //    _userRepositoryMock.Setup(repo => repo.CreateAsync(user)).ReturnsAsync(userReturn);
+
+        //    // Act
+        //    var result = await _userController.CreateUser(user);
+
+        //    var res = result.Result;
+
+        //    // Assert
+        //    // Assert
+        //    res.Should().NotBeNull();
+        //    res.Should().BeEquivalentTo(new BadRequestResult());
+
+        //}
+
+        public void Dispose()
+        {
         }
     }
 }
