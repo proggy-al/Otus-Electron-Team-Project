@@ -13,7 +13,7 @@ namespace GMS.Communication.DataAccess.Data
                 SenderId = new Guid(),
                 Subject = "TestSubject1",
                 Body = "TestBody1",
-                Type = MessageType.Text,
+                Type = MessageType.text,
                 Status = MessageStatus.read,
             },
             new GmsMessage()
@@ -22,7 +22,7 @@ namespace GMS.Communication.DataAccess.Data
                 SenderId = new Guid(),
                 Subject = "TestSubject2",
                 Body = "TestBody2",
-                Type = MessageType.Text,
+                Type = MessageType.text,
                 Status = MessageStatus.undelivered,
             },
             new GmsMessage()
@@ -31,7 +31,7 @@ namespace GMS.Communication.DataAccess.Data
                 SenderId = new Guid(),
                 Subject = "TestSubject3",
                 Body = "TestBody3",
-                Type = MessageType.Text,
+                Type = MessageType.text,
                 Status = MessageStatus.unread,
             }
         };

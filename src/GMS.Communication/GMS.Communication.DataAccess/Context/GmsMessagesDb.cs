@@ -35,7 +35,7 @@ namespace GMS.Communication.DataAccess.Context
                 .IsRequired();
             modelBuilder.Entity<GmsMessage>()
                 .Property(s => s.Type)
-                .HasDefaultValue(MessageType.Text)
+                .HasDefaultValue(MessageType.text)
                 .IsRequired();
             modelBuilder.Entity<GmsMessage>()
                 .Property(s => s.Status)

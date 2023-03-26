@@ -2,8 +2,8 @@
 
 public enum MessageType
 {
-    Unknown = 0,
-    Text = 1,
+    unknown = 0,
+    text = 1,
 }
 
 public enum MessageStatus
