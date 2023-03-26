@@ -4,6 +4,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using JWTAuthManager;
 using System.Security.Claims;
+using AutoMapper;
+using GMS.Communication.Core.Abstractons;
+using GMS.Communication.Core.Domain;
+using GMS.Core.Core.Abstractions.Repositories.Base;
 using Microsoft.AspNetCore.Authorization;
 
 namespace GMS.Communication.WebHost.Controllers
@@ -13,10 +17,14 @@ namespace GMS.Communication.WebHost.Controllers
     public class MessengerController : Controller
     {
         private readonly IHubContext<ChatHub> _hubContext;
+        private readonly IRepository<GmsMessage> _db;
+        private readonly IMapper _mapper;
 
-        public MessengerController(IHubContext<ChatHub> hubContext)
+        public MessengerController(IHubContext<ChatHub> hubContext, IRepository<GmsMessage> db, IMapper mapper)
         {
             _hubContext = hubContext;
+            _db = db;
+            _mapper = mapper;
         }
 
         [Authorize]
@@ -25,17 +33,30 @@ namespace GMS.Communication.WebHost.Controllers
         [HttpPost]
         public async Task<IActionResult> SendMessageToAll([FromBody]MessageRequestDTO requestMessage)
         {
+            var message = _mapper.Map<GmsMessage>(requestMessage);
+            await _db.CreateAsync(message);
             await _hubContext.Clients.All.SendAsync("ReceiveMessage", requestMessage.Subject, requestMessage.Body);
             return Ok();
         }
 
-        [Authorize] //ограничения доступа к ручке
+        //[Authorize] //ограничения доступа к ручке
         [Route("SendById")]
         [HttpPost]
         public async Task<IActionResult> SendById([FromBody]MessageRequestDTO requestMessage)
         {
+            var message = _mapper.Map<GmsMessage>(requestMessage);
+            await _db.CreateAsync(message);
             await _hubContext.Clients.User(requestMessage.RecipientId.ToString()).SendAsync("ReceiveMessage", requestMessage.Subject, requestMessage.Body);
             return Ok();
+        }
+
+        //[Authorize] //ограничения доступа к ручке
+        [Route("GetAllMessages")]
+        [HttpPost]
+        public async Task<IEnumerable<GmsMessage>> GetAllMessages(Guid userId)
+        {
+            var messages = await _db.Get(x => x.SenderId == userId || x.RecipientId == userId);
+            return messages;
         }
 
         [Authorize] //ограничения доступа к ручке
