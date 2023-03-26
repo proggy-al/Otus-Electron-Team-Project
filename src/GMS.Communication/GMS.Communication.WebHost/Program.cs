@@ -12,6 +12,9 @@ namespace GMS.Communication.WebHost
         public static async Task Main(string[] args)
         {
             var host = CreateHostBuilder(args).Build();
+            ILoggerFactory loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
+            ILogger<GmsMessagesDb> logger = loggerFactory.CreateLogger<GmsMessagesDb>();
+            await CreateDbIfNotExist(host, logger);
             await host.RunAsync();
         }
 
