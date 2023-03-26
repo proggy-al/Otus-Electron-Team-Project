@@ -1,5 +1,9 @@
-﻿using GMS.Communication.DataAccess.Context;
+﻿using GMS.Communication.Core.Abstractons;
+using GMS.Communication.Core.Domain;
+using GMS.Communication.DataAccess.Context;
+using GMS.Communication.DataAccess.Repository;
 using GMS.Communication.WebHost.Hubs;
+using GMS.Communication.WebHost.Mapping;
 using GMS.Communication.WebHost.Models;
 using JWTAuthManager;
 using Microsoft.AspNetCore.SignalR;
@@ -18,7 +22,9 @@ namespace GMS.Communication.WebHost
                     x => x.MigrationsAssembly("GMS.Communication.DataAccess.Sqlite")
                     );
             });
+            services.AddAutoMapper(typeof(MappingProfile));
             services.AddSingleton<IUserIdProvider, MyUserProvider>();
+            services.AddScoped(typeof(IRepository<GmsMessage>), typeof(EfRepository<GmsMessage>));
             services.AddSignalR();
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
@@ -37,12 +43,7 @@ namespace GMS.Communication.WebHost
                 app.UseHsts();
             }
 
-            app.UseSwagger();
-            app.UseSwaggerUI(options =>
-            {
-                options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
-                options.RoutePrefix = string.Empty;
-            });
+
 
             app.UseRouting();
             app.UseEndpoints(endpoints =>
@@ -50,6 +51,14 @@ namespace GMS.Communication.WebHost
                 endpoints.MapControllers();
                 endpoints.MapHub<ChatHub>($"/chatHub");
             });
+
+            app.UseSwagger();
+            app.UseSwaggerUI(options =>
+            {
+                options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
+                options.RoutePrefix = string.Empty;
+            });
+
             app.UseAuthentication();
             app.UseAuthorization();
         }
