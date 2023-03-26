@@ -5,13 +5,13 @@ using Microsoft.Extensions.Logging;
 
 namespace GMS.Communication.DataAccess.Repository
 {
-    public class MessageRepository<T> : IRepository<T> where T : BaseEntity
+    public class EfRepository<T> : IRepository<T> where T : BaseEntity
     {
         private readonly GmsMessagesDb _db;
         private readonly ILogger<T> _logger;
         private readonly string _typeName;
 
-        public MessageRepository(GmsMessagesDb db, ILogger<T> logger)
+        public EfRepository(GmsMessagesDb db, ILogger<T> logger)
         {
             _db = db;
             _logger = logger;
@@ -73,7 +73,8 @@ namespace GMS.Communication.DataAccess.Repository
         public Task<IEnumerable<T>> GetAllAsync()
         {
             _logger.LogInformation($"Getting all entities of {_typeName}");
-            return Task.FromResult<IEnumerable<T>>(_db.Set<T>().AsSplitQuery());
+            var result = Task.FromResult<IEnumerable<T>>(_db.Set<T>().AsSplitQuery());
+            return result;
         }
 
         /// <summary>
