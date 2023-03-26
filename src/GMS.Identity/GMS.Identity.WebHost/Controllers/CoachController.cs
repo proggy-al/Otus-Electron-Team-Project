@@ -30,7 +30,8 @@ public class CoachController: ControllerBase
     [HttpGet(IdentityRouting.GetCoach)]
     public async Task<ActionResult<UserApiModel?>> GetCoach([FromRoute] Guid id)
     {
-        return  Ok(await _userRepository.GetCoach(id));
+        var res = await _userRepository.GetCoach(id);
+        return  res==null||res.UserName==null?NotFound(): Ok(res);
     }
 
     /// <summary>

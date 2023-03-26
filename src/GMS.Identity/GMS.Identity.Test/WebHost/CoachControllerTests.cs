@@ -13,6 +13,8 @@ using System.Text;
 using System.Threading.Tasks;
 using GMS.Identity.DataAccess.Repositories;
 using FluentAssertions;
+using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 namespace GMS.Identity.Test.WebHost
 {
@@ -73,6 +75,27 @@ namespace GMS.Identity.Test.WebHost
             // Assert
             res.Should().NotBeNull();
             res.Value.Should().BeEquivalentTo(coachReturn);
+
+        }
+
+        [Fact]
+        public async void GetCoachAsync_ByNotExistingId_ReturnNull()
+        {
+            // Arrange
+            var coach = CreateUserCreateApiModel();
+            var coachReturn = CreateUserApiModel(coach);
+            var randomCoachId=Guid.NewGuid();
+
+            _coachRepositoryMock.Setup(repo => repo.GetCoach(coachReturn.Id)).ReturnsAsync(coachReturn);
+
+            // Act
+            var result = await _coachController.GetCoach(randomCoachId);
+
+            var res = result;
+
+            // Assert
+            res.Should().NotBeNull();
+            res.Result.Should().BeEquivalentTo(new NotFoundResult());
 
         }
     }
