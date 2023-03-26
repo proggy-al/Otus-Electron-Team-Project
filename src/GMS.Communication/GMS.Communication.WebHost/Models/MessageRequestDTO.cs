@@ -1,4 +1,6 @@
-﻿namespace GMS.Communication.WebHost.Models
+﻿using GMS.Communication.Core;
+
+namespace GMS.Communication.WebHost.Models
 {
     public class MessageRequestDTO
     {
@@ -7,8 +9,9 @@
         public string Subject { get; set; }        
         public string Body { get; set; }
         public string Type { get; set; }
-        public DateTime CreateDate { get; set;}
-        public DateTime DeliveryDate { get; set;}
+        public string CreateDate { get; set;}
+        public string DeliveryDate { get; set;}
+        public string ReadDate { get; set;}
         public string Status { get; set; }
     }
 }
