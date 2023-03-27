@@ -72,7 +72,7 @@ namespace GMS.Communication.DataAccess.Repository
         /// Get all entities
         /// </summary>
         /// <returns></returns>
-        public Task<IEnumerable<T>> GetAllAsync(Guid userId)
+        public Task<IEnumerable<T>> GetAllAsync()
         {
             _logger.LogInformation($"Getting all entities of {_typeName}");
 
@@ -94,23 +94,7 @@ namespace GMS.Communication.DataAccess.Repository
             return result;
         }
 
-        public Task<IEnumerable<T>> GetByIdAsync(Guid[] ids, CancellationToken cancel = default)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task UpdateAsync(T entity, CancellationToken cancel = default)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task UpdateAsync(T[] entities, CancellationToken cancel = default)
-        {
-            throw new NotImplementedException();
-        }
-
-
-        public async Task<ICollection<T>> Get(Expression<Func<T, bool>> where)
+        public async Task<ICollection<T>> GetByPredicateAsync(Expression<Func<T, bool>> where)
         {
             var result = await _db.Set<T>().Where(where).ToListAsync();
             return result;

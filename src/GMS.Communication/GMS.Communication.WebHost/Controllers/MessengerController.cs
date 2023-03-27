@@ -1,14 +1,12 @@
-﻿using GMS.Communication.WebHost.Hubs;
-using GMS.Communication.WebHost.Models;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.SignalR;
-using JWTAuthManager;
-using System.Security.Claims;
-using AutoMapper;
+﻿using AutoMapper;
 using GMS.Communication.Core.Abstractons;
 using GMS.Communication.Core.Domain;
-using GMS.Core.Core.Abstractions.Repositories.Base;
+using GMS.Communication.WebHost.Hubs;
+using GMS.Communication.WebHost.Models;
+using JWTAuthManager;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 
 namespace GMS.Communication.WebHost.Controllers
 {
@@ -39,7 +37,7 @@ namespace GMS.Communication.WebHost.Controllers
             return Ok();
         }
 
-        //[Authorize] //ограничения доступа к ручке
+        [Authorize] //ограничения доступа к ручке
         [Route("SendById")]
         [HttpPost]
         public async Task<IActionResult> SendById([FromBody]MessageRequestDTO requestMessage)
@@ -50,12 +48,12 @@ namespace GMS.Communication.WebHost.Controllers
             return Ok();
         }
 
-        //[Authorize] //ограничения доступа к ручке
+        [Authorize] //ограничения доступа к ручке
         [Route("GetAllMessages")]
         [HttpPost]
         public async Task<IEnumerable<GmsMessage>> GetAllMessages(Guid userId)
         {
-            var messages = await _db.Get(x => x.SenderId == userId || x.RecipientId == userId);
+            var messages = await _db.GetByPredicateAsync(x => x.SenderId == userId || x.RecipientId == userId);
             return messages;
         }
 
