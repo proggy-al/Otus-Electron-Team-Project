@@ -17,6 +17,7 @@ try
         .AddRepositories()
         .AddDBContext(builder.Configuration)
         .AddServices()
+        .AddBackgroundServices()
         .AddEndpointsApiExplorer()
         .ConfigureSwagger()
         .AddAuthorization()
