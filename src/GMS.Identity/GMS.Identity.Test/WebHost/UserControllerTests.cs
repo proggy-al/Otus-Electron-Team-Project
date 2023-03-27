@@ -1,5 +1,6 @@
 ﻿using AutoFixture;
 using AutoFixture.AutoMoq;
+using AutoMapper;
 using Bogus;
 using FluentAssertions;
 using GMS.Identity.Client.Models;
@@ -7,6 +8,7 @@ using GMS.Identity.Core.Abstractions.Repositories;
 using GMS.Identity.WebHost.Controllers;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.DependencyInjection;
 using Moq;
 using System;
 using System.Collections.Generic;
@@ -16,16 +18,19 @@ using System.Threading.Tasks;
 
 namespace GMS.Identity.Test.WebHost
 {
-    public class UserControllerAsyncTests:IDisposable
+    public class UserControllerAsyncTests:IClassFixture<TestFixture>
     {
         private readonly Mock<IUserRepository> _userRepositoryMock;
         private readonly UserController _userController;
+        private readonly Mapper _mapper;
 
-        public UserControllerAsyncTests()
+        public UserControllerAsyncTests(TestFixture testFixture)
         {
             var fixture = new Fixture().Customize(new AutoMoqCustomization());
             _userRepositoryMock = fixture.Freeze<Mock<IUserRepository>>();
             _userController = fixture.Build<UserController>().OmitAutoProperties().Create();
+
+            _mapper=testFixture.ServiceProvider.GetService<Mapper>();
         }
 
         public UserCreateApiModel CreateUserCreateApiModel(bool isMailCorrect=true, bool isPasswordValid=true)
