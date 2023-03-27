@@ -9,8 +9,8 @@ namespace GMS.Communication.DataAccess.Data
         {
             new GmsMessage()
             {
-                RecipientId = new Guid(),
-                SenderId = new Guid(),
+                RecipientId = Guid.Parse("a24ab827-10a5-47bf-86bd-39adeb89b6c9"),
+                SenderId = Guid.Parse("8699aba2-5ec1-40cf-b186-36ca13c15ea2"),
                 Subject = "TestSubject1",
                 Body = "TestBody1",
                 Type = MessageType.text,
@@ -18,8 +18,8 @@ namespace GMS.Communication.DataAccess.Data
             },
             new GmsMessage()
             {
-                RecipientId = new Guid(),
-                SenderId = new Guid(),
+                RecipientId = Guid.Parse("a24ab827-10a5-47bf-86bd-39adeb89b6c9"),
+                SenderId = Guid.Parse("8699aba2-5ec1-40cf-b186-36ca13c15ea2"),
                 Subject = "TestSubject2",
                 Body = "TestBody2",
                 Type = MessageType.text,
@@ -27,8 +27,8 @@ namespace GMS.Communication.DataAccess.Data
             },
             new GmsMessage()
             {
-                RecipientId = new Guid(),
-                SenderId = new Guid(),
+                RecipientId = Guid.Parse("8699aba2-5ec1-40cf-b186-36ca13c15ea2"),
+                SenderId =Guid.Parse("a24ab827-10a5-47bf-86bd-39adeb89b6c9"),
                 Subject = "TestSubject3",
                 Body = "TestBody3",
                 Type = MessageType.text,
