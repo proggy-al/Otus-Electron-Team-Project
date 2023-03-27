@@ -37,7 +37,7 @@ namespace GMS.Communication.WebHost.Controllers
             return Ok();
         }
 
-        [Authorize] //ограничения доступа к ручке
+        //[Authorize] //ограничения доступа к ручке
         [Route("SendById")]
         [HttpPost]
         public async Task<IActionResult> SendById([FromBody]MessageRequestDTO requestMessage)
@@ -48,10 +48,10 @@ namespace GMS.Communication.WebHost.Controllers
             return Ok();
         }
 
-        [Authorize] //ограничения доступа к ручке
-        [Route("GetAllMessages")]
+        //[Authorize] //ограничения доступа к ручке
+        [Route("GetUsersMessagesByUserId")]
         [HttpPost]
-        public async Task<IEnumerable<GmsMessage>> GetAllMessages(Guid userId)
+        public async Task<IEnumerable<GmsMessage>> GetUsersMessagesByUserId(Guid userId)
         {
             var messages = await _db.GetByPredicateAsync(x => x.SenderId == userId || x.RecipientId == userId);
             return messages;
