@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace GMS.Core.WebHost.Controllers
 {
     //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-    [Route("api/[controller]")]
+    [Route("time-slots")]
     [ApiController]
     public class TimeSlotController :
         BaseController<TimeSlotController, ITimeSlotService, TimeSlot, TimeSlotDto, TimeSlotVM, Guid>
@@ -19,7 +19,14 @@ namespace GMS.Core.WebHost.Controllers
         public TimeSlotController(ITimeSlotService service, ILogger<TimeSlotController> logger, IMapper mapper) 
             : base(service, logger, mapper) { }
 
-        [HttpGet("[action]")]
+        /// <summary>
+        /// Получение слотов тренера в фитнес клуба
+        /// </summary>
+        /// <param name="date">Дата</param>
+        /// <param name="fitnessClubId">Индентификатор фитнес клуба</param>
+        /// <param name="trainerId">Идентификатор тренера</param>
+        /// <returns></returns>
+        [HttpGet("{fitnessClubId:guid}/trainers/{trainerId:guid}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]

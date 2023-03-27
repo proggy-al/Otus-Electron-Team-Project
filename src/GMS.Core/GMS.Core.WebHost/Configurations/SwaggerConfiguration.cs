@@ -1,4 +1,6 @@
-﻿using Microsoft.OpenApi.Models;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.OpenApi.Models;
+using System.Reflection;
 
 namespace GMS.Core.WebHost.Configurations
 {
@@ -45,6 +47,8 @@ namespace GMS.Core.WebHost.Configurations
                         new List<string>()
                     }
                 });
+
+                options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, $"{Assembly.GetExecutingAssembly().GetName().Name}.xml"));
             });
             return serviceCollection;
         }

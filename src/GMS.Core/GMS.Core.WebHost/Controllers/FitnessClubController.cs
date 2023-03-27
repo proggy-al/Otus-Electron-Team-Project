@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace GMS.Core.WebHost.Controllers
 {
     //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-    [Route("api/[controller]")]
+    [Route("fitness-clubs")]
     [ApiController]
     public class FitnessClubController : 
         BaseController<FitnessClubController, IFitnessClubService, FitnessClub, FitnessClubDto, FitnessClubVM, Guid>
@@ -19,13 +19,22 @@ namespace GMS.Core.WebHost.Controllers
         public FitnessClubController(IFitnessClubService service, ILogger<FitnessClubController> logger, IMapper mapper) 
             : base(service, logger, mapper) { }
 
-        [HttpGet("[action]/{page}:{itemsPerPage}")]
+        /// <summary>
+        /// Получение фитнес клубов с пагинацией
+        /// </summary>
+        /// <param name="limit">Количество сущностей</param>
+        /// <param name="offset">Индекс начала выборки</param>
+        /// <returns></returns>
+        [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetPage(int page, int itemsPerPage)
+        public async Task<IActionResult> GetPage(int? limit, int? offset)
         {
-            var entitiesDto = await _service.GetPage(page, itemsPerPage);
+            limit = limit ?? int.MaxValue;
+            offset = offset ?? 0;
+
+            var entitiesDto = await _service.GetPage(limit.Value, offset.Value);
 
             if (entitiesDto == null)
                 return NotFound();

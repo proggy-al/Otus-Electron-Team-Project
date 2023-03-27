@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace GMS.Core.WebHost.Controllers
 {
     //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-    [Route("api/[controller]")]
+    [Route("trainings")]
     [ApiController]
     public class TrainingController :
         BaseController<TrainingController, ITrainingService, Training, TrainingDto, TrainingVM, Guid>
@@ -19,13 +19,22 @@ namespace GMS.Core.WebHost.Controllers
         public TrainingController(ITrainingService service, ILogger<TrainingController> logger, IMapper mapper)
             : base(service, logger, mapper) { }
 
-        [HttpGet("[action]/{page}:{itemsPerPage}")]
+        /// <summary>
+        /// Получение всех тренировок с пагинацией
+        /// </summary>
+        /// <param name="limit">Количество сущностей</param>
+        /// <param name="offset">Индекс начала выборки</param>
+        /// <returns></returns>
+        [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetPage(int page, int itemsPerPage)
+        public async Task<IActionResult> GetPage(int? limit, int? offset)
         {
-            var entitiesDto = await _service.GetPage(page, itemsPerPage);
+            limit = limit ?? int.MaxValue;
+            offset = offset ?? 0;
+
+            var entitiesDto = await _service.GetPage(limit.Value, offset.Value);
 
             if (entitiesDto == null)
                 return NotFound();
@@ -33,27 +42,23 @@ namespace GMS.Core.WebHost.Controllers
             return Ok(_mapper.Map<List<TrainingVM>>(entitiesDto));
         }
 
-        [HttpGet("[action]")]
+        /// <summary>
+        /// Получение тренировок пользователя с пагинацией
+        /// </summary>
+        /// <param name="userId">Идентификатор пользователя</param>
+        /// <param name="limit">Количество сущностей</param>
+        /// <param name="offset">Индекс начала выборки</param>
+        /// <returns></returns>
+        [HttpGet("{userId:guid}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetAllByUserId(Guid userId)
+        public async Task<IActionResult> GetPageByUserId(Guid userId, int? limit, int? offset)
         {
-            var entitiesDto = await _service.GetAllByUserId(userId);
+            limit = limit ?? int.MaxValue;
+            offset = offset ?? 0;
 
-            if (entitiesDto == null)
-                return NotFound();
-
-            return Ok(_mapper.Map<List<TrainingVM>>(entitiesDto));
-        }
-
-        [HttpGet("[action]/{page}:{itemsPerPage}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetPageByUserId(Guid userId, int page, int itemsPerPage)
-        {
-            var entitiesDto = await _service.GetPageByUserId(userId, page, itemsPerPage);
+            var entitiesDto = await _service.GetPageByUserId(userId, limit.Value, offset.Value);
 
             if (entitiesDto == null)
                 return NotFound();
