@@ -1,31 +1,15 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.SignalR;
+﻿using Microsoft.AspNetCore.SignalR;
+using System.Security.Principal;
 
 namespace GMS.Communication.WebHost.Hubs
 {
 
     public class ChatHub : Hub
     {
-        [Authorize]
-        public async Task SendMessageAsync(string message, Guid userId)
-        {
-            //await Clients.User(userId).SendAsync("Receive", message, userId);
-            await Clients.All.SendAsync("ReceiveMessage", message);
-
-        }
-
-        [Authorize]
-        public async Task SendMessageById(string message, Guid userId)
-        {
-            await Clients.User("System").SendAsync("Receive", message, userId);
-        }
-
-        [Authorize]
         public override async Task OnConnectedAsync()
         {        
-            var id= Context.User?.Claims?.FirstOrDefault(a => a.Type == "ID").Value;
-            //var userName = Context.User?.Identity?.Name ?? "Anonymous";
-            //var connectionId = Context.ConnectionId;
+            var id= Context.User?.Claims.FirstOrDefault(a => a.Type == "ID")?.Value;
+            if (id is null) throw new IdentityNotMappedException(nameof(OnConnectedAsync)); // TODO возможно данная проверка не нужна. Уточнить.
             await base.OnConnectedAsync();
         }
     }
