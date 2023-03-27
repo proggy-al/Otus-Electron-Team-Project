@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using GMS.Core.BusinessLogic.Contracts;
-using GMS.Core.WebHost.VIewModels;
+using GMS.Core.WebHost.Models;
 
 namespace GMS.Core.WebHost.Mappings
 {
@@ -11,8 +11,9 @@ namespace GMS.Core.WebHost.Mappings
     {
         public TimeSlotVmMappingsProfile()
         {
-            CreateMap<TimeSlotVM, TimeSlotDto>();
-            CreateMap<TimeSlotDto, TimeSlotVM>();
+            CreateMap<TimeSlotDto, TimeSlotResponse>();
+            CreateMap<TimeSlotResponse, TimeSlotDto>()
+                .ForMember(d => d.IsDeleted, map => map.Ignore());
         }
     }
 }

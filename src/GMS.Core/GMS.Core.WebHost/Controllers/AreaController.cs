@@ -1,11 +1,7 @@
 ﻿using AutoMapper;
 using GMS.Core.BusinessLogic.Abstractions;
-using GMS.Core.BusinessLogic.Contracts;
-using GMS.Core.Core.Domain;
 using GMS.Core.WebHost.Controllers.Base;
-using GMS.Core.WebHost.VIewModels;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
+using GMS.Core.WebHost.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GMS.Core.WebHost.Controllers
@@ -13,52 +9,39 @@ namespace GMS.Core.WebHost.Controllers
     //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [Route("api/[controller]")]
     [ApiController]
-    public class AreaController : 
-        BaseController<AreaController, IAreaService, Area, AreaDto, AreaVM, Guid>
+    public class AreaController : BaseController<IAreaService>
     {
-        public AreaController(IAreaService service, ILogger<AreaController> logger, IMapper mapper)
+        public AreaController(IAreaService service, ILogger<AreaController> logger, IMapper mapper) 
             : base(service, logger, mapper) { }
 
-        [HttpGet("[action]/{page}:{itemsPerPage}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetPage(int page, int itemsPerPage)
+        [HttpGet("[action]/{pageNumber}:{pageSize}")]
+        public async Task<IActionResult> GetPage(Guid fitnessClubId, int pageNumber, int pageSize)
         {
-            var entitiesDto = await _service.GetPage(page, itemsPerPage);
-
-            if (entitiesDto == null)
-                return NotFound();
-
-            return Ok(_mapper.Map<List<AreaVM>>(entitiesDto));
+            throw new NotImplementedException();
         }
 
-        [HttpGet("[action]")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetAllByFitnessClubId(Guid fitnessClubId)
+        [HttpGet("[action]/{id}")]
+        public async Task<IActionResult> Get(Guid id)
         {
-            var entitiesDto = await _service.GetAllByFitnessClubId(fitnessClubId);
-
-            if (entitiesDto == null)
-                return NotFound();
-
-            return Ok(_mapper.Map<List<AreaVM>>(entitiesDto));
+            throw new NotImplementedException();
         }
 
-        [HttpGet("[action]/{page}:{itemsPerPage}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetPageByFitnessClubId(Guid fitnessClubId, int page, int itemsPerPage)
+        [HttpPost("[action]")]
+        public async Task<IActionResult> Add(AreaRequest request)
         {
-            var entitiesDto = await _service.GetPageByFitnessClubId(fitnessClubId, page, itemsPerPage);
+            throw new NotImplementedException();
+        }
 
-            if (entitiesDto == null)
-                return NotFound();
+        [HttpPut("[action]/{id}")]
+        public async Task<IActionResult> Edit(Guid id, AreaRequest request)
+        {
+            throw new NotImplementedException();
+        }
 
-            return Ok(_mapper.Map<List<AreaVM>>(entitiesDto));
+        [HttpDelete("[action]/{id}")]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

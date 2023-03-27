@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using GMS.Core.BusinessLogic.Contracts;
-using GMS.Core.WebHost.VIewModels;
+using GMS.Core.WebHost.Models;
 
 namespace GMS.Core.WebHost.Mappings
 {
@@ -11,8 +11,14 @@ namespace GMS.Core.WebHost.Mappings
     {
         public ProductVmMappingsProfile()
         {
-            CreateMap<ProductVM, ProductDto>();
-            CreateMap<ProductDto, ProductVM>();
+            CreateMap<ProductDto, ProductResponse>();
+            CreateMap<ProductResponse, ProductDto>()
+                .ForMember(d => d.FitnessClubId, map => map.Ignore())
+                .ForMember(d => d.IsDeleted, map => map.Ignore());
+
+            CreateMap<ProductCreateDto, ProductCreateRequest>();
+            CreateMap<ProductCreateRequest, ProductCreateDto>()
+                .ForMember(d => d.OwnerId, map => map.Ignore());
         }
     }
 }

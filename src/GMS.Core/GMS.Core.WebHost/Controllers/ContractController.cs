@@ -1,9 +1,7 @@
 ﻿using AutoMapper;
 using GMS.Core.BusinessLogic.Abstractions;
-using GMS.Core.BusinessLogic.Contracts;
-using GMS.Core.Core.Domain;
 using GMS.Core.WebHost.Controllers.Base;
-using GMS.Core.WebHost.VIewModels;
+using GMS.Core.WebHost.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -11,82 +9,48 @@ using Microsoft.AspNetCore.Mvc;
 namespace GMS.Core.WebHost.Controllers
 {
     //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [Route("api/[controller]")]
     [ApiController]
-    public class ContractController :
-        BaseController<ContractController, IContractService, Contract, ContractDto, ContractVM, Guid>
+    public class ContractController : BaseController<IContractService>
     {
-        public ContractController(IContractService service, ILogger<ContractController> logger, IMapper mapper) 
-            : base(service, logger, mapper) { }
+        public ContractController(IContractService service, ILogger<ContractController> logger, IMapper mapper) : base(service, logger, mapper) { }
 
-        [HttpGet("[action]/{page}:{itemsPerPage}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetPage(int page, int itemsPerPage)
+        [HttpGet("[action]/{pageNumber}:{pageSize}")]
+        public async Task<IActionResult> GetPagedByManagerId(Guid managerId, int pageNumber, int pageSize)
         {
-            var entitiesDto = await _service.GetPage(page, itemsPerPage);
-
-            if (entitiesDto == null)
-                return NotFound();
-
-            return Ok(_mapper.Map<List<ContractVM>>(entitiesDto));
+            throw new NotImplementedException();
         }
 
-        [HttpGet("[action]")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetAllByManagerId(Guid managerId)
+        [HttpGet("[action]/{pageNumber}:{pageSize}")]
+        public async Task<IActionResult> GetPageByUserId(Guid userId, int pageNumber, int pageSize)
         {
-            var entitiesDto = await _service.GetAllByManagerId(managerId);
-
-            if (entitiesDto == null)
-                return NotFound();
-
-            return Ok(_mapper.Map<List<ContractVM>>(entitiesDto));
+            throw new NotImplementedException();
         }
 
-        [HttpGet("[action]/{page}:{itemsPerPage}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetPagedByManagerId(Guid managerId, int page, int itemsPerPage)
+        [HttpGet("[action]/{pageNumber}:{pageSize}")]
+        public async Task<IActionResult> GetPageByFitnessClubId(Guid fitnessClubId, int pageNumber, int pageSize)
         {
-            var entitiesDto = await _service.GetPageByManagerId(managerId, page, itemsPerPage);
-
-            if (entitiesDto == null)
-                return NotFound();
-
-            return Ok(_mapper.Map<List<ContractVM>>(entitiesDto));
+            throw new NotImplementedException();
         }
 
-        [HttpGet("[action]")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetAllByUserId(Guid userId)
+        [HttpGet("[action]/{id}")]
+        public async Task<IActionResult> Get(Guid id)
         {
-            var entitiesDto = await _service.GetAllByUserId(userId);
-
-            if (entitiesDto == null)
-                return NotFound();
-
-            return Ok(_mapper.Map<List<ContractVM>>(entitiesDto));
+            throw new NotImplementedException();
         }
 
-        [HttpGet("[action]/{page}:{itemsPerPage}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetPageByUserId(Guid userId, int page, int itemsPerPage)
+        [HttpPost("[action]")]
+        public async Task<IActionResult> Add(ContractCreateRequest request)
         {
-            var entitiesDto = await _service.GetPageByUserId(userId, page, itemsPerPage);
+            throw new NotImplementedException();
+        }
 
-            if (entitiesDto == null)
-                return NotFound();
-
-            return Ok(_mapper.Map<List<ContractVM>>(entitiesDto));
+        [HttpPut("[action]")]
+        public async Task<IActionResult> Approve(ContractApproveRequest request)
+        {
+            // ToDo: реализовать подтверждение контракта. Свойство IsApproved и ManagerId
+            throw new NotImplementedException();
         }
     }
 }

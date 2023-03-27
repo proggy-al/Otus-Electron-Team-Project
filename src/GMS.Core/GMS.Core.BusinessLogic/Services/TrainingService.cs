@@ -1,32 +1,39 @@
 ﻿using AutoMapper;
 using GMS.Core.BusinessLogic.Abstractions;
 using GMS.Core.BusinessLogic.Contracts;
-using GMS.Core.BusinessLogic.Services.Base;
 using GMS.Core.Core.Abstractions.Repositories;
-using GMS.Core.Core.Domain;
 
 namespace GMS.Core.BusinessLogic.Services
 {
-    public class TrainingService : BaseService<ITrainingRepository, Training, TrainingDto, Guid>, ITrainingService
+    public class TrainingService : ITrainingService
     {
-        public TrainingService(IMapper mapper, ITrainingRepository repository) : base(mapper, repository) { }
+        private readonly IMapper _mapper;
+        private readonly ITrainingRepository _repository;
 
-        public async Task<List<TrainingDto>> GetPage(int page, int itemsPerPage)
+        public TrainingService(IMapper mapper, ITrainingRepository repository)
         {
-            var entities = await _repository.GetPagedAsync(page, itemsPerPage);
-            return _mapper.Map<List<Training>, List<TrainingDto>>(entities);
+            _mapper = mapper;
+            _repository = repository;
         }
 
-        public async Task<List<TrainingDto>> GetAllByUserId(Guid userId)
+        public Task<List<TrainingDto>> EditTrainerNotes(Guid userId, int pageNumber, int pageSize)
         {
-            var entities = await _repository.GetAllByUserIdAsync(userId);
-            return _mapper.Map<List<Training>, List<TrainingDto>>(entities);
+            throw new NotImplementedException();
         }
 
-        public async Task<List<TrainingDto>> GetPageByUserId(Guid userId, int page, int itemsPerPage)
+        public Task<List<TrainingDto>> GetAllByUserId(Guid userId)
         {
-            var entities = await _repository.GetPagedByUserIdAsync(userId, page, itemsPerPage);
-            return _mapper.Map<List<Training>, List<TrainingDto>>(entities);
+            throw new NotImplementedException();
+        }
+
+        public Task<List<TrainingDto>> GetPage(int pageNumber, int pageSize)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<List<TrainingDto>> GetPageByUserId(Guid userId, int pageNumber, int pageSize)
+        {
+            throw new NotImplementedException();
         }
     }
 }

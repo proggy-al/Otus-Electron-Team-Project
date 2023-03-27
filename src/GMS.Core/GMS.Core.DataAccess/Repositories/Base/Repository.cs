@@ -1,5 +1,6 @@
 ﻿using GMS.Core.Core.Abstractions.Repositories.Base;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace GMS.Core.DataAccess.Repositories.Base
 {
@@ -8,77 +9,13 @@ namespace GMS.Core.DataAccess.Repositories.Base
     /// </summary>
     /// <typeparam name="T">Тип сущности</typeparam>
     /// <typeparam name="TPrimaryKey">Основной ключ</typeparam>
-    public abstract class Repository<T, TPrimaryKey> : ReadRepository<T, TPrimaryKey>, IRepository<T, TPrimaryKey> where T : class, IEntity<TPrimaryKey>
+    public abstract class Repository<T, TPrimaryKey> 
+        : ReadRepository<T, TPrimaryKey>, IRepository<T, TPrimaryKey> where T 
+        : class, IEntity<TPrimaryKey>
     {
-        protected Repository(DbContext context) : base(context)
-        {
-        }
+        public Guid Test { get; set; }
 
-        /// <summary>
-        /// Удалить сущность
-        /// </summary>
-        /// <param name="id">ID удалённой сущности</param>
-        /// <returns>была ли сущность удалена</returns>
-        public virtual bool Delete(TPrimaryKey id)
-        {
-            var obj = EntitySet.Find(id);
-            if (obj == null)
-            {
-                return false;
-            }
-            EntitySet.Remove(obj);
-            return true;
-        }
-
-        /// <summary>
-        /// Удалить сущность
-        /// </summary>
-        /// <param name="entity">сущность для удаления</param>
-        /// <returns>была ли сущность удалена</returns>
-        public virtual bool Delete(T entity)
-        {
-            if (entity == null)
-            {
-                return false;
-            }
-            Context.Entry(entity).State = EntityState.Deleted;
-            return true;
-        }
-
-        /// <summary>
-        /// Удалить сущности
-        /// </summary>
-        /// <param name="entities">Коллекция сущностей для удаления</param>
-        /// <returns>была ли операция завершена успешно</returns>
-        public virtual bool DeleteRange(ICollection<T> entities)
-        {
-            if (entities == null || !entities.Any())
-            {
-                return false;
-            }
-            EntitySet.RemoveRange(entities);
-            return true;
-        }
-
-        /// <summary>
-        /// Для сущности проставить состояние - что она изменена
-        /// </summary>
-        /// <param name="entity">сущность для изменения</param>
-        public virtual void Update(T entity)
-        {
-            Context.Entry(entity).State = EntityState.Modified;
-        }
-
-        /// <summary>
-        /// Добавить в базу одну сущность
-        /// </summary>
-        /// <param name="entity">сущность для добавления</param>
-        /// <returns>добавленная сущность</returns>
-        public virtual T Add(T entity)
-        {
-            var objToReturn = Context.Set<T>().Add(entity);
-            return objToReturn.Entity;
-        }
+        protected Repository(DbContext context) : base(context) { Test = Guid.NewGuid(); }
 
         /// <summary>
         /// Добавить в базу одну сущность
@@ -91,34 +28,27 @@ namespace GMS.Core.DataAccess.Repositories.Base
         }
 
         /// <summary>
-        /// Добавить в базу массив сущностей
+        /// Для сущности проставить состояние - что она изменена
         /// </summary>
-        /// <param name="entities">массив сущностей</param>
-        public virtual void AddRange(List<T> entities)
+        /// <param name="entity">сущность для изменения</param>
+        public virtual void Update(T entity)
         {
-            var enumerable = entities as IList<T> ?? entities.ToList();
-            Context.Set<T>().AddRange(enumerable);
+            Context.Update(entity);
         }
 
         /// <summary>
-        /// Добавить в базу массив сущностей
+        /// Удалить сущность
         /// </summary>
-        /// <param name="entities">массив сущностей</param>
-        public virtual async Task AddRangeAsync(ICollection<T> entities)
+        /// <param name="id">ID удалённой сущности</param>
+        /// <returns>была ли сущность удалена</returns>
+        public virtual bool Delete(TPrimaryKey id)
         {
-            if (entities == null || !entities.Any())
-            {
-                return;
-            }
-            await EntitySet.AddRangeAsync(entities);
-        }
-
-        /// <summary>
-        /// Сохранить изменения
-        /// </summary>
-        public virtual void SaveChanges()
-        {
-            Context.SaveChanges();
+            var obj = EntitySet.Find(id);
+            if (obj == null)
+                return false;
+            
+            EntitySet.Remove(obj);
+            return true;
         }
 
         /// <summary>

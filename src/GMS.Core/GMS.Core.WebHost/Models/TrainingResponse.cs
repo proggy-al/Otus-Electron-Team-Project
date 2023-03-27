@@ -1,9 +1,8 @@
-﻿namespace GMS.Core.WebHost.VIewModels
+﻿using GMS.Core.Core.Domain;
+
+namespace GMS.Core.WebHost.Models
 {
-    /// <summary>
-    /// ДТО тренировки
-    /// </summary>
-    public class TrainingVM
+    public class TrainingResponse
     {
         /// <summary>
         /// Идентификатор
@@ -16,23 +15,18 @@
         public Guid UserId { get; set; }
 
         /// <summary>
-        /// Идентификатор временного интервала
+        /// временной интервал
         /// </summary>
-        public Guid TimeSlotId { get; set; }
+        public TimeSlotResponse TimeSlot { get; set; }
 
         /// <summary>
-        /// Описание 
+        /// Описание результатов тренировки
         /// </summary>
         public string Description { get; set; }
 
         /// <summary>
-        /// Оценка за тренировку
+        /// Оценка за тренировку в %. 100% - наивысшая оценка
         /// </summary>
         public int Points { get; set; }
-
-        /// <summary>
-        /// Удалено
-        /// </summary>
-        public bool Deleted { get; set; }
     }
 }

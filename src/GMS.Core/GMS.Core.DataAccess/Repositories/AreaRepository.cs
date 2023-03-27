@@ -16,15 +16,15 @@ namespace GMS.Core.DataAccess.Repositories
         /// <summary>
         /// Получить постраничный список
         /// </summary>
-        /// <param name="page">номер страницы</param>
-        /// <param name="itemsPerPage">объем страницы</param>
+        /// <param name="pageNumber">номер страницы</param>
+        /// <param name="pageSize">объем страницы</param>
         /// <returns>список зон</returns>
-        public async Task<List<Area>> GetPagedAsync(int page, int itemsPerPage)
+        public async Task<List<Area>> GetPagedAsync(int pageNumber, int pageSize)
         {
             var query = GetAll();
             return await query
-                .Skip((page - 1) * itemsPerPage)
-                .Take(itemsPerPage)
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
                 .ToListAsync();
         }
 
@@ -45,16 +45,16 @@ namespace GMS.Core.DataAccess.Repositories
         /// Получить постраничный список по идентификатору фитнес клуба 
         /// </summary>
         /// <param name="fitnessClubId">идентификатор фитнес клуба</param>
-        /// <param name="page">номер страницы</param>
-        /// <param name="itemsPerPage">объем страницы</param>
+        /// <param name="pageNumber">номер страницы</param>
+        /// <param name="pageSize">объем страницы</param>
         /// <returns>список зон</returns>
-        public async Task<List<Area>> GetPagedByFitnessClubIdAsync(Guid fitnessClubId, int page, int itemsPerPage)
+        public async Task<List<Area>> GetPagedByFitnessClubIdAsync(Guid fitnessClubId, int pageNumber, int pageSize)
         {
             var query = GetAll();
             return await query
                 .Where(a => a.FitnessClubId == fitnessClubId)
-                .Skip((page - 1) * itemsPerPage)
-                .Take(itemsPerPage)
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
                 .ToListAsync();
         }
     }

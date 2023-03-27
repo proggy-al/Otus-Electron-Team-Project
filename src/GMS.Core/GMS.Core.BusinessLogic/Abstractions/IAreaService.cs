@@ -1,34 +1,16 @@
-﻿using GMS.Core.BusinessLogic.Abstractions.Base;
-using GMS.Core.BusinessLogic.Contracts;
-using GMS.Core.Core.Domain;
-using GMS.Core.DataAccess.Repositories;
+﻿using GMS.Core.BusinessLogic.Contracts;
 
 namespace GMS.Core.BusinessLogic.Abstractions
 {
-    public interface IAreaService : IBaseService<AreaRepository, Area, AreaDto, Guid>
+    public interface IAreaService : IService
     {
         /// <summary>
-        /// Получить постраничный список
-        /// </summary>
-        /// <param name="page">номер страницы</param>
-        /// <param name="itemsPerPage">объем страницы</param>
-        /// <returns>список ДТО зон</returns>
-        Task<List<AreaDto>> GetPage(int page, int itemsPerPage);
-
-        /// <summary>
-        /// Получить все сущности по идентификатору фитнес клуба 
+        /// Получить постраничный список зон
         /// </summary>
         /// <param name="fitnessClubId">идентификатор фитнес клуба</param>
+        /// <param name="pageNumber">номер страницы</param>
+        /// <param name="pageSize">количество</param>
         /// <returns>список ДТО зон</returns>
-        Task<List<AreaDto>> GetAllByFitnessClubId(Guid fitnessClubId);
-
-        /// <summary>
-        /// Получить постраничный список по идентификатору фитнес клуба 
-        /// </summary>
-        /// <param name="fitnessClubId">идентификатор фитнес клуба</param>
-        /// <param name="page">номер страницы</param>
-        /// <param name="itemsPerPage">объем страницы</param>
-        /// <returns>список ДТО зон</returns>
-        Task<List<AreaDto>> GetPageByFitnessClubId(Guid fitnessClubId, int page, int itemsPerPage);
+        Task<List<AreaDto>> GetPage(Guid fitnessClubId, int pageNumber, int pageSize);
     }
 }

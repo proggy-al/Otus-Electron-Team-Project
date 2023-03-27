@@ -1,12 +1,10 @@
-﻿namespace GMS.Core.WebHost.VIewModels
+﻿namespace GMS.Core.BusinessLogic.Contracts
 {
-    public class FitnessClubVM
+    /// <summary>
+    /// ДТО создания фитнес клуба
+    /// </summary>
+    public class FitnessClubCreateOrEditDto
     {
-        /// <summary>
-        /// Идентификатор
-        /// </summary>
-        public Guid Id { get; set; }
-
         /// <summary>
         /// Наименование
         /// </summary>
@@ -23,13 +21,8 @@
         public string Address { get; set; }
 
         /// <summary>
-        /// Идентификатор владельца
+        /// Идентификатор владельца клуба
         /// </summary>
         public Guid OwnerId { get; set; }
-
-        /// <summary>
-        /// Удалено
-        /// </summary>
-        public bool Deleted { get; set; }
     }
 }

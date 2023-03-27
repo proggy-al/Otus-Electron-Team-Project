@@ -12,7 +12,6 @@ namespace GMS.Core.BusinessLogic.Mappings
         public TrainingMappingsProfile()
         {
             CreateMap<Training, TrainingDto>();
-
             CreateMap<TrainingDto, Training>()
                 .ForMember(d => d.TimeSlot, map => map.Ignore());
         }

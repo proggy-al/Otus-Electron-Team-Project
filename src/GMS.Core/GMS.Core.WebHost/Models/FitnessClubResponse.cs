@@ -1,10 +1,7 @@
-﻿namespace GMS.Core.WebHost.VIewModels
+﻿namespace GMS.Core.WebHost.Models
 {
-    /// <summary>
-    /// ДТО зоны
-    /// </summary>
-    public class AreaVM
-    {   
+    public class FitnessClubResponse
+    {
         /// <summary>
         /// Идентификатор
         /// </summary>
@@ -16,13 +13,13 @@
         public string Name { get; set; }
 
         /// <summary>
-        /// Идентификатор фитнес клуба
+        /// Описание
         /// </summary>
-        public Guid FitnessClubId { get; set; }
+        public string Description { get; set; }
 
         /// <summary>
-        /// Удалено
+        /// Адрес
         /// </summary>
-        public bool Deleted { get; set; }
+        public string Address { get; set; }
     }
 }

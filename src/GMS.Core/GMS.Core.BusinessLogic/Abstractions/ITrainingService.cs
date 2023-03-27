@@ -1,19 +1,16 @@
-﻿using GMS.Core.BusinessLogic.Abstractions.Base;
-using GMS.Core.BusinessLogic.Contracts;
-using GMS.Core.Core.Domain;
-using GMS.Core.DataAccess.Repositories;
+﻿using GMS.Core.BusinessLogic.Contracts;
 
 namespace GMS.Core.BusinessLogic.Abstractions
 {
-    public interface ITrainingService : IBaseService<TrainingRepository, Training, TrainingDto, Guid>
+    public interface ITrainingService : IService
     {
         /// <summary>
         /// Получить постраничный список
         /// </summary>
-        /// <param name="page">номер страницы</param>
-        /// <param name="itemsPerPage">объем страницы</param>
+        /// <param name="pageNumber">номер страницы</param>
+        /// <param name="pageSize">количество</param>
         /// <returns>список ДТО тренировок</returns>
-        Task<List<TrainingDto>> GetPage(int page, int itemsPerPage);
+        Task<List<TrainingDto>> GetPage(int pageNumber, int pageSize);
 
 
         /// <summary>
@@ -27,9 +24,11 @@ namespace GMS.Core.BusinessLogic.Abstractions
         /// Получить постраничный список по идентификатору пользователя
         /// </summary>
         /// <param name="userId">идентификатор пользователя</param>
-        /// <param name="page">номер страницы</param>
-        /// <param name="itemsPerPage">объем страницы</param>
+        /// <param name="pageNumber">номер страницы</param>
+        /// <param name="pageSize">количество</param>
         /// <returns>список ДТО тренировок</returns>
-        Task<List<TrainingDto>> GetPageByUserId(Guid userId, int page, int itemsPerPage);
+        Task<List<TrainingDto>> GetPageByUserId(Guid userId, int pageNumber, int pageSize);
+
+        Task<List<TrainingDto>> EditTrainerNotes(Guid userId, int pageNumber, int pageSize);
     }
 }

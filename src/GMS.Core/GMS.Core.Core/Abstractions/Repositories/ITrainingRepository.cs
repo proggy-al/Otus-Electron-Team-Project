@@ -8,10 +8,10 @@ namespace GMS.Core.Core.Abstractions.Repositories
         /// <summary>
         /// Получить постраничный список
         /// </summary>
-        /// <param name="page">номер страницы</param>
-        /// <param name="itemsPerPage">объем страницы</param>
+        /// <param name="pageNumber">номер страницы</param>
+        /// <param name="pageSize">объем страницы</param>
         /// <returns>список тренировок</returns>
-        Task<List<Training>> GetPagedAsync(int page, int itemsPerPage);
+        Task<List<Training>> GetPagedAsync(int pageNumber, int pageSize);
 
 
         /// <summary>
@@ -25,9 +25,9 @@ namespace GMS.Core.Core.Abstractions.Repositories
         /// Получить постраничный список по идентификатору пользователя
         /// </summary>
         /// <param name="userId">идентификатор пользователя</param>
-        /// <param name="page">номер страницы</param>
-        /// <param name="itemsPerPage">объем страницы</param>
+        /// <param name="pageNumber">номер страницы</param>
+        /// <param name="pageSize">объем страницы</param>
         /// <returns>список тренировок</returns>
-        Task<List<Training>> GetPagedByUserIdAsync(Guid userId, int page, int itemsPerPage);
+        Task<List<Training>> GetPagedByUserIdAsync(Guid userId, int pageNumber, int pageSize);
     }
 }

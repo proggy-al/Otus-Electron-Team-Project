@@ -42,7 +42,7 @@ namespace GMS.Core.Test
                     for (int i = 0; i < 20; i++)
                     {
                         var fixture = new Fixture();
-                        var newItem = fixture.Build<Contract>().Without(e => e.Product).Without(e => e.FitnessClub).Create();
+                        var newItem = fixture.Build<Contract>().Without(e => e.Product).Create();
                         db.Contracts.Add(newItem);
                     }
                     db.SaveChanges();

@@ -17,7 +17,7 @@ namespace GMS.Core.DataAccess.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.2")
+                .HasAnnotation("ProductVersion", "7.0.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.HasPostgresExtension(modelBuilder, "uuid-ossp");
@@ -30,13 +30,13 @@ namespace GMS.Core.DataAccess.Migrations
                         .HasColumnType("uuid")
                         .HasDefaultValueSql("uuid_generate_v4()");
 
-                    b.Property<bool>("Deleted")
+                    b.Property<Guid>("FitnessClubId")
+                        .HasColumnType("uuid");
+
+                    b.Property<bool>("IsDeleted")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("boolean")
                         .HasDefaultValue(false);
-
-                    b.Property<Guid>("FitnessClubId")
-                        .HasColumnType("uuid");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -53,51 +53,114 @@ namespace GMS.Core.DataAccess.Migrations
                         new
                         {
                             Id = new Guid("a0000000-0000-0000-0000-000000000001"),
-                            Deleted = false,
                             FitnessClubId = new Guid("f0000000-0000-0000-0000-000000000001"),
+                            IsDeleted = false,
                             Name = "Outdoor workout area"
                         },
                         new
                         {
                             Id = new Guid("a0000000-0000-0000-0000-000000000002"),
-                            Deleted = false,
                             FitnessClubId = new Guid("f0000000-0000-0000-0000-000000000001"),
+                            IsDeleted = false,
                             Name = "Free weights area"
                         },
                         new
                         {
                             Id = new Guid("a0000000-0000-0000-0000-000000000003"),
-                            Deleted = false,
                             FitnessClubId = new Guid("f0000000-0000-0000-0000-000000000001"),
+                            IsDeleted = false,
                             Name = "Functional training area"
                         },
                         new
                         {
                             Id = new Guid("a0000000-0000-0000-0000-000000000004"),
-                            Deleted = false,
                             FitnessClubId = new Guid("f0000000-0000-0000-0000-000000000001"),
+                            IsDeleted = false,
                             Name = "Resistance Machines area"
                         },
                         new
                         {
                             Id = new Guid("a0000000-0000-0000-0000-000000000005"),
-                            Deleted = false,
                             FitnessClubId = new Guid("f0000000-0000-0000-0000-000000000001"),
+                            IsDeleted = false,
                             Name = "Cardio Equipment area"
                         },
                         new
                         {
                             Id = new Guid("a0000000-0000-0000-0000-000000000006"),
-                            Deleted = false,
                             FitnessClubId = new Guid("f0000000-0000-0000-0000-000000000002"),
+                            IsDeleted = false,
                             Name = "Тренажерный зал"
                         },
                         new
                         {
                             Id = new Guid("a0000000-0000-0000-0000-000000000007"),
-                            Deleted = false,
                             FitnessClubId = new Guid("f0000000-0000-0000-0000-000000000002"),
+                            IsDeleted = false,
                             Name = "Зона кардиотренажеров"
+                        },
+                        new
+                        {
+                            Id = new Guid("a0000000-0000-0000-0000-000000000008"),
+                            FitnessClubId = new Guid("f0000000-0000-0000-0000-000000000003"),
+                            IsDeleted = false,
+                            Name = "Зона 8 ФК3"
+                        },
+                        new
+                        {
+                            Id = new Guid("a0000000-0000-0000-0000-000000000009"),
+                            FitnessClubId = new Guid("f0000000-0000-0000-0000-000000000003"),
+                            IsDeleted = false,
+                            Name = "Зона 9 ФК3"
+                        },
+                        new
+                        {
+                            Id = new Guid("a0000000-0000-0000-0000-00000000000a"),
+                            FitnessClubId = new Guid("f0000000-0000-0000-0000-000000000003"),
+                            IsDeleted = false,
+                            Name = "Зона 10 ФК3"
+                        },
+                        new
+                        {
+                            Id = new Guid("a0000000-0000-0000-0000-00000000000b"),
+                            FitnessClubId = new Guid("f0000000-0000-0000-0000-000000000003"),
+                            IsDeleted = true,
+                            Name = "Зона 11 ФК3"
+                        },
+                        new
+                        {
+                            Id = new Guid("a0000000-0000-0000-0000-00000000000c"),
+                            FitnessClubId = new Guid("f0000000-0000-0000-0000-000000000003"),
+                            IsDeleted = false,
+                            Name = "Зона 12 ФК3"
+                        },
+                        new
+                        {
+                            Id = new Guid("a0000000-0000-0000-0000-00000000000d"),
+                            FitnessClubId = new Guid("f0000000-0000-0000-0000-000000000003"),
+                            IsDeleted = false,
+                            Name = "Зона 13 ФК3"
+                        },
+                        new
+                        {
+                            Id = new Guid("a0000000-0000-0000-0000-00000000000e"),
+                            FitnessClubId = new Guid("f0000000-0000-0000-0000-000000000003"),
+                            IsDeleted = false,
+                            Name = "Зона 14 ФК3"
+                        },
+                        new
+                        {
+                            Id = new Guid("a0000000-0000-0000-0000-00000000000f"),
+                            FitnessClubId = new Guid("f0000000-0000-0000-0000-000000000003"),
+                            IsDeleted = false,
+                            Name = "Зона 15 ФК3"
+                        },
+                        new
+                        {
+                            Id = new Guid("a0000000-0000-0000-0000-000000000010"),
+                            FitnessClubId = new Guid("f0000000-0000-0000-0000-000000000003"),
+                            IsDeleted = false,
+                            Name = "Зона 16 ФК3"
                         });
                 });
 
@@ -108,18 +171,21 @@ namespace GMS.Core.DataAccess.Migrations
                         .HasColumnType("uuid")
                         .HasDefaultValueSql("uuid_generate_v4()");
 
-                    b.Property<bool>("Deleted")
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<bool?>("IsApproved")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("boolean")
                         .HasDefaultValue(false);
 
-                    b.Property<DateTime>("EndDate")
-                        .HasColumnType("timestamp with time zone");
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("boolean")
+                        .HasDefaultValue(false);
 
-                    b.Property<Guid>("FitnessClubId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("ManagerId")
+                    b.Property<Guid?>("ManagerId")
+                        .IsRequired()
                         .HasColumnType("uuid");
 
                     b.Property<Guid>("ProductId")
@@ -133,10 +199,7 @@ namespace GMS.Core.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("FitnessClubId");
-
-                    b.HasIndex("ProductId")
-                        .IsUnique();
+                    b.HasIndex("ProductId");
 
                     b.ToTable("Contracts");
 
@@ -144,46 +207,156 @@ namespace GMS.Core.DataAccess.Migrations
                         new
                         {
                             Id = new Guid("c0000000-0000-0000-0000-000000000001"),
-                            Deleted = false,
-                            EndDate = new DateTime(2024, 2, 17, 20, 50, 55, 529, DateTimeKind.Utc).AddTicks(8684),
-                            FitnessClubId = new Guid("f0000000-0000-0000-0000-000000000001"),
+                            EndDate = new DateTime(2024, 3, 25, 23, 3, 17, 545, DateTimeKind.Utc).AddTicks(7020),
+                            IsApproved = true,
+                            IsDeleted = false,
                             ManagerId = new Guid("00000000-0000-0000-0006-000000000001"),
                             ProductId = new Guid("b0000000-0000-0000-0000-000000000002"),
-                            StartDate = new DateTime(2023, 2, 17, 20, 50, 55, 529, DateTimeKind.Utc).AddTicks(8681),
-                            UserId = new Guid("00000000-0000-0000-0001-000000000001")
+                            StartDate = new DateTime(2023, 3, 26, 23, 3, 17, 545, DateTimeKind.Utc).AddTicks(7016),
+                            UserId = new Guid("00000000-0000-0000-0002-000000000001")
                         },
                         new
                         {
                             Id = new Guid("c0000000-0000-0000-0000-000000000002"),
-                            Deleted = false,
-                            EndDate = new DateTime(2023, 3, 19, 20, 50, 55, 529, DateTimeKind.Utc).AddTicks(8698),
-                            FitnessClubId = new Guid("f0000000-0000-0000-0000-000000000001"),
+                            EndDate = new DateTime(2024, 3, 25, 23, 3, 17, 545, DateTimeKind.Utc).AddTicks(7121),
+                            IsApproved = true,
+                            IsDeleted = false,
                             ManagerId = new Guid("00000000-0000-0000-0006-000000000001"),
                             ProductId = new Guid("b0000000-0000-0000-0000-000000000003"),
-                            StartDate = new DateTime(2023, 2, 17, 20, 50, 55, 529, DateTimeKind.Utc).AddTicks(8698),
-                            UserId = new Guid("00000000-0000-0000-0001-000000000001")
+                            StartDate = new DateTime(2023, 3, 26, 23, 3, 17, 545, DateTimeKind.Utc).AddTicks(7118),
+                            UserId = new Guid("00000000-0000-0000-0002-000000000001")
                         },
                         new
                         {
                             Id = new Guid("c0000000-0000-0000-0000-000000000003"),
-                            Deleted = false,
-                            EndDate = new DateTime(2023, 3, 19, 20, 50, 55, 529, DateTimeKind.Utc).AddTicks(8735),
-                            FitnessClubId = new Guid("f0000000-0000-0000-0000-000000000002"),
+                            EndDate = new DateTime(2024, 3, 25, 23, 3, 17, 545, DateTimeKind.Utc).AddTicks(7265),
+                            IsApproved = true,
+                            IsDeleted = false,
                             ManagerId = new Guid("00000000-0000-0000-0006-000000000002"),
                             ProductId = new Guid("b0000000-0000-0000-0000-000000000006"),
-                            StartDate = new DateTime(2023, 2, 17, 20, 50, 55, 529, DateTimeKind.Utc).AddTicks(8734),
-                            UserId = new Guid("00000000-0000-0000-0001-000000000002")
+                            StartDate = new DateTime(2023, 3, 26, 23, 3, 17, 545, DateTimeKind.Utc).AddTicks(7263),
+                            UserId = new Guid("00000000-0000-0000-0002-000000000002")
                         },
                         new
                         {
                             Id = new Guid("c0000000-0000-0000-0000-000000000004"),
-                            Deleted = false,
-                            EndDate = new DateTime(2023, 3, 19, 20, 50, 55, 529, DateTimeKind.Utc).AddTicks(8743),
-                            FitnessClubId = new Guid("f0000000-0000-0000-0000-000000000002"),
+                            EndDate = new DateTime(2024, 3, 25, 23, 3, 17, 545, DateTimeKind.Utc).AddTicks(7282),
+                            IsApproved = true,
+                            IsDeleted = false,
                             ManagerId = new Guid("00000000-0000-0000-0006-000000000002"),
                             ProductId = new Guid("b0000000-0000-0000-0000-000000000008"),
-                            StartDate = new DateTime(2023, 2, 17, 20, 50, 55, 529, DateTimeKind.Utc).AddTicks(8742),
-                            UserId = new Guid("00000000-0000-0000-0001-000000000002")
+                            StartDate = new DateTime(2023, 3, 26, 23, 3, 17, 545, DateTimeKind.Utc).AddTicks(7281),
+                            UserId = new Guid("00000000-0000-0000-0002-000000000002")
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000005"),
+                            EndDate = new DateTime(2024, 3, 25, 23, 3, 17, 545, DateTimeKind.Utc).AddTicks(7296),
+                            IsApproved = true,
+                            IsDeleted = false,
+                            ManagerId = new Guid("00000000-0000-0000-0006-000000000003"),
+                            ProductId = new Guid("b0000000-0000-0000-0000-000000000009"),
+                            StartDate = new DateTime(2023, 3, 26, 23, 3, 17, 545, DateTimeKind.Utc).AddTicks(7295),
+                            UserId = new Guid("00000000-0000-0000-0002-000000000003")
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000006"),
+                            EndDate = new DateTime(2024, 3, 25, 23, 3, 17, 545, DateTimeKind.Utc).AddTicks(7329),
+                            IsApproved = true,
+                            IsDeleted = false,
+                            ManagerId = new Guid("00000000-0000-0000-0006-000000000003"),
+                            ProductId = new Guid("b0000000-0000-0000-0000-00000000000a"),
+                            StartDate = new DateTime(2023, 3, 26, 23, 3, 17, 545, DateTimeKind.Utc).AddTicks(7327),
+                            UserId = new Guid("00000000-0000-0000-0002-000000000003")
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000007"),
+                            EndDate = new DateTime(2024, 3, 25, 23, 3, 17, 545, DateTimeKind.Utc).AddTicks(7343),
+                            IsApproved = true,
+                            IsDeleted = false,
+                            ManagerId = new Guid("00000000-0000-0000-0006-000000000003"),
+                            ProductId = new Guid("b0000000-0000-0000-0000-00000000000b"),
+                            StartDate = new DateTime(2023, 3, 26, 23, 3, 17, 545, DateTimeKind.Utc).AddTicks(7342),
+                            UserId = new Guid("00000000-0000-0000-0002-000000000003")
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000008"),
+                            EndDate = new DateTime(2024, 3, 25, 23, 3, 17, 545, DateTimeKind.Utc).AddTicks(7355),
+                            IsApproved = true,
+                            IsDeleted = false,
+                            ManagerId = new Guid("00000000-0000-0000-0006-000000000003"),
+                            ProductId = new Guid("b0000000-0000-0000-0000-00000000000c"),
+                            StartDate = new DateTime(2023, 3, 26, 23, 3, 17, 545, DateTimeKind.Utc).AddTicks(7354),
+                            UserId = new Guid("00000000-0000-0000-0002-000000000003")
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-000000000009"),
+                            EndDate = new DateTime(2024, 3, 25, 23, 3, 17, 545, DateTimeKind.Utc).AddTicks(7369),
+                            IsApproved = true,
+                            IsDeleted = false,
+                            ManagerId = new Guid("00000000-0000-0000-0006-000000000003"),
+                            ProductId = new Guid("b0000000-0000-0000-0000-00000000000d"),
+                            StartDate = new DateTime(2023, 3, 26, 23, 3, 17, 545, DateTimeKind.Utc).AddTicks(7367),
+                            UserId = new Guid("00000000-0000-0000-0002-000000000003")
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-00000000000a"),
+                            EndDate = new DateTime(2024, 3, 25, 23, 3, 17, 545, DateTimeKind.Utc).AddTicks(7390),
+                            IsApproved = true,
+                            IsDeleted = false,
+                            ManagerId = new Guid("00000000-0000-0000-0006-000000000003"),
+                            ProductId = new Guid("b0000000-0000-0000-0000-00000000000e"),
+                            StartDate = new DateTime(2023, 3, 26, 23, 3, 17, 545, DateTimeKind.Utc).AddTicks(7389),
+                            UserId = new Guid("00000000-0000-0000-0002-000000000003")
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-00000000000b"),
+                            EndDate = new DateTime(2024, 3, 25, 23, 3, 17, 545, DateTimeKind.Utc).AddTicks(7401),
+                            IsApproved = true,
+                            IsDeleted = false,
+                            ManagerId = new Guid("00000000-0000-0000-0006-000000000003"),
+                            ProductId = new Guid("b0000000-0000-0000-0000-00000000000f"),
+                            StartDate = new DateTime(2023, 3, 26, 23, 3, 17, 545, DateTimeKind.Utc).AddTicks(7401),
+                            UserId = new Guid("00000000-0000-0000-0002-000000000003")
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-00000000000c"),
+                            EndDate = new DateTime(2024, 3, 25, 23, 3, 17, 545, DateTimeKind.Utc).AddTicks(7478),
+                            IsApproved = true,
+                            IsDeleted = false,
+                            ManagerId = new Guid("00000000-0000-0000-0006-000000000003"),
+                            ProductId = new Guid("b0000000-0000-0000-0000-000000000010"),
+                            StartDate = new DateTime(2023, 3, 26, 23, 3, 17, 545, DateTimeKind.Utc).AddTicks(7477),
+                            UserId = new Guid("00000000-0000-0000-0002-000000000003")
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-00000000000d"),
+                            EndDate = new DateTime(2024, 3, 25, 23, 3, 17, 545, DateTimeKind.Utc).AddTicks(7489),
+                            IsApproved = true,
+                            IsDeleted = false,
+                            ManagerId = new Guid("00000000-0000-0000-0006-000000000003"),
+                            ProductId = new Guid("b0000000-0000-0000-0000-000000000009"),
+                            StartDate = new DateTime(2023, 3, 26, 23, 3, 17, 545, DateTimeKind.Utc).AddTicks(7488),
+                            UserId = new Guid("00000000-0000-0000-0002-000000000003")
+                        },
+                        new
+                        {
+                            Id = new Guid("c0000000-0000-0000-0000-00000000000e"),
+                            EndDate = new DateTime(2024, 3, 25, 23, 3, 17, 545, DateTimeKind.Utc).AddTicks(7529),
+                            IsApproved = true,
+                            IsDeleted = false,
+                            ManagerId = new Guid("00000000-0000-0000-0006-000000000003"),
+                            ProductId = new Guid("b0000000-0000-0000-0000-000000000009"),
+                            StartDate = new DateTime(2023, 3, 26, 23, 3, 17, 545, DateTimeKind.Utc).AddTicks(7528),
+                            UserId = new Guid("00000000-0000-0000-0002-000000000003")
                         });
                 });
 
@@ -198,14 +371,14 @@ namespace GMS.Core.DataAccess.Migrations
                         .IsUnicode(false)
                         .HasColumnType("character varying(256)");
 
-                    b.Property<bool>("Deleted")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("boolean")
-                        .HasDefaultValue(false);
-
                     b.Property<string>("Description")
                         .IsUnicode(false)
                         .HasColumnType("character varying(4096)");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("boolean")
+                        .HasDefaultValue(false);
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -224,19 +397,55 @@ namespace GMS.Core.DataAccess.Migrations
                         {
                             Id = new Guid("f0000000-0000-0000-0000-000000000001"),
                             Address = "360 Hampton Dr, Venice, CA 90291, USA",
-                            Deleted = false,
-                            Description = "Gold’s Gym Venice gives you access to everything you need reach your fitness goals: all outdoor workout spaces, weight and strength training areas, a wide selection of free weights, cardio equipment, resistance machines – plus a team of certified Personal Trainers ready to support and motivate you to become the strongest version of yourself. From our beginning as a small bodybuilding gym in 1965 to today, Gold’s Gym delivers a dynamic fitness experience focused on strength and performance. View our local gym membership options and join Gold’s Gym Venice now.",
+                            Description = "The Original Home of Serious Training",
+                            IsDeleted = false,
                             Name = "Gold's Gym Venice",
-                            OwnerId = new Guid("00000000-0000-0000-0000-000000000001")
+                            OwnerId = new Guid("00000000-0000-0000-0004-000000000001")
                         },
                         new
                         {
                             Id = new Guid("f0000000-0000-0000-0000-000000000002"),
                             Address = "Россия, Санкт-Петербург, ул. Воскова, д. 16",
-                            Deleted = false,
-                            Description = "Атлетический клуб «Алмаз» является одним из самых известных клубов Санкт-Петербурга и России, развивающих фитнес и бодибилдинг. За более чем 25 летнею историю развития, клуб накопил богатейший опыт в сфере фитнеса и бодибилдинга. Об этом свидетельствуют многочисленные победы воспитанников клуба на международных, Российских и городских соревнованиях по фитнесу и бодибилдингу.Клуб оборудован удобными раздевалками, душевыми, современными системами вентиляции зала.Тренера клуба помогут клиентам составить индивидуальные программы тренировок, скорректируют диету, помогут распланировать распорядок дня, для желающих проведут персональные тренировки.",
+                            Description = "Персональные тренировки по фитнесу и бодибилдингу",
+                            IsDeleted = false,
                             Name = "Атлетический клуб Алмаз",
-                            OwnerId = new Guid("00000000-0000-0000-0000-000000000002")
+                            OwnerId = new Guid("00000000-0000-0000-0004-000000000002")
+                        },
+                        new
+                        {
+                            Id = new Guid("f0000000-0000-0000-0000-000000000003"),
+                            Address = "Адрес ФК 3",
+                            Description = "Персональные тренировки ФК 3",
+                            IsDeleted = false,
+                            Name = "Фитнес клуб 3",
+                            OwnerId = new Guid("00000000-0000-0000-0004-000000000003")
+                        },
+                        new
+                        {
+                            Id = new Guid("f0000000-0000-0000-0000-000000000004"),
+                            Address = "Адрес ФК 4",
+                            Description = "Персональные тренировки ФК 4",
+                            IsDeleted = false,
+                            Name = "Фитнес клуб 4",
+                            OwnerId = new Guid("00000000-0000-0000-0004-000000000003")
+                        },
+                        new
+                        {
+                            Id = new Guid("f0000000-0000-0000-0000-000000000005"),
+                            Address = "Адрес ФК 5",
+                            Description = "Персональные тренировки ФК 5",
+                            IsDeleted = false,
+                            Name = "Фитнес клуб 5",
+                            OwnerId = new Guid("00000000-0000-0000-0004-000000000003")
+                        },
+                        new
+                        {
+                            Id = new Guid("f0000000-0000-0000-0000-000000000006"),
+                            Address = "Адрес ФК 6",
+                            Description = "Персональные тренировки ФК 6",
+                            IsDeleted = false,
+                            Name = "Фитнес клуб 6",
+                            OwnerId = new Guid("00000000-0000-0000-0004-000000000003")
                         });
                 });
 
@@ -247,17 +456,17 @@ namespace GMS.Core.DataAccess.Migrations
                         .HasColumnType("uuid")
                         .HasDefaultValueSql("uuid_generate_v4()");
 
-                    b.Property<bool>("Deleted")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("boolean")
-                        .HasDefaultValue(false);
-
                     b.Property<string>("Description")
                         .IsUnicode(false)
                         .HasColumnType("character varying(1024)");
 
                     b.Property<Guid>("FitnessClubId")
                         .HasColumnType("uuid");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("boolean")
+                        .HasDefaultValue(false);
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -280,82 +489,182 @@ namespace GMS.Core.DataAccess.Migrations
                         new
                         {
                             Id = new Guid("b0000000-0000-0000-0000-000000000001"),
-                            Deleted = false,
-                            Description = "Free access to the club for 30 days",
+                            Description = "Cardio training",
                             FitnessClubId = new Guid("f0000000-0000-0000-0000-000000000001"),
-                            Name = "1-Month Contract",
+                            IsDeleted = false,
+                            Name = "1 personal Training",
                             Price = 100,
-                            Quantity = 30
+                            Quantity = 1
                         },
                         new
                         {
                             Id = new Guid("b0000000-0000-0000-0000-000000000002"),
-                            Deleted = false,
-                            Description = "Free access to the club for 1 year",
+                            Description = "Cardio training",
                             FitnessClubId = new Guid("f0000000-0000-0000-0000-000000000001"),
-                            Name = "12-Month Contract",
-                            Price = 490,
-                            Quantity = 365
+                            IsDeleted = false,
+                            Name = "8 personal Training",
+                            Price = 600,
+                            Quantity = 8
                         },
                         new
                         {
                             Id = new Guid("b0000000-0000-0000-0000-000000000003"),
-                            Deleted = false,
-                            Description = "for a month",
+                            Description = "Functional training",
                             FitnessClubId = new Guid("f0000000-0000-0000-0000-000000000001"),
+                            IsDeleted = false,
                             Name = "1 personal Training",
-                            Price = 65,
+                            Price = 100,
                             Quantity = 1
                         },
                         new
                         {
                             Id = new Guid("b0000000-0000-0000-0000-000000000004"),
-                            Deleted = false,
-                            Description = "for a month",
+                            Description = "Functional training",
                             FitnessClubId = new Guid("f0000000-0000-0000-0000-000000000001"),
+                            IsDeleted = false,
                             Name = "8 personal Training",
-                            Price = 360,
+                            Price = 600,
                             Quantity = 8
                         },
                         new
                         {
                             Id = new Guid("b0000000-0000-0000-0000-000000000005"),
-                            Deleted = false,
-                            Description = "Свободное посещение клуба в течении 1 дня",
+                            Description = "Бодибилдинг",
                             FitnessClubId = new Guid("f0000000-0000-0000-0000-000000000002"),
-                            Name = "Разовое посещение",
-                            Price = 500,
+                            IsDeleted = false,
+                            Name = "1 персональная тренировка",
+                            Price = 80,
                             Quantity = 1
                         },
                         new
                         {
                             Id = new Guid("b0000000-0000-0000-0000-000000000006"),
-                            Deleted = false,
-                            Description = "Свободное посещение клуба в течении 30 дней",
+                            Description = "Бодибилдинг",
                             FitnessClubId = new Guid("f0000000-0000-0000-0000-000000000002"),
-                            Name = "Абонемент на месяц",
-                            Price = 2000,
-                            Quantity = 30
+                            IsDeleted = false,
+                            Name = "8 персональных тренировок",
+                            Price = 480,
+                            Quantity = 8
                         },
                         new
                         {
                             Id = new Guid("b0000000-0000-0000-0000-000000000007"),
-                            Deleted = false,
-                            Description = "на 1 месяц",
+                            Description = "Кардио",
                             FitnessClubId = new Guid("f0000000-0000-0000-0000-000000000002"),
+                            IsDeleted = false,
                             Name = "1 персональная тренировка",
-                            Price = 2000,
+                            Price = 80,
                             Quantity = 1
                         },
                         new
                         {
                             Id = new Guid("b0000000-0000-0000-0000-000000000008"),
-                            Deleted = false,
-                            Description = "на 1 месяц",
+                            Description = "Кардио",
                             FitnessClubId = new Guid("f0000000-0000-0000-0000-000000000002"),
+                            IsDeleted = false,
                             Name = "8 персональных тренировок",
-                            Price = 12000,
+                            Price = 480,
                             Quantity = 8
+                        },
+                        new
+                        {
+                            Id = new Guid("b0000000-0000-0000-0000-000000000009"),
+                            Description = "1 персональня тренировка ФК3",
+                            FitnessClubId = new Guid("f0000000-0000-0000-0000-000000000003"),
+                            IsDeleted = false,
+                            Name = "Продукт 9 ФК3",
+                            Price = 10,
+                            Quantity = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("b0000000-0000-0000-0000-00000000000a"),
+                            Description = "2 персональные тренировки ФК3",
+                            FitnessClubId = new Guid("f0000000-0000-0000-0000-000000000003"),
+                            IsDeleted = false,
+                            Name = "Продукт 10 ФК3",
+                            Price = 20,
+                            Quantity = 2
+                        },
+                        new
+                        {
+                            Id = new Guid("b0000000-0000-0000-0000-00000000000b"),
+                            Description = "3 персональные тренировки ФК3",
+                            FitnessClubId = new Guid("f0000000-0000-0000-0000-000000000003"),
+                            IsDeleted = false,
+                            Name = "Продукт 11 ФК3",
+                            Price = 30,
+                            Quantity = 3
+                        },
+                        new
+                        {
+                            Id = new Guid("b0000000-0000-0000-0000-00000000000c"),
+                            Description = "4 персональные тренировки ФК3",
+                            FitnessClubId = new Guid("f0000000-0000-0000-0000-000000000003"),
+                            IsDeleted = false,
+                            Name = "Продукт 12 ФК3",
+                            Price = 40,
+                            Quantity = 4
+                        },
+                        new
+                        {
+                            Id = new Guid("b0000000-0000-0000-0000-00000000000d"),
+                            Description = "5 персональных тренировок ФК3",
+                            FitnessClubId = new Guid("f0000000-0000-0000-0000-000000000003"),
+                            IsDeleted = false,
+                            Name = "Продукт 13 ФК3",
+                            Price = 50,
+                            Quantity = 5
+                        },
+                        new
+                        {
+                            Id = new Guid("b0000000-0000-0000-0000-00000000000e"),
+                            Description = "6 персональных тренировок ФК3",
+                            FitnessClubId = new Guid("f0000000-0000-0000-0000-000000000003"),
+                            IsDeleted = false,
+                            Name = "Продукт 14 ФК3",
+                            Price = 60,
+                            Quantity = 6
+                        },
+                        new
+                        {
+                            Id = new Guid("b0000000-0000-0000-0000-00000000000f"),
+                            Description = "7 персональных тренировок ФК3",
+                            FitnessClubId = new Guid("f0000000-0000-0000-0000-000000000003"),
+                            IsDeleted = false,
+                            Name = "Продукт 15 ФК3",
+                            Price = 70,
+                            Quantity = 7
+                        },
+                        new
+                        {
+                            Id = new Guid("b0000000-0000-0000-0000-000000000010"),
+                            Description = "8 персональных тренировок ФК3",
+                            FitnessClubId = new Guid("f0000000-0000-0000-0000-000000000003"),
+                            IsDeleted = false,
+                            Name = "Продукт 16 ФК3",
+                            Price = 80,
+                            Quantity = 8
+                        },
+                        new
+                        {
+                            Id = new Guid("b0000000-0000-0000-0000-000000000011"),
+                            Description = "9 персональных тренировок ФК3",
+                            FitnessClubId = new Guid("f0000000-0000-0000-0000-000000000003"),
+                            IsDeleted = false,
+                            Name = "Продукт 17 ФК3",
+                            Price = 90,
+                            Quantity = 9
+                        },
+                        new
+                        {
+                            Id = new Guid("b0000000-0000-0000-0000-000000000012"),
+                            Description = "10 персональных тренировок ФК3",
+                            FitnessClubId = new Guid("f0000000-0000-0000-0000-000000000003"),
+                            IsDeleted = false,
+                            Name = "Продукт 18 ФК3",
+                            Price = 100,
+                            Quantity = 10
                         });
                 });
 
@@ -372,11 +681,6 @@ namespace GMS.Core.DataAccess.Migrations
                     b.Property<DateTime>("DateTime")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<bool>("Deleted")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("boolean")
-                        .HasDefaultValue(false);
-
                     b.Property<string>("Description")
                         .IsUnicode(false)
                         .HasColumnType("character varying(512)");
@@ -386,6 +690,16 @@ namespace GMS.Core.DataAccess.Migrations
 
                     b.Property<Guid>("FitnessClubId")
                         .HasColumnType("uuid");
+
+                    b.Property<bool?>("IsBusy")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("boolean")
+                        .HasDefaultValue(false);
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("boolean")
+                        .HasDefaultValue(false);
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -412,16 +726,16 @@ namespace GMS.Core.DataAccess.Migrations
                         .HasColumnType("uuid")
                         .HasDefaultValueSql("uuid_generate_v4()");
 
-                    b.Property<bool>("Deleted")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("boolean")
-                        .HasDefaultValue(false);
-
                     b.Property<string>("Description")
                         .IsUnicode(false)
                         .HasColumnType("character varying(256)");
 
-                    b.Property<int>("Points")
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("boolean")
+                        .HasDefaultValue(false);
+
+                    b.Property<int?>("Points")
                         .HasColumnType("integer");
 
                     b.Property<Guid>("TimeSlotId")
@@ -451,19 +765,11 @@ namespace GMS.Core.DataAccess.Migrations
 
             modelBuilder.Entity("GMS.Core.Core.Domain.Contract", b =>
                 {
-                    b.HasOne("GMS.Core.Core.Domain.FitnessClub", "FitnessClub")
-                        .WithMany("Contracts")
-                        .HasForeignKey("FitnessClubId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("GMS.Core.Core.Domain.Product", "Product")
-                        .WithOne("Contract")
-                        .HasForeignKey("GMS.Core.Core.Domain.Contract", "ProductId")
+                        .WithMany("Contracts")
+                        .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("FitnessClub");
 
                     b.Navigation("Product");
                 });
@@ -519,8 +825,6 @@ namespace GMS.Core.DataAccess.Migrations
                 {
                     b.Navigation("Areas");
 
-                    b.Navigation("Contracts");
-
                     b.Navigation("Products");
 
                     b.Navigation("TimeSlots");
@@ -528,8 +832,7 @@ namespace GMS.Core.DataAccess.Migrations
 
             modelBuilder.Entity("GMS.Core.Core.Domain.Product", b =>
                 {
-                    b.Navigation("Contract")
-                        .IsRequired();
+                    b.Navigation("Contracts");
                 });
 
             modelBuilder.Entity("GMS.Core.Core.Domain.TimeSlot", b =>

@@ -11,6 +11,6 @@
         /// </summary>
         TId Id { get; set; }
 
-        bool Deleted { get; set; }
+        bool IsDeleted { get; set; }
     }
 }

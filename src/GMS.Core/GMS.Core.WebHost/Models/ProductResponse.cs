@@ -1,9 +1,9 @@
-﻿namespace GMS.Core.WebHost.VIewModels
+﻿namespace GMS.Core.WebHost.Models
 {
     /// <summary>
     /// ДТО продукта
     /// </summary>
-    public class ProductVM
+    public class ProductResponse
     {
         /// <summary>
         /// Идентификатор
@@ -21,7 +21,7 @@
         public string Description { get; set; }
 
         /// <summary>
-        /// Количество (тренировок в пакете персональных тренировок, дней в абонементе на свободное посещение, минут в абонементе на солярий)
+        /// Количество персональных тренировок
         /// </summary>
         public int Quantity { get; set; }
 
@@ -29,15 +29,5 @@
         /// Цена
         /// </summary>
         public int Price { get; set; }
-
-        /// <summary>
-        /// Идентификатор фитнес клуба
-        /// </summary>
-        public Guid FitnessClubId { get; set; }
-
-        /// <summary>
-        /// Удалено
-        /// </summary>
-        public bool Deleted { get; set; }
     }
 }

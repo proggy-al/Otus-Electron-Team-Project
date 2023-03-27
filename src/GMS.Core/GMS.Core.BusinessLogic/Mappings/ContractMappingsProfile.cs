@@ -14,7 +14,6 @@ namespace GMS.Core.BusinessLogic.Mappings
             CreateMap<Contract, ContractDto>();
 
             CreateMap<ContractDto, Contract>()
-                .ForMember(d => d.FitnessClub, map => map.Ignore())
                 .ForMember(d => d.Product, map => map.Ignore());
         }
     }
