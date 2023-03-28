@@ -6,7 +6,8 @@ namespace GMS.Identity.WebHost.Configuration
     {
         public static IServiceCollection ConfigureMapper(this IServiceCollection serviceCollection)
         {
-            serviceCollection.AddSingleton<IMapper>(new Mapper(Configuration()));
+            IMapper mapper = new Mapper(Configuration());
+            serviceCollection.AddSingleton<IMapper>(mapper);
             return serviceCollection;
         }
 
@@ -17,6 +18,7 @@ namespace GMS.Identity.WebHost.Configuration
                 cfg.AddProfile<MappingProfile>();
                 
             });
+            
 
             //configuration.AssertConfigurationIsValid();
             return configuration;

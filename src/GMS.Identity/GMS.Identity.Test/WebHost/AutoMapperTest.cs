@@ -15,6 +15,7 @@ namespace GMS.Identity.Test.WebHost
         {
             var configuration = new MapperConfiguration(cfg =>
                                 cfg.AddProfile<MappingProfile>());
+           
 
             configuration.AssertConfigurationIsValid();
         }
