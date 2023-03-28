@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using GMS.Core.BusinessLogic.Contracts;
-using GMS.Core.WebHost.VIewModels;
+using GMS.Core.WebHost.Models;
 
 namespace GMS.Core.WebHost.Mappings
 {
@@ -11,8 +11,9 @@ namespace GMS.Core.WebHost.Mappings
     {
         public ContractVmMappingsProfile()
         {
-            CreateMap<ContractVM, ContractDto>();
-            CreateMap<ContractDto, ContractVM>();
+            CreateMap<ContractDto, ContractResponse>();
+            CreateMap<ContractResponse, ContractDto>()
+                .ForMember(d => d.IsDeleted, map => map.Ignore());
         }
     }
 }

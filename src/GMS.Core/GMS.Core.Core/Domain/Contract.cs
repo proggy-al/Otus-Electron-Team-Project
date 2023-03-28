@@ -1,21 +1,16 @@
-﻿using GMS.Core.Core.Abstractions.Repositories.Base;
+﻿using GMS.Core.Core.Domain.Base;
 
 namespace GMS.Core.Core.Domain
 {
     /// <summary>
     /// Модель контракта (заключается между пользователем и фитнес клубом при покупке продукта с помощью менеджера по продажам)
     /// </summary>
-    public class Contract : IEntity<Guid>
+    public class Contract : BaseEntity
     {
         /// <summary>
-        /// Идентификатор
+        /// Идентификатор пользователя
         /// </summary>
-        public Guid Id { get; set; }
-
-        /// <summary>
-        /// Продукт
-        /// </summary>
-        public Product Product { get; set; }
+        public Guid UserId { get; set; }
 
         /// <summary>
         /// Идентификатор продукта
@@ -23,24 +18,14 @@ namespace GMS.Core.Core.Domain
         public Guid ProductId { get; set; }
 
         /// <summary>
+        /// Продукт
+        /// </summary>
+        public virtual Product Product { get; set; }
+
+        /// <summary>
         /// Идентификатор менеджера
         /// </summary>
-        public Guid ManagerId { get; set; }
-
-        /// <summary>
-        /// Идентификатор пользователя
-        /// </summary>
-        public Guid UserId { get; set; }
-
-        /// <summary>
-        /// Фитнес клуб
-        /// </summary>
-        public FitnessClub FitnessClub { get; set; }
-
-        /// <summary>
-        /// Идентификатор фитнес клуба
-        /// </summary>
-        public Guid FitnessClubId { get; set; }
+        public Guid? ManagerId { get; set; }
 
         /// <summary>
         /// Дата начала контракта
@@ -53,8 +38,8 @@ namespace GMS.Core.Core.Domain
         public DateTime EndDate { get; set; }
 
         /// <summary>
-        /// Удалено
+        /// Статус подтверждения контракта
         /// </summary>
-        public bool Deleted { get; set; }
+        public bool? IsApproved { get; set; }
     }
 }

@@ -1,64 +1,94 @@
 ﻿using AutoMapper;
 using GMS.Core.BusinessLogic.Abstractions;
 using GMS.Core.BusinessLogic.Contracts;
-using GMS.Core.Core.Domain;
 using GMS.Core.WebHost.Controllers.Base;
-using GMS.Core.WebHost.VIewModels;
+using GMS.Core.WebHost.Models;
+using JWTAuthManager;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
 
 namespace GMS.Core.WebHost.Controllers
 {
     //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    //[ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductController :
-        BaseController<ProductController, IProductService, Product, ProductDto, ProductVM, Guid>
+    public class ProductController : BaseController<IProductService>
     {
-        public ProductController(IProductService service, ILogger<ProductController> logger, IMapper mapper) 
-            : base(service, logger, mapper) { }
+        public ProductController(IProductService service, ILogger<ProductController> logger, IMapper mapper) : base(service, logger, mapper) { }
 
-        [HttpGet("[action]/{page}:{itemsPerPage}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetPage(int page, int itemsPerPage)
+        /// <summary>
+        /// Получить список продуктов клуба
+        /// </summary>
+        /// <param name="fitnessClubId">идентификатор фитнес клуба</param>
+        /// <param name="pageNumber">номер страницы</param>
+        /// <param name="pageSize">количество</param>
+        /// <returns>List<ProductResponse></returns>
+        [HttpGet("[action]/{pageNumber}:{pageSize}")]
+        public async Task<IActionResult> GetPage(Guid fitnessClubId, int pageNumber = 1, int pageSize = 12)
         {
-            var entitiesDto = await _service.GetPage(page, itemsPerPage);
+            var pagedList = await _service.GetPage(fitnessClubId, pageNumber, pageSize);
+            var result = _mapper.Map<List<ProductResponse>>(pagedList.Entities);
 
-            if (entitiesDto == null)
-                return NotFound();
+            Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(pagedList.Pagination));
 
-            return Ok(_mapper.Map<List<ProductVM>>(entitiesDto));
+            int cnt = result.Count;
+            _logger.LogInformation($"Returned {cnt} Product{(cnt > 1 ? "s" : "")} from database.");
+
+            return Ok(result);
         }
 
-        [HttpGet("[action]")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetAllByFitnessClubId(Guid fitnessClubId)
+        /// <summary>
+        /// Получение информации о продукте
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("[action]/{id}")]
+        public async Task<IActionResult> Get(Guid id)
         {
-            var entitiesDto = await _service.GetAllByFitnessClubId(fitnessClubId);
+            var productDto = await _service.Get(id);
+            var result = _mapper.Map<ProductResponse>(productDto);
 
-            if (entitiesDto == null)
-                return NotFound();
+            _logger.LogInformation($"Returned Product \"{id}\" from database.");
 
-            return Ok(_mapper.Map<List<ProductVM>>(entitiesDto));
+            return Ok(result);
         }
 
-        [HttpGet("[action]/{page}:{itemsPerPage}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetPageByFitnessClubId(Guid fitnessClubId, int page, int itemsPerPage)
+        /// <summary>
+        /// Добавить продукт
+        /// </summary>
+        /// <param name="request">информация о продукте</param>
+        /// <returns>идентификатор продукта</returns>
+        //[Authorize(Roles = nameof(Priviliges.GYMOwner))]
+        [HttpPost("[action]")]
+        public async Task<IActionResult> Add(ProductCreateRequest request)
         {
-            var entitiesDto = await _service.GetPageByFitnessClubId(fitnessClubId, page, itemsPerPage);
+            var productDto = _mapper.Map<ProductCreateDto>(request);
+            productDto.EmploeeId = UserId;
 
-            if (entitiesDto == null)
-                return NotFound();
+            var id = await _service.Create(productDto);
 
-            return Ok(_mapper.Map<List<ProductVM>>(entitiesDto));
+            _logger.LogInformation($"Add Product \"{id}\" to database.");
+
+            return Ok(id.ToString());
+        }
+
+        /// <summary>
+        /// Поместить продукт в архив
+        /// </summary>
+        /// <param name="id">идентификатор продукта</param>
+        /// <returns></returns>
+        //[Authorize(Roles = nameof(Priviliges.GYMOwner))]
+        [HttpDelete("[action]/{id}")]
+        public async Task<IActionResult> AddToArchive(Guid id)
+        {
+            await _service.AddToArchive(id, UserId);
+
+            _logger.LogInformation($"Add to archive Product \"{id}\"");
+
+            return NoContent();
         }
     }
 }

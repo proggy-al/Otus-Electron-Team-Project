@@ -41,8 +41,13 @@
         public DateTime EndDate { get; set; }
 
         /// <summary>
-        /// Удалено
+        /// Статус подтверждения контракта
         /// </summary>
-        public bool Deleted { get; set; }
+        public bool IsApproved { get; set; }
+
+        /// <summary>
+        /// Удаленная запись доступна только для чтения
+        /// </summary>
+        public bool IsDeleted { get; set; }
     }
 }

@@ -1,41 +1,30 @@
-﻿using GMS.Core.Core.Abstractions.Repositories.Base;
+﻿using GMS.Core.Core.Domain.Base;
 
 namespace GMS.Core.Core.Domain
 {
     /// <summary>
     /// Модель зоны (помещение в фитнес клубе)
     /// </summary>
-    public class Area : IEntity<Guid>
+    public class Area : BaseEntity
     {
-        /// <summary>
-        /// Идентификатор
-        /// </summary>
-        public Guid Id { get; set; }
-
         /// <summary>
         /// Наименование
         /// </summary>
         public string Name { get; set; }
 
         /// <summary>
-        /// Фитнес клуб
-        /// </summary>
-        public FitnessClub FitnessClub { get; set; }
-
-        /// <summary>
         /// Идентификатор фитнес клуба
         /// </summary>
-        public Guid FitnessClubId { get; set; }
-
+        public Guid FitnessClubId { get; set; }        
+        
         /// <summary>
-        /// Удалено
+        /// Фитнес клуб
         /// </summary>
-        public bool Deleted { get; set; }
-
+        public virtual FitnessClub FitnessClub { get; set; }
 
         /// <summary>
         /// Временной интервал
         /// </summary>
-        public TimeSlot TimeSlot { get; set; }
+        public virtual TimeSlot TimeSlot { get; set; }
     }
 }

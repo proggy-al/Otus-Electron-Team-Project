@@ -6,8 +6,6 @@ namespace GMS.Core.DataAccess.Context
 {
     public class DatabaseContext : DbContext
     {
-        // ToDo: перенести в настройки
-        
         public DbSet<FitnessClub> FitnessClubs { get; set; }
         public DbSet<Area> Areas { get; set; }
         public DbSet<Product> Products { get; set; }
@@ -17,7 +15,7 @@ namespace GMS.Core.DataAccess.Context
 
         public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
         {
-            Database.EnsureCreated();
+            //Database.EnsureCreated();
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

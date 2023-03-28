@@ -1,50 +1,36 @@
-﻿using GMS.Core.BusinessLogic.Abstractions.Base;
-using GMS.Core.BusinessLogic.Contracts;
-using GMS.Core.Core.Domain;
-using GMS.Core.DataAccess.Repositories;
+﻿using GMS.Core.BusinessLogic.Contracts;
 
 namespace GMS.Core.BusinessLogic.Abstractions
 {
-    public interface IContractService : IBaseService<ContractRepository, Contract, ContractDto, Guid>
+    public interface IContractService : IService
     {
         /// <summary>
-        /// Получить список
-        /// </summary>
-        /// <param name="page">номер страницы</param>
-        /// <param name="itemsPerPage">объем страницы</param>
-        /// <returns>список ДТО контракта</returns>
-        Task<List<ContractDto>> GetPage(int page, int itemsPerPage);
-
-        /// <summary>
-        /// Получить все сущности по идентификатору менеджера
+        /// Получить постраничный список контрактов менеджера
         /// </summary>
         /// <param name="managerId">идентификатор менеджера</param>
+        /// <param name="pageNumber">номер страницы</param>
+        /// <param name="pageSize">количество</param>
         /// <returns>список ДТО контрактов</returns>
-        Task<List<ContractDto>> GetAllByManagerId(Guid managerId);
+        Task<List<ContractDto>> GetPageByManagerId(Guid managerId, int pageNumber, int pageSize);
 
         /// <summary>
-        /// Получить постраничный список по идентификатору менеджера
-        /// </summary>
-        /// <param name="managerId">идентификатор менеджера</param>
-        /// <param name="page">номер страницы</param>
-        /// <param name="itemsPerPage">объем страницы</param>
-        /// <returns>список ДТО контрактов</returns>
-        Task<List<ContractDto>> GetPageByManagerId(Guid managerId, int page, int itemsPerPage);
-
-        /// <summary>
-        /// Получить все сущности по идентификатору пользователя
+        /// Получить постраничный список контрактов пользователя
         /// </summary>
         /// <param name="userId">идентификатор пользователя</param>
+        /// <param name="pageNumber">номер страницы</param>
+        /// <param name="pageSize">количество</param>
         /// <returns>список ДТО контрактов</returns>
-        Task<List<ContractDto>> GetAllByUserId(Guid userId);
+        Task<List<ContractDto>> GetPageByUserId(Guid userId, int pageNumber, int pageSize);
 
         /// <summary>
-        /// Получить постраничный список по идентификатору пользователя
+        /// Получить постраничный список контрактов фитнес клуба
         /// </summary>
-        /// <param name="userId">идентификатор пользователя</param>
-        /// <param name="page">номер страницы</param>
-        /// <param name="itemsPerPage">объем страницы</param>
+        /// <param name="fitnessClubId">идентификатор фитнес клуба</param>
+        /// <param name="pageNumber">номер страницы</param>
+        /// <param name="pageSize">количество</param>
         /// <returns>список ДТО контрактов</returns>
-        Task<List<ContractDto>> GetPageByUserId(Guid userId, int page, int itemsPerPage);
+        Task<List<ContractDto>> GetPageByFitnessClubId(Guid fitnessClubId, int pageNumber, int pageSize);
+
+        Task<List<ContractDto>> GetPage(int pageNumber, int pageSize);
     }
 }

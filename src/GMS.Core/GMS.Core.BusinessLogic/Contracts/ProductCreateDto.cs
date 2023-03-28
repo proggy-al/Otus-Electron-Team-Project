@@ -1,15 +1,10 @@
-﻿namespace GMS.Core.WebHost.VIewModels
+﻿namespace GMS.Core.BusinessLogic.Contracts
 {
     /// <summary>
     /// ДТО продукта
     /// </summary>
-    public class ProductVM
+    public class ProductCreateDto
     {
-        /// <summary>
-        /// Идентификатор
-        /// </summary>
-        public Guid Id { get; set; }
-
         /// <summary>
         /// Наименование
         /// </summary>
@@ -36,8 +31,8 @@
         public Guid FitnessClubId { get; set; }
 
         /// <summary>
-        /// Удалено
+        /// Идентификатор сотрудника клуба
         /// </summary>
-        public bool Deleted { get; set; }
+        public Guid EmploeeId { get; set; }
     }
 }

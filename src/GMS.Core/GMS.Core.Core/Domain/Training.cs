@@ -1,26 +1,16 @@
-﻿using GMS.Core.Core.Abstractions.Repositories.Base;
+﻿using GMS.Core.Core.Domain.Base;
 
 namespace GMS.Core.Core.Domain
 {
     /// <summary>
     /// Модель тренировки
     /// </summary>
-    public class Training : IEntity<Guid>
+    public class Training : BaseEntity
     {
-        /// <summary>
-        /// Идентификатор
-        /// </summary>
-        public Guid Id { get; set; }
-
         /// <summary>
         /// Идентификатор пользователя
         /// </summary>
         public Guid UserId { get; set; }
-
-        /// <summary>
-        /// Временной интервал 
-        /// </summary>
-        public TimeSlot TimeSlot { get; set; }
 
         /// <summary>
         /// Идентификатор временного интервала
@@ -28,18 +18,18 @@ namespace GMS.Core.Core.Domain
         public Guid TimeSlotId { get; set; }
 
         /// <summary>
-        /// Описание 
+        /// Временной интервал 
         /// </summary>
-        public string Description { get; set; }
+        public virtual TimeSlot TimeSlot { get; set; }
+
+        /// <summary>
+        /// Описание результатов тренировки
+        /// </summary>
+        public string? Description { get; set; }
 
         /// <summary>
         /// Оценка за тренировку
         /// </summary>
-        public int Points { get; set; }
-
-        /// <summary>
-        /// Удалено
-        /// </summary>
-        public bool Deleted { get; set; }
+        public int? Points { get; set; }
     }
 }

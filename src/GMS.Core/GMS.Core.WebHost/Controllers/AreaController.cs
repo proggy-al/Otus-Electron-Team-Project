@@ -1,64 +1,81 @@
 ﻿using AutoMapper;
 using GMS.Core.BusinessLogic.Abstractions;
 using GMS.Core.BusinessLogic.Contracts;
-using GMS.Core.Core.Domain;
 using GMS.Core.WebHost.Controllers.Base;
-using GMS.Core.WebHost.VIewModels;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
+using GMS.Core.WebHost.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
 
 namespace GMS.Core.WebHost.Controllers
 {
     //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [Route("api/[controller]")]
     [ApiController]
-    public class AreaController : 
-        BaseController<AreaController, IAreaService, Area, AreaDto, AreaVM, Guid>
+    public class AreaController : BaseController<IAreaService>
     {
-        public AreaController(IAreaService service, ILogger<AreaController> logger, IMapper mapper)
+        public AreaController(IAreaService service, ILogger<AreaController> logger, IMapper mapper) 
             : base(service, logger, mapper) { }
 
-        [HttpGet("[action]/{page}:{itemsPerPage}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetPage(int page, int itemsPerPage)
+        [HttpGet("[action]/{pageNumber}:{pageSize}")]
+        public async Task<IActionResult> GetPage(Guid fitnessClubId, int pageNumber, int pageSize)
         {
-            var entitiesDto = await _service.GetPage(page, itemsPerPage);
+            var pagedList = await _service.GetPage(fitnessClubId, pageNumber, pageSize);
+            var result = _mapper.Map<List<AreaResponse>>(pagedList.Entities);
 
-            if (entitiesDto == null)
-                return NotFound();
+            Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(pagedList.Pagination));
 
-            return Ok(_mapper.Map<List<AreaVM>>(entitiesDto));
+            int cnt = result.Count;
+
+            _logger.LogInformation($"Returned {cnt} Area{(cnt > 1 ? "s" : "")} from database.");
+
+            return Ok(result);
         }
 
-        [HttpGet("[action]")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetAllByFitnessClubId(Guid fitnessClubId)
+        [HttpGet("[action]/{id}")]
+        public async Task<IActionResult> Get(Guid id)
         {
-            var entitiesDto = await _service.GetAllByFitnessClubId(fitnessClubId);
+            var areaDto = await _service.Get(id);
+            var result = _mapper.Map<AreaResponse>(areaDto);
 
-            if (entitiesDto == null)
-                return NotFound();
+            _logger.LogInformation($"Returned Area \"{id}\" from database.");
 
-            return Ok(_mapper.Map<List<AreaVM>>(entitiesDto));
+            return Ok(result);
         }
 
-        [HttpGet("[action]/{page}:{itemsPerPage}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetPageByFitnessClubId(Guid fitnessClubId, int page, int itemsPerPage)
+        [HttpPost("[action]")]
+        public async Task<IActionResult> Add(AreaCreateRequest request)
         {
-            var entitiesDto = await _service.GetPageByFitnessClubId(fitnessClubId, page, itemsPerPage);
+            var areaDto = _mapper.Map<AreaCreateDto>(request);
+            areaDto.EmploeeId = UserId;
 
-            if (entitiesDto == null)
-                return NotFound();
+            var id = await _service.Create(areaDto);
 
-            return Ok(_mapper.Map<List<AreaVM>>(entitiesDto));
+            _logger.LogInformation($"Add Area \"{id}\" to database.");
+
+            return Ok(id.ToString());
+        }
+
+        [HttpPut("[action]/{id}")]
+        public async Task<IActionResult> Edit(Guid id, AreaEditRequest request)
+        {
+            var areaDto = _mapper.Map<AreaEditDto>(request);
+            areaDto.EmploeeId = UserId;
+
+            await _service.Update(id, areaDto);
+
+            _logger.LogInformation($"Edit Area \"{id}\" in database");
+
+            return NoContent();
+        }
+
+        [HttpDelete("[action]/{id}")]
+        public async Task<IActionResult> AddToArchive(Guid id)
+        {
+            await _service.AddToArchive(id, UserId);
+
+            _logger.LogInformation($"Add to archive Area \"{id}\"");
+
+            return NoContent();
         }
     }
 }

@@ -1,64 +1,49 @@
 ﻿using AutoMapper;
 using GMS.Core.BusinessLogic.Abstractions;
-using GMS.Core.BusinessLogic.Contracts;
-using GMS.Core.Core.Domain;
 using GMS.Core.WebHost.Controllers.Base;
-using GMS.Core.WebHost.VIewModels;
+using GMS.Core.WebHost.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GMS.Core.WebHost.Controllers
 {
-    //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [Route("api/[controller]")]
     [ApiController]
-    public class TrainingController :
-        BaseController<TrainingController, ITrainingService, Training, TrainingDto, TrainingVM, Guid>
+    public class TrainingController : BaseController<ITrainingService>
     {
-        public TrainingController(ITrainingService service, ILogger<TrainingController> logger, IMapper mapper)
-            : base(service, logger, mapper) { }
+        public TrainingController(ITrainingService service, ILogger<TrainingController> logger, IMapper mapper) : base(service, logger, mapper) { }
 
-        [HttpGet("[action]/{page}:{itemsPerPage}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetPage(int page, int itemsPerPage)
+        [HttpGet("[action]/{pageNumber}:{pageSize}")]
+        public async Task<IActionResult> GetPage(int pageNumber, int pageSize = 12)
         {
-            var entitiesDto = await _service.GetPage(page, itemsPerPage);
-
-            if (entitiesDto == null)
-                return NotFound();
-
-            return Ok(_mapper.Map<List<TrainingVM>>(entitiesDto));
+            throw new NotImplementedException();
         }
 
-        [HttpGet("[action]")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetAllByUserId(Guid userId)
+        [HttpGet("[action]/{id}")]
+        public async Task<IActionResult> Get(Guid id)
         {
-            var entitiesDto = await _service.GetAllByUserId(userId);
-
-            if (entitiesDto == null)
-                return NotFound();
-
-            return Ok(_mapper.Map<List<TrainingVM>>(entitiesDto));
+            throw new NotImplementedException();
         }
 
-        [HttpGet("[action]/{page}:{itemsPerPage}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetPageByUserId(Guid userId, int page, int itemsPerPage)
+        [HttpPut("[action]/{id}")]
+        public async Task<IActionResult> AddTrainerNotes(TrainingTrainerNotes request)
         {
-            var entitiesDto = await _service.GetPageByUserId(userId, page, itemsPerPage);
+            throw new NotImplementedException();
+        }
 
-            if (entitiesDto == null)
-                return NotFound();
+        [HttpPut("[action]/{id}")]
+        public async Task<IActionResult> AddUserSignedUp(TrainingUserSignedUp request)
+        {
+            throw new NotImplementedException();
+        }
 
-            return Ok(_mapper.Map<List<TrainingVM>>(entitiesDto));
+        [HttpDelete("[action]/{id}")]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

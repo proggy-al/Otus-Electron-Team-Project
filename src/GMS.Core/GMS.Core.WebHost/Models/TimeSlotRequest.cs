@@ -1,15 +1,10 @@
-﻿namespace GMS.Core.WebHost.VIewModels
+﻿namespace GMS.Core.WebHost.Models
 {
     /// <summary>
     /// ДТО временного интервала
     /// </summary>
-    public class TimeSlotVM
+    public class TimeSlotRequest
     {
-        /// <summary>
-        /// Идентификатор
-        /// </summary>
-        public Guid Id { get; set; }
-
         /// <summary>
         /// Наименование
         /// </summary>
@@ -26,7 +21,7 @@
         public DateTime DateTime { get; set; }
 
         /// <summary>
-        /// длительноть тренировки
+        /// длительноть тренировки в минутах
         /// </summary>
         public int Duration { get; set; }
 
@@ -44,10 +39,5 @@
         /// Идентификатор фитнес клуба
         /// </summary>
         public Guid FitnessClubId { get; set; }
-
-        /// <summary>
-        /// Удалено
-        /// </summary>
-        public bool Deleted { get; set; }
     }
 }

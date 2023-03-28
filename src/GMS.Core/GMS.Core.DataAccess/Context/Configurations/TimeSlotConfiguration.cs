@@ -8,9 +8,9 @@ namespace GMS.Core.DataAccess.Context.Configurations
     {
         public void Configure(EntityTypeBuilder<TimeSlot> builder)
         {
-            builder.HasOne(a => a.Training)
-                   .WithOne(b => b.TimeSlot)
-                   .HasForeignKey<Training>(b => b.TimeSlotId);
+            builder.HasOne(ts => ts.Training)
+                   .WithOne(t => t.TimeSlot)
+                   .HasForeignKey<Training>(t => t.TimeSlotId);
 
             builder.Property(p => p.Id)
                    .HasColumnType("uuid")
@@ -34,11 +34,12 @@ namespace GMS.Core.DataAccess.Context.Configurations
                    .IsRequired();
             builder.Property(p => p.FitnessClubId)
                    .IsRequired();
-            builder.Property(p => p.Deleted)
-                   .HasDefaultValue(false);
-
-            /*builder.HasIndex(p => new { p.DateTime, p.TrainerId })
-                   .IsUnique();*/
+            builder.Property(p => p.IsBusy)
+                   .HasDefaultValue(false)
+                   .IsRequired(false);
+            builder.Property(p => p.IsDeleted)
+                   .HasDefaultValue(false)
+                   .IsRequired();
         }
     }
 }

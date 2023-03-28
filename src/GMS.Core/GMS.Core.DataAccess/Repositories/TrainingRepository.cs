@@ -16,15 +16,15 @@ namespace GMS.Core.DataAccess.Repositories
         /// <summary>
         /// Получить постраничный список
         /// </summary>
-        /// <param name="page">номер страницы</param>
-        /// <param name="itemsPerPage">объем страницы</param>
+        /// <param name="pageNumber">номер страницы</param>
+        /// <param name="pageSize">объем страницы</param>
         /// <returns>список тренировок</returns>
-        public async Task<List<Training>> GetPagedAsync(int page, int itemsPerPage)
+        public async Task<List<Training>> GetPagedAsync(int pageNumber, int pageSize)
         {
             var query = GetAll();
             return await query
-                .Skip((page - 1) * itemsPerPage)
-                .Take(itemsPerPage)
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
                 .ToListAsync();
         }
 
@@ -46,16 +46,16 @@ namespace GMS.Core.DataAccess.Repositories
         /// Получить постраничный список по идентификатору пользователя
         /// </summary>
         /// <param name="userId">идентификатор пользователя</param>
-        /// <param name="page">номер страницы</param>
-        /// <param name="itemsPerPage">объем страницы</param>
+        /// <param name="pageNumber">номер страницы</param>
+        /// <param name="pageSize">объем страницы</param>
         /// <returns>список тренировок</returns>
-        public async Task<List<Training>> GetPagedByUserIdAsync(Guid userId, int page, int itemsPerPage)
+        public async Task<List<Training>> GetPagedByUserIdAsync(Guid userId, int pageNumber, int pageSize)
         {
             var query = GetAll();
             return await query
                 .Where(c => c.UserId == userId)
-                .Skip((page - 1) * itemsPerPage)
-                .Take(itemsPerPage)
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
                 .ToListAsync();
         }
     }

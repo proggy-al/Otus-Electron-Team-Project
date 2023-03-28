@@ -13,10 +13,11 @@ namespace GMS.Core.BusinessLogic.Mappings
         {
             CreateMap<FitnessClub, FitnessClubDto>();
 
-            CreateMap<FitnessClubDto, FitnessClub>()
+            CreateMap<FitnessClubCreateOrEditDto, FitnessClub>()
+                .ForMember(d => d.Id, map => map.Ignore())
+                .ForMember(d => d.IsDeleted, map => map.Ignore())
                 .ForMember(d => d.Areas, map => map.Ignore())
                 .ForMember(d => d.Products, map => map.Ignore())
-                .ForMember(d => d.Contracts, map => map.Ignore())
                 .ForMember(d => d.TimeSlots, map => map.Ignore());
         }
     }
