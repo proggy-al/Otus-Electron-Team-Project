@@ -22,7 +22,7 @@ namespace GMS.Identity.Test.WebHost
     {
         private readonly Mock<IUserRepository> _userRepositoryMock;
         private readonly UserController _userController;
-        private readonly Mapper _mapper;
+        private readonly Mapper? _mapper;
 
         public UserControllerAsyncTests(TestFixture testFixture)
         {
@@ -101,6 +101,8 @@ namespace GMS.Identity.Test.WebHost
         //    res.Should().BeEquivalentTo(new BadRequestResult());
 
         //}
+
+
 
         public void Dispose()
         {

@@ -33,6 +33,7 @@ public class MappingProfile : Profile
 
         CreateMap<User, UserAuthorizeApiModel>()
             .ForMember(d => d.Password, map => map.Ignore());
+
         CreateMap<UserAuthorizeApiModel, User>()
             .ForMember(d => d.Email, map => map.Ignore())
             .ForMember(d => d.TelegramUserName, map => map.Ignore())
@@ -41,7 +42,9 @@ public class MappingProfile : Profile
             .ForMember(d => d.PasswordHash, map => map.Ignore())
             .ForMember(d => d.IsActive, map => map.Ignore())
             .ForMember(d => d.Id, map => map.Ignore());
+
         CreateMap<User, UserJwtTokenModel>();
+
         CreateMap<UserJwtTokenModel, User>()
             .ForMember(d => d.Salt, map => map.Ignore())
             .ForMember(d => d.PasswordHash, map => map.Ignore())
