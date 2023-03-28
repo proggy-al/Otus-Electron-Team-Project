@@ -31,8 +31,8 @@
         public Guid FitnessClubId { get; set; }
 
         /// <summary>
-        /// Идентификатор владельца клуба
+        /// Идентификатор сотрудника клуба
         /// </summary>
-        public Guid OwnerId { get; set; }
+        public Guid EmploeeId { get; set; }
     }
 }

@@ -12,11 +12,7 @@ namespace GMS.Core.WebHost.Mappings
         public FitnessClubVmMappingsProfile()
         {
             CreateMap<FitnessClubDto, FitnessClubResponse>();
-            CreateMap<FitnessClubResponse, FitnessClubDto>()
-                .ForMember(f => f.IsDeleted, map => map.Ignore())
-                .ForMember(f => f.OwnerId, map => map.Ignore());
 
-            CreateMap<FitnessClubCreateOrEditDto, FitnessClubCreateOrEditRequest>();
             CreateMap<FitnessClubCreateOrEditRequest, FitnessClubCreateOrEditDto>()
                 .ForMember(f => f.OwnerId, map => map.Ignore());
         }

@@ -3,6 +3,6 @@
     public class AccessDeniedException : Exception
     {
         public AccessDeniedException(string name)
-            : base($"You don't have permission to access this {name}.") { }
+            : base($"You do not have permission to access this {name}.") { }
     }
 }

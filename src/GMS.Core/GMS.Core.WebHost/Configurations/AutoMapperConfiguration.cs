@@ -17,14 +17,14 @@ namespace GMS.Core.WebHost.Configurations
             var configuration = new MapperConfiguration(cfg =>
             {
                 cfg.AddProfile<FitnessClubMappingsProfile>();
-                //cfg.AddProfile<AreaMappingsProfile>();
+                cfg.AddProfile<AreaMappingsProfile>();
                 cfg.AddProfile<ProductMappingsProfile>();
                 //cfg.AddProfile<ContractMappingsProfile>();
                 //cfg.AddProfile<TimeSlotMappingsProfile>();
                 //cfg.AddProfile<TrainingMappingsProfile>();
 
                 cfg.AddProfile<FitnessClubVmMappingsProfile>();
-                //cfg.AddProfile<AreaVmMappingsProfile>();
+                cfg.AddProfile<AreaVmMappingsProfile>();
                 cfg.AddProfile<ProductVmMappingsProfile>();
                 //cfg.AddProfile<ContractVmMappingsProfile>();
                 //cfg.AddProfile<TimeSlotVmMappingsProfile>();

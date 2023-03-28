@@ -12,8 +12,12 @@ namespace GMS.Core.WebHost.Mappings
         public AreaVmMappingsProfile()
         {
             CreateMap<AreaDto, AreaResponse>();
-            CreateMap<AreaResponse, AreaDto>()
-                .ForMember(d => d.IsDeleted, map => map.Ignore());
+
+            CreateMap<AreaCreateRequest, AreaCreateDto>()
+                .ForMember(f => f.EmploeeId, map => map.Ignore());
+
+            CreateMap<AreaEditRequest, AreaEditDto>()
+                .ForMember(f => f.EmploeeId, map => map.Ignore());
         }
     }
 }

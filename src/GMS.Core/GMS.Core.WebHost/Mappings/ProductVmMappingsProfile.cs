@@ -12,13 +12,9 @@ namespace GMS.Core.WebHost.Mappings
         public ProductVmMappingsProfile()
         {
             CreateMap<ProductDto, ProductResponse>();
-            CreateMap<ProductResponse, ProductDto>()
-                .ForMember(d => d.FitnessClubId, map => map.Ignore())
-                .ForMember(d => d.IsDeleted, map => map.Ignore());
 
-            CreateMap<ProductCreateDto, ProductCreateRequest>();
             CreateMap<ProductCreateRequest, ProductCreateDto>()
-                .ForMember(d => d.OwnerId, map => map.Ignore());
+                .ForMember(d => d.EmploeeId, map => map.Ignore());
         }
     }
 }

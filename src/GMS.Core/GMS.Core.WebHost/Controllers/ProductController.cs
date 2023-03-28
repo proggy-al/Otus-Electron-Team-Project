@@ -66,7 +66,7 @@ namespace GMS.Core.WebHost.Controllers
         public async Task<IActionResult> Add(ProductCreateRequest request)
         {
             var productDto = _mapper.Map<ProductCreateDto>(request);
-            productDto.OwnerId = UserId;
+            productDto.EmploeeId = UserId;
 
             var id = await _service.Create(productDto);
 

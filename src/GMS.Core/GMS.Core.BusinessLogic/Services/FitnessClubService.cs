@@ -41,7 +41,7 @@ namespace GMS.Core.BusinessLogic.Services
 
         public async Task<FitnessClubDto> Get(Guid id)
         {
-            var fitnessClub = await _repository.GetAsync(id);
+            var fitnessClub = await _repository.GetAsync(id, true);
 
             if (fitnessClub == null)
                 throw new NotFoundException("FitnessClub", id);
@@ -61,7 +61,7 @@ namespace GMS.Core.BusinessLogic.Services
 
         public async Task Update(Guid id, FitnessClubCreateOrEditDto dto)
         {
-            var fitnessClub = await _repository.GetAsNoTrackingAsync(id);
+            var fitnessClub = await _repository.GetAsync(id);
 
             if (fitnessClub == null)
                 throw new NotExistException("FitnessClub", id);
@@ -70,10 +70,7 @@ namespace GMS.Core.BusinessLogic.Services
             else if (fitnessClub.IsDeleted) 
                 throw new EntityLockedException("FitnessClub", id);
 
-            fitnessClub = _mapper.Map<FitnessClub>(dto);
-            fitnessClub.Id = id;
-
-            _repository.Update(fitnessClub);
+            _mapper.Map(dto, fitnessClub);
             await _repository.SaveChangesAsync();
         }
 

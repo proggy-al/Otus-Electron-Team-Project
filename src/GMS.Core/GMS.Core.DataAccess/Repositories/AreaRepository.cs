@@ -3,6 +3,7 @@ using GMS.Core.DataAccess.Repositories.Base;
 using GMS.Core.Core.Domain;
 using Microsoft.EntityFrameworkCore;
 using GMS.Core.DataAccess.Context;
+using GMS.Core.WebHost.Models;
 
 namespace GMS.Core.DataAccess.Repositories
 {
@@ -13,49 +14,20 @@ namespace GMS.Core.DataAccess.Repositories
     {
         public AreaRepository(DatabaseContext context) : base(context) { }
 
-        /// <summary>
-        /// Получить постраничный список
-        /// </summary>
-        /// <param name="pageNumber">номер страницы</param>
-        /// <param name="pageSize">объем страницы</param>
-        /// <returns>список зон</returns>
-        public async Task<List<Area>> GetPagedAsync(int pageNumber, int pageSize)
+        public async Task<PagedList<Area>> GetPagedAsync(Guid fitnessClubId, int pageNumber, int pageSize, bool noTracking = false)
         {
-            var query = GetAll();
-            return await query
-                .Skip((pageNumber - 1) * pageSize)
-                .Take(pageSize)
-                .ToListAsync();
-        }
+            var query = GetAll(noTracking)
+                .Where(p => p.FitnessClubId == fitnessClubId && p.IsDeleted == false)
+                .OrderBy(p => p.Name);
 
-        /// <summary>
-        /// Получить все сущности по идентификатору фитнес клуба 
-        /// </summary>
-        /// <param name="fitnessClubId">идентификатор фитнес клуба</param>
-        /// <returns>список зон</returns>
-        public async Task<List<Area>> GetAllByFitnessClubIdAsync(Guid fitnessClubId)
-        {
-            var query = GetAll();
-            return await query
-                .Where(a => a.FitnessClubId == fitnessClubId)
-                .ToListAsync();
-        }
-
-        /// <summary>
-        /// Получить постраничный список по идентификатору фитнес клуба 
-        /// </summary>
-        /// <param name="fitnessClubId">идентификатор фитнес клуба</param>
-        /// <param name="pageNumber">номер страницы</param>
-        /// <param name="pageSize">объем страницы</param>
-        /// <returns>список зон</returns>
-        public async Task<List<Area>> GetPagedByFitnessClubIdAsync(Guid fitnessClubId, int pageNumber, int pageSize)
-        {
-            var query = GetAll();
-            return await query
-                .Where(a => a.FitnessClubId == fitnessClubId)
-                .Skip((pageNumber - 1) * pageSize)
-                .Take(pageSize)
-                .ToListAsync();
+            return new PagedList<Area>()
+            {
+                Entities = await query
+                    .Skip((pageNumber - 1) * pageSize)
+                    .Take(pageSize)
+                    .ToListAsync(),
+                Pagination = new Pagination(query.Count(), pageNumber, pageSize)
+            };
         }
     }
 }

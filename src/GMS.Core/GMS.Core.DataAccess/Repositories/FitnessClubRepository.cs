@@ -14,12 +14,6 @@ namespace GMS.Core.DataAccess.Repositories
     {
         public FitnessClubRepository(DatabaseContext context) : base(context) { }
 
-        /// <summary>
-        /// Получить постраничный список
-        /// </summary>
-        /// <param name="pageNumber">номер страницы</param>
-        /// <param name="pageSize">объем страницы</param>
-        /// <returns>список фитнес клубов</returns>
         public async Task<PagedList<FitnessClub>> GetPagedAsync(int pageNumber, int pageSize, bool noTracking = false)
         {
             var query = GetAll(noTracking)
@@ -36,12 +30,6 @@ namespace GMS.Core.DataAccess.Repositories
             };
         }
 
-        /// <summary>
-        /// Получить постраничный список
-        /// </summary>
-        /// <param name="pageNumber">номер страницы</param>
-        /// <param name="pageSize">объем страницы</param>
-        /// <returns>список фитнес клубов</returns>
         public async Task<PagedList<FitnessClub>> GetPageByOwnerIdAsync(Guid userId, int pageNumber, int pageSize, bool noTracking = false)
         {
             var query = GetAll(noTracking)

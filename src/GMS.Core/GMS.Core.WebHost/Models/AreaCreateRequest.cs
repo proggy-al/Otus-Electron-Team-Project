@@ -1,6 +1,6 @@
 ﻿namespace GMS.Core.WebHost.Models
 {
-    public class AreaRequest
+    public class AreaCreateRequest
     {   
         /// <summary>
         /// Наименование

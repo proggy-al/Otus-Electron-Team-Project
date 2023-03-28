@@ -12,12 +12,7 @@ namespace GMS.Core.BusinessLogic.Mappings
         public ProductMappingsProfile()
         {
             CreateMap<Product, ProductDto>();
-            CreateMap<ProductDto, Product>()
-                .ForMember(d => d.FitnessClub, map => map.Ignore())
-                .ForMember(d => d.Contracts, map => map.Ignore());
 
-            CreateMap<Product, ProductCreateDto>()
-                .ForMember(d => d.OwnerId, map => map.Ignore());
             CreateMap<ProductCreateDto, Product>()
                 .ForMember(d => d.Id, map => map.Ignore())
                 .ForMember(d => d.IsDeleted, map => map.Ignore())

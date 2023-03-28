@@ -33,7 +33,7 @@ namespace GMS.Core.BusinessLogic.Services
 
         public async Task<ProductDto> Get(Guid id)
         {
-            var product = await _productRepository.GetAsync(id);
+            var product = await _productRepository.GetAsync(id, true);
             
             if(product == null)
                 throw new NotFoundException("Product", id);
@@ -43,12 +43,14 @@ namespace GMS.Core.BusinessLogic.Services
 
         public async Task<Guid> Create(ProductCreateDto dto)
         {
-            var fitnessClub = await _fitnessClubrepository.GetAsync(dto.FitnessClubId);
+            var fitnessClub = await _fitnessClubrepository.GetAsync(dto.FitnessClubId, true);
 
             if (fitnessClub == null)
                 throw new NotExistException("FitnessClub", dto.FitnessClubId);
-            else if (fitnessClub.OwnerId != dto.OwnerId)
+            else if (fitnessClub.OwnerId != dto.EmploeeId)
                 throw new AccessDeniedException("FitnessClub");
+            else if (fitnessClub.IsDeleted)
+                throw new EntityLockedException("FitnessClub", fitnessClub.Id);
 
             var product = _mapper.Map<Product>(dto);
 
@@ -58,14 +60,16 @@ namespace GMS.Core.BusinessLogic.Services
             return result.Id;
         }
 
-        public async Task AddToArchive(Guid id, Guid userId)
+        public async Task AddToArchive(Guid id, Guid emploeeId)
         {
-            var product = await _productRepository.FirstOrDefaultAsyncWithInclude(X=>X.Id == id, x => x.FitnessClub);
+            var product = await _productRepository.GetWithIncludeAsync(X=>X.Id == id, x => x.FitnessClub);
 
             if (product == null)
                 throw new NotExistException("Product", id);
-            else if (product.FitnessClub.OwnerId != userId)
+            else if (product.FitnessClub.OwnerId != emploeeId)
                 throw new AccessDeniedException("Product");
+            else if (product.FitnessClub.IsDeleted)
+                throw new EntityLockedException("FitnessClub", product.FitnessClub.Id);
 
             product.IsDeleted = true;
             await _productRepository.SaveChangesAsync();

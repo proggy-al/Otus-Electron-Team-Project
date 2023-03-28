@@ -32,6 +32,7 @@ namespace GMS.Core.BusinessLogic.Abstractions
         /// Поместить в архив
         /// </summary>
         /// <param name="id">идентификатор</param>
-        Task AddToArchive(Guid id, Guid userId);
+        /// <param name="emploeeId">идентификатор сотрудника клуба</param>
+        Task AddToArchive(Guid id, Guid emploeeId);
     }
 }

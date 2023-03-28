@@ -33,27 +33,20 @@ namespace GMS.Core.DataAccess.Repositories.Base
             return asNoTracking ? EntitySet.AsNoTracking() : EntitySet;
         }
 
-        /// <summary>
-        /// Получить сущность по ID
-        /// </summary>
-        /// <param name="id">ID сущности</param>
-        /// <returns>сущность</returns>
-        public virtual async Task<T> GetAsync(TPrimaryKey id)
+        public virtual async Task<T> GetAsync(TPrimaryKey id, bool asNoTracking = false)
         {
-            return await EntitySet.FindAsync((object)id);
-        }
-
-        public virtual async Task<T> GetAsNoTrackingAsync(TPrimaryKey id)
-        {
+            if(!asNoTracking)
+                return await EntitySet.FindAsync((object)id);
+            
             return await EntitySet.AsNoTracking().FirstOrDefaultAsync(x => x.Id.Equals(id));
         }
 
-        public async Task<T> FirstOrDefaultAsync(Expression<Func<T, bool>> predicate)
+        public async Task<T> GetAsync(Expression<Func<T, bool>> predicate)
         {
             return await EntitySet.FirstOrDefaultAsync(predicate);
         }
 
-        public async Task<T> FirstOrDefaultAsyncWithInclude(Expression<Func<T, bool>> predicate, 
+        public async Task<T> GetWithIncludeAsync(Expression<Func<T, bool>> predicate, 
             params Expression<Func<T, object>>[] includeProperties)
         {
             return await EntitySet.IncludeEx(includeProperties).FirstOrDefaultAsync(predicate);

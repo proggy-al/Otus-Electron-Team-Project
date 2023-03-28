@@ -14,13 +14,6 @@ namespace GMS.Core.DataAccess.Repositories
     {
         public ProductRepository(DatabaseContext context) : base(context) { }
 
-        /// <summary>
-        /// Получить постраничный список по идентификатору фитнес клуба 
-        /// </summary>
-        /// <param name="fitnessClubId">идентификатор фитнес клуба</param>
-        /// <param name="pageNumber">номер страницы</param>
-        /// <param name="pageSize">объем страницы</param>
-        /// <returns>список продуктов</returns>
         public async Task<PagedList<Product>> GetPagedAsync(Guid fitnessClubId, int pageNumber, int pageSize, bool noTracking = false)
         {
             var query = GetAll(noTracking)
