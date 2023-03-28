@@ -1,7 +1,4 @@
-﻿using GMS.Core.BusinessLogic.Abstractions;
-using GMS.Core.BusinessLogic.Services;
-
-namespace GMS.Core.WebHost.Configurations
+﻿namespace GMS.Core.WebHost.Configurations
 {
     public static class ServicesConfiguration
     {

@@ -1,0 +1,75 @@
+Ограничение ролей в Core service
+
+User:
+- смотреть информацию о FitnessClub
+- смотреть информацию о Areas
+- смотреть информацию о Products
+- смотреть информацию о Contracts
+- смотреть информацию о TimeSlots
+- смотреть информацию о своих Trainings
+
+- купить Product (т.е. добавить Contract)
+
+- записаться на Training
+- удалить Training (при этом отправить оповещение тренеру, менеджеру об отмене тренировки)
+
+Trainer:
+- смотреть информацию о FitnessClubs
+- смотреть информацию о Areas
+- смотреть информацию о Products
+- смотреть информацию о Contracts
+- смотреть информацию о TimeSlots
+- смотреть информацию о Trainings
+
+- редактировать Training(Description, Points)
+
+Manager:
+- смотреть информацию о FitnessClubs
+- смотреть информацию о Areas
+- смотреть информацию о Products
+- смотреть информацию о Contracts
+- смотреть информацию о TimeSlots
+- смотреть информацию о Trainings
+
+- добавить новый Products
+- поместить в архив Products
+
+- подтвердить Contract (IsApproved, ManagerId)
+
+- создать TimeSlot
+- редактировать TimeSlot(TrainerId, AreaId)
+
+Administrator:
+- смотреть информацию о FitnessClubs
+- смотреть информацию о Areas
+- смотреть информацию о Products
+- смотреть информацию о Contracts
+- смотреть информацию о TimeSlots
+- смотреть информацию о Trainings
+
+- редактировать FitnessClub
+
+- добавить Area
+- редактировать Area
+- поместить в архив Area
+
+- добавить новый Products
+- поместить в архив Products
+
+- подтвердить Contract (IsApproved, ManagerId)
+
+- создать TimeSlot
+- редактировать TimeSlot(TrainerId, AreaId)
+- удалить TimeSlot (при этом отправить оповещение пользователю об отмене тренировки)
+
+Owner:
+- смотреть информацию о FitnessClubs
+- смотреть информацию о Areas
+- смотреть информацию о Products
+- смотреть информацию о Contracts
+- смотреть информацию о TimeSlots
+- смотреть информацию о Trainings
+
+- добавить FitnessClub
+- редактировать FitnessClub
+- поместить в архив FitnessClub

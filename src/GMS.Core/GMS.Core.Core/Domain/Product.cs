@@ -1,17 +1,12 @@
-﻿using GMS.Core.Core.Abstractions.Repositories.Base;
+﻿using GMS.Core.Core.Domain.Base;
 
 namespace GMS.Core.Core.Domain
 {
     /// <summary>
     /// Модель продукта, который можно приобрести в фитнес клубе
     /// </summary>
-    public class Product : IEntity<Guid>
+    public class Product : BaseEntity
     {
-        /// <summary>
-        /// Идентификатор
-        /// </summary>
-        public Guid Id { get; set; }
-
         /// <summary>
         /// Наименование
         /// </summary>
@@ -23,12 +18,12 @@ namespace GMS.Core.Core.Domain
         public string Description { get; set; }
 
         /// <summary>
-        /// Количество (тренировок в пакете персональных тренировок, дней в абонементе на свободное посещение, минут в абонементе на солярий)
+        /// Количество персональных тренировок
         /// </summary>
         public int Quantity { get; set; }
 
         /// <summary>
-        /// Цена
+        /// Цена в условных единицах
         /// </summary>
         public int Price { get; set; }
 
@@ -40,17 +35,11 @@ namespace GMS.Core.Core.Domain
         /// <summary>
         /// Идентификатор фитнес клуба
         /// </summary>
-        public Guid FitnessClubId { get; set; }
+        public virtual Guid FitnessClubId { get; set; }
 
         /// <summary>
-        /// Удалено
+        /// Контракты
         /// </summary>
-        public bool Deleted { get; set; }
-
-
-        /// <summary>
-        /// Контракт
-        /// </summary>
-        public Contract Contract { get; set; }
+        public virtual ICollection<Contract> Contracts { get; set; }
     }
 }

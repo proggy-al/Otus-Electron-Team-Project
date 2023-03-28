@@ -3,9 +3,7 @@
     /// <summary>
     /// Базовый интерфейс всех репозиториев
     /// </summary>
-    public interface IRepository
-    {
-    }
+    public interface IRepository { }
 
     /// <summary>
     /// Описания общих методов для всех репозиториев
@@ -16,25 +14,11 @@
         where T : IEntity<TPrimaryKey>
     {
         /// <summary>
-        /// Удалить сущность
+        /// Добавить в базу одну сущность
         /// </summary>
-        /// <param name="id">ID удалённой сущности</param>
-        /// <returns>была ли сущность удалена</returns>
-        bool Delete(TPrimaryKey id);
-
-        /// <summary>
-        /// Удалить сущность
-        /// </summary>
-        /// <param name="entity">сущность для удаления</param>
-        /// <returns>была ли сущность удалена</returns>
-        bool Delete(T entity);
-
-        /// <summary>
-        /// Удалить сущности
-        /// </summary>
-        /// <param name="entities">Коллекция сущностей для удаления</param>
-        /// <returns>была ли операция удаления успешна</returns>
-        bool DeleteRange(ICollection<T> entities);
+        /// <param name="entity">сущность для добавления</param>
+        /// <returns>добавленная сущность</returns>
+        Task<T> AddAsync(T entity);
 
         /// <summary>
         /// Для сущности проставить состояние - что она изменена
@@ -43,35 +27,11 @@
         void Update(T entity);
 
         /// <summary>
-        /// Добавить в базу одну сущность
+        /// Удалить сущность
         /// </summary>
-        /// <param name="entity">сущность для добавления</param>
-        /// <returns>добавленная сущность</returns>
-        T Add(T entity);
-
-        /// <summary>
-        /// Добавить в базу одну сущность
-        /// </summary>
-        /// <param name="entity">сущность для добавления</param>
-        /// <returns>добавленная сущность</returns>
-        Task<T> AddAsync(T entity);
-
-        /// <summary>
-        /// Добавить в базу массив сущностей
-        /// </summary>
-        /// <param name="entities">массив сущностей</param>
-        void AddRange(List<T> entities);
-
-        /// <summary>
-        /// Добавить в базу массив сущностей
-        /// </summary>
-        /// <param name="entities">массив сущностей</param>
-        Task AddRangeAsync(ICollection<T> entities);
-
-        /// <summary>
-        /// Сохранить изменения
-        /// </summary>
-        void SaveChanges();
+        /// <param name="id">ID удалённой сущности</param>
+        /// <returns>была ли сущность удалена</returns>
+        bool Delete(TPrimaryKey id);
 
         /// <summary>
         /// Сохранить изменения

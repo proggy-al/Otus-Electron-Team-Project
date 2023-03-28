@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
 using GMS.Core.Core.Domain;
+using GMS.Core.DataAccess.Data;
 
 namespace GMS.Core.DataAccess.Context.Configurations
 {
@@ -8,9 +9,9 @@ namespace GMS.Core.DataAccess.Context.Configurations
     {
         public void Configure(EntityTypeBuilder<Product> builder)
         {
-            builder.HasOne(a => a.Contract)
-                   .WithOne(b => b.Product)
-                   .HasForeignKey<Contract>(b => b.ProductId);
+            builder.HasMany(p => p.Contracts)
+                   .WithOne(c => c.Product)
+                   .HasForeignKey(c => c.ProductId);
 
             builder.Property(p => p.Id)
                    .HasColumnType("uuid")
@@ -30,101 +31,11 @@ namespace GMS.Core.DataAccess.Context.Configurations
                    .IsRequired();
             builder.Property(p => p.FitnessClubId)
                    .IsRequired();
-            builder.Property(p => p.Deleted)
-                   .HasDefaultValue(false);
+            builder.Property(p => p.IsDeleted)
+                   .HasDefaultValue(false)
+                   .IsRequired();
 
-            /*builder.HasIndex(p => new { p.Name, p.FitnessClubId })
-                   .IsUnique();*/
-
-            // Gold's Gym Venice
-            builder.HasData
-            (
-                new Product
-                {
-                    Id = Guid.Parse("b0000000-0000-0000-0000-000000000001"),
-                    Name = "1-Month Contract",
-                    Description = "Free access to the club for 30 days",
-                    Quantity = 30,
-                    Price = 100, // $
-                    FitnessClubId = Guid.Parse("f0000000-0000-0000-0000-000000000001"),
-                    Deleted = false
-                },
-                new Product
-                {
-                    Id = Guid.Parse("b0000000-0000-0000-0000-000000000002"),
-                    Name = "12-Month Contract",
-                    Description = "Free access to the club for 1 year",
-                    Quantity = 365,
-                    Price = 490,  // $
-                    FitnessClubId = Guid.Parse("f0000000-0000-0000-0000-000000000001"),
-                    Deleted = false
-                },
-                new Product
-                {
-                    Id = Guid.Parse("b0000000-0000-0000-0000-000000000003"),
-                    Name = "1 personal Training",
-                    Description = "for a month",
-                    Quantity = 1,
-                    Price = 65,   // $
-                    FitnessClubId = Guid.Parse("f0000000-0000-0000-0000-000000000001"),
-                    Deleted = false
-                },
-                new Product
-                {
-                    Id = Guid.Parse("b0000000-0000-0000-0000-000000000004"),
-                    Name = "8 personal Training",
-                    Description = "for a month",
-                    Quantity = 8,
-                    Price = 360,   // $
-                    FitnessClubId = Guid.Parse("f0000000-0000-0000-0000-000000000001"),
-                    Deleted = false
-                }
-            );
-
-            // Алмаз
-            builder.HasData
-            (
-                new Product
-                {
-                    Id = Guid.Parse("b0000000-0000-0000-0000-000000000005"),
-                    Name = "Разовое посещение",
-                    Description = "Свободное посещение клуба в течении 1 дня",
-                    Quantity = 1,
-                    Price = 500,    // рублей
-                    FitnessClubId = Guid.Parse("f0000000-0000-0000-0000-000000000002"),
-                    Deleted = false
-                },
-                new Product
-                {
-                    Id = Guid.Parse("b0000000-0000-0000-0000-000000000006"),
-                    Name = "Абонемент на месяц",
-                    Description = "Свободное посещение клуба в течении 30 дней",
-                    Quantity = 30,
-                    Price = 2000,   // рублей
-                    FitnessClubId = Guid.Parse("f0000000-0000-0000-0000-000000000002"),
-                    Deleted = false
-                },
-                new Product
-                {
-                    Id = Guid.Parse("b0000000-0000-0000-0000-000000000007"),
-                    Name = "1 персональная тренировка",
-                    Description = "на 1 месяц",
-                    Quantity = 1,
-                    Price = 2000,   // рублей
-                    FitnessClubId = Guid.Parse("f0000000-0000-0000-0000-000000000002"),
-                    Deleted = false
-                },
-                new Product
-                {
-                    Id = Guid.Parse("b0000000-0000-0000-0000-000000000008"),
-                    Name = "8 персональных тренировок",
-                    Description = "на 1 месяц",
-                    Quantity = 8,
-                    Price = 12000,  // рублей
-                    FitnessClubId = Guid.Parse("f0000000-0000-0000-0000-000000000002"),
-                    Deleted = false
-                }
-            );
+            builder.HasData(SeedData.Products);
         }
     }
 }

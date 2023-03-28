@@ -16,15 +16,15 @@ namespace GMS.Core.DataAccess.Repositories
         /// <summary>
         /// Получить постраничный список
         /// </summary>
-        /// <param name="page">номер страницы</param>
-        /// <param name="itemsPerPage">объем страницы</param>
+        /// <param name="pageNumber">номер страницы</param>
+        /// <param name="pageSize">объем страницы</param>
         /// <returns>список контрактов</returns>
-        public async Task<List<Contract>> GetPagedAsync(int page, int itemsPerPage)
+        public async Task<List<Contract>> GetPagedAsync(int pageNumber, int pageSize)
         {
             var query = GetAll();
             return await query
-                .Skip((page - 1) * itemsPerPage)
-                .Take(itemsPerPage)
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
                 .ToListAsync();
         }
 
@@ -45,16 +45,16 @@ namespace GMS.Core.DataAccess.Repositories
         /// Получить постраничный список по идентификатору менеджера
         /// </summary>
         /// <param name="managerId">идентификатор менеджера</param>
-        /// <param name="page">номер страницы</param>
-        /// <param name="itemsPerPage">объем страницы</param>
+        /// <param name="pageNumber">номер страницы</param>
+        /// <param name="pageSize">объем страницы</param>
         /// <returns>список контрактов</returns>
-        public async Task<List<Contract>> GetPagedByManagerIdAsync(Guid managerId, int page, int itemsPerPage)
+        public async Task<List<Contract>> GetPagedByManagerIdAsync(Guid managerId, int pageNumber, int pageSize)
         {
             var query = GetAll();
             return await query
                 .Where(c => c.ManagerId == managerId)
-                .Skip((page - 1) * itemsPerPage)
-                .Take(itemsPerPage)
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
                 .ToListAsync();
         }
 
@@ -75,16 +75,16 @@ namespace GMS.Core.DataAccess.Repositories
         /// Получить постраничный список по идентификатору пользователя
         /// </summary>
         /// <param name="userId">идентификатор пользователя</param>
-        /// <param name="page">номер страницы</param>
-        /// <param name="itemsPerPage">объем страницы</param>
+        /// <param name="pageNumber">номер страницы</param>
+        /// <param name="pageSize">объем страницы</param>
         /// <returns>список контрактов</returns>
-        public async Task<List<Contract>> GetPagedByUserIdAsync(Guid userId, int page, int itemsPerPage)
+        public async Task<List<Contract>> GetPagedByUserIdAsync(Guid userId, int pageNumber, int pageSize)
         {
             var query = GetAll();
             return await query
                 .Where(c => c.UserId == userId)
-                .Skip((page - 1) * itemsPerPage)
-                .Take(itemsPerPage)
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
                 .ToListAsync();
         }
     }

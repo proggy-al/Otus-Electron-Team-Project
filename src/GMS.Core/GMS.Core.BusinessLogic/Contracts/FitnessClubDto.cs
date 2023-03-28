@@ -31,8 +31,8 @@
         public Guid OwnerId { get; set; }
 
         /// <summary>
-        /// Удалено
+        /// Удаленная запись доступна только для чтения
         /// </summary>
-        public bool Deleted { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }

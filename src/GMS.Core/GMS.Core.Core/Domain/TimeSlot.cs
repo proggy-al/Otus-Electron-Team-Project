@@ -1,17 +1,12 @@
-﻿using GMS.Core.Core.Abstractions.Repositories.Base;
+﻿using GMS.Core.Core.Domain.Base;
 
 namespace GMS.Core.Core.Domain
 {
     /// <summary>
     /// Модель временного интервала для бронирования тренировки в фитнес клубе в определенный промежуток времени к определенному тренеру
     /// </summary>
-    public class TimeSlot : IEntity<Guid>
+    public class TimeSlot : BaseEntity
     {
-        /// <summary>
-        /// Идентификатор
-        /// </summary>
-        public Guid Id { get; set; }
-
         /// <summary>
         /// Наименование
         /// </summary>
@@ -28,7 +23,7 @@ namespace GMS.Core.Core.Domain
         public DateTime DateTime { get; set; }
 
         /// <summary>
-        /// длительноть тренировки
+        /// длительноть тренировки в минутах
         /// </summary>
         public int Duration { get; set; }
 
@@ -38,19 +33,14 @@ namespace GMS.Core.Core.Domain
         public Guid TrainerId { get; set; }
 
         /// <summary>
-        /// Зона
-        /// </summary>
-        public Area Area { get; set; }
-
-        /// <summary>
         /// Идентификатор зоны
         /// </summary>
         public Guid AreaId { get; set; }
 
         /// <summary>
-        /// Фитнес клуб
+        /// Зона
         /// </summary>
-        public FitnessClub FitnessClub { get; set; }
+        public virtual Area Area { get; set; }
 
         /// <summary>
         /// Идентификатор фитнес клуба
@@ -58,14 +48,18 @@ namespace GMS.Core.Core.Domain
         public Guid FitnessClubId { get; set; }
 
         /// <summary>
-        /// Удалено
+        /// Фитнес клуб
         /// </summary>
-        public bool Deleted { get; set; }
+        public virtual FitnessClub FitnessClub { get; set; }
 
+        /// <summary>
+        /// Статус занят/свободен для записи на тренировку
+        /// </summary>
+        public bool? IsBusy { get; set; }
 
         /// <summary>
         /// Тренировка
         /// </summary>
-        public Training Training { get; set; }
+        public virtual Training Training { get; set; }
     }
 }

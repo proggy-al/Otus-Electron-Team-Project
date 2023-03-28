@@ -1,4 +1,6 @@
-﻿namespace GMS.Core.Core.Abstractions.Repositories.Base
+﻿using System.Linq.Expressions;
+
+namespace GMS.Core.Core.Abstractions.Repositories.Base
 {
     /// <summary>
     /// Интерфейс репозитория, предназначенного для чтения
@@ -8,32 +10,36 @@
     public interface IReadRepository<T, TPrimaryKey> : IRepository where T : IEntity<TPrimaryKey>
     {
         /// <summary>
-        /// Запросить все сущности в базе
+        /// Получить сущность по ID
         /// </summary>
-        /// <param name="noTracking">Вызвать с AsNoTracking</param>
-        /// <returns>IQueryable массив сущностей</returns>
-        IQueryable<T> GetAll(bool noTracking = false);
+        /// <param name="id">ID сущности</param>
+        /// <param name="asNoTracking">отслеживание изменений</param>
+        /// <returns></returns>
+        Task<T> GetAsync(TPrimaryKey id, bool asNoTracking = false);
 
         /// <summary>
-        /// Запросить все сущности в базе
+        /// Получить сущность по определенным условиям поиска
         /// </summary>
-        /// <param name="cancellationToken">Токен отмены</param>
-        /// <param name="asNoTracking">Вызвать с AsNoTracking</param>
+        /// <param name="predicate">условия поиска</param>
+        /// <returns>сущность</returns>
+        Task<T> GetAsync(Expression<Func<T, bool>> predicate);
+
+        /// <summary>
+        /// Получить сущность по определенным условиям поиска со связными данными
+        /// </summary>
+        /// <param name="predicate">условия поиска</param>
+        /// <param name="includeProperties">связные данные</param>
+        /// <returns>сущность</returns>
+        Task<T> GetWithIncludeAsync(Expression<Func<T, bool>> predicate,
+            params Expression<Func<T, object>>[] includeProperties);
+
+        /// <summary>
+        /// Получить список сущностей по определенным условиям поиска со связными данными
+        /// </summary>
+        /// <param name="predicate">условия поиска</param>
+        /// <param name="includeProperties">связные данные</param>
         /// <returns>Список сущностей</returns>
-        Task<List<T>> GetAllAsync(CancellationToken cancellationToken, bool asNoTracking = false);
-
-        /// <summary>
-        /// Получить сущность по ID
-        /// </summary>
-        /// <param name="id">ID сущности</param>
-        /// <returns>сущность</returns>
-        T Get(TPrimaryKey id);
-
-        /// <summary>
-        /// Получить сущность по ID
-        /// </summary>
-        /// <param name="id">ID сущности</param>
-        /// <returns>сущность</returns>
-        Task<T> GetAsync(TPrimaryKey id);
+        IEnumerable<T> GetWithInclude(Func<T, bool> predicate,
+            params Expression<Func<T, object>>[] includeProperties);
     }
 }

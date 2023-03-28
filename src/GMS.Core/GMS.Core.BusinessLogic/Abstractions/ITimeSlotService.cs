@@ -1,11 +1,8 @@
-﻿using GMS.Core.BusinessLogic.Abstractions.Base;
-using GMS.Core.BusinessLogic.Contracts;
-using GMS.Core.Core.Domain;
-using GMS.Core.DataAccess.Repositories;
+﻿using GMS.Core.BusinessLogic.Contracts;
 
 namespace GMS.Core.BusinessLogic.Abstractions
 {
-    public interface ITimeSlotService : IBaseService<TimeSlotRepository, TimeSlot, TimeSlotDto, Guid>
+    public interface ITimeSlotService : IService
     {
         /// <summary>
         /// Получить список временных интервалов за день 

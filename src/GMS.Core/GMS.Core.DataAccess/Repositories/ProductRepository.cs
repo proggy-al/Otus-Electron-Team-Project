@@ -2,6 +2,7 @@
 using GMS.Core.Core.Domain;
 using GMS.Core.DataAccess.Context;
 using GMS.Core.DataAccess.Repositories.Base;
+using GMS.Core.WebHost.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace GMS.Core.DataAccess.Repositories
@@ -13,49 +14,20 @@ namespace GMS.Core.DataAccess.Repositories
     {
         public ProductRepository(DatabaseContext context) : base(context) { }
 
-        /// <summary>
-        /// Получить постраничный список
-        /// </summary>
-        /// <param name="page">номер страницы</param>
-        /// <param name="itemsPerPage">объем страницы</param>
-        /// <returns>список продуктов</returns>
-        public async Task<List<Product>> GetPagedAsync(int page, int itemsPerPage)
+        public async Task<PagedList<Product>> GetPagedAsync(Guid fitnessClubId, int pageNumber, int pageSize, bool noTracking = false)
         {
-            var query = GetAll();
-            return await query
-                .Skip((page - 1) * itemsPerPage)
-                .Take(itemsPerPage)
-                .ToListAsync();
-        }
+            var query = GetAll(noTracking)
+                .Where(p => p.FitnessClubId == fitnessClubId && p.IsDeleted == false)
+                .OrderBy(p => p.Quantity);
 
-        /// <summary>
-        /// Получить все сущности по идентификатору фитнес клуба 
-        /// </summary>
-        /// <param name="fitnessClubId">идентификатор фитнес клуба</param>
-        /// <returns>список продуктов</returns>
-        public async Task<List<Product>> GetAllByFitnessClubIdAsync(Guid fitnessClubId)
-        {
-            var query = GetAll();
-            return await query
-                .Where(a => a.FitnessClubId == fitnessClubId)
-                .ToListAsync();
-        }
-
-        /// <summary>
-        /// Получить постраничный список по идентификатору фитнес клуба 
-        /// </summary>
-        /// <param name="fitnessClubId">идентификатор фитнес клуба</param>
-        /// <param name="page">номер страницы</param>
-        /// <param name="itemsPerPage">объем страницы</param>
-        /// <returns>список продуктов</returns>
-        public async Task<List<Product>> GetPagedByFitnessClubIdAsync(Guid fitnessClubId, int page, int itemsPerPage)
-        {
-            var query = GetAll();
-            return await query
-                .Where(a => a.FitnessClubId == fitnessClubId)
-                .Skip((page - 1) * itemsPerPage)
-                .Take(itemsPerPage)
-                .ToListAsync();
+            return new PagedList<Product>()
+            {
+                Entities = await query
+                    .Skip((pageNumber - 1) * pageSize)
+                    .Take(pageSize)
+                    .ToListAsync(),
+                Pagination = new Pagination(query.Count(), pageNumber, pageSize)
+            };
         }
     }
 }

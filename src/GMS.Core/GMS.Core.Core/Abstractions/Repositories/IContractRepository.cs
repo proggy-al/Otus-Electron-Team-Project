@@ -8,10 +8,10 @@ namespace GMS.Core.Core.Abstractions.Repositories
         /// <summary>
         /// Получить постраничный список
         /// </summary>
-        /// <param name="page">номер страницы</param>
-        /// <param name="itemsPerPage">объем страницы</param>
+        /// <param name="pageNumber">номер страницы</param>
+        /// <param name="pageSize">объем страницы</param>
         /// <returns>список контрактов</returns>
-        Task<List<Contract>> GetPagedAsync(int page, int itemsPerPage);
+        Task<List<Contract>> GetPagedAsync(int pageNumber, int pageSize);
 
         /// <summary>
         /// Получить все сущности по идентификатору менеджера
@@ -24,10 +24,10 @@ namespace GMS.Core.Core.Abstractions.Repositories
         /// Получить постраничный список по идентификатору менеджера
         /// </summary>
         /// <param name="managerId">идентификатор менеджера</param>
-        /// <param name="page">номер страницы</param>
-        /// <param name="itemsPerPage">объем страницы</param>
+        /// <param name="pageNumber">номер страницы</param>
+        /// <param name="pageSize">объем страницы</param>
         /// <returns>список контрактов</returns>
-        Task<List<Contract>> GetPagedByManagerIdAsync(Guid managerId, int page, int itemsPerPage);
+        Task<List<Contract>> GetPagedByManagerIdAsync(Guid managerId, int pageNumber, int pageSize);
 
         /// <summary>
         /// Получить все сущности по идентификатору пользователя
@@ -40,9 +40,9 @@ namespace GMS.Core.Core.Abstractions.Repositories
         /// Получить постраничный список по идентификатору пользователя
         /// </summary>
         /// <param name="userId">идентификатор пользователя</param>
-        /// <param name="page">номер страницы</param>
-        /// <param name="itemsPerPage">объем страницы</param>
+        /// <param name="pageNumber">номер страницы</param>
+        /// <param name="pageSize">объем страницы</param>
         /// <returns>список контрактов</returns>
-        Task<List<Contract>> GetPagedByUserIdAsync(Guid userId, int page, int itemsPerPage);
+        Task<List<Contract>> GetPagedByUserIdAsync(Guid userId, int pageNumber, int pageSize);
     }
 }

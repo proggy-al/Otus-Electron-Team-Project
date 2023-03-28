@@ -1,17 +1,12 @@
-﻿using GMS.Core.Core.Abstractions.Repositories.Base;
+﻿using GMS.Core.Core.Domain.Base;
 
 namespace GMS.Core.Core.Domain
 {
     /// <summary>
     /// Модель фитнес клуба
     /// </summary>
-    public class FitnessClub : IEntity<Guid>
+    public class FitnessClub : BaseEntity
     {
-        /// <summary>
-        /// Идентификатор
-        /// </summary>
-        public Guid Id { get; set; }
-
         /// <summary>
         /// Наименование
         /// </summary>
@@ -28,34 +23,23 @@ namespace GMS.Core.Core.Domain
         public string Address { get; set; }
 
         /// <summary>
-        /// Идентификатор владельца
+        /// Идентификатор пользователя
         /// </summary>
         public Guid OwnerId { get; set; }
 
         /// <summary>
-        /// Удалено
-        /// </summary>
-        public bool Deleted { get; set; }
-
-
-        /// <summary>
         /// Зоны
         /// </summary>
-        public IEnumerable<Area> Areas { get; set; }
+        public virtual ICollection<Area> Areas { get; set; }
 
         /// <summary>
         /// Продукты
         /// </summary>
-        public IEnumerable<Product> Products { get; set; }
-
-        /// <summary>
-        /// Контракты
-        /// </summary>
-        public IEnumerable<Contract> Contracts { get; set; }
+        public virtual ICollection<Product> Products { get; set; }
 
         /// <summary>
         /// Временные интервалы
         /// </summary>
-        public IEnumerable<TimeSlot> TimeSlots { get; set; }
+        public virtual ICollection<TimeSlot> TimeSlots { get; set; }
     }
 }

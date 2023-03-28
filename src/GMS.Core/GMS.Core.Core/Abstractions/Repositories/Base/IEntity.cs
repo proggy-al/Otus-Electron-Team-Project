@@ -11,6 +11,9 @@
         /// </summary>
         TId Id { get; set; }
 
-        bool Deleted { get; set; }
+        /// <summary>
+        /// Возвращает значение true, если элемент был удален
+        /// </summary>
+        bool IsDeleted { get; set; }
     }
 }

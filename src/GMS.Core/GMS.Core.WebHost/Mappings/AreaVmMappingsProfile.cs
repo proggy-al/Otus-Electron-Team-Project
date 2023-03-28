@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using GMS.Core.BusinessLogic.Contracts;
-using GMS.Core.WebHost.VIewModels;
+using GMS.Core.WebHost.Models;
 
 namespace GMS.Core.WebHost.Mappings
 {
@@ -11,8 +11,13 @@ namespace GMS.Core.WebHost.Mappings
     {
         public AreaVmMappingsProfile()
         {
-            CreateMap<AreaVM, AreaDto>();
-            CreateMap<AreaDto, AreaVM>();
+            CreateMap<AreaDto, AreaResponse>();
+
+            CreateMap<AreaCreateRequest, AreaCreateDto>()
+                .ForMember(f => f.EmploeeId, map => map.Ignore());
+
+            CreateMap<AreaEditRequest, AreaEditDto>()
+                .ForMember(f => f.EmploeeId, map => map.Ignore());
         }
     }
 }

@@ -46,8 +46,13 @@
         public Guid FitnessClubId { get; set; }
 
         /// <summary>
-        /// Удалено
+        /// Статус занят/свободен для записи на тренировку
         /// </summary>
-        public bool Deleted { get; set; }
+        public bool IsBusy { get; set; }
+
+        /// <summary>
+        /// Удаленная запись доступна только для чтения
+        /// </summary>
+        public bool IsDeleted { get; set; }
     }
 }

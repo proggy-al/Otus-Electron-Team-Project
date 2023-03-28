@@ -23,8 +23,7 @@ try
         .ConfigureSwagger()
         .AddControllers();
 
-    builder.Services.AddCustomJWTAuthentification();
-
+    //builder.Services.AddCustomJWTAuthentification();
 
     var app = WebApplicationConfiguration.Configure(builder);
 

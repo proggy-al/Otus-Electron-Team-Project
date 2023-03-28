@@ -1,9 +1,9 @@
-﻿namespace GMS.Core.WebHost.VIewModels
+﻿namespace GMS.Core.WebHost.Models
 {
     /// <summary>
     /// ДТО контракта
     /// </summary>
-    public class ContractVM
+    public class ContractResponse
     {
         /// <summary>
         /// Идентификатор
@@ -11,9 +11,9 @@
         public Guid Id { get; set; }
 
         /// <summary>
-        /// Идентификатор продукта
+        /// Информация о продукте
         /// </summary>
-        public Guid ProductId { get; set; }
+        public ProductResponse Product { get; set; }
 
         /// <summary>
         /// Идентификатор менеджера
@@ -26,9 +26,9 @@
         public Guid UserId { get; set; }
 
         /// <summary>
-        /// Идентификатор фитнес клуба
+        /// Информация о фитнес клубе
         /// </summary>
-        public Guid FitnessClubId { get; set; }
+        public FitnessClubResponse FitnessClub { get; set; }
 
         /// <summary>
         /// Дата начала контракта
@@ -39,10 +39,5 @@
         /// Дата завершения контракта
         /// </summary>
         public DateTime EndDate { get; set; }
-
-        /// <summary>
-        /// Удалено
-        /// </summary>
-        public bool Deleted { get; set; }
     }
 }

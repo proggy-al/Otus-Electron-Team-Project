@@ -8,14 +8,10 @@ namespace GMS.Core.WebHost.Configurations
         {
             var app = builder.Build();
 
-            //app.UseHttpsRedirection();
-            
+            app.UseCustomExceptionHandler();
             app.UseRouting();
-
             app.UseAuthentication();
-
             app.UseAuthorization();
-
             //if (app.Environment.IsDevelopment())
             //{
                 app.UseSwagger();

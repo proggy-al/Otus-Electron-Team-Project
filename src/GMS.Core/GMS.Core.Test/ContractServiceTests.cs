@@ -25,7 +25,7 @@ namespace GMS.Core.Test
             foreach(var i in Range(1,5))
             {
                 var fixture = new Fixture();
-                var entity = fixture.Build<Contract>().Without(e => e.Product).Without(e => e.FitnessClub).Create();
+                var entity = fixture.Build<Contract>().Without(e => e.Product).Create();
                 entity.StartDate = new DateTime(2023, 10, 10);
                 FakeContracts.Add(entity);
             };
