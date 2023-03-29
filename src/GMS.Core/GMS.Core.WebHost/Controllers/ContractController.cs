@@ -14,7 +14,7 @@ namespace GMS.Core.WebHost.Controllers
     [ApiController]
     public class ContractController : BaseController<IContractService>
     {
-        public ContractController(IContractService service, ILogger<ContractController> logger, IMapper mapper) : base(service, logger, mapper) { }
+        public ContractController(IContractService service, IMapper mapper) : base(service, mapper) { }
 
         [HttpGet("[action]/{pageNumber}:{pageSize}")]
         public async Task<IActionResult> GetPagedByManagerId(Guid managerId, int pageNumber, int pageSize)

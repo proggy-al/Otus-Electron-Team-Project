@@ -14,7 +14,7 @@ namespace GMS.Core.WebHost.Controllers
     [ApiController]
     public class TrainingController : BaseController<ITrainingService>
     {
-        public TrainingController(ITrainingService service, ILogger<TrainingController> logger, IMapper mapper) : base(service, logger, mapper) { }
+        public TrainingController(ITrainingService service, IMapper mapper) : base(service, mapper) { }
 
         [HttpGet("[action]/{pageNumber}:{pageSize}")]
         public async Task<IActionResult> GetPage(int pageNumber, int pageSize = 12)

@@ -13,8 +13,7 @@ namespace GMS.Core.WebHost.Controllers
     [ApiController]
     public class AreaController : BaseController<IAreaService>
     {
-        public AreaController(IAreaService service, ILogger<AreaController> logger, IMapper mapper) 
-            : base(service, logger, mapper) { }
+        public AreaController(IAreaService service , IMapper mapper) : base(service, mapper) { }
 
         [HttpGet("[action]/{pageNumber}:{pageSize}")]
         public async Task<IActionResult> GetPage(Guid fitnessClubId, int pageNumber, int pageSize)
@@ -23,11 +22,6 @@ namespace GMS.Core.WebHost.Controllers
             var result = _mapper.Map<List<AreaResponse>>(pagedList.Entities);
 
             Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(pagedList.Pagination));
-
-            int cnt = result.Count;
-
-            _logger.LogInformation($"Returned {cnt} Area{(cnt > 1 ? "s" : "")} from database.");
-
             return Ok(result);
         }
 
@@ -36,8 +30,6 @@ namespace GMS.Core.WebHost.Controllers
         {
             var areaDto = await _service.Get(id);
             var result = _mapper.Map<AreaResponse>(areaDto);
-
-            _logger.LogInformation($"Returned Area \"{id}\" from database.");
 
             return Ok(result);
         }
@@ -50,8 +42,6 @@ namespace GMS.Core.WebHost.Controllers
 
             var id = await _service.Create(areaDto);
 
-            _logger.LogInformation($"Add Area \"{id}\" to database.");
-
             return Ok(id.ToString());
         }
 
@@ -63,8 +53,6 @@ namespace GMS.Core.WebHost.Controllers
 
             await _service.Update(id, areaDto);
 
-            _logger.LogInformation($"Edit Area \"{id}\" in database");
-
             return NoContent();
         }
 
@@ -72,8 +60,6 @@ namespace GMS.Core.WebHost.Controllers
         public async Task<IActionResult> AddToArchive(Guid id)
         {
             await _service.AddToArchive(id, UserId);
-
-            _logger.LogInformation($"Add to archive Area \"{id}\"");
 
             return NoContent();
         }
