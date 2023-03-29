@@ -17,7 +17,7 @@ namespace GMS.Core.WebHost.Controllers
     [ApiController]
     public class ProductController : BaseController<IProductService>
     {
-        public ProductController(IProductService service, ILogger<ProductController> logger, IMapper mapper) : base(service, logger, mapper) { }
+        public ProductController(IProductService service, IMapper mapper) : base(service, mapper) { }
 
         /// <summary>
         /// Получить список продуктов клуба
@@ -34,9 +34,6 @@ namespace GMS.Core.WebHost.Controllers
 
             Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(pagedList.Pagination));
 
-            int cnt = result.Count;
-            _logger.LogInformation($"Returned {cnt} Product{(cnt > 1 ? "s" : "")} from database.");
-
             return Ok(result);
         }
 
@@ -50,8 +47,6 @@ namespace GMS.Core.WebHost.Controllers
         {
             var productDto = await _service.Get(id);
             var result = _mapper.Map<ProductResponse>(productDto);
-
-            _logger.LogInformation($"Returned Product \"{id}\" from database.");
 
             return Ok(result);
         }
@@ -70,8 +65,6 @@ namespace GMS.Core.WebHost.Controllers
 
             var id = await _service.Create(productDto);
 
-            _logger.LogInformation($"Add Product \"{id}\" to database.");
-
             return Ok(id.ToString());
         }
 
@@ -85,8 +78,6 @@ namespace GMS.Core.WebHost.Controllers
         public async Task<IActionResult> AddToArchive(Guid id)
         {
             await _service.AddToArchive(id, UserId);
-
-            _logger.LogInformation($"Add to archive Product \"{id}\"");
 
             return NoContent();
         }

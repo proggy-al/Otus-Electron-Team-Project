@@ -1,20 +1,16 @@
 ﻿using GMS.Core.BusinessLogic.Exceptions;
-using Microsoft.AspNetCore.Diagnostics;
-using Microsoft.AspNetCore.Http;
 using System.Net;
 using System.Text.Json;
 
 namespace GMS.Core.WebHost.Middlewares
 {
-    public class CustomExceptionHandlerMiddleware
+    public class ExceptionHandlerMiddleware
     {
         private readonly RequestDelegate _next;
-        private readonly ILogger<CustomExceptionHandlerMiddleware> _logger;
 
-        public CustomExceptionHandlerMiddleware(RequestDelegate next, ILogger<CustomExceptionHandlerMiddleware> logger)
+        public ExceptionHandlerMiddleware(RequestDelegate next)
         {
             _next = next;
-            _logger = logger;
         }
 
         public async Task Invoke(HttpContext context)
@@ -66,8 +62,6 @@ namespace GMS.Core.WebHost.Middlewares
                     ErrorMsg = exception.Message 
                 });
             }
-
-            _logger.LogError(result);
 
             return context.Response.WriteAsync(result);
         }
