@@ -1,4 +1,6 @@
-﻿using Swashbuckle.AspNetCore.SwaggerUI;
+﻿using GMS.Core.WebHost.Middlewares;
+using Serilog;
+using Swashbuckle.AspNetCore.SwaggerUI;
 
 namespace GMS.Core.WebHost.Configurations
 {
@@ -7,8 +9,8 @@ namespace GMS.Core.WebHost.Configurations
         public static WebApplication Configure(WebApplicationBuilder builder)
         {
             var app = builder.Build();
-
-            app.UseCustomExceptionHandler();
+            app.UseMiddleware<LoggerMiddleware>();
+            app.UseMiddleware<ExceptionHandlerMiddleware>();
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();

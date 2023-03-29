@@ -13,7 +13,7 @@ namespace GMS.Core.WebHost.Controllers
     [ApiController]
     public class TimeSlotController : BaseController<ITimeSlotService>
     {
-        public TimeSlotController(ITimeSlotService service, ILogger<TimeSlotController> logger, IMapper mapper) : base(service, logger, mapper){ }
+        public TimeSlotController(ITimeSlotService service, IMapper mapper) : base(service, mapper){ }
 
         [HttpGet("[action]")]
         public async Task<IActionResult> GetAllPerDay(DateOnly date, Guid fitnessClubId, Guid trainerId)

@@ -10,19 +10,16 @@ namespace GMS.Core.WebHost.Controllers.Base
         where TService : IService
     {
         protected readonly TService _service;
-        protected readonly ILogger _logger;
         protected readonly IMapper _mapper;
 
-        protected BaseController(TService service, ILogger logger, IMapper mapper)
+        protected BaseController(TService service, IMapper mapper)
         {
             _service = service;
-            _logger = logger;
             _mapper = mapper;
         }
 
         //protected virtual Guid UserId => Guid.Parse(User.Claims.FirstOrDefault(c => c.Type == "ID").Value);
         //protected virtual string UserRole => User.Claims.FirstOrDefault(c => c.Type == "Role").Value;
-
 
 
         // Проверка роли пользователя
