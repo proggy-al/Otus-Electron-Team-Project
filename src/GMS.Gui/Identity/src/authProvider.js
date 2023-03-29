@@ -5,7 +5,7 @@ import inMemoryJWT from './inMemoryJwt';
 
 const authProvider = {
     login: ({ username, password }) => {
-        const request = new Request('https://localhost:7118/user/authorize', {
+        const request = new Request('http://localhost:6001/authorize', {
             method: 'POST',
             body: JSON.stringify({ username, password }),
             headers: new Headers({ 'Content-Type': 'application/json' })

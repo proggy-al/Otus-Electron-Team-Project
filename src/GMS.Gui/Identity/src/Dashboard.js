@@ -4,8 +4,8 @@ import { Card, CardContent, CardHeader } from '@mui/material';
 
 const Dashboard = () => (
     <Card>
-        <CardHeader title="Welcome to the Project Management System" />
-        <CardContent>Helo! DeadLine Team  welcome you to use awesome software!)</CardContent>
+        <CardHeader title="Welcome to the GYM Management System admin console" />
+        <CardContent>Hi there! Electron Team  welcome you to use awesome software!)</CardContent>
     </Card>
 );
 
