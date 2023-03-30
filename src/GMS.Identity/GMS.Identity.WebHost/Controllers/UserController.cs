@@ -74,7 +74,7 @@ public class UserController : ControllerBase
         var validationContext = new ValidationContext<UserCreateApiModel>(user);
         ValidationResult validationResult = await _validator.ValidateAsync(validationContext);
 
-        if (!validationResult.IsValid) { return StatusCode(500, validationResult.Errors.Aggregate("",(a,b)=>$"{a};{b}")); }
+        if (!validationResult.IsValid) { return BadRequest(validationResult.Errors.Aggregate("Validation error: ", (a, b) => $"{a} {b};")); }
 
         try
         {
@@ -83,7 +83,7 @@ public class UserController : ControllerBase
         }
         catch (Exception ex)
         {
-            return StatusCode(500, ex.Message); 
+            return BadRequest(ex.Message); 
         }
     }
 
@@ -95,7 +95,7 @@ public class UserController : ControllerBase
     /// <returns></returns>
     [RequirePrivelege(Priviliges.Administrator, Priviliges.System)]
     [HttpPut(IdentityRouting.PatchUser)]
-    public async Task<ActionResult> PatchUser([FromRoute] Guid id, [FromBody] UserPatchApiModel user)
+    public async Task<ActionResult<bool>> PatchUser([FromRoute] Guid id, [FromBody] UserPatchApiModel user)
     {
         
         try
@@ -120,7 +120,7 @@ public class UserController : ControllerBase
     /// <returns></returns>
     [RequirePrivelege(Priviliges.Administrator, Priviliges.System)]
     [HttpDelete(IdentityRouting.DeleteUser)]
-    public async Task<ActionResult> DeleteUser([FromRoute] Guid id)
+    public async Task<ActionResult<bool>> DeleteUser([FromRoute] Guid id)
     {
         try
         {
@@ -143,7 +143,7 @@ public class UserController : ControllerBase
     /// <param name="user"></param>
     /// <returns></returns>
     [HttpPost(IdentityRouting.GetToken)]
-    public async Task<IActionResult> Token([FromBody] UserAuthorizeApiModel user)
+    public async Task<ActionResult<string>> Token([FromBody] UserAuthorizeApiModel user)
     {
         var identity =await GetIdentity(user);
         if (identity == null)

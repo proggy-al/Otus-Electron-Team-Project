@@ -14,9 +14,9 @@ namespace GMS.Identity.WebHost.Controllers;
 [ApiController]
 public class CoachController: ControllerBase
 {
-    private readonly CoachRepository _userRepository;
+    private readonly ICoachRepository _userRepository;
 
-    public CoachController(CoachRepository userRepository)
+    public CoachController(ICoachRepository userRepository)
     {
         _userRepository = userRepository ;
     }
@@ -28,9 +28,10 @@ public class CoachController: ControllerBase
     /// <returns></returns>
     [Authorize]
     [HttpGet(IdentityRouting.GetCoach)]
-    public async Task<UserApiModel?> GetCoach([FromRoute] Guid id)
+    public async Task<ActionResult<UserApiModel?>> GetCoach([FromRoute] Guid id)
     {
-        return await _userRepository.GetCoach(id);
+        var res = await _userRepository.GetCoach(id);
+        return  res==null||res.UserName==null?NotFound(): Ok(res);
     }
 
     /// <summary>

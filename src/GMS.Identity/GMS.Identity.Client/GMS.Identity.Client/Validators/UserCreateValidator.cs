@@ -17,6 +17,7 @@ public class UserCreateValidator:AbstractValidator<UserCreateApiModel>
         RuleFor(u => u.UserName).MaximumLength(200).WithMessage("Name is too long!");
         RuleFor(u => u.UserName).Must(BeSomeCondition);
         RuleFor(u => u.Email).EmailAddress().WithMessage("Email addres is incoorect");
+        RuleFor(u=>u.Password).MinimumLength(6).WithMessage("Password should have more than 6 character");
     }
 
     protected bool BeSomeCondition(string? s)
