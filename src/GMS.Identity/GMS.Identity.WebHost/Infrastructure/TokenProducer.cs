@@ -1,4 +1,4 @@
-﻿using JWTAuthManager;
+﻿using JWTAuthManager.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -7,7 +7,7 @@ namespace GMS.Identity.WebHost.Infrastructure;
 
 public static class TokenProducer
 {
-    public static string GetJWTToken(IEnumerable<Claim> inedtityClaims, IAuthOptions authOptions)
+    public static string GetJWTToken(IEnumerable<Claim> inedtityClaims, AuthOptions authOptions)
     {
         var now = DateTime.UtcNow;
         
