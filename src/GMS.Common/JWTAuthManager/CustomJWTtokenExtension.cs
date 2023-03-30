@@ -1,13 +1,9 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Builder;
+﻿using JWTAuthManager.Options;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
+using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace JWTAuthManager;
 
@@ -15,12 +11,34 @@ public static class CustomJWTtokenExtension
 {
     public static void AddCustomJWTAuthentification(this IServiceCollection services)
     {
-        var builder = WebApplication.CreateBuilder();
-        builder.Configuration.AddJsonFile(Path.Combine(System.IO.Path.GetDirectoryName(Assembly.GetEntryAssembly().Location),"identitysettings.json"));
+        var configOptions = new ConfigurationBuilder().AddJsonFile("identitysettings.json").Build();
+        var authOptions = configOptions.GetSection(AuthOptions.Position).Get<AuthOptions>();
+        var jwtOptions = configOptions.GetSection(JwtBearerTokenOptions.Position).Get<JwtBearerTokenOptions>();
 
-        IAuthOptions authOptions = new AuthOptions(builder.Configuration);
         services.AddSingleton(authOptions);
-        services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                    .AddJwtBearer(JwtBearerOptions.GetJwtBearerOptions(new Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions(), builder.Configuration, authOptions));
+        services.AddAuthentication(authOpt =>
+        {
+            authOpt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            authOpt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+        })
+                .AddJwtBearer(jwtOpt =>
+                {
+                    jwtOpt.RequireHttpsMetadata = jwtOptions.RequireHttpsMetadata;
+                    jwtOpt.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        // укзывает, будет ли валидироваться издатель при валидации токена
+                        ValidateIssuer = jwtOptions.ValidateIssuer,
+                        // будет ли валидироваться потребитель токена
+                        ValidateAudience = jwtOptions.ValidateAudience,
+                        // будет ли валидироваться время существования
+                        ValidateLifetime = jwtOptions.ValidateLifetime,
+                        // валидация ключа безопасности
+                        ValidateIssuerSigningKey = jwtOptions.ValidateIssuerSigningKey,
+                        // строка, представляющая издателя
+                        ValidIssuer = authOptions.Issuer,
+                        ValidAudience = authOptions.Audience,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(authOptions.Key))
+                    };
+                });
     }
 }

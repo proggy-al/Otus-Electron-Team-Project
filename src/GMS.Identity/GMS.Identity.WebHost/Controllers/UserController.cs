@@ -13,6 +13,7 @@ using GMS.Identity.Client.Models;
 using JWTAuthManager;
 using FluentValidation;
 using FluentValidation.Results;
+using JWTAuthManager.Options;
 
 namespace GMS.Identity.WebHost.Controllers;
 
@@ -22,10 +23,10 @@ public class UserController : ControllerBase
 {
 
     private readonly IUserRepository _userRepository;
-    private readonly IAuthOptions _authOptions;
+    private readonly AuthOptions _authOptions;
     private readonly IValidator _validator;
 
-    public UserController(IUserRepository userRepository, IAuthOptions authOptions, IValidator<UserCreateApiModel> validator)
+    public UserController(IUserRepository userRepository, AuthOptions authOptions, IValidator<UserCreateApiModel> validator)
     {
         _userRepository = userRepository;
         _authOptions = authOptions; 
