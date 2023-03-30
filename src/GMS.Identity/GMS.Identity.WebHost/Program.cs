@@ -1,5 +1,7 @@
 using GMS.Identity.WebHost;
+using GMS.Identity.WebHost.Configuration;
 using Microsoft.AspNetCore.Builder;
+using System.Threading.RateLimiting;
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
@@ -13,6 +15,7 @@ builder.Services.AddCors(options =>
                           builder.AllowAnyMethod().AllowAnyHeader().AllowAnyOrigin();   //SetIsOriginAllowed(x=>true).AllowCredentials()
                       });
 });
+
 
 
 builder.Configuration.AddJsonFile("swaggersettings.json");

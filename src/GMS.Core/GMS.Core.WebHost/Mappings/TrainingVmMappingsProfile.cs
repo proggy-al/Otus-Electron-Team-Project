@@ -11,7 +11,8 @@ namespace GMS.Core.WebHost.Mappings
     {
         public TrainingVmMappingsProfile()
         {
-            CreateMap<TrainingDto, TrainingResponse>();
+            CreateMap<TrainingDto, TrainingResponse>()
+                 .ForMember(d => d.TimeSlot, map => map.Ignore());
             CreateMap<TrainingResponse, TrainingDto>()
                 .ForMember(d => d.IsDeleted, map => map.Ignore());
         }
