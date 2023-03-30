@@ -35,7 +35,7 @@ import {userlist, userEdit, userCreate} from './users';
 import { MyLayout } from './MyLayout';
 
 //const dataProvider = jsonServerProvider('https://localhost:7250');   //https://localhost:7250/
-const dataProviderIdentity = myDataProvider('https://localhost:7118');
+const dataProviderIdentity = myDataProvider('http://localhost:6001');
 //const dataProviderCore =  myDataProvider('https://localhost:7044');
 
 const dataProvider = combineDataProviders((resource) => {
