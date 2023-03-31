@@ -7,12 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Data.Sqlite.Core" Version="7.0.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.4" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GMS.Communication.Core\GMS.Communication.Core.csproj" />
+    <ProjectReference Include="..\..\GMS.Core\GMS.Core.DataAccess\GMS.Core.DataAccess.csproj" />
+    <ProjectReference Include="..\GMS.Communication.DataAccess\GMS.Communication.DataAccess.csproj" />
   </ItemGroup>
 
 </Project>

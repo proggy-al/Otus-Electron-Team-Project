@@ -5,6 +5,7 @@ using GMS.Identity.Client.Validators;
 using GMS.Identity.Core.Abstractions.Repositories;
 using GMS.Identity.DataAccess.Context;
 using GMS.Identity.DataAccess.Repositories;
+using GMS.Identity.WebHost.Configuration;
 using GMS.Identity.WebHost.Infrastructure;
 using JWTAuthManager;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -24,15 +25,16 @@ public static class Registration
 
         services.AddDbContext<IdentityContext>(options => { options.UseLazyLoadingProxies().EnableSensitiveDataLogging().UseSqlite("Data Source = Application.db"); });
         // services.AddDbContext<IdentityContext>(opt => opt.UseNpgsql(configuration.GetConnectionString("ModuleDatabase"), x => x.MigrationsHistoryTable("__MigrationHistory", "identity")));
-        var mapperConfig = new MapperConfiguration(mc =>
-        {
-            mc.AddProfile(new MappingProfile());
-        });
-        IMapper mapper = mapperConfig.CreateMapper();
-        services.AddSingleton(mapper);
+        //var mapperConfig = new MapperConfiguration(mc =>
+        //{
+        //    mc.AddProfile(new MappingProfile());
+        //});
+        //IMapper mapper = mapperConfig.CreateMapper();
+        //services.AddSingleton(mapper);
+        services.ConfigureMapper();
 
         services.AddTransient<IUserRepository, UserRepository>();
-        services.AddTransient<CoachRepository, CoachRepository>();
+        services.AddTransient<ICoachRepository, CoachRepository>();
         //services.AddScoped<IValidator<UserCreateApiModel>, UserCreateValidator>();
         services.AddValidatorsFromAssemblyContaining<UserCreateValidator>();
 
