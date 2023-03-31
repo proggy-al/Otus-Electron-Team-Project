@@ -17,6 +17,7 @@ namespace GMS.Core.WebHost.Configurations
             var configuration = new MapperConfiguration(cfg =>
             {
                 cfg.AddProfile<FitnessClubMappingsProfile>();
+                cfg.AddProfile<EmployeeMappingsProfile>();
                 cfg.AddProfile<AreaMappingsProfile>();
                 cfg.AddProfile<ProductMappingsProfile>();
                 //cfg.AddProfile<ContractMappingsProfile>();
