@@ -28,6 +28,11 @@ namespace GMS.Core.Core.Domain
         public Guid OwnerId { get; set; }
 
         /// <summary>
+        /// Сотрудники
+        /// </summary>
+        public virtual ICollection<Employee> Employees { get; set; }
+
+        /// <summary>
         /// Зоны
         /// </summary>
         public virtual ICollection<Area> Areas { get; set; }

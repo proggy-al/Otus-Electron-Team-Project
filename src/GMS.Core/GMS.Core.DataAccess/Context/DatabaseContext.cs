@@ -6,6 +6,7 @@ namespace GMS.Core.DataAccess.Context
 {
     public class DatabaseContext : DbContext
     {
+        public DbSet<Employee> Employees { get; set; }
         public DbSet<FitnessClub> FitnessClubs { get; set; }
         public DbSet<Area> Areas { get; set; }
         public DbSet<Product> Products { get; set; }
@@ -24,6 +25,7 @@ namespace GMS.Core.DataAccess.Context
             modelBuilder.HasPostgresExtension("uuid-ossp");
 
             modelBuilder.ApplyConfiguration(new FitnessClubConfiguration());
+            modelBuilder.ApplyConfiguration(new EmployeeConfiguration());
             modelBuilder.ApplyConfiguration(new AreaConfiguration());
             modelBuilder.ApplyConfiguration(new ProductConfiguration());
             modelBuilder.ApplyConfiguration(new ContractConfiguration());

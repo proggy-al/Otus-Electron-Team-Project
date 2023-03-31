@@ -9,6 +9,10 @@ namespace GMS.Core.DataAccess.Context.Configurations
     {
         public void Configure(EntityTypeBuilder<FitnessClub> builder)
         {
+            builder.HasMany(f => f.Employees)
+                   .WithOne(p => p.FitnessClub)
+                   .HasForeignKey(a => a.FitnessClubId)
+                   .IsRequired();
             builder.HasMany(f => f.Areas)
                    .WithOne(p => p.FitnessClub)
                    .HasForeignKey(a => a.FitnessClubId)
