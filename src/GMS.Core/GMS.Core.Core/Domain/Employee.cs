@@ -2,6 +2,9 @@
 
 namespace GMS.Core.Core.Domain
 {
+    /// <summary>
+    /// Сотрудник фитнес клуба
+    /// </summary>
     public class Employee : BaseEntity
     {
         /// <summary>

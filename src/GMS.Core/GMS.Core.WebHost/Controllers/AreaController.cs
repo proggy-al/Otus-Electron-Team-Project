@@ -3,7 +3,6 @@ using GMS.Core.BusinessLogic.Abstractions;
 using GMS.Core.BusinessLogic.Contracts;
 using GMS.Core.WebHost.Controllers.Base;
 using GMS.Core.WebHost.Models;
-using JWTAuthManager;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
@@ -15,7 +14,7 @@ namespace GMS.Core.WebHost.Controllers
     [ApiController]
     public class AreaController : BaseController<IAreaService>
     {
-        public AreaController(IAreaService service , IMapper mapper) : base(service, mapper) { }
+        public AreaController(IAreaService service, IMapper mapper) : base(service, mapper) { }
 
         [AllowAnonymous]
         [HttpGet("[action]/{pageNumber}:{pageSize}")]
