@@ -1,75 +1,60 @@
-Ограничение ролей в Core service
+Политика в Core service
+
+AllowAnonymous:
++ смотреть информацию о FitnessClubs
++ смотреть информацию о Areas
++ смотреть информацию о Products
++ смотреть информацию о TimeSlots (без инфо из Trainings)
+
 
 User:
-- смотреть информацию о FitnessClub
-- смотреть информацию о Areas
-- смотреть информацию о Products
-- смотреть информацию о Contracts
-- смотреть информацию о TimeSlots
-- смотреть информацию о своих Trainings
++ действия AllowAnonymous
 
-- купить Product (т.е. добавить Contract)
++ смотреть информацию о Contracts(по UserId)
++ добавить Contract(т.е. купить Product, без ManagerId и IsApproved)
 
-- записаться на Training
-- удалить Training (при этом отправить оповещение тренеру, менеджеру об отмене тренировки)
++ смотреть информацию о Trainings(по UserId с инфо из TimeSlots)
++ добавить Training(если TimeSlot.IsBusy == false, тогда обновить TimeSlot.IsBusy = true)
+
++ удалить Training(по UserId; обновить TimeSlot.IsBusy = false; отправить оповещение тренеру, менеджеру об отмене тренировки)
+
 
 Trainer:
-- смотреть информацию о FitnessClubs
-- смотреть информацию о Areas
-- смотреть информацию о Products
-- смотреть информацию о Contracts
-- смотреть информацию о TimeSlots
-- смотреть информацию о Trainings
++ действия AllowAnonymous
 
-- редактировать Training(Description, Points)
++ смотреть информацию о TimeSlots (c инфо из Trainings по TrainerId)
+
++ редактировать Training(Description, Points)
+
 
 Manager:
-- смотреть информацию о FitnessClubs
-- смотреть информацию о Areas
-- смотреть информацию о Products
-- смотреть информацию о Contracts
-- смотреть информацию о TimeSlots
-- смотреть информацию о Trainings
++ действия AllowAnonymous
 
-- добавить новый Products
-- поместить в архив Products
++ добавить новый Product
++ поместить в архив Product
 
-- подтвердить Contract (IsApproved, ManagerId)
++ редактировать Contract (т.е. подтвердить, обновив только IsApproved = true и ManagerId)
 
-- создать TimeSlot
-- редактировать TimeSlot(TrainerId, AreaId)
++ смотреть информацию о TimeSlots (c инфо из Trainings без Description и Points)
++ создать TimeSlot (IsBusy = false)
++ редактировать TimeSlot(только TrainerId, AreaId)
+
 
 Administrator:
-- смотреть информацию о FitnessClubs
-- смотреть информацию о Areas
-- смотреть информацию о Products
-- смотреть информацию о Contracts
-- смотреть информацию о TimeSlots
-- смотреть информацию о Trainings
++ действия  Manager
 
-- редактировать FitnessClub
++ редактировать FitnessClub(кроме OwnerId)
 
-- добавить Area
-- редактировать Area
-- поместить в архив Area
++ добавить Area
++ редактировать Area
++ поместить в архив Area
 
-- добавить новый Products
-- поместить в архив Products
++ редактировать TimeSlot(кроме DateTime, Duration, IsBusy)
++ удалить TimeSlot (при этом отправить оповещение пользователю об отмене тренировки)
 
-- подтвердить Contract (IsApproved, ManagerId)
-
-- создать TimeSlot
-- редактировать TimeSlot(TrainerId, AreaId)
-- удалить TimeSlot (при этом отправить оповещение пользователю об отмене тренировки)
 
 Owner:
-- смотреть информацию о FitnessClubs
-- смотреть информацию о Areas
-- смотреть информацию о Products
-- смотреть информацию о Contracts
-- смотреть информацию о TimeSlots
-- смотреть информацию о Trainings
++ действия Administrator
 
-- добавить FitnessClub
-- редактировать FitnessClub
-- поместить в архив FitnessClub
++ добавить FitnessClub
++ поместить в архив FitnessClub
