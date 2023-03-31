@@ -23,6 +23,7 @@ try
         .AddServices()
         .AddEndpointsApiExplorer()
         .AddCustomJWTAuthentification()
+        .AddAuthorizationGMS()
         .ConfigureSwagger()
         .AddControllers();
 

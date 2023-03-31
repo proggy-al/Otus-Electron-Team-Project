@@ -19,7 +19,7 @@ namespace GMS.Core.WebHost.Configurations
 
                 options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
                 {
-                    Name = "JWT Bearer authorization",
+                    Name = "Authorization",
                     Type = SecuritySchemeType.ApiKey,
                     Scheme = "Bearer",
                     BearerFormat = "JWT",

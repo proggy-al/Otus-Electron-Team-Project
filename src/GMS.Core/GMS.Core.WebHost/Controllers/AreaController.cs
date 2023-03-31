@@ -3,20 +3,23 @@ using GMS.Core.BusinessLogic.Abstractions;
 using GMS.Core.BusinessLogic.Contracts;
 using GMS.Core.WebHost.Controllers.Base;
 using GMS.Core.WebHost.Models;
+using JWTAuthManager;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
 
 namespace GMS.Core.WebHost.Controllers
 {
-    //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class AreaController : BaseController<IAreaService>
     {
         public AreaController(IAreaService service , IMapper mapper) : base(service, mapper) { }
 
+        [AllowAnonymous]
         [HttpGet("[action]/{pageNumber}:{pageSize}")]
-        public async Task<IActionResult> GetPage(Guid fitnessClubId, int pageNumber, int pageSize)
+        public async Task<IActionResult> GetPage(Guid fitnessClubId, int pageNumber = 1, int pageSize = 12)
         {
             var pagedList = await _service.GetPage(fitnessClubId, pageNumber, pageSize);
             var result = _mapper.Map<List<AreaResponse>>(pagedList.Entities);
@@ -25,6 +28,7 @@ namespace GMS.Core.WebHost.Controllers
             return Ok(result);
         }
 
+        [AllowAnonymous]
         [HttpGet("[action]/{id}")]
         public async Task<IActionResult> Get(Guid id)
         {
@@ -34,6 +38,7 @@ namespace GMS.Core.WebHost.Controllers
             return Ok(result);
         }
 
+        [Authorize(Policy = "Administrator")]
         [HttpPost("[action]")]
         public async Task<IActionResult> Add(AreaCreateRequest request)
         {
@@ -45,6 +50,7 @@ namespace GMS.Core.WebHost.Controllers
             return Ok(id.ToString());
         }
 
+        [Authorize(Policy = "Administrator")]
         [HttpPut("[action]/{id}")]
         public async Task<IActionResult> Edit(Guid id, AreaEditRequest request)
         {
@@ -56,6 +62,7 @@ namespace GMS.Core.WebHost.Controllers
             return NoContent();
         }
 
+        [Authorize(Policy = "Administrator")]
         [HttpDelete("[action]/{id}")]
         public async Task<IActionResult> AddToArchive(Guid id)
         {

@@ -4,15 +4,13 @@ using GMS.Core.BusinessLogic.Contracts;
 using GMS.Core.WebHost.Controllers.Base;
 using GMS.Core.WebHost.Models;
 using JWTAuthManager;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
 
 namespace GMS.Core.WebHost.Controllers
 {
-    //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-    //[ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ProductController : BaseController<IProductService>
@@ -26,6 +24,7 @@ namespace GMS.Core.WebHost.Controllers
         /// <param name="pageNumber">номер страницы</param>
         /// <param name="pageSize">количество</param>
         /// <returns>List<ProductResponse></returns>
+        [AllowAnonymous]
         [HttpGet("[action]/{pageNumber}:{pageSize}")]
         public async Task<IActionResult> GetPage(Guid fitnessClubId, int pageNumber = 1, int pageSize = 12)
         {
@@ -42,6 +41,7 @@ namespace GMS.Core.WebHost.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
+        [AllowAnonymous]
         [HttpGet("[action]/{id}")]
         public async Task<IActionResult> Get(Guid id)
         {
@@ -57,6 +57,7 @@ namespace GMS.Core.WebHost.Controllers
         /// <param name="request">информация о продукте</param>
         /// <returns>идентификатор продукта</returns>
         //[Authorize(Roles = nameof(Priviliges.GYMOwner))]
+        [Authorize(Policy = "Manager")]
         [HttpPost("[action]")]
         public async Task<IActionResult> Add(ProductCreateRequest request)
         {
@@ -73,7 +74,7 @@ namespace GMS.Core.WebHost.Controllers
         /// </summary>
         /// <param name="id">идентификатор продукта</param>
         /// <returns></returns>
-        //[Authorize(Roles = nameof(Priviliges.GYMOwner))]
+        [Authorize(Policy = "Manager")]
         [HttpDelete("[action]/{id}")]
         public async Task<IActionResult> AddToArchive(Guid id)
         {
