@@ -23,54 +23,11 @@ namespace GMS.Identity.DataAccess.ContextConfiguration
 
             // Для примера, позже удалить
             builder.HasData(
-                  //new User() { Id = Guid.NewGuid(), UserName = "Sash", TelegramUserName = "@sash", Salt = testPas1.salt, PasswordHash = testPas1.pass, Role = "Administrator", Email = "sash@mail.ru", IsActive = true },
-                  //new User() { Id = Guid.NewGuid(), UserName = "Dan", TelegramUserName = "@dan", Salt = testPas2.salt, PasswordHash = testPas2.pass, Role = "Administrator", Email = "dan@mail.ru", IsActive = true },
-                  //new User() { Id = Guid.NewGuid(), UserName = "System", TelegramUserName = "@system", Salt = testPas2.salt, PasswordHash = testPas2.pass, Role = "System", Email = "sys@mail.ru", IsActive = true },
-                  //new User() { Id = Guid.NewGuid(), UserName = "User", TelegramUserName = "@user", Salt = testPas2.salt, PasswordHash = testPas2.pass, Role = "User", Email = "user@mail.ru", IsActive = true },
-                  new
-                  {
-                      Id = new Guid("a24ab827-10a5-47bf-86bd-39adeb89b6c9"),
-                      Email = "sash@mail.ru",
-                      IsActive = true,
-                      PasswordHash = "jYQ/ud6dDjGLUgzoIWqCxLyfKA5XLWujcoT00jjwI/k=",
-                      Role = "Administrator",
-                      Salt = "YyaqmwHNHJJ7huxnTd/srg==",
-                      TelegramUserName = "@sash",
-                      UserName = "Sash"
-                  },
-                  new User()
-                  {
-                      Id = new Guid("8699aba2-5ec1-40cf-b186-36ca13c15ea2"),
-                      Email = "dan@mail.ru",
-                      IsActive = true,
-                      PasswordHash = "ZW62oAyOt2cMhTyfyQeV4ex6buOsCo+442ktnp4ry4g=",
-                      Role = "Administrator",
-                      Salt = "v3kv2EX3EtGm2HjulHm95A==",
-                      TelegramUserName = "@dan",
-                      UserName = "Dan"
-                  },
-                  new User()
-                  {
-                      Id = new Guid("c35e71b1-01fe-4e96-aa13-35371f792a4f"),
-                      Email = "sys@mail.ru",
-                      IsActive = true,
-                      PasswordHash = "ZW62oAyOt2cMhTyfyQeV4ex6buOsCo+442ktnp4ry4g=",
-                      Role = "System",
-                      Salt = "v3kv2EX3EtGm2HjulHm95A==",
-                      TelegramUserName = "@system",
-                      UserName = "System"
-                  },
-                  new User()
-                  {
-                      Id = new Guid("6f35e9ac-2718-4b98-9a39-d3c136217e97"),
-                      Email = "user@mail.ru",
-                      IsActive = true,
-                      PasswordHash = "ZW62oAyOt2cMhTyfyQeV4ex6buOsCo+442ktnp4ry4g=",
-                      Role = "User",
-                      Salt = "v3kv2EX3EtGm2HjulHm95A==",
-                      TelegramUserName = "@user",
-                      UserName = "User"
-                  },
+                  new User() { Id = new Guid("a24ab827-10a5-47bf-86bd-39adeb89b6c9"), UserName = "Sash", TelegramUserName = "@sash", Salt = testPas1.salt, PasswordHash = testPas1.pass, Role = "Administrator", Email = "sash@mail.ru", IsActive = true },
+                  new User() { Id = new Guid("8699aba2-5ec1-40cf-b186-36ca13c15ea2"), UserName = "Dan", TelegramUserName = "@dan", Salt = testPas2.salt, PasswordHash = testPas2.pass, Role = "Administrator", Email = "dan@mail.ru", IsActive = true },
+                  new User() { Id = new Guid("c35e71b1-01fe-4e96-aa13-35371f792a4f"), UserName = "System", TelegramUserName = "@system", Salt = testPas2.salt, PasswordHash = testPas2.pass, Role = "System", Email = "sys@mail.ru", IsActive = true },
+                  new User() { Id = new Guid("6f35e9ac-2718-4b98-9a39-d3c136217e97"), UserName = "User", TelegramUserName = "@user", Salt = testPas2.salt, PasswordHash = testPas2.pass, Role = "User", Email = "user@mail.ru", IsActive = true },
+
 
                   // Владельцы
                   new User()
@@ -78,9 +35,9 @@ namespace GMS.Identity.DataAccess.ContextConfiguration
                       Id = new Guid("00000000-0000-0000-0004-000000000001"),
                       Email = "joegold@mail.ru",
                       IsActive = true,
-                      PasswordHash = "n5zqX3XdybntUcBHO0vdBjRej+QSduTDeFhTRsrOO9k=",
+                      PasswordHash = testPas1.pass,
                       Role = "GYMOwner",
-                      Salt = "knowPi2QZNuCrHAlMYyt+w==",
+                      Salt = testPas1.salt,
                       TelegramUserName = "@joegold",
                       UserName = "Joe"
                   },
@@ -89,9 +46,9 @@ namespace GMS.Identity.DataAccess.ContextConfiguration
                       Id = new Guid("00000000-0000-0000-0004-000000000002"),
                       Email = "andrey@mail.ru",
                       IsActive = true,
-                      PasswordHash = "n5zqX3XdybntUcBHO0vdBjRej+QSduTDeFhTRsrOO9k=",
+                      PasswordHash = testPas1.pass,
                       Role = "GYMOwner",
-                      Salt = "knowPi2QZNuCrHAlMYyt+w==",
+                      Salt = testPas1.salt,
                       TelegramUserName = "@andrey",
                       UserName = "Андрей"
                   },
@@ -100,9 +57,9 @@ namespace GMS.Identity.DataAccess.ContextConfiguration
                       Id = new Guid("00000000-0000-0000-0004-000000000003"),
                       Email = "gymowner3@mail.ru",
                       IsActive = true,
-                      PasswordHash = "n5zqX3XdybntUcBHO0vdBjRej+QSduTDeFhTRsrOO9k=",
+                      PasswordHash = testPas1.pass,
                       Role = "GYMOwner",
-                      Salt = "knowPi2QZNuCrHAlMYyt+w==",
+                      Salt = testPas1.salt,
                       TelegramUserName = "@gymowner3",
                       UserName = "Owner3"
                   },
@@ -113,9 +70,9 @@ namespace GMS.Identity.DataAccess.ContextConfiguration
                       Id = new Guid("10000000-0000-0000-0001-000000000001"),
                       Email = "goldgymadministrator@mail.ru",
                       IsActive = true,
-                      PasswordHash = "3681sgmS5A7DvwlIyHOHJqL0aKD60ImMv7ZEIweBTEs=",
+                      PasswordHash = testPas1.pass,
                       Role = "Administrator",
-                      Salt = "8rPfOLj0A26zoW0rpFVpyA==",
+                      Salt = testPas1.salt,
                       TelegramUserName = "@goldgymadministrator",
                       UserName = "GoldGymAdministrator"
                   },
@@ -124,9 +81,9 @@ namespace GMS.Identity.DataAccess.ContextConfiguration
                       Id = new Guid("10000000-0000-0000-0001-000000000002"),
                       Email = "almazadministrator@mail.ru",
                       IsActive = true,
-                      PasswordHash = "3681sgmS5A7DvwlIyHOHJqL0aKD60ImMv7ZEIweBTEs=",
+                      PasswordHash = testPas1.pass,
                       Role = "Administrator",
-                      Salt = "8rPfOLj0A26zoW0rpFVpyA==",
+                      Salt = testPas1.salt,
                       TelegramUserName = "@almazadministrator",
                       UserName = "AlmazAdministrator"
                   },
@@ -135,9 +92,9 @@ namespace GMS.Identity.DataAccess.ContextConfiguration
                       Id = new Guid("10000000-0000-0000-0001-000000000003"),
                       Email = "administrator3@mail.ru",
                       IsActive = true,
-                      PasswordHash = "3681sgmS5A7DvwlIyHOHJqL0aKD60ImMv7ZEIweBTEs=",
+                      PasswordHash = testPas1.pass,
                       Role = "Administrator",
-                      Salt = "8rPfOLj0A26zoW0rpFVpyA==",
+                      Salt = testPas1.salt,
                       TelegramUserName = "@administrator3",
                       UserName = "Administrator3"
                   },
@@ -148,9 +105,9 @@ namespace GMS.Identity.DataAccess.ContextConfiguration
                       Id = new Guid("10000000-0000-0000-0006-000000000001"),
                       Email = "goldgymmanager@mail.ru",
                       IsActive = true,
-                      PasswordHash = "3681sgmS5A7DvwlIyHOHJqL0aKD60ImMv7ZEIweBTEs=",
+                      PasswordHash = testPas1.pass,
                       Role = "Manager",
-                      Salt = "8rPfOLj0A26zoW0rpFVpyA==",
+                      Salt = testPas1.salt,
                       TelegramUserName = "@goldgymmanager",
                       UserName = "GoldGymManager"
                   },
@@ -159,9 +116,9 @@ namespace GMS.Identity.DataAccess.ContextConfiguration
                       Id = new Guid("10000000-0000-0000-0006-000000000002"),
                       Email = "almazmanager@mail.ru",
                       IsActive = true,
-                      PasswordHash = "3681sgmS5A7DvwlIyHOHJqL0aKD60ImMv7ZEIweBTEs=",
+                      PasswordHash = testPas1.pass,
                       Role = "Manager",
-                      Salt = "8rPfOLj0A26zoW0rpFVpyA==",
+                      Salt = testPas1.salt,
                       TelegramUserName = "@almazmanager",
                       UserName = "AlmazManager"
                   },
@@ -170,9 +127,9 @@ namespace GMS.Identity.DataAccess.ContextConfiguration
                       Id = new Guid("10000000-0000-0000-0006-000000000003"),
                       Email = "manager3@mail.ru",
                       IsActive = true,
-                      PasswordHash = "3681sgmS5A7DvwlIyHOHJqL0aKD60ImMv7ZEIweBTEs=",
+                      PasswordHash = testPas1.pass,
                       Role = "Manager",
-                      Salt = "8rPfOLj0A26zoW0rpFVpyA==",
+                      Salt = testPas1.salt,
                       TelegramUserName = "@manager3",
                       UserName = "Manager3"
                   },
@@ -183,9 +140,9 @@ namespace GMS.Identity.DataAccess.ContextConfiguration
                       Id = new Guid("00000000-0000-0000-0002-000000000001"),
                       Email = "johngold@mail.ru",
                       IsActive = true,
-                      PasswordHash = "n5zqX3XdybntUcBHO0vdBjRej+QSduTDeFhTRsrOO9k=",
+                      PasswordHash = testPas1.pass,
                       Role = "User",
-                      Salt = "knowPi2QZNuCrHAlMYyt+w==",
+                      Salt = testPas1.salt,
                       TelegramUserName = "@johngold",
                       UserName = "John"
                   },
@@ -194,9 +151,9 @@ namespace GMS.Identity.DataAccess.ContextConfiguration
                       Id = new Guid("00000000-0000-0000-0002-000000000002"),
                       Email = "ivanalmaz@mail.ru",
                       IsActive = true,
-                      PasswordHash = "n5zqX3XdybntUcBHO0vdBjRej+QSduTDeFhTRsrOO9k=",
+                      PasswordHash = testPas1.pass,
                       Role = "User",
-                      Salt = "knowPi2QZNuCrHAlMYyt+w==",
+                      Salt = testPas1.salt,
                       TelegramUserName = "@ivanalmaz",
                       UserName = "Иван"
                   },
@@ -205,9 +162,9 @@ namespace GMS.Identity.DataAccess.ContextConfiguration
                       Id = new Guid("00000000-0000-0000-0002-000000000003"),
                       Email = "user3@mail.ru",
                       IsActive = true,
-                      PasswordHash = "n5zqX3XdybntUcBHO0vdBjRej+QSduTDeFhTRsrOO9k=",
+                      PasswordHash = testPas1.pass,
                       Role = "User",
-                      Salt = "knowPi2QZNuCrHAlMYyt+w==",
+                      Salt = testPas1.salt,
                       TelegramUserName = "@user3",
                       UserName = "User3"
                   }
