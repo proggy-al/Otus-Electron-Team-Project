@@ -1,20 +1,16 @@
 ﻿using AutoMapper;
 using GMS.Core.BusinessLogic.Abstractions;
 using GMS.Core.BusinessLogic.Contracts;
-using GMS.Core.Core.Domain;
 using GMS.Core.WebHost.Controllers.Base;
 using GMS.Core.WebHost.Models;
 using JWTAuthManager;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Net;
 using System.Text.Json;
 
 namespace GMS.Core.WebHost.Controllers
 {
-    //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-    //[ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class FitnessClubController : BaseController<IFitnessClubService>
@@ -27,6 +23,7 @@ namespace GMS.Core.WebHost.Controllers
         /// <param name="pageNumber">номер страницы</param>
         /// <param name="pageSize">количество</param>
         /// <returns>List<FitnessClubResponse></returns>
+        [AllowAnonymous]
         [HttpGet("[action]/{pageNumber}:{pageSize}")]
         public async Task<IActionResult> GetPage(int pageNumber = 1, int pageSize = 6)
         {
@@ -43,7 +40,7 @@ namespace GMS.Core.WebHost.Controllers
         /// <param name="pageNumber">номер страницы</param>
         /// <param name="pageSize">количество</param>
         /// <returns>List<FitnessClubResponse></returns>
-        //[Authorize(Roles = nameof(Priviliges.GYMOwner))]
+        [Authorize(Policy = "GymOwner")]
         [HttpGet("[action]/{pageNumber}:{pageSize}")]
         public async Task<IActionResult> GetPageByOwnerId(int pageNumber = 1, int pageSize = 6)
         {
@@ -59,6 +56,7 @@ namespace GMS.Core.WebHost.Controllers
         /// </summary>
         /// <param name="id">идентификатор клуба</param>
         /// <returns>FitnessClubResponse</returns>
+        [AllowAnonymous]
         [HttpGet("[action]/{id}")]
         public async Task<IActionResult> Get(Guid id)
         {
@@ -73,7 +71,7 @@ namespace GMS.Core.WebHost.Controllers
         /// </summary>
         /// <param name="request">информация о клубе</param>
         /// <returns>идентификатор клуба</returns>
-        //[Authorize(Roles = nameof(Priviliges.GYMOwner))]
+        [Authorize(Policy = "GymOwner")]
         [HttpPost("[action]")]
         public async Task<IActionResult> Add(FitnessClubCreateOrEditRequest request)
         {
@@ -90,7 +88,7 @@ namespace GMS.Core.WebHost.Controllers
         /// <param name="id">идендификатор клуба</param>
         /// <param name="request">информация о клубе</param>
         /// <returns></returns>
-        //[Authorize(Roles = nameof(Priviliges.GYMOwner))]
+        [Authorize(Policy = "GymOwner")]
         [HttpPut("[action]/{id}")]
         public async Task<IActionResult> Edit(Guid id, FitnessClubCreateOrEditRequest request)
         {
@@ -107,7 +105,7 @@ namespace GMS.Core.WebHost.Controllers
         /// </summary>
         /// <param name="id">идентификатор клуба</param>
         /// <returns></returns>
-        //[Authorize(Roles = nameof(Priviliges.GYMOwner))]
+        [Authorize(Policy = "GymOwner")]
         [HttpDelete("[action]/{id}")]
         public async Task<IActionResult> AddToArchive(Guid id)
         {

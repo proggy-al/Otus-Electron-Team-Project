@@ -1,8 +1,10 @@
+using GMS.Core.BusinessLogic.Abstractions;
 using GMS.Core.DataAccess.Context;
 using GMS.Core.WebHost.Configurations;
 using JWTAuthManager;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
+using System.Security.Claims;
 
 try
 {
@@ -20,10 +22,10 @@ try
         .AddRepositories()
         .AddServices()
         .AddEndpointsApiExplorer()
+        .AddCustomJWTAuthentification()
+        .AddAuthorizationGMS()
         .ConfigureSwagger()
         .AddControllers();
-
-    //builder.Services.AddCustomJWTAuthentification();
 
     var app = WebApplicationConfiguration.Configure(builder);
 
