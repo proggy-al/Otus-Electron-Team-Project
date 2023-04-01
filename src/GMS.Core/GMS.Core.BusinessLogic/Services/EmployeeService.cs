@@ -28,7 +28,7 @@ namespace GMS.Core.BusinessLogic.Services
             if (fitnessClub == null)
                 throw new NotExistException("FitnessClub", fitnessClubId);
             else if (fitnessClub.OwnerId != ownerId)
-                throw new AccessDeniedException("FitnessClub");
+                throw new AccessDeniedException("Employees");
 
             var pagedList = await _employeeRepository.GetPagedAsync(fitnessClubId, pageNumber, pageSize, true);
             return new PagedList<EmployeeDto>
@@ -40,17 +40,12 @@ namespace GMS.Core.BusinessLogic.Services
 
         public async Task<EmployeeDto> Get(Guid id, Guid ownerId)
         {
-            var employee = await _employeeRepository.GetAsync(id, true);
+            var employee = await _employeeRepository.GetWithIncludeAsync(e => e.Id == id, e => e.FitnessClub);
 
             if (employee == null)
                 throw new NotFoundException("Employee", id);
-
-            var fitnessClub = await _fitnessClubrepository.GetAsync(employee.FitnessClubId, true);
-
-            if (fitnessClub == null)
-                throw new NotExistException("FitnessClub", employee.FitnessClubId);
-            else if (fitnessClub.OwnerId != ownerId)
-                throw new AccessDeniedException("FitnessClub");
+            else if (employee.FitnessClub.OwnerId != ownerId)
+                throw new AccessDeniedException("Employee");
 
             return _mapper.Map<EmployeeDto>(employee);
         }
