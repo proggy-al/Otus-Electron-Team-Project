@@ -9,6 +9,7 @@ namespace GMS.Identity.Client
     public class IdentityRouting
     {
         public const string GetAllUsers = "user";
+        public const string GetListUsers = "user/ids";
         public const string GetUser = "user/{id}";
         public const string CreateUser = "user";
         public const string PatchUser = "user/{id}";
