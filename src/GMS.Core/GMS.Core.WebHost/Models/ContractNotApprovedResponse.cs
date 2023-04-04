@@ -1,6 +1,9 @@
 ﻿namespace GMS.Core.WebHost.Models
 {
-    public class ContractResponse
+    /// <summary>
+    /// Неподтвержденный контракт
+    /// </summary>
+    public class ContractNotApprovedResponse
     {
         /// <summary>
         /// Идентификатор
@@ -11,11 +14,6 @@
         /// Пользователь, который купил продукт
         /// </summary>
         public UserResponse User { get; set; }
-
-        /// <summary>
-        /// Менеджер, заключивший контракт
-        /// </summary>
-        public ManagerResponse Manager { get; set; }
 
         /// <summary>
         /// Продукт, который купил пользователь

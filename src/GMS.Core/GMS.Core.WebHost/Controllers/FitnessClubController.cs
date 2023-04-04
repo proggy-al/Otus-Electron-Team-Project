@@ -35,7 +35,7 @@ namespace GMS.Core.WebHost.Controllers
         }
 
         /// <summary>
-        /// Получение списка фитнес клубов пользователя
+        /// Получение списка фитнес клубов владельца
         /// </summary>
         /// <param name="pageNumber">номер страницы</param>
         /// <param name="pageSize">количество</param>

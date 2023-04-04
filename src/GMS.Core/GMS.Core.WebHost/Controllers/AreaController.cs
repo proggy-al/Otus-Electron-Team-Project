@@ -42,7 +42,7 @@ namespace GMS.Core.WebHost.Controllers
         public async Task<IActionResult> Add(AreaCreateRequest request)
         {
             var areaDto = _mapper.Map<AreaCreateDto>(request);
-            areaDto.EmploeeId = UserId;
+            areaDto.EmployeeId = UserId;
 
             var id = await _service.Create(areaDto);
 
@@ -54,7 +54,7 @@ namespace GMS.Core.WebHost.Controllers
         public async Task<IActionResult> Edit(Guid id, AreaEditRequest request)
         {
             var areaDto = _mapper.Map<AreaEditDto>(request);
-            areaDto.EmploeeId = UserId;
+            areaDto.EmployeeId = UserId;
 
             await _service.Update(id, areaDto);
 

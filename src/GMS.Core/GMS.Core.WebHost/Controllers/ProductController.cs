@@ -56,13 +56,12 @@ namespace GMS.Core.WebHost.Controllers
         /// </summary>
         /// <param name="request">информация о продукте</param>
         /// <returns>идентификатор продукта</returns>
-        //[Authorize(Roles = nameof(Priviliges.GYMOwner))]
         [Authorize(Policy = "Manager")]
         [HttpPost("[action]")]
         public async Task<IActionResult> Add(ProductCreateRequest request)
         {
             var productDto = _mapper.Map<ProductCreateDto>(request);
-            productDto.EmploeeId = UserId;
+            productDto.EmployeeId = UserId;
 
             var id = await _service.Create(productDto);
 

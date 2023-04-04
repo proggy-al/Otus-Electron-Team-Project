@@ -1,6 +1,6 @@
 ﻿namespace GMS.Core.WebHost.Models
 {
-    public class ContractResponse
+    public class ContractUserResponse
     {
         /// <summary>
         /// Идентификатор
@@ -8,19 +8,14 @@
         public Guid Id { get; set; }
 
         /// <summary>
-        /// Пользователь, который купил продукт
-        /// </summary>
-        public UserResponse User { get; set; }
-
-        /// <summary>
-        /// Менеджер, заключивший контракт
-        /// </summary>
-        public ManagerResponse Manager { get; set; }
-
-        /// <summary>
         /// Продукт, который купил пользователь
         /// </summary>
         public ProductResponse Product { get; set; }
+
+        /// <summary>
+        /// Фитнес клуб в котором куплен продукт
+        /// </summary>
+        public FitnessClubResponse FitnessClub { get; set; }
 
         /// <summary>
         /// Дата начала контракта

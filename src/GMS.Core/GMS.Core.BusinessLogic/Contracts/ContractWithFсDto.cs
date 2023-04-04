@@ -3,7 +3,7 @@
     /// <summary>
     /// ДТО контракта
     /// </summary>
-    public class ContractDto
+    public class ContractWithFсDto
     {
         /// <summary>
         /// Идентификатор
@@ -19,6 +19,11 @@
         /// Продукт
         /// </summary>
         public ProductDto Product { get; set; }
+
+        /// <summary>
+        /// Фитнес клуб
+        /// </summary>
+        public FitnessClubDto FitnessClub { get; set; }
 
         /// <summary>
         /// Идентификатор менеджера

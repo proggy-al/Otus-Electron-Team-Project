@@ -13,6 +13,14 @@ namespace GMS.Core.DataAccess.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.AlterColumn<Guid>(
+                name: "ManagerId",
+                table: "Contracts",
+                type: "uuid",
+                nullable: true,
+                oldClrType: typeof(Guid),
+                oldType: "uuid");
+
             migrationBuilder.CreateTable(
                 name: "Employees",
                 columns: table => new
@@ -37,98 +45,98 @@ namespace GMS.Core.DataAccess.Migrations
                 keyColumn: "Id",
                 keyValue: new Guid("c0000000-0000-0000-0000-000000000001"),
                 columns: new[] { "EndDate", "ManagerId", "StartDate" },
-                values: new object[] { new DateTime(2024, 3, 30, 21, 18, 24, 532, DateTimeKind.Utc).AddTicks(3518), new Guid("10000000-0000-0000-0006-000000000001"), new DateTime(2023, 3, 31, 21, 18, 24, 532, DateTimeKind.Utc).AddTicks(3513) });
+                values: new object[] { new DateTime(2024, 4, 3, 22, 31, 16, 200, DateTimeKind.Utc).AddTicks(6559), new Guid("10000000-0000-0000-0006-000000000001"), new DateTime(2023, 4, 4, 22, 31, 16, 200, DateTimeKind.Utc).AddTicks(6557) });
 
             migrationBuilder.UpdateData(
                 table: "Contracts",
                 keyColumn: "Id",
                 keyValue: new Guid("c0000000-0000-0000-0000-000000000002"),
                 columns: new[] { "EndDate", "ManagerId", "StartDate" },
-                values: new object[] { new DateTime(2024, 3, 30, 21, 18, 24, 532, DateTimeKind.Utc).AddTicks(3543), new Guid("10000000-0000-0000-0006-000000000001"), new DateTime(2023, 3, 31, 21, 18, 24, 532, DateTimeKind.Utc).AddTicks(3542) });
+                values: new object[] { new DateTime(2024, 4, 3, 22, 31, 16, 200, DateTimeKind.Utc).AddTicks(6580), new Guid("10000000-0000-0000-0006-000000000001"), new DateTime(2023, 4, 4, 22, 31, 16, 200, DateTimeKind.Utc).AddTicks(6579) });
 
             migrationBuilder.UpdateData(
                 table: "Contracts",
                 keyColumn: "Id",
                 keyValue: new Guid("c0000000-0000-0000-0000-000000000003"),
                 columns: new[] { "EndDate", "ManagerId", "StartDate" },
-                values: new object[] { new DateTime(2024, 3, 30, 21, 18, 24, 532, DateTimeKind.Utc).AddTicks(3552), new Guid("10000000-0000-0000-0006-000000000002"), new DateTime(2023, 3, 31, 21, 18, 24, 532, DateTimeKind.Utc).AddTicks(3551) });
+                values: new object[] { new DateTime(2024, 4, 3, 22, 31, 16, 200, DateTimeKind.Utc).AddTicks(6589), new Guid("10000000-0000-0000-0006-000000000002"), new DateTime(2023, 4, 4, 22, 31, 16, 200, DateTimeKind.Utc).AddTicks(6588) });
 
             migrationBuilder.UpdateData(
                 table: "Contracts",
                 keyColumn: "Id",
                 keyValue: new Guid("c0000000-0000-0000-0000-000000000004"),
                 columns: new[] { "EndDate", "ManagerId", "StartDate" },
-                values: new object[] { new DateTime(2024, 3, 30, 21, 18, 24, 532, DateTimeKind.Utc).AddTicks(3559), new Guid("10000000-0000-0000-0006-000000000002"), new DateTime(2023, 3, 31, 21, 18, 24, 532, DateTimeKind.Utc).AddTicks(3558) });
+                values: new object[] { new DateTime(2024, 4, 3, 22, 31, 16, 200, DateTimeKind.Utc).AddTicks(6597), new Guid("10000000-0000-0000-0006-000000000002"), new DateTime(2023, 4, 4, 22, 31, 16, 200, DateTimeKind.Utc).AddTicks(6596) });
 
             migrationBuilder.UpdateData(
                 table: "Contracts",
                 keyColumn: "Id",
                 keyValue: new Guid("c0000000-0000-0000-0000-000000000005"),
-                columns: new[] { "EndDate", "ManagerId", "StartDate" },
-                values: new object[] { new DateTime(2024, 3, 30, 21, 18, 24, 532, DateTimeKind.Utc).AddTicks(3567), new Guid("10000000-0000-0000-0006-000000000003"), new DateTime(2023, 3, 31, 21, 18, 24, 532, DateTimeKind.Utc).AddTicks(3566) });
+                columns: new[] { "EndDate", "IsApproved", "ManagerId", "StartDate" },
+                values: new object[] { new DateTime(2024, 4, 3, 22, 31, 16, 200, DateTimeKind.Utc).AddTicks(6605), false, null, new DateTime(2023, 4, 4, 22, 31, 16, 200, DateTimeKind.Utc).AddTicks(6604) });
 
             migrationBuilder.UpdateData(
                 table: "Contracts",
                 keyColumn: "Id",
                 keyValue: new Guid("c0000000-0000-0000-0000-000000000006"),
-                columns: new[] { "EndDate", "ManagerId", "StartDate" },
-                values: new object[] { new DateTime(2024, 3, 30, 21, 18, 24, 532, DateTimeKind.Utc).AddTicks(3578), new Guid("10000000-0000-0000-0006-000000000003"), new DateTime(2023, 3, 31, 21, 18, 24, 532, DateTimeKind.Utc).AddTicks(3577) });
+                columns: new[] { "EndDate", "IsApproved", "ManagerId", "StartDate" },
+                values: new object[] { new DateTime(2024, 4, 3, 22, 31, 16, 200, DateTimeKind.Utc).AddTicks(6616), false, null, new DateTime(2023, 4, 4, 22, 31, 16, 200, DateTimeKind.Utc).AddTicks(6616) });
 
             migrationBuilder.UpdateData(
                 table: "Contracts",
                 keyColumn: "Id",
                 keyValue: new Guid("c0000000-0000-0000-0000-000000000007"),
-                columns: new[] { "EndDate", "ManagerId", "StartDate" },
-                values: new object[] { new DateTime(2024, 3, 30, 21, 18, 24, 532, DateTimeKind.Utc).AddTicks(3585), new Guid("10000000-0000-0000-0006-000000000003"), new DateTime(2023, 3, 31, 21, 18, 24, 532, DateTimeKind.Utc).AddTicks(3584) });
+                columns: new[] { "EndDate", "IsApproved", "ManagerId", "StartDate" },
+                values: new object[] { new DateTime(2024, 4, 3, 22, 31, 16, 200, DateTimeKind.Utc).AddTicks(6626), false, null, new DateTime(2023, 4, 4, 22, 31, 16, 200, DateTimeKind.Utc).AddTicks(6625) });
 
             migrationBuilder.UpdateData(
                 table: "Contracts",
                 keyColumn: "Id",
                 keyValue: new Guid("c0000000-0000-0000-0000-000000000008"),
                 columns: new[] { "EndDate", "ManagerId", "StartDate" },
-                values: new object[] { new DateTime(2024, 3, 30, 21, 18, 24, 532, DateTimeKind.Utc).AddTicks(3594), new Guid("10000000-0000-0000-0006-000000000003"), new DateTime(2023, 3, 31, 21, 18, 24, 532, DateTimeKind.Utc).AddTicks(3593) });
+                values: new object[] { new DateTime(2024, 4, 3, 22, 31, 16, 200, DateTimeKind.Utc).AddTicks(6633), new Guid("10000000-0000-0000-0006-000000000003"), new DateTime(2023, 4, 4, 22, 31, 16, 200, DateTimeKind.Utc).AddTicks(6633) });
 
             migrationBuilder.UpdateData(
                 table: "Contracts",
                 keyColumn: "Id",
                 keyValue: new Guid("c0000000-0000-0000-0000-000000000009"),
                 columns: new[] { "EndDate", "ManagerId", "StartDate" },
-                values: new object[] { new DateTime(2024, 3, 30, 21, 18, 24, 532, DateTimeKind.Utc).AddTicks(3600), new Guid("10000000-0000-0000-0006-000000000003"), new DateTime(2023, 3, 31, 21, 18, 24, 532, DateTimeKind.Utc).AddTicks(3600) });
+                values: new object[] { new DateTime(2024, 4, 3, 22, 31, 16, 200, DateTimeKind.Utc).AddTicks(6642), new Guid("10000000-0000-0000-0006-000000000003"), new DateTime(2023, 4, 4, 22, 31, 16, 200, DateTimeKind.Utc).AddTicks(6641) });
 
             migrationBuilder.UpdateData(
                 table: "Contracts",
                 keyColumn: "Id",
                 keyValue: new Guid("c0000000-0000-0000-0000-00000000000a"),
                 columns: new[] { "EndDate", "ManagerId", "StartDate" },
-                values: new object[] { new DateTime(2024, 3, 30, 21, 18, 24, 532, DateTimeKind.Utc).AddTicks(3610), new Guid("10000000-0000-0000-0006-000000000003"), new DateTime(2023, 3, 31, 21, 18, 24, 532, DateTimeKind.Utc).AddTicks(3610) });
+                values: new object[] { new DateTime(2024, 4, 3, 22, 31, 16, 200, DateTimeKind.Utc).AddTicks(6652), new Guid("10000000-0000-0000-0006-000000000003"), new DateTime(2023, 4, 4, 22, 31, 16, 200, DateTimeKind.Utc).AddTicks(6651) });
 
             migrationBuilder.UpdateData(
                 table: "Contracts",
                 keyColumn: "Id",
                 keyValue: new Guid("c0000000-0000-0000-0000-00000000000b"),
-                columns: new[] { "EndDate", "ManagerId", "StartDate" },
-                values: new object[] { new DateTime(2024, 3, 30, 21, 18, 24, 532, DateTimeKind.Utc).AddTicks(3618), new Guid("10000000-0000-0000-0006-000000000003"), new DateTime(2023, 3, 31, 21, 18, 24, 532, DateTimeKind.Utc).AddTicks(3617) });
+                columns: new[] { "EndDate", "ManagerId", "StartDate", "UserId" },
+                values: new object[] { new DateTime(2024, 4, 3, 22, 31, 16, 200, DateTimeKind.Utc).AddTicks(6660), new Guid("10000000-0000-0000-0006-000000000003"), new DateTime(2023, 4, 4, 22, 31, 16, 200, DateTimeKind.Utc).AddTicks(6659), new Guid("00000000-0000-0000-0002-000000000002") });
 
             migrationBuilder.UpdateData(
                 table: "Contracts",
                 keyColumn: "Id",
                 keyValue: new Guid("c0000000-0000-0000-0000-00000000000c"),
-                columns: new[] { "EndDate", "ManagerId", "StartDate" },
-                values: new object[] { new DateTime(2024, 3, 30, 21, 18, 24, 532, DateTimeKind.Utc).AddTicks(3625), new Guid("10000000-0000-0000-0006-000000000003"), new DateTime(2023, 3, 31, 21, 18, 24, 532, DateTimeKind.Utc).AddTicks(3624) });
+                columns: new[] { "EndDate", "ManagerId", "StartDate", "UserId" },
+                values: new object[] { new DateTime(2024, 4, 3, 22, 31, 16, 200, DateTimeKind.Utc).AddTicks(6667), new Guid("10000000-0000-0000-0001-000000000003"), new DateTime(2023, 4, 4, 22, 31, 16, 200, DateTimeKind.Utc).AddTicks(6667), new Guid("00000000-0000-0000-0002-000000000002") });
 
             migrationBuilder.UpdateData(
                 table: "Contracts",
                 keyColumn: "Id",
                 keyValue: new Guid("c0000000-0000-0000-0000-00000000000d"),
                 columns: new[] { "EndDate", "ManagerId", "StartDate" },
-                values: new object[] { new DateTime(2024, 3, 30, 21, 18, 24, 532, DateTimeKind.Utc).AddTicks(3631), new Guid("10000000-0000-0000-0006-000000000003"), new DateTime(2023, 3, 31, 21, 18, 24, 532, DateTimeKind.Utc).AddTicks(3630) });
+                values: new object[] { new DateTime(2024, 4, 3, 22, 31, 16, 200, DateTimeKind.Utc).AddTicks(6676), new Guid("10000000-0000-0000-0001-000000000003"), new DateTime(2023, 4, 4, 22, 31, 16, 200, DateTimeKind.Utc).AddTicks(6675) });
 
             migrationBuilder.UpdateData(
                 table: "Contracts",
                 keyColumn: "Id",
                 keyValue: new Guid("c0000000-0000-0000-0000-00000000000e"),
                 columns: new[] { "EndDate", "ManagerId", "StartDate" },
-                values: new object[] { new DateTime(2024, 3, 30, 21, 18, 24, 532, DateTimeKind.Utc).AddTicks(3666), new Guid("10000000-0000-0000-0006-000000000003"), new DateTime(2023, 3, 31, 21, 18, 24, 532, DateTimeKind.Utc).AddTicks(3665) });
+                values: new object[] { new DateTime(2024, 4, 3, 22, 31, 16, 200, DateTimeKind.Utc).AddTicks(6699), new Guid("10000000-0000-0000-0001-000000000003"), new DateTime(2023, 4, 4, 22, 31, 16, 200, DateTimeKind.Utc).AddTicks(6699) });
 
             migrationBuilder.InsertData(
                 table: "Employees",
@@ -154,6 +162,16 @@ namespace GMS.Core.DataAccess.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Employees");
+
+            migrationBuilder.AlterColumn<Guid>(
+                name: "ManagerId",
+                table: "Contracts",
+                type: "uuid",
+                nullable: false,
+                defaultValue: new Guid("00000000-0000-0000-0000-000000000000"),
+                oldClrType: typeof(Guid),
+                oldType: "uuid",
+                oldNullable: true);
 
             migrationBuilder.UpdateData(
                 table: "Contracts",
@@ -187,22 +205,22 @@ namespace GMS.Core.DataAccess.Migrations
                 table: "Contracts",
                 keyColumn: "Id",
                 keyValue: new Guid("c0000000-0000-0000-0000-000000000005"),
-                columns: new[] { "EndDate", "ManagerId", "StartDate" },
-                values: new object[] { new DateTime(2024, 3, 25, 23, 3, 17, 545, DateTimeKind.Utc).AddTicks(7296), new Guid("00000000-0000-0000-0006-000000000003"), new DateTime(2023, 3, 26, 23, 3, 17, 545, DateTimeKind.Utc).AddTicks(7295) });
+                columns: new[] { "EndDate", "IsApproved", "ManagerId", "StartDate" },
+                values: new object[] { new DateTime(2024, 3, 25, 23, 3, 17, 545, DateTimeKind.Utc).AddTicks(7296), true, new Guid("00000000-0000-0000-0006-000000000003"), new DateTime(2023, 3, 26, 23, 3, 17, 545, DateTimeKind.Utc).AddTicks(7295) });
 
             migrationBuilder.UpdateData(
                 table: "Contracts",
                 keyColumn: "Id",
                 keyValue: new Guid("c0000000-0000-0000-0000-000000000006"),
-                columns: new[] { "EndDate", "ManagerId", "StartDate" },
-                values: new object[] { new DateTime(2024, 3, 25, 23, 3, 17, 545, DateTimeKind.Utc).AddTicks(7329), new Guid("00000000-0000-0000-0006-000000000003"), new DateTime(2023, 3, 26, 23, 3, 17, 545, DateTimeKind.Utc).AddTicks(7327) });
+                columns: new[] { "EndDate", "IsApproved", "ManagerId", "StartDate" },
+                values: new object[] { new DateTime(2024, 3, 25, 23, 3, 17, 545, DateTimeKind.Utc).AddTicks(7329), true, new Guid("00000000-0000-0000-0006-000000000003"), new DateTime(2023, 3, 26, 23, 3, 17, 545, DateTimeKind.Utc).AddTicks(7327) });
 
             migrationBuilder.UpdateData(
                 table: "Contracts",
                 keyColumn: "Id",
                 keyValue: new Guid("c0000000-0000-0000-0000-000000000007"),
-                columns: new[] { "EndDate", "ManagerId", "StartDate" },
-                values: new object[] { new DateTime(2024, 3, 25, 23, 3, 17, 545, DateTimeKind.Utc).AddTicks(7343), new Guid("00000000-0000-0000-0006-000000000003"), new DateTime(2023, 3, 26, 23, 3, 17, 545, DateTimeKind.Utc).AddTicks(7342) });
+                columns: new[] { "EndDate", "IsApproved", "ManagerId", "StartDate" },
+                values: new object[] { new DateTime(2024, 3, 25, 23, 3, 17, 545, DateTimeKind.Utc).AddTicks(7343), true, new Guid("00000000-0000-0000-0006-000000000003"), new DateTime(2023, 3, 26, 23, 3, 17, 545, DateTimeKind.Utc).AddTicks(7342) });
 
             migrationBuilder.UpdateData(
                 table: "Contracts",
@@ -229,15 +247,15 @@ namespace GMS.Core.DataAccess.Migrations
                 table: "Contracts",
                 keyColumn: "Id",
                 keyValue: new Guid("c0000000-0000-0000-0000-00000000000b"),
-                columns: new[] { "EndDate", "ManagerId", "StartDate" },
-                values: new object[] { new DateTime(2024, 3, 25, 23, 3, 17, 545, DateTimeKind.Utc).AddTicks(7401), new Guid("00000000-0000-0000-0006-000000000003"), new DateTime(2023, 3, 26, 23, 3, 17, 545, DateTimeKind.Utc).AddTicks(7401) });
+                columns: new[] { "EndDate", "ManagerId", "StartDate", "UserId" },
+                values: new object[] { new DateTime(2024, 3, 25, 23, 3, 17, 545, DateTimeKind.Utc).AddTicks(7401), new Guid("00000000-0000-0000-0006-000000000003"), new DateTime(2023, 3, 26, 23, 3, 17, 545, DateTimeKind.Utc).AddTicks(7401), new Guid("00000000-0000-0000-0002-000000000003") });
 
             migrationBuilder.UpdateData(
                 table: "Contracts",
                 keyColumn: "Id",
                 keyValue: new Guid("c0000000-0000-0000-0000-00000000000c"),
-                columns: new[] { "EndDate", "ManagerId", "StartDate" },
-                values: new object[] { new DateTime(2024, 3, 25, 23, 3, 17, 545, DateTimeKind.Utc).AddTicks(7478), new Guid("00000000-0000-0000-0006-000000000003"), new DateTime(2023, 3, 26, 23, 3, 17, 545, DateTimeKind.Utc).AddTicks(7477) });
+                columns: new[] { "EndDate", "ManagerId", "StartDate", "UserId" },
+                values: new object[] { new DateTime(2024, 3, 25, 23, 3, 17, 545, DateTimeKind.Utc).AddTicks(7478), new Guid("00000000-0000-0000-0006-000000000003"), new DateTime(2023, 3, 26, 23, 3, 17, 545, DateTimeKind.Utc).AddTicks(7477), new Guid("00000000-0000-0000-0002-000000000003") });
 
             migrationBuilder.UpdateData(
                 table: "Contracts",
