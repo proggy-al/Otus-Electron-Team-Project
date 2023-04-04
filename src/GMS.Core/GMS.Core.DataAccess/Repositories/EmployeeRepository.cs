@@ -14,12 +14,13 @@ namespace GMS.Core.DataAccess.Repositories
     {
         public EmployeeRepository(DatabaseContext context) : base(context) { }
 
-        public async Task<PagedList<Employee>> GetPagedAsync(Guid fitnessClubId, int pageNumber, int pageSize, bool noTracking = false)
+        public async Task<PagedList<Guid>> GetPagedAsync(Guid fitnessClubId, int pageNumber, int pageSize)
         {
-            var query = GetAll(noTracking)
-                .Where(p => p.FitnessClubId == fitnessClubId && p.IsDeleted == false);
+            var query = GetAll(true)
+                .Where(p => p.FitnessClubId == fitnessClubId && p.IsDeleted == false)
+                .Select(p => p.Id);
 
-            return new PagedList<Employee>()
+            return new PagedList<Guid>()
             {
                 Entities = await query
                     .Skip((pageNumber - 1) * pageSize)
@@ -27,6 +28,12 @@ namespace GMS.Core.DataAccess.Repositories
                     .ToListAsync(),
                 Pagination = new Pagination(query.Count(), pageNumber, pageSize)
             };
+        }
+
+        public async Task<bool> IsEmployeeWorkingInFitnessClub(Guid fitnessClubId, Guid employeeId)
+        {
+            return await EntitySet
+                .AnyAsync(e => e.FitnessClubId == fitnessClubId && e.Id == employeeId && e.IsDeleted == false);
         }
     }
 }

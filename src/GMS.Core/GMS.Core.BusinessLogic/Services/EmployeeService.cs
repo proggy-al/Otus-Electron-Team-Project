@@ -21,7 +21,7 @@ namespace GMS.Core.BusinessLogic.Services
             _fitnessClubrepository = fitnessClubrepository;
         }
 
-        public async Task<PagedList<EmployeeDto>> GetPage(Guid ownerId, Guid fitnessClubId, int pageNumber, int pageSize)
+        public async Task<PagedList<Guid>> GetPage(Guid ownerId, Guid fitnessClubId, int pageNumber, int pageSize)
         {
             var fitnessClub = await _fitnessClubrepository.GetAsync(fitnessClubId, true);
 
@@ -30,12 +30,8 @@ namespace GMS.Core.BusinessLogic.Services
             else if (fitnessClub.OwnerId != ownerId)
                 throw new AccessDeniedException("Employees");
 
-            var pagedList = await _employeeRepository.GetPagedAsync(fitnessClubId, pageNumber, pageSize, true);
-            return new PagedList<EmployeeDto>
-            {
-                Entities = _mapper.Map<List<Employee>, List<EmployeeDto>>(pagedList.Entities),
-                Pagination = pagedList.Pagination
-            };
+            var pagedList = await _employeeRepository.GetPagedAsync(fitnessClubId, pageNumber, pageSize);
+            return pagedList;
         }
 
         public async Task<EmployeeDto> Get(Guid id, Guid ownerId)

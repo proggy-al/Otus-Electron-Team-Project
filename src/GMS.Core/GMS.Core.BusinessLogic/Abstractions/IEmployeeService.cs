@@ -1,19 +1,20 @@
 ﻿using GMS.Core.BusinessLogic.Contracts;
 using GMS.Core.WebHost.Models;
+using System.Xml.Schema;
 
 namespace GMS.Core.BusinessLogic.Abstractions
 {
     public interface IEmployeeService : IService
     {
         /// <summary>
-        /// Получить постраничный список сотрудников фитнес клуба
+        /// Получить постраничный список идентификаторов сотрудников фитнес клуба
         /// </summary>
         /// <param name="ownerId">идентификатор владельца клуба</param>
         /// <param name="fitnessClubId">идентификатор фитнес клуба</param>
         /// <param name="pageNumber">номер страницы</param>
         /// <param name="pageSize">количество</param>
-        /// <returns>список ДТО сотрудников</returns>
-        Task<PagedList<EmployeeDto>> GetPage(Guid ownerId, Guid fitnessClubId, int pageNumber, int pageSize);
+        /// <returns>список идентификаторов сотрудников</returns>
+        Task<PagedList<Guid>> GetPage(Guid ownerId, Guid fitnessClubId, int pageNumber, int pageSize);
 
         /// <summary>
         /// Получить
