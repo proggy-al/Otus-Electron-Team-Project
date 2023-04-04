@@ -1,10 +1,13 @@
 using GMS.Core.BusinessLogic.Abstractions;
 using GMS.Core.DataAccess.Context;
 using GMS.Core.WebHost.Configurations;
+using GMS.Core.WebHost.Configurations.Options;
 using JWTAuthManager;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Serilog;
-using System.Security.Claims;
+using System;
 
 try
 {
@@ -19,7 +22,9 @@ try
         {
             options.UseNpgsql(connectionString);
         })
+        .AddOptions(builder.Configuration)
         .AddRepositories()
+        .AddHttpClients()
         .AddServices()
         .AddEndpointsApiExplorer()
         .AddCustomJWTAuthentification()
