@@ -16,11 +16,12 @@ namespace GMS.Core.Test
 
         public ContractRepositoryTests(TestFixture testFixture)
         {
-            _contractRepository = testFixture.ServiceProvider.GetRequiredService<IContractRepository>();
+            var serviceProvider = testFixture.ServiceProvider;
+            _contractRepository = serviceProvider.GetService<IContractRepository>();
         }
 
         [Fact]
-        public async Task GetPagedAsync_ReturnsValid_ForValidparams()
+        public async void GetPagedAsync_ReturnsValid_ForValidparams()
         {
            /* var result = await _contractRepository.GetPagedAsync(1, 2);
 
