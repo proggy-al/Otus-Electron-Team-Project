@@ -1,20 +1,21 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using GMS.Core.WebHost.Configurations;
-using GMS.Core.DataAccess.Context;
-using AutoFixture;
+﻿using AutoFixture;
 using GMS.Core.Core.Domain;
+using GMS.Core.DataAccess.Context;
+using GMS.Core.WebHost.Configurations;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace GMS.Core.Test
 {
-    public class TestFixture : IDisposable
+    public class TestFixture //: IDisposable
     {
         public IServiceProvider ServiceProvider { get; set; }
 
-        public IServiceCollection ServiceCollection { get; set; }
+        private readonly DatabaseContext _db;
 
         public TestFixture()
         {
+
             var services = new ServiceCollection();
 
             services.ConfigureMapper();
@@ -24,34 +25,43 @@ namespace GMS.Core.Test
                 options.UseInMemoryDatabase("GmsCore");
             });
 
+            //services.AddTransient<DbContext, DatabaseContext>();
+
             services.AddRepositories();
-            ServiceProvider = services.BuildServiceProvider();
+
+            var serviceProvider = services.BuildServiceProvider();
+            ServiceProvider = serviceProvider;
+
+            _db = ServiceProvider.GetRequiredService<DatabaseContext>();
+
+            SeedDb();
         }
 
         /// <summary>
         /// Засею пока только Contracts
         /// </summary>
-        void SeedDb()
+        private void SeedDb()
         {
-            using (var db = ServiceProvider.GetRequiredService<DatabaseContext>())
-            {
-                var created = db.Database.EnsureCreated();
 
-                if (created)
+
+            var created = _db.Database.EnsureCreated();
+
+            if (created)
+            {
+                for (int i = 0; i < 20; i++)
                 {
-                    for (int i = 0; i < 20; i++)
-                    {
-                        var fixture = new Fixture();
-                        var newItem = fixture.Build<Contract>().Without(e => e.Product).Create();
-                        db.Contracts.Add(newItem);
-                    }
-                    db.SaveChanges();
+                    var fixture = new Fixture();
+                    var newItem = fixture.Build<Contract>().Without(e => e.Product).Create();
+                    _db.Contracts.Add(newItem);
                 }
+                _db.SaveChanges();
             }
+
         }
 
         public void Dispose()
         {
+            _db.Dispose();
         }
     }
 }

@@ -18,6 +18,7 @@ namespace GMS.Core.Test
         private readonly Guid _id = Guid.NewGuid();
         private IMapper _mapper;
         private List<Contract> FakeContracts;
+        private readonly IServiceProvider _serviceProvider;
 
         public ContractServiceTests(TestFixture testFixture)
         {
@@ -30,8 +31,10 @@ namespace GMS.Core.Test
                 FakeContracts.Add(entity);
             };
 
+            _serviceProvider=testFixture.ServiceProvider;
             FakeContracts.First().Id = _id;
-            _mapper = testFixture.ServiceProvider.GetService<IMapper>();
+            _mapper = _serviceProvider.GetService<IMapper>();
+           // _contractService = new ContractService(_mapper, _serviceProvider.GetService<IContractRepository>());
             _contractService = new ContractService(_mapper, _repositoryMock.Object);
         }
 
