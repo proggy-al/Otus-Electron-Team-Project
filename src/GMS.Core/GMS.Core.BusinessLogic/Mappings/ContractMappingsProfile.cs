@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using GMS.Core.BusinessLogic.Contracts;
 using GMS.Core.Core.Domain;
+using System.Net;
 
 namespace GMS.Core.BusinessLogic.Mappings
 {
@@ -11,11 +12,10 @@ namespace GMS.Core.BusinessLogic.Mappings
     {
         public ContractMappingsProfile()
         {
-            CreateMap<Contract, ContractDto>()
-                .ForMember(d => d.FitnessClubId, map => map.Ignore());
+            CreateMap<Contract, ContractDto>();
 
-            CreateMap<ContractDto, Contract>()
-                .ForMember(d => d.Product, map => map.Ignore());
+            CreateMap<Contract, ContractWithFсDto>().IncludeMembers(с => с.Product);
+            CreateMap<Product, ContractWithFсDto>(MemberList.None);
         }
     }
 }

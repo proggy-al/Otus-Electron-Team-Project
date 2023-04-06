@@ -11,24 +11,19 @@
         public Guid Id { get; set; }
 
         /// <summary>
-        /// Идентификатор продукта
-        /// </summary>
-        public Guid ProductId { get; set; }
-
-        /// <summary>
-        /// Идентификатор менеджера
-        /// </summary>
-        public Guid ManagerId { get; set; }
-
-        /// <summary>
         /// Идентификатор пользователя
         /// </summary>
         public Guid UserId { get; set; }
 
         /// <summary>
-        /// Идентификатор фитнес клуба
+        /// Продукт
         /// </summary>
-        public Guid FitnessClubId { get; set; }
+        public ProductDto Product { get; set; }
+
+        /// <summary>
+        /// Идентификатор менеджера
+        /// </summary>
+        public Guid ManagerId { get; set; }
 
         /// <summary>
         /// Дата начала контракта

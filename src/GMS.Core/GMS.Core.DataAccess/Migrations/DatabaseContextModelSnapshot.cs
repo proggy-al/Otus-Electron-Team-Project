@@ -185,7 +185,6 @@ namespace GMS.Core.DataAccess.Migrations
                         .HasDefaultValue(false);
 
                     b.Property<Guid?>("ManagerId")
-                        .IsRequired()
                         .HasColumnType("uuid");
 
                     b.Property<Guid>("ProductId")
@@ -207,156 +206,212 @@ namespace GMS.Core.DataAccess.Migrations
                         new
                         {
                             Id = new Guid("c0000000-0000-0000-0000-000000000001"),
-                            EndDate = new DateTime(2024, 3, 25, 23, 3, 17, 545, DateTimeKind.Utc).AddTicks(7020),
+                            EndDate = new DateTime(2024, 4, 3, 22, 31, 16, 200, DateTimeKind.Utc).AddTicks(6559),
                             IsApproved = true,
                             IsDeleted = false,
-                            ManagerId = new Guid("00000000-0000-0000-0006-000000000001"),
+                            ManagerId = new Guid("10000000-0000-0000-0006-000000000001"),
                             ProductId = new Guid("b0000000-0000-0000-0000-000000000002"),
-                            StartDate = new DateTime(2023, 3, 26, 23, 3, 17, 545, DateTimeKind.Utc).AddTicks(7016),
+                            StartDate = new DateTime(2023, 4, 4, 22, 31, 16, 200, DateTimeKind.Utc).AddTicks(6557),
                             UserId = new Guid("00000000-0000-0000-0002-000000000001")
                         },
                         new
                         {
                             Id = new Guid("c0000000-0000-0000-0000-000000000002"),
-                            EndDate = new DateTime(2024, 3, 25, 23, 3, 17, 545, DateTimeKind.Utc).AddTicks(7121),
+                            EndDate = new DateTime(2024, 4, 3, 22, 31, 16, 200, DateTimeKind.Utc).AddTicks(6580),
                             IsApproved = true,
                             IsDeleted = false,
-                            ManagerId = new Guid("00000000-0000-0000-0006-000000000001"),
+                            ManagerId = new Guid("10000000-0000-0000-0006-000000000001"),
                             ProductId = new Guid("b0000000-0000-0000-0000-000000000003"),
-                            StartDate = new DateTime(2023, 3, 26, 23, 3, 17, 545, DateTimeKind.Utc).AddTicks(7118),
+                            StartDate = new DateTime(2023, 4, 4, 22, 31, 16, 200, DateTimeKind.Utc).AddTicks(6579),
                             UserId = new Guid("00000000-0000-0000-0002-000000000001")
                         },
                         new
                         {
                             Id = new Guid("c0000000-0000-0000-0000-000000000003"),
-                            EndDate = new DateTime(2024, 3, 25, 23, 3, 17, 545, DateTimeKind.Utc).AddTicks(7265),
+                            EndDate = new DateTime(2024, 4, 3, 22, 31, 16, 200, DateTimeKind.Utc).AddTicks(6589),
                             IsApproved = true,
                             IsDeleted = false,
-                            ManagerId = new Guid("00000000-0000-0000-0006-000000000002"),
+                            ManagerId = new Guid("10000000-0000-0000-0006-000000000002"),
                             ProductId = new Guid("b0000000-0000-0000-0000-000000000006"),
-                            StartDate = new DateTime(2023, 3, 26, 23, 3, 17, 545, DateTimeKind.Utc).AddTicks(7263),
+                            StartDate = new DateTime(2023, 4, 4, 22, 31, 16, 200, DateTimeKind.Utc).AddTicks(6588),
                             UserId = new Guid("00000000-0000-0000-0002-000000000002")
                         },
                         new
                         {
                             Id = new Guid("c0000000-0000-0000-0000-000000000004"),
-                            EndDate = new DateTime(2024, 3, 25, 23, 3, 17, 545, DateTimeKind.Utc).AddTicks(7282),
+                            EndDate = new DateTime(2024, 4, 3, 22, 31, 16, 200, DateTimeKind.Utc).AddTicks(6597),
                             IsApproved = true,
                             IsDeleted = false,
-                            ManagerId = new Guid("00000000-0000-0000-0006-000000000002"),
+                            ManagerId = new Guid("10000000-0000-0000-0006-000000000002"),
                             ProductId = new Guid("b0000000-0000-0000-0000-000000000008"),
-                            StartDate = new DateTime(2023, 3, 26, 23, 3, 17, 545, DateTimeKind.Utc).AddTicks(7281),
+                            StartDate = new DateTime(2023, 4, 4, 22, 31, 16, 200, DateTimeKind.Utc).AddTicks(6596),
                             UserId = new Guid("00000000-0000-0000-0002-000000000002")
                         },
                         new
                         {
                             Id = new Guid("c0000000-0000-0000-0000-000000000005"),
-                            EndDate = new DateTime(2024, 3, 25, 23, 3, 17, 545, DateTimeKind.Utc).AddTicks(7296),
-                            IsApproved = true,
+                            EndDate = new DateTime(2024, 4, 3, 22, 31, 16, 200, DateTimeKind.Utc).AddTicks(6605),
+                            IsApproved = false,
                             IsDeleted = false,
-                            ManagerId = new Guid("00000000-0000-0000-0006-000000000003"),
                             ProductId = new Guid("b0000000-0000-0000-0000-000000000009"),
-                            StartDate = new DateTime(2023, 3, 26, 23, 3, 17, 545, DateTimeKind.Utc).AddTicks(7295),
+                            StartDate = new DateTime(2023, 4, 4, 22, 31, 16, 200, DateTimeKind.Utc).AddTicks(6604),
                             UserId = new Guid("00000000-0000-0000-0002-000000000003")
                         },
                         new
                         {
                             Id = new Guid("c0000000-0000-0000-0000-000000000006"),
-                            EndDate = new DateTime(2024, 3, 25, 23, 3, 17, 545, DateTimeKind.Utc).AddTicks(7329),
-                            IsApproved = true,
+                            EndDate = new DateTime(2024, 4, 3, 22, 31, 16, 200, DateTimeKind.Utc).AddTicks(6616),
+                            IsApproved = false,
                             IsDeleted = false,
-                            ManagerId = new Guid("00000000-0000-0000-0006-000000000003"),
                             ProductId = new Guid("b0000000-0000-0000-0000-00000000000a"),
-                            StartDate = new DateTime(2023, 3, 26, 23, 3, 17, 545, DateTimeKind.Utc).AddTicks(7327),
+                            StartDate = new DateTime(2023, 4, 4, 22, 31, 16, 200, DateTimeKind.Utc).AddTicks(6616),
                             UserId = new Guid("00000000-0000-0000-0002-000000000003")
                         },
                         new
                         {
                             Id = new Guid("c0000000-0000-0000-0000-000000000007"),
-                            EndDate = new DateTime(2024, 3, 25, 23, 3, 17, 545, DateTimeKind.Utc).AddTicks(7343),
-                            IsApproved = true,
+                            EndDate = new DateTime(2024, 4, 3, 22, 31, 16, 200, DateTimeKind.Utc).AddTicks(6626),
+                            IsApproved = false,
                             IsDeleted = false,
-                            ManagerId = new Guid("00000000-0000-0000-0006-000000000003"),
                             ProductId = new Guid("b0000000-0000-0000-0000-00000000000b"),
-                            StartDate = new DateTime(2023, 3, 26, 23, 3, 17, 545, DateTimeKind.Utc).AddTicks(7342),
+                            StartDate = new DateTime(2023, 4, 4, 22, 31, 16, 200, DateTimeKind.Utc).AddTicks(6625),
                             UserId = new Guid("00000000-0000-0000-0002-000000000003")
                         },
                         new
                         {
                             Id = new Guid("c0000000-0000-0000-0000-000000000008"),
-                            EndDate = new DateTime(2024, 3, 25, 23, 3, 17, 545, DateTimeKind.Utc).AddTicks(7355),
+                            EndDate = new DateTime(2024, 4, 3, 22, 31, 16, 200, DateTimeKind.Utc).AddTicks(6633),
                             IsApproved = true,
                             IsDeleted = false,
-                            ManagerId = new Guid("00000000-0000-0000-0006-000000000003"),
+                            ManagerId = new Guid("10000000-0000-0000-0006-000000000003"),
                             ProductId = new Guid("b0000000-0000-0000-0000-00000000000c"),
-                            StartDate = new DateTime(2023, 3, 26, 23, 3, 17, 545, DateTimeKind.Utc).AddTicks(7354),
+                            StartDate = new DateTime(2023, 4, 4, 22, 31, 16, 200, DateTimeKind.Utc).AddTicks(6633),
                             UserId = new Guid("00000000-0000-0000-0002-000000000003")
                         },
                         new
                         {
                             Id = new Guid("c0000000-0000-0000-0000-000000000009"),
-                            EndDate = new DateTime(2024, 3, 25, 23, 3, 17, 545, DateTimeKind.Utc).AddTicks(7369),
+                            EndDate = new DateTime(2024, 4, 3, 22, 31, 16, 200, DateTimeKind.Utc).AddTicks(6642),
                             IsApproved = true,
                             IsDeleted = false,
-                            ManagerId = new Guid("00000000-0000-0000-0006-000000000003"),
+                            ManagerId = new Guid("10000000-0000-0000-0006-000000000003"),
                             ProductId = new Guid("b0000000-0000-0000-0000-00000000000d"),
-                            StartDate = new DateTime(2023, 3, 26, 23, 3, 17, 545, DateTimeKind.Utc).AddTicks(7367),
+                            StartDate = new DateTime(2023, 4, 4, 22, 31, 16, 200, DateTimeKind.Utc).AddTicks(6641),
                             UserId = new Guid("00000000-0000-0000-0002-000000000003")
                         },
                         new
                         {
                             Id = new Guid("c0000000-0000-0000-0000-00000000000a"),
-                            EndDate = new DateTime(2024, 3, 25, 23, 3, 17, 545, DateTimeKind.Utc).AddTicks(7390),
+                            EndDate = new DateTime(2024, 4, 3, 22, 31, 16, 200, DateTimeKind.Utc).AddTicks(6652),
                             IsApproved = true,
                             IsDeleted = false,
-                            ManagerId = new Guid("00000000-0000-0000-0006-000000000003"),
+                            ManagerId = new Guid("10000000-0000-0000-0006-000000000003"),
                             ProductId = new Guid("b0000000-0000-0000-0000-00000000000e"),
-                            StartDate = new DateTime(2023, 3, 26, 23, 3, 17, 545, DateTimeKind.Utc).AddTicks(7389),
+                            StartDate = new DateTime(2023, 4, 4, 22, 31, 16, 200, DateTimeKind.Utc).AddTicks(6651),
                             UserId = new Guid("00000000-0000-0000-0002-000000000003")
                         },
                         new
                         {
                             Id = new Guid("c0000000-0000-0000-0000-00000000000b"),
-                            EndDate = new DateTime(2024, 3, 25, 23, 3, 17, 545, DateTimeKind.Utc).AddTicks(7401),
+                            EndDate = new DateTime(2024, 4, 3, 22, 31, 16, 200, DateTimeKind.Utc).AddTicks(6660),
                             IsApproved = true,
                             IsDeleted = false,
-                            ManagerId = new Guid("00000000-0000-0000-0006-000000000003"),
+                            ManagerId = new Guid("10000000-0000-0000-0006-000000000003"),
                             ProductId = new Guid("b0000000-0000-0000-0000-00000000000f"),
-                            StartDate = new DateTime(2023, 3, 26, 23, 3, 17, 545, DateTimeKind.Utc).AddTicks(7401),
-                            UserId = new Guid("00000000-0000-0000-0002-000000000003")
+                            StartDate = new DateTime(2023, 4, 4, 22, 31, 16, 200, DateTimeKind.Utc).AddTicks(6659),
+                            UserId = new Guid("00000000-0000-0000-0002-000000000002")
                         },
                         new
                         {
                             Id = new Guid("c0000000-0000-0000-0000-00000000000c"),
-                            EndDate = new DateTime(2024, 3, 25, 23, 3, 17, 545, DateTimeKind.Utc).AddTicks(7478),
+                            EndDate = new DateTime(2024, 4, 3, 22, 31, 16, 200, DateTimeKind.Utc).AddTicks(6667),
                             IsApproved = true,
                             IsDeleted = false,
-                            ManagerId = new Guid("00000000-0000-0000-0006-000000000003"),
+                            ManagerId = new Guid("10000000-0000-0000-0001-000000000003"),
                             ProductId = new Guid("b0000000-0000-0000-0000-000000000010"),
-                            StartDate = new DateTime(2023, 3, 26, 23, 3, 17, 545, DateTimeKind.Utc).AddTicks(7477),
-                            UserId = new Guid("00000000-0000-0000-0002-000000000003")
+                            StartDate = new DateTime(2023, 4, 4, 22, 31, 16, 200, DateTimeKind.Utc).AddTicks(6667),
+                            UserId = new Guid("00000000-0000-0000-0002-000000000002")
                         },
                         new
                         {
                             Id = new Guid("c0000000-0000-0000-0000-00000000000d"),
-                            EndDate = new DateTime(2024, 3, 25, 23, 3, 17, 545, DateTimeKind.Utc).AddTicks(7489),
+                            EndDate = new DateTime(2024, 4, 3, 22, 31, 16, 200, DateTimeKind.Utc).AddTicks(6676),
                             IsApproved = true,
                             IsDeleted = false,
-                            ManagerId = new Guid("00000000-0000-0000-0006-000000000003"),
+                            ManagerId = new Guid("10000000-0000-0000-0001-000000000003"),
                             ProductId = new Guid("b0000000-0000-0000-0000-000000000009"),
-                            StartDate = new DateTime(2023, 3, 26, 23, 3, 17, 545, DateTimeKind.Utc).AddTicks(7488),
+                            StartDate = new DateTime(2023, 4, 4, 22, 31, 16, 200, DateTimeKind.Utc).AddTicks(6675),
                             UserId = new Guid("00000000-0000-0000-0002-000000000003")
                         },
                         new
                         {
                             Id = new Guid("c0000000-0000-0000-0000-00000000000e"),
-                            EndDate = new DateTime(2024, 3, 25, 23, 3, 17, 545, DateTimeKind.Utc).AddTicks(7529),
+                            EndDate = new DateTime(2024, 4, 3, 22, 31, 16, 200, DateTimeKind.Utc).AddTicks(6699),
                             IsApproved = true,
                             IsDeleted = false,
-                            ManagerId = new Guid("00000000-0000-0000-0006-000000000003"),
+                            ManagerId = new Guid("10000000-0000-0000-0001-000000000003"),
                             ProductId = new Guid("b0000000-0000-0000-0000-000000000009"),
-                            StartDate = new DateTime(2023, 3, 26, 23, 3, 17, 545, DateTimeKind.Utc).AddTicks(7528),
+                            StartDate = new DateTime(2023, 4, 4, 22, 31, 16, 200, DateTimeKind.Utc).AddTicks(6699),
                             UserId = new Guid("00000000-0000-0000-0002-000000000003")
+                        });
+                });
+
+            modelBuilder.Entity("GMS.Core.Core.Domain.Employee", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("FitnessClubId")
+                        .HasColumnType("uuid");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("boolean")
+                        .HasDefaultValue(false);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FitnessClubId");
+
+                    b.ToTable("Employees");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("10000000-0000-0000-0006-000000000001"),
+                            FitnessClubId = new Guid("f0000000-0000-0000-0000-000000000001"),
+                            IsDeleted = false
+                        },
+                        new
+                        {
+                            Id = new Guid("10000000-0000-0000-0001-000000000001"),
+                            FitnessClubId = new Guid("f0000000-0000-0000-0000-000000000001"),
+                            IsDeleted = false
+                        },
+                        new
+                        {
+                            Id = new Guid("10000000-0000-0000-0006-000000000002"),
+                            FitnessClubId = new Guid("f0000000-0000-0000-0000-000000000002"),
+                            IsDeleted = false
+                        },
+                        new
+                        {
+                            Id = new Guid("10000000-0000-0000-0001-000000000002"),
+                            FitnessClubId = new Guid("f0000000-0000-0000-0000-000000000002"),
+                            IsDeleted = false
+                        },
+                        new
+                        {
+                            Id = new Guid("10000000-0000-0000-0006-000000000003"),
+                            FitnessClubId = new Guid("f0000000-0000-0000-0000-000000000003"),
+                            IsDeleted = false
+                        },
+                        new
+                        {
+                            Id = new Guid("10000000-0000-0000-0001-000000000003"),
+                            FitnessClubId = new Guid("f0000000-0000-0000-0000-000000000003"),
+                            IsDeleted = false
                         });
                 });
 
@@ -774,6 +829,17 @@ namespace GMS.Core.DataAccess.Migrations
                     b.Navigation("Product");
                 });
 
+            modelBuilder.Entity("GMS.Core.Core.Domain.Employee", b =>
+                {
+                    b.HasOne("GMS.Core.Core.Domain.FitnessClub", "FitnessClub")
+                        .WithMany("Employees")
+                        .HasForeignKey("FitnessClubId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("FitnessClub");
+                });
+
             modelBuilder.Entity("GMS.Core.Core.Domain.Product", b =>
                 {
                     b.HasOne("GMS.Core.Core.Domain.FitnessClub", "FitnessClub")
@@ -824,6 +890,8 @@ namespace GMS.Core.DataAccess.Migrations
             modelBuilder.Entity("GMS.Core.Core.Domain.FitnessClub", b =>
                 {
                     b.Navigation("Areas");
+
+                    b.Navigation("Employees");
 
                     b.Navigation("Products");
 

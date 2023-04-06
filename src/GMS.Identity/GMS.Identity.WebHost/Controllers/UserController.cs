@@ -29,7 +29,7 @@ public class UserController : ControllerBase
     public UserController(IUserRepository userRepository, AuthOptions authOptions, IValidator<UserCreateApiModel> validator)
     {
         _userRepository = userRepository;
-        _authOptions = authOptions; 
+        _authOptions = authOptions;
         _validator = validator;
     }
 
@@ -38,11 +38,23 @@ public class UserController : ControllerBase
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
-    [RequirePrivelege(Priviliges.Administrator, Priviliges.System)]
+    [RequirePrivelege(Priviliges.GYMOwner, Priviliges.Administrator, Priviliges.Manager, Priviliges.System)]
     [HttpGet(IdentityRouting.GetUser)]
     public async Task<UserApiModel?> GetUser([FromRoute] Guid id)
     {
         return await _userRepository.GetUser(id);
+    }
+
+    /// <summary>
+    /// Get list users by Ids
+    /// </summary>
+    /// <param name="ids"></param>
+    /// <returns>list UserApiModel</returns>
+    [RequirePrivelege(Priviliges.GYMOwner, Priviliges.Administrator, Priviliges.Manager, Priviliges.System)]
+    [HttpGet(IdentityRouting.GetListUsers)]
+    public async Task<List<UserApiModel>> GetListUsers([FromQuery] List<Guid> ids)
+    {
+        return await _userRepository.GetListUsers(ids);
     }
 
     /// <summary>
@@ -67,7 +79,7 @@ public class UserController : ControllerBase
     /// </summary>
     /// <param name="user"></param>
     /// <returns></returns>
-    [RequirePrivelege(Priviliges.Administrator, Priviliges.System)]
+    [RequirePrivelege(Priviliges.GYMOwner, Priviliges.Administrator, Priviliges.System)]
     [HttpPost(IdentityRouting.CreateUser)]
     public async Task<ActionResult<UserApiModel>>CreateUser([FromBody] UserCreateApiModel user)
     {

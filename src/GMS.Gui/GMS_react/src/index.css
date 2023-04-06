@@ -1,0 +1,70 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+input{
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid black;
+
+}
+input:focus{
+  border: none;
+}
+.frame{
+  border-radius: 8px;
+  padding: 8px;
+  border: 1px solid black;
+}
+
+.btn{
+  padding: 8px;
+  border-radius: 8px;
+  border: none;
+  opacity: 0.8;
+  cursor:pointer;
+} 
+.btn:hover{
+  opacity: 1;
+}
+
+.btn-primary{
+  background-color: #0cc9f8;
+  color: black;
+}
+
+.btn-success{
+  background-color: #18cc21;
+  color: black;
+}
+
+.validation-error{
+  color: tomato;
+}
+
+.max-width500{
+  width: 100%;
+  max-width: 500px;
+}
+
+/*FLEX*/
+
+.flex-vcc{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.flex-hcc{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

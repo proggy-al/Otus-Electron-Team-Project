@@ -11,12 +11,7 @@ namespace GMS.Core.WebHost.Mappings
     {
         public ContractVmMappingsProfile()
         {
-            CreateMap<ContractDto, ContractResponse>()
-                .ForMember(d => d.Product, map => map.Ignore())
-                .ForMember(d => d.FitnessClub, map => map.Ignore());
-            CreateMap<ContractResponse, ContractDto>()
-                .ForMember(d => d.IsDeleted, map => map.Ignore())
-                .ForMember(d => d.IsApproved, map => map.Ignore());
+            CreateMap<ContractWithFсDto, ContractUserResponse>();
         }
     }
 }

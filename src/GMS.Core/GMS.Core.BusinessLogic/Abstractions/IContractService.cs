@@ -1,17 +1,29 @@
 ﻿using GMS.Core.BusinessLogic.Contracts;
+using GMS.Core.WebHost.Models;
 
 namespace GMS.Core.BusinessLogic.Abstractions
 {
     public interface IContractService : IService
     {
         /// <summary>
-        /// Получить постраничный список контрактов менеджера
+        /// Получить постраничный список НЕподтвержденных контрактов фитнес клуба
         /// </summary>
-        /// <param name="managerId">идентификатор менеджера</param>
+        /// <param name="employeeId">идентификатор сотрудника клуба</param>
+        /// <param name="fitnessClubId">идентификатор фитнес клуба</param>
         /// <param name="pageNumber">номер страницы</param>
         /// <param name="pageSize">количество</param>
         /// <returns>список ДТО контрактов</returns>
-        Task<List<ContractDto>> GetPageByManagerId(Guid managerId, int pageNumber, int pageSize);
+        Task<PagedList<ContractDto>> GetPageNotApproved(Guid employeeId, Guid fitnessClubId, int pageNumber, int pageSize);
+
+        /// <summary>
+        /// Получить постраничный список подтвержденных контрактов фитнес клуба
+        /// </summary>
+        /// <param name="employeeId">идентификатор сотрудника клуба</param>
+        /// <param name="fitnessClubId">идентификатор фитнес клуба</param>
+        /// <param name="pageNumber">номер страницы</param>
+        /// <param name="pageSize">количество</param>
+        /// <returns>список ДТО контрактов</returns>
+        Task<PagedList<ContractDto>> GetPageApproved(Guid employeeId, Guid fitnessClubId, int pageNumber, int pageSize);
 
         /// <summary>
         /// Получить постраничный список контрактов пользователя
@@ -19,18 +31,23 @@ namespace GMS.Core.BusinessLogic.Abstractions
         /// <param name="userId">идентификатор пользователя</param>
         /// <param name="pageNumber">номер страницы</param>
         /// <param name="pageSize">количество</param>
-        /// <returns>список ДТО контрактов</returns>
-        Task<List<ContractDto>> GetPageByUserId(Guid userId, int pageNumber, int pageSize);
+        /// <returns></returns>
+        Task<PagedList<ContractWithFсDto>> GetPageByUserId(Guid userId, int pageNumber, int pageSize);
 
         /// <summary>
-        /// Получить постраничный список контрактов фитнес клуба
+        /// Создать котракт(купить продукты)
         /// </summary>
-        /// <param name="fitnessClubId">идентификатор фитнес клуба</param>
-        /// <param name="pageNumber">номер страницы</param>
-        /// <param name="pageSize">количество</param>
-        /// <returns>список ДТО контрактов</returns>
-        Task<List<ContractDto>> GetPageByFitnessClubId(Guid fitnessClubId, int pageNumber, int pageSize);
+        /// <param name="productId">идентификатор продукта</param>
+        /// <param name="userId">идентификатор пользователя</param>
+        /// <returns></returns>
+        Task<Guid> Create(Guid productId, Guid userId);
 
-        Task<List<ContractDto>> GetPage(int pageNumber, int pageSize);
+        /// <summary>
+        /// Подтвердить контракт
+        /// </summary>
+        /// <param name="contractId">идентификатор контракта</param>
+        /// <param name="employeeId">идентификатор сотрудника</param>
+        /// <returns></returns>
+        Task Approve(Guid contractId, Guid employeeId);
     }
 }

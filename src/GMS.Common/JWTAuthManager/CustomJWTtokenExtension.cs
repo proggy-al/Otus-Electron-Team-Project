@@ -9,7 +9,7 @@ namespace JWTAuthManager;
 
 public static class CustomJWTtokenExtension
 {
-    public static void AddCustomJWTAuthentification(this IServiceCollection services)
+    public static IServiceCollection AddCustomJWTAuthentification(this IServiceCollection services)
     {
         var configOptions = new ConfigurationBuilder().AddJsonFile("identitysettings.json").Build();
         var authOptions = configOptions.GetSection(AuthOptions.Position).Get<AuthOptions>();
@@ -36,9 +36,13 @@ public static class CustomJWTtokenExtension
                         ValidateIssuerSigningKey = jwtOptions.ValidateIssuerSigningKey,
                         // строка, представляющая издателя
                         ValidIssuer = authOptions.Issuer,
+                        // установка потребителя токена
                         ValidAudience = authOptions.Audience,
+                        // установка ключа безопасности
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(authOptions.Key))
                     };
                 });
+
+        return services;
     }
 }

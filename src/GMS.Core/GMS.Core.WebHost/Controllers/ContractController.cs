@@ -1,56 +1,155 @@
 ﻿using AutoMapper;
 using GMS.Core.BusinessLogic.Abstractions;
 using GMS.Core.WebHost.Controllers.Base;
+using GMS.Core.WebHost.HttpClients;
 using GMS.Core.WebHost.Models;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
 
 namespace GMS.Core.WebHost.Controllers
 {
-    //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [Route("api/[controller]")]
     [ApiController]
     public class ContractController : BaseController<IContractService>
     {
-        public ContractController(IContractService service, IMapper mapper) : base(service, mapper) { }
+        private IUserHttpClient _httpClient;
 
+        public ContractController(IContractService service, IMapper mapper, IUserHttpClient httpClient) : base(service, mapper)
+        {
+            _httpClient = httpClient;
+        }
+
+        [Authorize(Policy = "Manager")]
         [HttpGet("[action]/{pageNumber}:{pageSize}")]
-        public async Task<IActionResult> GetPagedByManagerId(Guid managerId, int pageNumber, int pageSize)
+        public async Task<IActionResult> GetPageNotApproved(Guid fitnessClubId, int pageNumber = 1, int pageSize = 12)
         {
-            throw new NotImplementedException();
+            // получаем список неподтвержденных контрактов
+            var pagedContracts = await _service.GetPageNotApproved(UserId, fitnessClubId, pageNumber, pageSize);
+
+            if (pagedContracts.Entities.Count == 0)
+                return NoContent();
+
+            // получаем список уникальных Id пользователей в контрактах(т.к. пользователи могут повторяться)
+            var uniqUserIds = pagedContracts.Entities.Select(x => x.UserId).Distinct().ToList();
+
+            // запрашиваем информацию о пользователях в Identity microservice
+            _httpClient.Token = GetToken();
+            var users = await _httpClient.GetPagedUsersAsync(uniqUserIds);
+
+            // соединяем информацию контрактов с информацией о пользователях
+            var contracts = from u in users
+                            join c in pagedContracts.Entities on u.Id equals c.UserId
+                            select new ContractNotApprovedResponse
+                            {
+                                Id = c.Id,
+                                User = new UserResponse
+                                {
+                                    Id = u.Id,
+                                    Name = u.UserName,
+                                    Email = u.Email,
+                                    TelegramName = u.TelegramUserName
+                                },
+                                Product = new ProductResponse
+                                {
+                                    Id = c.Product.Id,
+                                    Name = c.Product.Name,
+                                    Description = c.Product.Description,
+                                    Quantity = c.Product.Quantity,
+                                    Price = c.Product.Price
+                                },
+                                StartDate = c.StartDate,
+                                EndDate = c.EndDate
+                            };
+
+            Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(pagedContracts.Pagination));
+            return Ok(contracts);
         }
 
+        [Authorize(Policy = "Manager")]
         [HttpGet("[action]/{pageNumber}:{pageSize}")]
-        public async Task<IActionResult> GetPageByUserId(Guid userId, int pageNumber, int pageSize)
+        public async Task<IActionResult> GetPage(Guid fitnessClubId, int pageNumber = 1, int pageSize = 12)
         {
-            throw new NotImplementedException();
+            // получаем список контрактов
+            var pagedContracts = await _service.GetPageApproved(UserId, fitnessClubId, pageNumber, pageSize);
+
+            if (pagedContracts.Entities.Count == 0)
+                return NoContent();
+
+            // получаем список уникальных Id пользователей и сотрудников в контрактах
+            var uniqUserIds = pagedContracts.Entities.Select(x => x.UserId).Distinct().ToList();
+            var uniqManagerIds = pagedContracts.Entities.Select(x => x.ManagerId).Distinct().ToList();
+
+            // запрашиваем информацию о пользователях b сотрудниках в Identity microservice
+            _httpClient.Token = GetToken();
+            var users = await _httpClient.GetPagedUsersAsync(uniqUserIds);
+            var managers = await _httpClient.GetPagedUsersAsync(uniqManagerIds);
+
+            // соединяем информацию контрактов с информацией о пользователях
+            var contracts = from c in pagedContracts.Entities
+                            join u in users on c.UserId equals u.Id
+                            join m in managers on c.ManagerId equals m.Id
+                            select new ContractResponse
+                            {
+                                Id = c.Id,
+                                User = new UserResponse
+                                {
+                                    Id = u.Id,
+                                    Name = u.UserName,
+                                    Email = u.Email,
+                                    TelegramName = u.TelegramUserName
+                                },
+                                Manager = new ManagerResponse
+                                {
+                                    Id = m.Id,
+                                    Name = m.UserName
+                                },
+                                Product = new ProductResponse
+                                {
+                                    Id = c.Product.Id,
+                                    Name = c.Product.Name,
+                                    Description = c.Product.Description,
+                                    Quantity = c.Product.Quantity,
+                                    Price = c.Product.Price
+                                },
+                                StartDate = c.StartDate,
+                                EndDate = c.EndDate
+                            };
+
+            Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(pagedContracts.Pagination));
+            return Ok(contracts);
         }
 
-        [HttpGet("[action]/{pageNumber}:{pageSize}")]
-        public async Task<IActionResult> GetPageByFitnessClubId(Guid fitnessClubId, int pageNumber, int pageSize)
-        {
-            throw new NotImplementedException();
+         
+         [Authorize(Policy = "User")]
+         [HttpGet("[action]/{pageNumber}:{pageSize}")]
+         public async Task<IActionResult> GetPageByUser(int pageNumber = 1, int pageSize = 12)
+         {
+            var pagedContracts = await _service.GetPageByUserId(UserId, pageNumber, pageSize);
+
+            if (pagedContracts.Entities.Count == 0)
+                return NoContent();
+
+           var contracts = _mapper.Map<List<ContractUserResponse>>(pagedContracts.Entities);
+
+            Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(pagedContracts.Pagination));
+            return Ok(contracts);
         }
 
-        [HttpGet("[action]/{id}")]
-        public async Task<IActionResult> Get(Guid id)
-        {
-            throw new NotImplementedException();
-        }
+         [Authorize(Policy = "User")]
+         [HttpPost("[action]")]
+         public async Task<IActionResult> Add(Guid productId)
+         {
+            var id = await _service.Create(productId, UserId);
+            return Ok(id.ToString());
+         }
 
-        [HttpPost("[action]")]
-        public async Task<IActionResult> Add(ContractCreateRequest request)
-        {
-            throw new NotImplementedException();
-        }
-
-        [HttpPut("[action]")]
-        public async Task<IActionResult> Approve(ContractApproveRequest request)
-        {
-            // ToDo: реализовать подтверждение контракта. Свойство IsApproved и ManagerId
-            throw new NotImplementedException();
+         [Authorize(Policy = "Manager")]
+         [HttpPut("[action]")]
+         public async Task<IActionResult> Approve(Guid contractId)
+         {
+            await _service.Approve(contractId, UserId);
+            return NoContent();
         }
     }
 }

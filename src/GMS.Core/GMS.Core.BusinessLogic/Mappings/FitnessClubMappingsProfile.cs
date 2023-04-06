@@ -16,6 +16,7 @@ namespace GMS.Core.BusinessLogic.Mappings
             CreateMap<FitnessClubCreateOrEditDto, FitnessClub>()
                 .ForMember(d => d.Id, map => map.Ignore())
                 .ForMember(d => d.IsDeleted, map => map.Ignore())
+                .ForMember(d => d.Employees, map => map.Ignore())
                 .ForMember(d => d.Areas, map => map.Ignore())
                 .ForMember(d => d.Products, map => map.Ignore())
                 .ForMember(d => d.TimeSlots, map => map.Ignore());

@@ -12,7 +12,7 @@ namespace GMS.Core.WebHost.Configurations
             string UrlSeq = "http://localhost:5341";
 
             Log.Logger = new Serilog.LoggerConfiguration()
-                .WriteTo.Console(new JsonFormatter())
+                .WriteTo.Console()
                 .WriteTo.Seq(UrlSeq)
                 .CreateLogger();
 

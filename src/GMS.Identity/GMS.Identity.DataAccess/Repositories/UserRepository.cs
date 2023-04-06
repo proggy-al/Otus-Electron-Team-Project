@@ -30,6 +30,12 @@ namespace GMS.Identity.DataAccess.Repositories
             return null;
         }
 
+        public async Task<List<UserApiModel>> GetListUsers(List<Guid> ids)
+        {
+            var entities = await _context.Users.Where(u => ids.Contains(u.Id)).ToListAsync();
+            return _mapper.Map<List<UserApiModel>>(entities);
+        }
+
         public async Task<List<UserApiModel>> GetUsers()
         {
             var entities = await _context.Users.ToListAsync();

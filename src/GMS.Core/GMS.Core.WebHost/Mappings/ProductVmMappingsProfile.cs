@@ -14,7 +14,7 @@ namespace GMS.Core.WebHost.Mappings
             CreateMap<ProductDto, ProductResponse>();
 
             CreateMap<ProductCreateRequest, ProductCreateDto>()
-                .ForMember(d => d.EmploeeId, map => map.Ignore());
+                .ForMember(d => d.EmployeeId, map => map.Ignore());
         }
     }
 }

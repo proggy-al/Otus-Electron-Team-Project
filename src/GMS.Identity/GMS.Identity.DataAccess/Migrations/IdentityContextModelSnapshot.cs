@@ -16,7 +16,7 @@ namespace GMS.Identity.DataAccess.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.2")
+                .HasAnnotation("ProductVersion", "7.0.4")
                 .HasAnnotation("Proxies:ChangeTracking", false)
                 .HasAnnotation("Proxies:CheckEquality", false)
                 .HasAnnotation("Proxies:LazyLoading", true);
@@ -65,9 +65,9 @@ namespace GMS.Identity.DataAccess.Migrations
                             Id = new Guid("a24ab827-10a5-47bf-86bd-39adeb89b6c9"),
                             Email = "sash@mail.ru",
                             IsActive = true,
-                            PasswordHash = "jYQ/ud6dDjGLUgzoIWqCxLyfKA5XLWujcoT00jjwI/k=",
+                            PasswordHash = "pCNmzUgc/yf9pL2udDqpjfBQOUXvtm5JJkI89K1PhrI=",
                             Role = "Administrator",
-                            Salt = "YyaqmwHNHJJ7huxnTd/srg==",
+                            Salt = "h7TRguSGJKGsTDKLzqYJ1Q==",
                             TelegramUserName = "@sash",
                             UserName = "Sash"
                         },
@@ -76,9 +76,9 @@ namespace GMS.Identity.DataAccess.Migrations
                             Id = new Guid("8699aba2-5ec1-40cf-b186-36ca13c15ea2"),
                             Email = "dan@mail.ru",
                             IsActive = true,
-                            PasswordHash = "ZW62oAyOt2cMhTyfyQeV4ex6buOsCo+442ktnp4ry4g=",
+                            PasswordHash = "v9UvAOCyNVfzz1lIAX/jUgGI2sCKAuW/HGr3DGngu58=",
                             Role = "Administrator",
-                            Salt = "v3kv2EX3EtGm2HjulHm95A==",
+                            Salt = "LpqopcBCi+JGLZooN8fg2Q==",
                             TelegramUserName = "@dan",
                             UserName = "Dan"
                         },
@@ -87,9 +87,9 @@ namespace GMS.Identity.DataAccess.Migrations
                             Id = new Guid("c35e71b1-01fe-4e96-aa13-35371f792a4f"),
                             Email = "sys@mail.ru",
                             IsActive = true,
-                            PasswordHash = "ZW62oAyOt2cMhTyfyQeV4ex6buOsCo+442ktnp4ry4g=",
+                            PasswordHash = "v9UvAOCyNVfzz1lIAX/jUgGI2sCKAuW/HGr3DGngu58=",
                             Role = "System",
-                            Salt = "v3kv2EX3EtGm2HjulHm95A==",
+                            Salt = "LpqopcBCi+JGLZooN8fg2Q==",
                             TelegramUserName = "@system",
                             UserName = "System"
                         },
@@ -98,11 +98,143 @@ namespace GMS.Identity.DataAccess.Migrations
                             Id = new Guid("6f35e9ac-2718-4b98-9a39-d3c136217e97"),
                             Email = "user@mail.ru",
                             IsActive = true,
-                            PasswordHash = "ZW62oAyOt2cMhTyfyQeV4ex6buOsCo+442ktnp4ry4g=",
+                            PasswordHash = "v9UvAOCyNVfzz1lIAX/jUgGI2sCKAuW/HGr3DGngu58=",
                             Role = "User",
-                            Salt = "v3kv2EX3EtGm2HjulHm95A==",
+                            Salt = "LpqopcBCi+JGLZooN8fg2Q==",
                             TelegramUserName = "@user",
                             UserName = "User"
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0004-000000000001"),
+                            Email = "joegold@mail.ru",
+                            IsActive = true,
+                            PasswordHash = "pCNmzUgc/yf9pL2udDqpjfBQOUXvtm5JJkI89K1PhrI=",
+                            Role = "GYMOwner",
+                            Salt = "h7TRguSGJKGsTDKLzqYJ1Q==",
+                            TelegramUserName = "@joegold",
+                            UserName = "Joe"
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0004-000000000002"),
+                            Email = "andrey@mail.ru",
+                            IsActive = true,
+                            PasswordHash = "pCNmzUgc/yf9pL2udDqpjfBQOUXvtm5JJkI89K1PhrI=",
+                            Role = "GYMOwner",
+                            Salt = "h7TRguSGJKGsTDKLzqYJ1Q==",
+                            TelegramUserName = "@andrey",
+                            UserName = "Андрей"
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0004-000000000003"),
+                            Email = "gymowner3@mail.ru",
+                            IsActive = true,
+                            PasswordHash = "pCNmzUgc/yf9pL2udDqpjfBQOUXvtm5JJkI89K1PhrI=",
+                            Role = "GYMOwner",
+                            Salt = "h7TRguSGJKGsTDKLzqYJ1Q==",
+                            TelegramUserName = "@gymowner3",
+                            UserName = "Owner3"
+                        },
+                        new
+                        {
+                            Id = new Guid("10000000-0000-0000-0001-000000000001"),
+                            Email = "goldgymadministrator@mail.ru",
+                            IsActive = true,
+                            PasswordHash = "pCNmzUgc/yf9pL2udDqpjfBQOUXvtm5JJkI89K1PhrI=",
+                            Role = "Administrator",
+                            Salt = "h7TRguSGJKGsTDKLzqYJ1Q==",
+                            TelegramUserName = "@goldgymadministrator",
+                            UserName = "GoldGymAdministrator"
+                        },
+                        new
+                        {
+                            Id = new Guid("10000000-0000-0000-0001-000000000002"),
+                            Email = "almazadministrator@mail.ru",
+                            IsActive = true,
+                            PasswordHash = "pCNmzUgc/yf9pL2udDqpjfBQOUXvtm5JJkI89K1PhrI=",
+                            Role = "Administrator",
+                            Salt = "h7TRguSGJKGsTDKLzqYJ1Q==",
+                            TelegramUserName = "@almazadministrator",
+                            UserName = "AlmazAdministrator"
+                        },
+                        new
+                        {
+                            Id = new Guid("10000000-0000-0000-0001-000000000003"),
+                            Email = "administrator3@mail.ru",
+                            IsActive = true,
+                            PasswordHash = "pCNmzUgc/yf9pL2udDqpjfBQOUXvtm5JJkI89K1PhrI=",
+                            Role = "Administrator",
+                            Salt = "h7TRguSGJKGsTDKLzqYJ1Q==",
+                            TelegramUserName = "@administrator3",
+                            UserName = "Administrator3"
+                        },
+                        new
+                        {
+                            Id = new Guid("10000000-0000-0000-0006-000000000001"),
+                            Email = "goldgymmanager@mail.ru",
+                            IsActive = true,
+                            PasswordHash = "pCNmzUgc/yf9pL2udDqpjfBQOUXvtm5JJkI89K1PhrI=",
+                            Role = "Manager",
+                            Salt = "h7TRguSGJKGsTDKLzqYJ1Q==",
+                            TelegramUserName = "@goldgymmanager",
+                            UserName = "GoldGymManager"
+                        },
+                        new
+                        {
+                            Id = new Guid("10000000-0000-0000-0006-000000000002"),
+                            Email = "almazmanager@mail.ru",
+                            IsActive = true,
+                            PasswordHash = "pCNmzUgc/yf9pL2udDqpjfBQOUXvtm5JJkI89K1PhrI=",
+                            Role = "Manager",
+                            Salt = "h7TRguSGJKGsTDKLzqYJ1Q==",
+                            TelegramUserName = "@almazmanager",
+                            UserName = "AlmazManager"
+                        },
+                        new
+                        {
+                            Id = new Guid("10000000-0000-0000-0006-000000000003"),
+                            Email = "manager3@mail.ru",
+                            IsActive = true,
+                            PasswordHash = "pCNmzUgc/yf9pL2udDqpjfBQOUXvtm5JJkI89K1PhrI=",
+                            Role = "Manager",
+                            Salt = "h7TRguSGJKGsTDKLzqYJ1Q==",
+                            TelegramUserName = "@manager3",
+                            UserName = "Manager3"
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0002-000000000001"),
+                            Email = "johngold@mail.ru",
+                            IsActive = true,
+                            PasswordHash = "pCNmzUgc/yf9pL2udDqpjfBQOUXvtm5JJkI89K1PhrI=",
+                            Role = "User",
+                            Salt = "h7TRguSGJKGsTDKLzqYJ1Q==",
+                            TelegramUserName = "@johngold",
+                            UserName = "John"
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0002-000000000002"),
+                            Email = "ivanalmaz@mail.ru",
+                            IsActive = true,
+                            PasswordHash = "pCNmzUgc/yf9pL2udDqpjfBQOUXvtm5JJkI89K1PhrI=",
+                            Role = "User",
+                            Salt = "h7TRguSGJKGsTDKLzqYJ1Q==",
+                            TelegramUserName = "@ivanalmaz",
+                            UserName = "Иван"
+                        },
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0002-000000000003"),
+                            Email = "user3@mail.ru",
+                            IsActive = true,
+                            PasswordHash = "pCNmzUgc/yf9pL2udDqpjfBQOUXvtm5JJkI89K1PhrI=",
+                            Role = "User",
+                            Salt = "h7TRguSGJKGsTDKLzqYJ1Q==",
+                            TelegramUserName = "@user3",
+                            UserName = "User3"
                         });
                 });
 #pragma warning restore 612, 618

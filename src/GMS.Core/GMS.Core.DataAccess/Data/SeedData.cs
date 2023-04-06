@@ -61,7 +61,49 @@ namespace GMS.Core.DataAccess.Data
                 IsDeleted = false
             },
         };
+        public static IEnumerable<Employee> Employees => new List<Employee>()
+        {
+            // Gold's Gym
+            new Employee
+            {
+                Id = Guid.Parse("10000000-0000-0000-0006-000000000001"),
+                FitnessClubId = Guid.Parse("f0000000-0000-0000-0000-000000000001"),  
+                IsDeleted = false
+            },
+            new Employee
+            {
+                Id = Guid.Parse("10000000-0000-0000-0001-000000000001"),
+                FitnessClubId = Guid.Parse("f0000000-0000-0000-0000-000000000001"),
+                IsDeleted = false
+            },
 
+            // Алмаз
+            new Employee
+            {
+                Id = Guid.Parse("10000000-0000-0000-0006-000000000002"),
+                FitnessClubId = Guid.Parse("f0000000-0000-0000-0000-000000000002"),
+                IsDeleted = false
+            },
+            new Employee
+            {
+                Id = Guid.Parse("10000000-0000-0000-0001-000000000002"),
+                FitnessClubId = Guid.Parse("f0000000-0000-0000-0000-000000000002"),
+                IsDeleted = false
+            },
+            // Фитнес клуб 3
+            new Employee
+            {
+                Id = Guid.Parse("10000000-0000-0000-0006-000000000003"),
+                FitnessClubId = Guid.Parse("f0000000-0000-0000-0000-000000000003"),
+                IsDeleted = false
+            },
+            new Employee
+            {
+                Id = Guid.Parse("10000000-0000-0000-0001-000000000003"),
+                FitnessClubId = Guid.Parse("f0000000-0000-0000-0000-000000000003"),
+                IsDeleted = false
+            },
+        };
         public static IEnumerable<Area> Areas => new List<Area>()
         {
             // Gold's Gym Venice
@@ -379,7 +421,7 @@ namespace GMS.Core.DataAccess.Data
             {
                 Id = Guid.Parse("c0000000-0000-0000-0000-000000000001"),
                 ProductId = Guid.Parse("b0000000-0000-0000-0000-000000000002"),
-                ManagerId = Guid.Parse("00000000-0000-0000-0006-000000000001"),
+                ManagerId = Guid.Parse("10000000-0000-0000-0006-000000000001"),
                 UserId = Guid.Parse("00000000-0000-0000-0002-000000000001"),
                 StartDate = DateTime.UtcNow,
                 EndDate = DateTime.UtcNow.AddDays(365),
@@ -390,7 +432,7 @@ namespace GMS.Core.DataAccess.Data
             {
                 Id = Guid.Parse("c0000000-0000-0000-0000-000000000002"),
                 ProductId = Guid.Parse("b0000000-0000-0000-0000-000000000003"),
-                ManagerId = Guid.Parse("00000000-0000-0000-0006-000000000001"),
+                ManagerId = Guid.Parse("10000000-0000-0000-0006-000000000001"),
                 UserId = Guid.Parse("00000000-0000-0000-0002-000000000001"),
                 StartDate = DateTime.UtcNow,
                 EndDate = DateTime.UtcNow.AddDays(365),
@@ -403,7 +445,7 @@ namespace GMS.Core.DataAccess.Data
             {
                 Id = Guid.Parse("c0000000-0000-0000-0000-000000000003"),
                 ProductId = Guid.Parse("b0000000-0000-0000-0000-000000000006"),
-                ManagerId = Guid.Parse("00000000-0000-0000-0006-000000000002"),
+                ManagerId = Guid.Parse("10000000-0000-0000-0006-000000000002"),
                 UserId = Guid.Parse("00000000-0000-0000-0002-000000000002"),
                 StartDate = DateTime.UtcNow,
                 EndDate = DateTime.UtcNow.AddDays(365),
@@ -413,8 +455,8 @@ namespace GMS.Core.DataAccess.Data
             new Contract
             {
                 Id = Guid.Parse("c0000000-0000-0000-0000-000000000004"),
-                ProductId = Guid.Parse("b0000000-0000-0000-0000-000000000008"), 
-                ManagerId = Guid.Parse("00000000-0000-0000-0006-000000000002"),
+                ProductId = Guid.Parse("b0000000-0000-0000-0000-000000000008"),
+                ManagerId = Guid.Parse("10000000-0000-0000-0006-000000000002"),
                 UserId = Guid.Parse("00000000-0000-0000-0002-000000000002"),
                 StartDate = DateTime.UtcNow,
                 EndDate = DateTime.UtcNow.AddDays(365),
@@ -427,40 +469,40 @@ namespace GMS.Core.DataAccess.Data
             {
                 Id = Guid.Parse("c0000000-0000-0000-0000-000000000005"),
                 ProductId = Guid.Parse("b0000000-0000-0000-0000-000000000009"),
-                ManagerId = Guid.Parse("00000000-0000-0000-0006-000000000003"),
+                //ManagerId = Guid.Parse("10000000-0000-0000-0006-000000000003"),
                 UserId = Guid.Parse("00000000-0000-0000-0002-000000000003"),
                 StartDate = DateTime.UtcNow,
                 EndDate = DateTime.UtcNow.AddDays(365),
-                IsApproved = true,
+                IsApproved = false,
                 IsDeleted = false
             },
             new Contract
             {
                 Id = Guid.Parse("c0000000-0000-0000-0000-000000000006"),
                 ProductId = Guid.Parse("b0000000-0000-0000-0000-00000000000a"),
-                ManagerId = Guid.Parse("00000000-0000-0000-0006-000000000003"),
+                //ManagerId = Guid.Parse("10000000-0000-0000-0006-000000000003"),
                 UserId = Guid.Parse("00000000-0000-0000-0002-000000000003"),
                 StartDate = DateTime.UtcNow,
                 EndDate = DateTime.UtcNow.AddDays(365),
-                IsApproved = true,
+                IsApproved = false,
                 IsDeleted = false
             },
             new Contract
             {
                 Id = Guid.Parse("c0000000-0000-0000-0000-000000000007"),
                 ProductId = Guid.Parse("b0000000-0000-0000-0000-00000000000b"),
-                ManagerId = Guid.Parse("00000000-0000-0000-0006-000000000003"),
+                //ManagerId = Guid.Parse("10000000-0000-0000-0006-000000000003"),
                 UserId = Guid.Parse("00000000-0000-0000-0002-000000000003"),
                 StartDate = DateTime.UtcNow,
                 EndDate = DateTime.UtcNow.AddDays(365),
-                IsApproved = true,
+                IsApproved = false,
                 IsDeleted = false
             },
             new Contract
             {
                 Id = Guid.Parse("c0000000-0000-0000-0000-000000000008"),
                 ProductId = Guid.Parse("b0000000-0000-0000-0000-00000000000c"),
-                ManagerId = Guid.Parse("00000000-0000-0000-0006-000000000003"),
+                ManagerId = Guid.Parse("10000000-0000-0000-0006-000000000003"),
                 UserId = Guid.Parse("00000000-0000-0000-0002-000000000003"),
                 StartDate = DateTime.UtcNow,
                 EndDate = DateTime.UtcNow.AddDays(365),
@@ -471,7 +513,7 @@ namespace GMS.Core.DataAccess.Data
             {
                 Id = Guid.Parse("c0000000-0000-0000-0000-000000000009"),
                 ProductId = Guid.Parse("b0000000-0000-0000-0000-00000000000d"),
-                ManagerId = Guid.Parse("00000000-0000-0000-0006-000000000003"),
+                ManagerId = Guid.Parse("10000000-0000-0000-0006-000000000003"),
                 UserId = Guid.Parse("00000000-0000-0000-0002-000000000003"),
                 StartDate = DateTime.UtcNow,
                 EndDate = DateTime.UtcNow.AddDays(365),
@@ -482,7 +524,7 @@ namespace GMS.Core.DataAccess.Data
             {
                 Id = Guid.Parse("c0000000-0000-0000-0000-00000000000a"),
                 ProductId = Guid.Parse("b0000000-0000-0000-0000-00000000000e"),
-                ManagerId = Guid.Parse("00000000-0000-0000-0006-000000000003"),
+                ManagerId = Guid.Parse("10000000-0000-0000-0006-000000000003"),
                 UserId = Guid.Parse("00000000-0000-0000-0002-000000000003"),
                 StartDate = DateTime.UtcNow,
                 EndDate = DateTime.UtcNow.AddDays(365),
@@ -493,8 +535,8 @@ namespace GMS.Core.DataAccess.Data
             {
                 Id = Guid.Parse("c0000000-0000-0000-0000-00000000000b"),
                 ProductId = Guid.Parse("b0000000-0000-0000-0000-00000000000f"),
-                ManagerId = Guid.Parse("00000000-0000-0000-0006-000000000003"),
-                UserId = Guid.Parse("00000000-0000-0000-0002-000000000003"),
+                ManagerId = Guid.Parse("10000000-0000-0000-0006-000000000003"),
+                UserId = Guid.Parse("00000000-0000-0000-0002-000000000002"),
                 StartDate = DateTime.UtcNow,
                 EndDate = DateTime.UtcNow.AddDays(365),
                 IsApproved = true,
@@ -504,8 +546,8 @@ namespace GMS.Core.DataAccess.Data
             {
                 Id = Guid.Parse("c0000000-0000-0000-0000-00000000000c"),
                 ProductId = Guid.Parse("b0000000-0000-0000-0000-000000000010"),
-                ManagerId = Guid.Parse("00000000-0000-0000-0006-000000000003"),
-                UserId = Guid.Parse("00000000-0000-0000-0002-000000000003"),
+                ManagerId = Guid.Parse("10000000-0000-0000-0001-000000000003"),
+                UserId = Guid.Parse("00000000-0000-0000-0002-000000000002"),
                 StartDate = DateTime.UtcNow,
                 EndDate = DateTime.UtcNow.AddDays(365),
                 IsApproved = true,
@@ -515,7 +557,7 @@ namespace GMS.Core.DataAccess.Data
             {
                 Id = Guid.Parse("c0000000-0000-0000-0000-00000000000d"),
                 ProductId = Guid.Parse("b0000000-0000-0000-0000-000000000009"),
-                ManagerId = Guid.Parse("00000000-0000-0000-0006-000000000003"),
+                ManagerId = Guid.Parse("10000000-0000-0000-0001-000000000003"),
                 UserId = Guid.Parse("00000000-0000-0000-0002-000000000003"),
                 StartDate = DateTime.UtcNow,
                 EndDate = DateTime.UtcNow.AddDays(365),
@@ -526,7 +568,7 @@ namespace GMS.Core.DataAccess.Data
             {
                 Id = Guid.Parse("c0000000-0000-0000-0000-00000000000e"),
                 ProductId = Guid.Parse("b0000000-0000-0000-0000-000000000009"),
-                ManagerId = Guid.Parse("00000000-0000-0000-0006-000000000003"),
+                ManagerId = Guid.Parse("10000000-0000-0000-0001-000000000003"),
                 UserId = Guid.Parse("00000000-0000-0000-0002-000000000003"),
                 StartDate = DateTime.UtcNow,
                 EndDate = DateTime.UtcNow.AddDays(365),

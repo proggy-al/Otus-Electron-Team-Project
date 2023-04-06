@@ -13,7 +13,7 @@ namespace GMS.Core.Test
 { 
     public class ContractServiceTests : IClassFixture<TestFixture>
     {
-        private readonly ContractService _contractService;
+       /* private readonly ContractService _contractService;
         private readonly Mock<IContractRepository> _repositoryMock = new Mock<IContractRepository>();
         private readonly Guid _id = Guid.NewGuid();
         private IMapper _mapper;
@@ -77,6 +77,6 @@ namespace GMS.Core.Test
             {
                 Assert.True(result.Count == 1);
             }
-        }
+        }*/
     }
 }

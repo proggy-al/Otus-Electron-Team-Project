@@ -14,10 +14,10 @@ namespace GMS.Core.WebHost.Mappings
             CreateMap<AreaDto, AreaResponse>();
 
             CreateMap<AreaCreateRequest, AreaCreateDto>()
-                .ForMember(f => f.EmploeeId, map => map.Ignore());
+                .ForMember(f => f.EmployeeId, map => map.Ignore());
 
             CreateMap<AreaEditRequest, AreaEditDto>()
-                .ForMember(f => f.EmploeeId, map => map.Ignore());
+                .ForMember(f => f.EmployeeId, map => map.Ignore());
         }
     }
 }
