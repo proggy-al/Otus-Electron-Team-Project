@@ -36,7 +36,9 @@ public static class CustomJWTtokenExtension
                         ValidateIssuerSigningKey = jwtOptions.ValidateIssuerSigningKey,
                         // строка, представляющая издателя
                         ValidIssuer = authOptions.Issuer,
+                        // установка потребителя токена
                         ValidAudience = authOptions.Audience,
+                        // установка ключа безопасности
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(authOptions.Key))
                     };
                 });

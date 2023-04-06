@@ -1,8 +1,5 @@
 ﻿namespace GMS.Core.WebHost.Models
 {
-    /// <summary>
-    /// ДТО контракта
-    /// </summary>
     public class ContractResponse
     {
         /// <summary>
@@ -11,24 +8,19 @@
         public Guid Id { get; set; }
 
         /// <summary>
-        /// Информация о продукте
+        /// Пользователь, который купил продукт
+        /// </summary>
+        public UserResponse User { get; set; }
+
+        /// <summary>
+        /// Менеджер, заключивший контракт
+        /// </summary>
+        public ManagerResponse Manager { get; set; }
+
+        /// <summary>
+        /// Продукт, который купил пользователь
         /// </summary>
         public ProductResponse Product { get; set; }
-
-        /// <summary>
-        /// Идентификатор менеджера
-        /// </summary>
-        public Guid ManagerId { get; set; }
-
-        /// <summary>
-        /// Идентификатор пользователя
-        /// </summary>
-        public Guid UserId { get; set; }
-
-        /// <summary>
-        /// Информация о фитнес клубе
-        /// </summary>
-        public FitnessClubResponse FitnessClub { get; set; }
 
         /// <summary>
         /// Дата начала контракта

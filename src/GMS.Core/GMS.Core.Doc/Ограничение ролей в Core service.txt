@@ -33,6 +33,7 @@ Manager:
 + добавить новый Product
 + поместить в архив Product
 
++ смотреть информацию о Contracts(по ManagerId)
 + редактировать Contract (т.е. подтвердить, обновив только IsApproved = true и ManagerId)
 
 + смотреть информацию о TimeSlots (c инфо из Trainings без Description и Points)

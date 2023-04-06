@@ -16,7 +16,7 @@ namespace GMS.Core.DataAccess.Context.Configurations
             builder.Property(p => p.ProductId)
                    .IsRequired();
             builder.Property(p => p.ManagerId)
-                   .IsRequired();
+                   .IsRequired(false);
             builder.Property(p => p.UserId)
                    .IsRequired();
             builder.Property(p => p.StartDate)

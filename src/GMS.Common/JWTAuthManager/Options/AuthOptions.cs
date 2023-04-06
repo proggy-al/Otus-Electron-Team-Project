@@ -1,7 +1,4 @@
-﻿using System.Text;
-using Microsoft.IdentityModel.Tokens;
-
-namespace JWTAuthManager.Options;
+﻿namespace JWTAuthManager.Options;
 
 public class AuthOptions
 {
@@ -22,14 +19,5 @@ public class AuthOptions
     /// время жизни токена в минутах
     /// </summary>
     public int LifeTime { get; set; }
-
-    /// <summary>
-    /// Инициализировать новый экземпляр класса SymmetricSecurityKey.
-    /// </summary>
-    /// <returns>SymmetricSecurityKey</returns>
-    public SymmetricSecurityKey GetSymmetricSecurityKey()
-    {
-        return new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Key));
-    }
 }
 

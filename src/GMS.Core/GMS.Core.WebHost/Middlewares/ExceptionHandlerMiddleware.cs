@@ -44,6 +44,10 @@ namespace GMS.Core.WebHost.Middlewares
                 case EntityLockedException:
                     code = HttpStatusCode.Locked;
                     break;
+                case ContractAlreadyApprovedException:
+                    code = HttpStatusCode.Locked;
+                    break;
+
               //case ValidationException validationException:
               //      code = HttpStatusCode.BadRequest;
               //      result = JsonSerializer.Serialize(validationException.Errors);

@@ -33,6 +33,6 @@
         /// <summary>
         /// Идентификатор сотрудника клуба
         /// </summary>
-        public Guid EmploeeId { get; set; }
+        public Guid EmployeeId { get; set; }
     }
 }
