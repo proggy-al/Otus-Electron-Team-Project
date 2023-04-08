@@ -14,18 +14,21 @@ namespace GMS.Core.Test
     {
         private readonly IContractRepository _contractRepository;
 
+        private readonly FitnessClub _fitnessClub;
+
         public ContractRepositoryTests(TestFixture testFixture)
         {
             var serviceProvider = testFixture.ServiceProvider;
             _contractRepository = serviceProvider.GetService<IContractRepository>();
+            _fitnessClub = testFixture.fitnessClub;
         }
 
         [Fact]
         public async void GetPagedAsync_ReturnsValid_ForValidparams()
         {
-           /* var result = await _contractRepository.GetPagedAsync(1, 2);
+            var result = await _contractRepository.GetPageAsync(_fitnessClub.Id, 1, 2,true);
 
-            result.Count.ShouldBe(2);*/
+            result.Entities.Count.ShouldBe(2);
         }
     }
 }

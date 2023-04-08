@@ -4,14 +4,20 @@ using GMS.Core.DataAccess.Context;
 using GMS.Core.WebHost.Configurations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Shouldly;
 
 namespace GMS.Core.Test
 {
-    public class TestFixture //: IDisposable
+    public class TestFixture : IDisposable
     {
         public IServiceProvider ServiceProvider { get; set; }
 
         private readonly DatabaseContext _db;
+
+        public readonly Product product;
+
+        public readonly FitnessClub fitnessClub;
+
 
         public TestFixture()
         {
@@ -32,6 +38,15 @@ namespace GMS.Core.Test
             var serviceProvider = services.BuildServiceProvider();
             ServiceProvider = serviceProvider;
 
+            var fixture= new Fixture();
+
+            fixture.Behaviors.OfType<ThrowingRecursionBehavior>().ToList().ForEach(b => fixture.Behaviors.Remove(b));
+            fixture.Behaviors.Add(new OmitOnRecursionBehavior());
+
+            fitnessClub = fixture.Build<FitnessClub>().With(a=>a.IsDeleted,false).Create();
+
+            product = fixture.Build<Product>().With(x=>x.FitnessClub, fitnessClub).Create();
+
             _db = ServiceProvider.GetRequiredService<DatabaseContext>();
 
             SeedDb();
@@ -51,7 +66,7 @@ namespace GMS.Core.Test
                 for (int i = 0; i < 20; i++)
                 {
                     var fixture = new Fixture();
-                    var newItem = fixture.Build<Contract>().Without(e => e.Product).Create();
+                    var newItem = fixture.Build<Contract>().With(e => e.Product,product).With(e=>e.IsApproved,true).Create();
                     _db.Contracts.Add(newItem);
                 }
                 _db.SaveChanges();
