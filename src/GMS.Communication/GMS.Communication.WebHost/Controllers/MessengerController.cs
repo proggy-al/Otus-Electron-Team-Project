@@ -61,7 +61,7 @@ namespace GMS.Communication.WebHost.Controllers
         [RequirePrivelege(Priviliges.Administrator, Priviliges.System)]
         [Route("SendByGroup")]
         [HttpPost]
-        public async Task<IActionResult> SendByGroup([FromBody]MessageRequestDTO requestMessage)
+        public async Task<IActionResult> SendByGroup() //TODO добавить DTO объект
         {
             throw new NotImplementedException();
         }
@@ -69,7 +69,7 @@ namespace GMS.Communication.WebHost.Controllers
         [Authorize]
         [Route("AddToGroup")]
         [HttpPost]
-        public async Task<IActionResult> AddToGroup([FromBody]MessageRequestDTO requestMessage)
+        public async Task<IActionResult> AddToGroup() //TODO добавить DTO объект
         {
             throw new NotImplementedException();
         }
@@ -77,10 +77,27 @@ namespace GMS.Communication.WebHost.Controllers
         [Authorize]
         [Route("RemoveFromGroup")]
         [HttpPost]
-        public async Task<IActionResult> RemoveFromGroup([FromBody]MessageRequestDTO requestMessage)
+        public async Task<IActionResult> RemoveFromGroup() //TODO добавить DTO объект
         {
             throw new NotImplementedException();
         }
 
+        [Authorize]
+        [RequirePrivelege(Priviliges.Administrator, Priviliges.System)]
+        [Route("AddNewGroup")]
+        [HttpPost]
+        public async Task<IActionResult> AddNewGroup() //TODO добавить DTO объект
+        {
+            throw new NotImplementedException();
+        }
+
+        [Authorize]
+        [RequirePrivelege(Priviliges.Administrator, Priviliges.System)]
+        [Route("DeleteGroup")]
+        [HttpPost]
+        public async Task<IActionResult> DeleteGroup() //TODO добавить DTO объект
+        {
+            throw new NotImplementedException(); 
+        }
     }
 }
