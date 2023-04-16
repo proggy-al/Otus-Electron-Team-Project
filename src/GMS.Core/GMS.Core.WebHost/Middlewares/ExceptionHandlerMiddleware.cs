@@ -47,12 +47,19 @@ namespace GMS.Core.WebHost.Middlewares
                 case ContractAlreadyApprovedException:
                     code = HttpStatusCode.Locked;
                     break;
-
-              //case ValidationException validationException:
-              //      code = HttpStatusCode.BadRequest;
-              //      result = JsonSerializer.Serialize(validationException.Errors);
-              //      break;
-
+                case TimeIntervalIsNotFreeException:
+                    code = HttpStatusCode.BadRequest;
+                    break;
+                case UnableToСancelTrainingException:
+                    code = HttpStatusCode.BadRequest;
+                    break;
+                case BadRequestException:
+                    code = HttpStatusCode.BadRequest;
+                    break;
+                    //case ValidationException validationException:
+                    //    code = HttpStatusCode.BadRequest;
+                    //    result = JsonSerializer.Serialize(validationException.Errors);
+                    //    break;
             }
 
             context.Response.ContentType = "application/json";

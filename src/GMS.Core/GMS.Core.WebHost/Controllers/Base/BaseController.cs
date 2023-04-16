@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using GMS.Core.BusinessLogic.Abstractions;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 using System.Security.Claims;
 
 namespace GMS.Core.WebHost.Controllers.Base
@@ -28,7 +29,10 @@ namespace GMS.Core.WebHost.Controllers.Base
         /// <returns></returns>
         protected virtual string? GetToken()
         {
-            return HttpContext.Request.Headers["Authorization"].First();
+            if (HttpContext.Request.Headers.ContainsKey("Authorization"))
+                return HttpContext.Request.Headers["Authorization"].First();
+            
+            return null;
         }
     }
 }

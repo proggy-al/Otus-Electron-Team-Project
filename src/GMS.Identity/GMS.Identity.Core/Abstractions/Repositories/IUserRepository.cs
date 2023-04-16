@@ -21,6 +21,14 @@ namespace GMS.Identity.Core.Abstractions.Repositories
         Task<List<UserApiModel>> GetListUsers(List<Guid> ids);
 
         /// <summary>
+        /// Get list short info UserApiShortModel
+        /// </summary>
+        /// <param name="ids">list ids</param>
+        /// <returns>List UserApiShortModel</returns>
+        Task<List<UserApiShortModel>> GetListShortInfoUsers(List<Guid> ids);
+        
+
+        /// <summary>
         /// Get all users
         /// </summary>
         /// <returns>UserApiModel</returns>

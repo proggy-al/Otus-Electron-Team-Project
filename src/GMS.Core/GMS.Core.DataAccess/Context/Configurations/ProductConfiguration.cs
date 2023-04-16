@@ -11,7 +11,8 @@ namespace GMS.Core.DataAccess.Context.Configurations
         {
             builder.HasMany(p => p.Contracts)
                    .WithOne(c => c.Product)
-                   .HasForeignKey(c => c.ProductId);
+                   .HasForeignKey(c => c.ProductId)
+                   .OnDelete(DeleteBehavior.SetNull);
 
             builder.Property(p => p.Id)
                    .HasColumnType("uuid")

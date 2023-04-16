@@ -2,36 +2,19 @@
 using System.Text.Json;
 using System.Text;
 using Microsoft.Extensions.Options;
-using System;
 using GMS.Core.WebHost.Configurations.Options;
+using GMS.Core.WebHost.HttpClients.Abstractions;
 
 namespace GMS.Core.WebHost.HttpClients
 {
-    public class UserHttpClient : IUserHttpClient
+    public class UserHttpClient : BaseHttpClient, IUserHttpClient
     {
-        public string? Token
+        public UserHttpClient(HttpClient httpClient, IOptions<HttpClientOptions> options) : base(httpClient,options)
         {
-            set
-            {
-                if(value != null)
-                    _httpClient.DefaultRequestHeaders.Add("Authorization", value);
-            }
-        }
-
-        private HttpClient _httpClient;
-        private readonly JsonSerializerOptions _options;
-
-        public UserHttpClient(HttpClient httpClient, IOptions<HttpClientOptions> options)
-        {
-            _httpClient = httpClient;
             _httpClient.BaseAddress = new Uri(options.Value.BaseUriIdentityUser);
-            _httpClient.Timeout = TimeSpan.FromSeconds(options.Value.Timeout);
-            _httpClient.DefaultRequestHeaders.Clear();
-
-            _options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
         }
 
-        public async Task<List<UserApiModel>> GetPagedUsersAsync(List<Guid> ids)
+        public async Task<List<UserApiModel>> GetUsersAsync(List<Guid> ids)
         {
             var query = $"?ids={string.Join("&ids=",ids)}";
             var response = await _httpClient.GetAsync($"ids{query}");
@@ -40,6 +23,18 @@ namespace GMS.Core.WebHost.HttpClients
                 throw new Exception($"Error request to IdentityService: {response.StatusCode}");    // ToDo: создать custom exception для middleWare
 
             var result = await response.Content.ReadFromJsonAsync<List<UserApiModel>>();
+            return result;
+        }
+
+        public async Task<List<UserApiShortModel>> GetShortInfoUsersAsync(List<Guid> ids)
+        {
+            var query = $"?ids={string.Join("&ids=", ids)}";
+            var response = await _httpClient.GetAsync($"info/ids{query}");
+
+            if (!response.IsSuccessStatusCode)
+                throw new Exception($"Error request to IdentityService: {response.StatusCode}");    // ToDo: создать custom exception для middleWare
+
+            var result = await response.Content.ReadFromJsonAsync<List<UserApiShortModel>>();
             return result;
         }
 

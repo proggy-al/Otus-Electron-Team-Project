@@ -58,6 +58,18 @@ public class UserController : ControllerBase
     }
 
     /// <summary>
+    /// Get list short info users by Ids
+    /// </summary>
+    /// <param name="ids"></param>
+    /// <returns>list UserApiModel</returns>
+    [RequirePrivelege(Priviliges.GYMOwner, Priviliges.Administrator, Priviliges.Manager, Priviliges.Coach, Priviliges.System)]
+    [HttpGet(IdentityRouting.GetListShortInfoUsers)]
+    public async Task<List<UserApiShortModel>> GetListShortInfoUsers([FromQuery] List<Guid> ids)
+    {
+        return await _userRepository.GetListShortInfoUsers(ids);
+    }
+
+    /// <summary>
     /// Get all users , should be authorize as Admin or System
     /// </summary>
     /// <returns></returns>

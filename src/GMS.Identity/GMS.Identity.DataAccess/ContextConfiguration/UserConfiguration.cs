@@ -167,6 +167,52 @@ namespace GMS.Identity.DataAccess.ContextConfiguration
                       Salt = testPas1.salt,
                       TelegramUserName = "@user3",
                       UserName = "User3"
+                  },
+
+                  // Тренера
+                  new User()
+                  {
+                      Id = new Guid("10000000-0000-0000-0005-000000000001"),
+                      Email = "arnoldgold@mail.ru",
+                      IsActive = true,
+                      PasswordHash = testPas1.pass,
+                      Role = "Coach",
+                      Salt = testPas1.salt,
+                      TelegramUserName = "@arnoldgold",
+                      UserName = "Arnold"
+                  },
+                  new User()
+                  {
+                      Id = new Guid("10000000-0000-0000-0005-000000000002"),
+                      Email = "alekseialmaz@mail.ru",
+                      IsActive = true,
+                      PasswordHash = testPas1.pass,
+                      Role = "Coach",
+                      Salt = testPas1.salt,
+                      TelegramUserName = "@alekseialmaz",
+                      UserName = "Алексей"
+                  },
+                  new User()
+                  {
+                      Id = new Guid("10000000-0000-0000-0005-000000000003"),
+                      Email = "trainer3@mail.ru",
+                      IsActive = true,
+                      PasswordHash = testPas1.pass,
+                      Role = "Coach",
+                      Salt = testPas1.salt,
+                      TelegramUserName = "@trainer3",
+                      UserName = "Trainer3"
+                  },
+                  new User()
+                  {
+                      Id = new Guid("10000000-0000-0000-0005-000000000004"),
+                      Email = "trainer4@mail.ru",
+                      IsActive = true,
+                      PasswordHash = testPas1.pass,
+                      Role = "Coach",
+                      Salt = testPas1.salt,
+                      TelegramUserName = "@trainer4",
+                      UserName = "Trainer4"
                   }
             );
         }

@@ -1,31 +1,27 @@
-using GMS.Core.BusinessLogic.Abstractions;
 using GMS.Core.DataAccess.Context;
 using GMS.Core.WebHost.Configurations;
-using GMS.Core.WebHost.Configurations.Options;
 using JWTAuthManager;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using Serilog;
-using System;
 
 try
 {
     var builder = WebApplication.CreateBuilder(args);
     builder.Environment.ApplicationName = typeof(Program).Assembly.FullName;
-    
+
     var connectionString = builder.Configuration.GetConnectionString("GmsCore");
+
     builder.Services
-        .ConfigureLogger()
-        .ConfigureMapper()
         .AddDbContext<DatabaseContext>(options =>
         {
             options.UseNpgsql(connectionString);
-        })
-        .AddOptions(builder.Configuration)
+        })       
         .AddRepositories()
+        .AddOptions(builder.Configuration)
+        .ConfigureMapper()
         .AddHttpClients()
         .AddServices()
+        .ConfigureLogger(builder.Configuration)
         .AddEndpointsApiExplorer()
         .AddCustomJWTAuthentification()
         .AddAuthorizationGMS()

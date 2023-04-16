@@ -85,19 +85,20 @@ namespace GMS.Core.BusinessLogic.Services
 
             if (contract == null)
                 throw new NotExistException("Contract", contractId);
-            else if(contract.IsApproved == true)
+            else if (contract.IsApproved == true)
                 throw new ContractAlreadyApprovedException(contractId);
+            else if (contract.Product.FitnessClub.OwnerId != emploeeId)
+            {
+                var IsEmployeeExist = await _employeeRepository.IsEmployeeWorkingInFitnessClub(contract.Product.FitnessClubId, emploeeId);
 
-            var IsEmployeeExist = await _employeeRepository.IsEmployeeWorkingInFitnessClub(contract.Product.FitnessClubId, emploeeId);
-
-            if (contract.Product.FitnessClub.OwnerId != emploeeId && !IsEmployeeExist)
-                throw new AccessDeniedException("Contract");
-            else if (contract.Product.FitnessClub.IsDeleted)
+                if(!IsEmployeeExist)
+                    throw new AccessDeniedException("Contract");
+            }
+            if (contract.Product.FitnessClub.IsDeleted)
                 throw new EntityLockedException("FitnessClub", contract.Product.FitnessClub.Id);
 
             contract.IsApproved = true;
             contract.ManagerId = emploeeId;
-
             await _contractRepository.SaveChangesAsync();
         }
     }

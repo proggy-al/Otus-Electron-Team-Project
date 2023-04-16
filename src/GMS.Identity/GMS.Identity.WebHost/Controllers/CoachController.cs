@@ -48,4 +48,14 @@ public class CoachController: ControllerBase
         return res;
     }
 
+    /// <summary>
+    /// Get list coaches
+    /// </summary>
+    /// <returns></returns>
+    [AllowAnonymous]
+    [HttpGet(IdentityRouting.GetListCoaches)]
+    public async Task<List<UserApiShortModel>> GetCoaches([FromQuery] List<Guid> ids)
+    {
+        return await _userRepository.GetListCoaches(ids);
+    }
 }

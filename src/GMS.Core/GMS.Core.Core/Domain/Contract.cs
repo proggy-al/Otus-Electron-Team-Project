@@ -1,4 +1,5 @@
 ﻿using GMS.Core.Core.Domain.Base;
+using GMS.Core.Core.Domain.Employees;
 
 namespace GMS.Core.Core.Domain
 {
@@ -28,6 +29,11 @@ namespace GMS.Core.Core.Domain
         public Guid? ManagerId { get; set; }
 
         /// <summary>
+        /// Менеджер, подтвердивший контракт
+        /// </summary>
+        public virtual Manager Manager { get; set; }
+
+        /// <summary>
         /// Дата начала контракта
         /// </summary>
         public DateTime StartDate { get; set; }
@@ -40,6 +46,6 @@ namespace GMS.Core.Core.Domain
         /// <summary>
         /// Статус подтверждения контракта
         /// </summary>
-        public bool? IsApproved { get; set; }
+        public bool IsApproved { get; set; }
     }
 }

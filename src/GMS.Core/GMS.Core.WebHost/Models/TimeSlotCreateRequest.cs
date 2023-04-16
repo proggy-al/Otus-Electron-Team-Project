@@ -1,9 +1,6 @@
 ﻿namespace GMS.Core.WebHost.Models
 {
-    /// <summary>
-    /// ДТО временного интервала
-    /// </summary>
-    public class TimeSlotRequest
+    public class TimeSlotCreateRequest
     {
         /// <summary>
         /// Наименование
@@ -34,10 +31,5 @@
         /// Идентификатор зоны
         /// </summary>
         public Guid AreaId { get; set; }
-
-        /// <summary>
-        /// Идентификатор фитнес клуба
-        /// </summary>
-        public Guid FitnessClubId { get; set; }
     }
 }

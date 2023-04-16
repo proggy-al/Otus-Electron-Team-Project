@@ -3,7 +3,7 @@
     /// <summary>
     /// ДТО создания фитнес клуба
     /// </summary>
-    public class FitnessClubCreateOrEditDto
+    public class FitnessClubCreateDto
     {
         /// <summary>
         /// Наименование

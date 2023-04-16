@@ -5,6 +5,7 @@ AllowAnonymous:
 + смотреть информацию о Areas
 + смотреть информацию о Products
 + смотреть информацию о TimeSlots (без инфо из Trainings)
++ смотреть информацию о Trainers
 
 
 User:
@@ -13,18 +14,18 @@ User:
 + смотреть информацию о Contracts(по UserId)
 + добавить Contract(т.е. купить Product, без ManagerId и IsApproved)
 
-+ смотреть информацию о Trainings(по UserId с инфо из TimeSlots)
-+ добавить Training(если TimeSlot.IsBusy == false, тогда обновить TimeSlot.IsBusy = true)
-
-+ удалить Training(по UserId; обновить TimeSlot.IsBusy = false; отправить оповещение тренеру, менеджеру об отмене тренировки)
++ смотреть информацию о Trainings(по UserId)
++ добавить Training(обновить TimeSlot.IsBusy = true)
++ отменить Training не позднее чем за 24 часа(по UserId; обновить TimeSlot.IsBusy = false; отправить оповещение тренеру, менеджеру об отмене тренировки)
 
 
 Trainer:
 + действия AllowAnonymous
 
-+ смотреть информацию о TimeSlots (c инфо из Trainings по TrainerId)
++ смотреть информацию о прошедших Training
++ смотреть информацию о будущих Training
 
-+ редактировать Training(Description, Points)
++ редактировать Training(добавить Description, Points)
 
 
 Manager:
@@ -33,25 +34,28 @@ Manager:
 + добавить новый Product
 + поместить в архив Product
 
++ смотреть информацию о неподтвержденных Contracts (по FitnessClubId)
 + смотреть информацию о Contracts(по ManagerId)
 + редактировать Contract (т.е. подтвердить, обновив только IsApproved = true и ManagerId)
 
-+ смотреть информацию о TimeSlots (c инфо из Trainings без Description и Points)
-+ создать TimeSlot (IsBusy = false)
-+ редактировать TimeSlot(только TrainerId, AreaId)
++ создать TimeSlot
 
 
 Administrator:
 + действия  Manager
+- редактировать Contract(т.е. подтвердить, обновив только IsApproved = true и ManagerId)
 
-+ редактировать FitnessClub(кроме OwnerId)
++ редактировать FitnessClub
 
 + добавить Area
 + редактировать Area
 + поместить в архив Area
 
-+ редактировать TimeSlot(кроме DateTime, Duration, IsBusy)
-+ удалить TimeSlot (при этом отправить оповещение пользователю об отмене тренировки)
++ поместить в архив TimeSlot (при этом отправить оповещение пользователю об отмене тренировки и удалить Training)
+
++ смотреть информацию о Emploee
++ добавить Emploee
++ поместить в архив Emploee
 
 
 Owner:

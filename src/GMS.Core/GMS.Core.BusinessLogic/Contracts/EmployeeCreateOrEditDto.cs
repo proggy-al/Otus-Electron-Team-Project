@@ -16,8 +16,13 @@
         public Guid FitnessClubId { get; set; }
 
         /// <summary>
-        /// Идентификатор сотрудника клуба
+        /// пользователь, который добавляет/редактирует сотрудника
         /// </summary>
-        public Guid OwnerId { get; set; }
+        public Guid UserId { get; set; }
+
+        /// <summary>
+        /// Роль
+        /// </summary>
+        public string Role { get; set; }
     }
 }

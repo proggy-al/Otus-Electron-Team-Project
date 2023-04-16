@@ -30,8 +30,7 @@
         /// Удалить сущность
         /// </summary>
         /// <param name="id">ID удалённой сущности</param>
-        /// <returns>была ли сущность удалена</returns>
-        bool Delete(TPrimaryKey id);
+        void Delete(TPrimaryKey id);
 
         /// <summary>
         /// Сохранить изменения

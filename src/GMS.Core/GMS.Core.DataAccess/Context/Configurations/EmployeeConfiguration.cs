@@ -17,8 +17,6 @@ namespace GMS.Core.DataAccess.Context.Configurations
             builder.Property(a => a.IsDeleted)
                    .HasDefaultValue(false)
                    .IsRequired();
-
-            builder.HasData(SeedData.Employees);
         }
     }
 }

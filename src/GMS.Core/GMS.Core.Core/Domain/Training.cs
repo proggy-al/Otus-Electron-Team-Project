@@ -23,13 +23,13 @@ namespace GMS.Core.Core.Domain
         public virtual TimeSlot TimeSlot { get; set; }
 
         /// <summary>
-        /// Описание результатов тренировки
+        /// Описание результатов тренировки от тренера
         /// </summary>
-        public string? Description { get; set; }
+        public string TrainerNotes { get; set; }
 
         /// <summary>
         /// Оценка за тренировку
         /// </summary>
-        public int? Points { get; set; }
+        public int Points { get; set; }
     }
 }

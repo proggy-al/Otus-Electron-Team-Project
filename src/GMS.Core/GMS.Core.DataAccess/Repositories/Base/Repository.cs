@@ -24,14 +24,10 @@ namespace GMS.Core.DataAccess.Repositories.Base
             Context.Entry(entity).State = EntityState.Modified;
         }
 
-        public virtual bool Delete(TPrimaryKey id)
+        public virtual void Delete(TPrimaryKey id)
         {
-            var obj = EntitySet.Find(id);
-            if (obj == null)
-                return false;
-            
+            var obj = EntitySet.Find(id);            
             EntitySet.Remove(obj);
-            return true;
         }
 
         public virtual async Task SaveChangesAsync(CancellationToken cancellationToken = default)

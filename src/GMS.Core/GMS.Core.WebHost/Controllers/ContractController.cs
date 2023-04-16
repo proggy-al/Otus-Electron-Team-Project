@@ -1,8 +1,9 @@
 ﻿using AutoMapper;
 using GMS.Core.BusinessLogic.Abstractions;
 using GMS.Core.WebHost.Controllers.Base;
-using GMS.Core.WebHost.HttpClients;
+using GMS.Core.WebHost.HttpClients.Abstractions;
 using GMS.Core.WebHost.Models;
+using JWTAuthManager;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
@@ -35,7 +36,7 @@ namespace GMS.Core.WebHost.Controllers
 
             // запрашиваем информацию о пользователях в Identity microservice
             _httpClient.Token = GetToken();
-            var users = await _httpClient.GetPagedUsersAsync(uniqUserIds);
+            var users = await _httpClient.GetUsersAsync(uniqUserIds);
 
             // соединяем информацию контрактов с информацией о пользователях
             var contracts = from u in users
@@ -82,8 +83,8 @@ namespace GMS.Core.WebHost.Controllers
 
             // запрашиваем информацию о пользователях b сотрудниках в Identity microservice
             _httpClient.Token = GetToken();
-            var users = await _httpClient.GetPagedUsersAsync(uniqUserIds);
-            var managers = await _httpClient.GetPagedUsersAsync(uniqManagerIds);
+            var users = await _httpClient.GetUsersAsync(uniqUserIds);
+            var managers = await _httpClient.GetUsersAsync(uniqManagerIds);
 
             // соединяем информацию контрактов с информацией о пользователях
             var contracts = from c in pagedContracts.Entities
@@ -121,7 +122,7 @@ namespace GMS.Core.WebHost.Controllers
         }
 
          
-         [Authorize(Policy = "User")]
+         [Authorize(Roles = nameof(Priviliges.User))]
          [HttpGet("[action]/{pageNumber}:{pageSize}")]
          public async Task<IActionResult> GetPageByUser(int pageNumber = 1, int pageSize = 12)
          {
@@ -136,7 +137,7 @@ namespace GMS.Core.WebHost.Controllers
             return Ok(contracts);
         }
 
-         [Authorize(Policy = "User")]
+         [Authorize(Roles = nameof(Priviliges.User))]
          [HttpPost("[action]")]
          public async Task<IActionResult> Add(Guid productId)
          {
@@ -144,7 +145,7 @@ namespace GMS.Core.WebHost.Controllers
             return Ok(id.ToString());
          }
 
-         [Authorize(Policy = "Manager")]
+         [Authorize(Roles = nameof(Priviliges.Manager))]
          [HttpPut("[action]")]
          public async Task<IActionResult> Approve(Guid contractId)
          {

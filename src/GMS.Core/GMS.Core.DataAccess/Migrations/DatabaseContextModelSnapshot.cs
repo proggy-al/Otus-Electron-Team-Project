@@ -174,7 +174,7 @@ namespace GMS.Core.DataAccess.Migrations
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<bool?>("IsApproved")
+                    b.Property<bool>("IsApproved")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("boolean")
                         .HasDefaultValue(false);
@@ -185,6 +185,7 @@ namespace GMS.Core.DataAccess.Migrations
                         .HasDefaultValue(false);
 
                     b.Property<Guid?>("ManagerId")
+                        .IsRequired()
                         .HasColumnType("uuid");
 
                     b.Property<Guid>("ProductId")
@@ -198,6 +199,8 @@ namespace GMS.Core.DataAccess.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ManagerId");
+
                     b.HasIndex("ProductId");
 
                     b.ToTable("Contracts");
@@ -206,153 +209,123 @@ namespace GMS.Core.DataAccess.Migrations
                         new
                         {
                             Id = new Guid("c0000000-0000-0000-0000-000000000001"),
-                            EndDate = new DateTime(2024, 4, 3, 22, 31, 16, 200, DateTimeKind.Utc).AddTicks(6559),
+                            EndDate = new DateTime(2024, 4, 15, 20, 28, 54, 438, DateTimeKind.Utc).AddTicks(2363),
                             IsApproved = true,
                             IsDeleted = false,
                             ManagerId = new Guid("10000000-0000-0000-0006-000000000001"),
                             ProductId = new Guid("b0000000-0000-0000-0000-000000000002"),
-                            StartDate = new DateTime(2023, 4, 4, 22, 31, 16, 200, DateTimeKind.Utc).AddTicks(6557),
+                            StartDate = new DateTime(2023, 4, 16, 20, 28, 54, 438, DateTimeKind.Utc).AddTicks(2361),
                             UserId = new Guid("00000000-0000-0000-0002-000000000001")
                         },
                         new
                         {
                             Id = new Guid("c0000000-0000-0000-0000-000000000002"),
-                            EndDate = new DateTime(2024, 4, 3, 22, 31, 16, 200, DateTimeKind.Utc).AddTicks(6580),
+                            EndDate = new DateTime(2024, 4, 15, 20, 28, 54, 438, DateTimeKind.Utc).AddTicks(2385),
                             IsApproved = true,
                             IsDeleted = false,
                             ManagerId = new Guid("10000000-0000-0000-0006-000000000001"),
                             ProductId = new Guid("b0000000-0000-0000-0000-000000000003"),
-                            StartDate = new DateTime(2023, 4, 4, 22, 31, 16, 200, DateTimeKind.Utc).AddTicks(6579),
+                            StartDate = new DateTime(2023, 4, 16, 20, 28, 54, 438, DateTimeKind.Utc).AddTicks(2384),
                             UserId = new Guid("00000000-0000-0000-0002-000000000001")
                         },
                         new
                         {
                             Id = new Guid("c0000000-0000-0000-0000-000000000003"),
-                            EndDate = new DateTime(2024, 4, 3, 22, 31, 16, 200, DateTimeKind.Utc).AddTicks(6589),
+                            EndDate = new DateTime(2024, 4, 15, 20, 28, 54, 438, DateTimeKind.Utc).AddTicks(2394),
                             IsApproved = true,
                             IsDeleted = false,
                             ManagerId = new Guid("10000000-0000-0000-0006-000000000002"),
                             ProductId = new Guid("b0000000-0000-0000-0000-000000000006"),
-                            StartDate = new DateTime(2023, 4, 4, 22, 31, 16, 200, DateTimeKind.Utc).AddTicks(6588),
+                            StartDate = new DateTime(2023, 4, 16, 20, 28, 54, 438, DateTimeKind.Utc).AddTicks(2394),
                             UserId = new Guid("00000000-0000-0000-0002-000000000002")
                         },
                         new
                         {
                             Id = new Guid("c0000000-0000-0000-0000-000000000004"),
-                            EndDate = new DateTime(2024, 4, 3, 22, 31, 16, 200, DateTimeKind.Utc).AddTicks(6597),
+                            EndDate = new DateTime(2024, 4, 15, 20, 28, 54, 438, DateTimeKind.Utc).AddTicks(2403),
                             IsApproved = true,
                             IsDeleted = false,
                             ManagerId = new Guid("10000000-0000-0000-0006-000000000002"),
                             ProductId = new Guid("b0000000-0000-0000-0000-000000000008"),
-                            StartDate = new DateTime(2023, 4, 4, 22, 31, 16, 200, DateTimeKind.Utc).AddTicks(6596),
+                            StartDate = new DateTime(2023, 4, 16, 20, 28, 54, 438, DateTimeKind.Utc).AddTicks(2403),
                             UserId = new Guid("00000000-0000-0000-0002-000000000002")
                         },
                         new
                         {
                             Id = new Guid("c0000000-0000-0000-0000-000000000005"),
-                            EndDate = new DateTime(2024, 4, 3, 22, 31, 16, 200, DateTimeKind.Utc).AddTicks(6605),
+                            EndDate = new DateTime(2024, 4, 15, 20, 28, 54, 438, DateTimeKind.Utc).AddTicks(2412),
                             IsApproved = false,
                             IsDeleted = false,
+                            ManagerId = new Guid("10000000-0000-0000-0006-000000000003"),
                             ProductId = new Guid("b0000000-0000-0000-0000-000000000009"),
-                            StartDate = new DateTime(2023, 4, 4, 22, 31, 16, 200, DateTimeKind.Utc).AddTicks(6604),
+                            StartDate = new DateTime(2023, 4, 16, 20, 28, 54, 438, DateTimeKind.Utc).AddTicks(2411),
                             UserId = new Guid("00000000-0000-0000-0002-000000000003")
                         },
                         new
                         {
                             Id = new Guid("c0000000-0000-0000-0000-000000000006"),
-                            EndDate = new DateTime(2024, 4, 3, 22, 31, 16, 200, DateTimeKind.Utc).AddTicks(6616),
+                            EndDate = new DateTime(2024, 4, 15, 20, 28, 54, 438, DateTimeKind.Utc).AddTicks(2424),
                             IsApproved = false,
                             IsDeleted = false,
+                            ManagerId = new Guid("10000000-0000-0000-0006-000000000003"),
                             ProductId = new Guid("b0000000-0000-0000-0000-00000000000a"),
-                            StartDate = new DateTime(2023, 4, 4, 22, 31, 16, 200, DateTimeKind.Utc).AddTicks(6616),
+                            StartDate = new DateTime(2023, 4, 16, 20, 28, 54, 438, DateTimeKind.Utc).AddTicks(2424),
                             UserId = new Guid("00000000-0000-0000-0002-000000000003")
                         },
                         new
                         {
                             Id = new Guid("c0000000-0000-0000-0000-000000000007"),
-                            EndDate = new DateTime(2024, 4, 3, 22, 31, 16, 200, DateTimeKind.Utc).AddTicks(6626),
+                            EndDate = new DateTime(2024, 4, 15, 20, 28, 54, 438, DateTimeKind.Utc).AddTicks(2433),
                             IsApproved = false,
                             IsDeleted = false,
+                            ManagerId = new Guid("10000000-0000-0000-0006-000000000003"),
                             ProductId = new Guid("b0000000-0000-0000-0000-00000000000b"),
-                            StartDate = new DateTime(2023, 4, 4, 22, 31, 16, 200, DateTimeKind.Utc).AddTicks(6625),
+                            StartDate = new DateTime(2023, 4, 16, 20, 28, 54, 438, DateTimeKind.Utc).AddTicks(2432),
                             UserId = new Guid("00000000-0000-0000-0002-000000000003")
                         },
                         new
                         {
                             Id = new Guid("c0000000-0000-0000-0000-000000000008"),
-                            EndDate = new DateTime(2024, 4, 3, 22, 31, 16, 200, DateTimeKind.Utc).AddTicks(6633),
+                            EndDate = new DateTime(2024, 4, 15, 20, 28, 54, 438, DateTimeKind.Utc).AddTicks(2441),
                             IsApproved = true,
                             IsDeleted = false,
                             ManagerId = new Guid("10000000-0000-0000-0006-000000000003"),
                             ProductId = new Guid("b0000000-0000-0000-0000-00000000000c"),
-                            StartDate = new DateTime(2023, 4, 4, 22, 31, 16, 200, DateTimeKind.Utc).AddTicks(6633),
+                            StartDate = new DateTime(2023, 4, 16, 20, 28, 54, 438, DateTimeKind.Utc).AddTicks(2441),
                             UserId = new Guid("00000000-0000-0000-0002-000000000003")
                         },
                         new
                         {
                             Id = new Guid("c0000000-0000-0000-0000-000000000009"),
-                            EndDate = new DateTime(2024, 4, 3, 22, 31, 16, 200, DateTimeKind.Utc).AddTicks(6642),
+                            EndDate = new DateTime(2024, 4, 15, 20, 28, 54, 438, DateTimeKind.Utc).AddTicks(2448),
                             IsApproved = true,
                             IsDeleted = false,
                             ManagerId = new Guid("10000000-0000-0000-0006-000000000003"),
                             ProductId = new Guid("b0000000-0000-0000-0000-00000000000d"),
-                            StartDate = new DateTime(2023, 4, 4, 22, 31, 16, 200, DateTimeKind.Utc).AddTicks(6641),
+                            StartDate = new DateTime(2023, 4, 16, 20, 28, 54, 438, DateTimeKind.Utc).AddTicks(2448),
                             UserId = new Guid("00000000-0000-0000-0002-000000000003")
                         },
                         new
                         {
                             Id = new Guid("c0000000-0000-0000-0000-00000000000a"),
-                            EndDate = new DateTime(2024, 4, 3, 22, 31, 16, 200, DateTimeKind.Utc).AddTicks(6652),
+                            EndDate = new DateTime(2024, 4, 15, 20, 28, 54, 438, DateTimeKind.Utc).AddTicks(2457),
                             IsApproved = true,
                             IsDeleted = false,
                             ManagerId = new Guid("10000000-0000-0000-0006-000000000003"),
                             ProductId = new Guid("b0000000-0000-0000-0000-00000000000e"),
-                            StartDate = new DateTime(2023, 4, 4, 22, 31, 16, 200, DateTimeKind.Utc).AddTicks(6651),
+                            StartDate = new DateTime(2023, 4, 16, 20, 28, 54, 438, DateTimeKind.Utc).AddTicks(2456),
                             UserId = new Guid("00000000-0000-0000-0002-000000000003")
                         },
                         new
                         {
                             Id = new Guid("c0000000-0000-0000-0000-00000000000b"),
-                            EndDate = new DateTime(2024, 4, 3, 22, 31, 16, 200, DateTimeKind.Utc).AddTicks(6660),
+                            EndDate = new DateTime(2024, 4, 15, 20, 28, 54, 438, DateTimeKind.Utc).AddTicks(2464),
                             IsApproved = true,
                             IsDeleted = false,
                             ManagerId = new Guid("10000000-0000-0000-0006-000000000003"),
                             ProductId = new Guid("b0000000-0000-0000-0000-00000000000f"),
-                            StartDate = new DateTime(2023, 4, 4, 22, 31, 16, 200, DateTimeKind.Utc).AddTicks(6659),
+                            StartDate = new DateTime(2023, 4, 16, 20, 28, 54, 438, DateTimeKind.Utc).AddTicks(2463),
                             UserId = new Guid("00000000-0000-0000-0002-000000000002")
-                        },
-                        new
-                        {
-                            Id = new Guid("c0000000-0000-0000-0000-00000000000c"),
-                            EndDate = new DateTime(2024, 4, 3, 22, 31, 16, 200, DateTimeKind.Utc).AddTicks(6667),
-                            IsApproved = true,
-                            IsDeleted = false,
-                            ManagerId = new Guid("10000000-0000-0000-0001-000000000003"),
-                            ProductId = new Guid("b0000000-0000-0000-0000-000000000010"),
-                            StartDate = new DateTime(2023, 4, 4, 22, 31, 16, 200, DateTimeKind.Utc).AddTicks(6667),
-                            UserId = new Guid("00000000-0000-0000-0002-000000000002")
-                        },
-                        new
-                        {
-                            Id = new Guid("c0000000-0000-0000-0000-00000000000d"),
-                            EndDate = new DateTime(2024, 4, 3, 22, 31, 16, 200, DateTimeKind.Utc).AddTicks(6676),
-                            IsApproved = true,
-                            IsDeleted = false,
-                            ManagerId = new Guid("10000000-0000-0000-0001-000000000003"),
-                            ProductId = new Guid("b0000000-0000-0000-0000-000000000009"),
-                            StartDate = new DateTime(2023, 4, 4, 22, 31, 16, 200, DateTimeKind.Utc).AddTicks(6675),
-                            UserId = new Guid("00000000-0000-0000-0002-000000000003")
-                        },
-                        new
-                        {
-                            Id = new Guid("c0000000-0000-0000-0000-00000000000e"),
-                            EndDate = new DateTime(2024, 4, 3, 22, 31, 16, 200, DateTimeKind.Utc).AddTicks(6699),
-                            IsApproved = true,
-                            IsDeleted = false,
-                            ManagerId = new Guid("10000000-0000-0000-0001-000000000003"),
-                            ProductId = new Guid("b0000000-0000-0000-0000-000000000009"),
-                            StartDate = new DateTime(2023, 4, 4, 22, 31, 16, 200, DateTimeKind.Utc).AddTicks(6699),
-                            UserId = new Guid("00000000-0000-0000-0002-000000000003")
                         });
                 });
 
@@ -376,43 +349,7 @@ namespace GMS.Core.DataAccess.Migrations
 
                     b.ToTable("Employees");
 
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("10000000-0000-0000-0006-000000000001"),
-                            FitnessClubId = new Guid("f0000000-0000-0000-0000-000000000001"),
-                            IsDeleted = false
-                        },
-                        new
-                        {
-                            Id = new Guid("10000000-0000-0000-0001-000000000001"),
-                            FitnessClubId = new Guid("f0000000-0000-0000-0000-000000000001"),
-                            IsDeleted = false
-                        },
-                        new
-                        {
-                            Id = new Guid("10000000-0000-0000-0006-000000000002"),
-                            FitnessClubId = new Guid("f0000000-0000-0000-0000-000000000002"),
-                            IsDeleted = false
-                        },
-                        new
-                        {
-                            Id = new Guid("10000000-0000-0000-0001-000000000002"),
-                            FitnessClubId = new Guid("f0000000-0000-0000-0000-000000000002"),
-                            IsDeleted = false
-                        },
-                        new
-                        {
-                            Id = new Guid("10000000-0000-0000-0006-000000000003"),
-                            FitnessClubId = new Guid("f0000000-0000-0000-0000-000000000003"),
-                            IsDeleted = false
-                        },
-                        new
-                        {
-                            Id = new Guid("10000000-0000-0000-0001-000000000003"),
-                            FitnessClubId = new Guid("f0000000-0000-0000-0000-000000000003"),
-                            IsDeleted = false
-                        });
+                    b.UseTptMappingStrategy();
                 });
 
             modelBuilder.Entity("GMS.Core.Core.Domain.FitnessClub", b =>
@@ -743,10 +680,7 @@ namespace GMS.Core.DataAccess.Migrations
                     b.Property<int>("Duration")
                         .HasColumnType("integer");
 
-                    b.Property<Guid>("FitnessClubId")
-                        .HasColumnType("uuid");
-
-                    b.Property<bool?>("IsBusy")
+                    b.Property<bool>("IsBusy")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("boolean")
                         .HasDefaultValue(false);
@@ -766,12 +700,109 @@ namespace GMS.Core.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AreaId")
-                        .IsUnique();
+                    b.HasIndex("AreaId");
 
-                    b.HasIndex("FitnessClubId");
+                    b.HasIndex("TrainerId");
 
                     b.ToTable("TimeSlots");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("d0000000-0000-0000-0000-000000000001"),
+                            AreaId = new Guid("a0000000-0000-0000-0000-000000000003"),
+                            DateTime = new DateTime(2023, 6, 1, 8, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Strength and endurance training",
+                            Duration = 60,
+                            IsBusy = false,
+                            IsDeleted = false,
+                            Name = "Functional training",
+                            TrainerId = new Guid("10000000-0000-0000-0005-000000000001")
+                        },
+                        new
+                        {
+                            Id = new Guid("d0000000-0000-0000-0000-000000000002"),
+                            AreaId = new Guid("a0000000-0000-0000-0000-000000000007"),
+                            DateTime = new DateTime(2023, 6, 1, 8, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Тренировка на выносливость",
+                            Duration = 60,
+                            IsBusy = false,
+                            IsDeleted = false,
+                            Name = "Кардио",
+                            TrainerId = new Guid("10000000-0000-0000-0005-000000000002")
+                        },
+                        new
+                        {
+                            Id = new Guid("d0000000-0000-0000-0000-000000000003"),
+                            AreaId = new Guid("a0000000-0000-0000-0000-000000000008"),
+                            DateTime = new DateTime(2023, 6, 1, 8, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Описание тренировки 3 ФК3",
+                            Duration = 60,
+                            IsBusy = true,
+                            IsDeleted = false,
+                            Name = "Запись на тренировку 3 ФК3",
+                            TrainerId = new Guid("10000000-0000-0000-0005-000000000003")
+                        },
+                        new
+                        {
+                            Id = new Guid("d0000000-0000-0000-0000-000000000004"),
+                            AreaId = new Guid("a0000000-0000-0000-0000-000000000008"),
+                            DateTime = new DateTime(2023, 6, 1, 10, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Описание тренировки 4 ФК3",
+                            Duration = 60,
+                            IsBusy = false,
+                            IsDeleted = false,
+                            Name = "Запись на тренировку 4 ФК3",
+                            TrainerId = new Guid("10000000-0000-0000-0005-000000000003")
+                        },
+                        new
+                        {
+                            Id = new Guid("d0000000-0000-0000-0000-000000000005"),
+                            AreaId = new Guid("a0000000-0000-0000-0000-000000000008"),
+                            DateTime = new DateTime(2023, 6, 1, 11, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Описание тренировки 5 ФК3",
+                            Duration = 60,
+                            IsBusy = false,
+                            IsDeleted = false,
+                            Name = "Запись на тренировку 5 ФК3",
+                            TrainerId = new Guid("10000000-0000-0000-0005-000000000003")
+                        },
+                        new
+                        {
+                            Id = new Guid("d0000000-0000-0000-0000-000000000006"),
+                            AreaId = new Guid("a0000000-0000-0000-0000-000000000009"),
+                            DateTime = new DateTime(2023, 6, 1, 8, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Описание тренировки 6 ФК3",
+                            Duration = 60,
+                            IsBusy = false,
+                            IsDeleted = false,
+                            Name = "Запись на тренировку 6 ФК3",
+                            TrainerId = new Guid("10000000-0000-0000-0005-000000000004")
+                        },
+                        new
+                        {
+                            Id = new Guid("d0000000-0000-0000-0000-000000000007"),
+                            AreaId = new Guid("a0000000-0000-0000-0000-000000000009"),
+                            DateTime = new DateTime(2023, 1, 1, 9, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Описание тренировки 7 ФК3",
+                            Duration = 60,
+                            IsBusy = true,
+                            IsDeleted = false,
+                            Name = "Запись на тренировку 7 ФК3",
+                            TrainerId = new Guid("10000000-0000-0000-0005-000000000003")
+                        },
+                        new
+                        {
+                            Id = new Guid("d0000000-0000-0000-0000-000000000008"),
+                            AreaId = new Guid("a0000000-0000-0000-0000-000000000009"),
+                            DateTime = new DateTime(2023, 1, 1, 10, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Описание тренировки 8 ФК3",
+                            Duration = 60,
+                            IsBusy = true,
+                            IsDeleted = false,
+                            Name = "Запись на тренировку 8 ФК3",
+                            TrainerId = new Guid("10000000-0000-0000-0005-000000000003")
+                        });
                 });
 
             modelBuilder.Entity("GMS.Core.Core.Domain.Training", b =>
@@ -781,20 +812,25 @@ namespace GMS.Core.DataAccess.Migrations
                         .HasColumnType("uuid")
                         .HasDefaultValueSql("uuid_generate_v4()");
 
-                    b.Property<string>("Description")
-                        .IsUnicode(false)
-                        .HasColumnType("character varying(256)");
-
                     b.Property<bool>("IsDeleted")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("boolean")
                         .HasDefaultValue(false);
 
-                    b.Property<int?>("Points")
-                        .HasColumnType("integer");
+                    b.Property<int>("Points")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasDefaultValue(0);
 
                     b.Property<Guid>("TimeSlotId")
                         .HasColumnType("uuid");
+
+                    b.Property<string>("TrainerNotes")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .IsUnicode(false)
+                        .HasColumnType("character varying(256)")
+                        .HasDefaultValue("");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uuid");
@@ -805,6 +841,122 @@ namespace GMS.Core.DataAccess.Migrations
                         .IsUnique();
 
                     b.ToTable("Trainings");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("d0000000-0000-0000-0001-000000000001"),
+                            IsDeleted = false,
+                            Points = 0,
+                            TimeSlotId = new Guid("d0000000-0000-0000-0000-000000000003"),
+                            TrainerNotes = "",
+                            UserId = new Guid("00000000-0000-0000-0002-000000000003")
+                        },
+                        new
+                        {
+                            Id = new Guid("d0000000-0000-0000-0001-000000000002"),
+                            IsDeleted = false,
+                            Points = 0,
+                            TimeSlotId = new Guid("d0000000-0000-0000-0000-000000000007"),
+                            TrainerNotes = "",
+                            UserId = new Guid("00000000-0000-0000-0002-000000000003")
+                        },
+                        new
+                        {
+                            Id = new Guid("d0000000-0000-0000-0001-000000000003"),
+                            IsDeleted = false,
+                            Points = 0,
+                            TimeSlotId = new Guid("d0000000-0000-0000-0000-000000000008"),
+                            TrainerNotes = "",
+                            UserId = new Guid("00000000-0000-0000-0002-000000000003")
+                        });
+                });
+
+            modelBuilder.Entity("GMS.Core.Core.Domain.Employees.Administrator", b =>
+                {
+                    b.HasBaseType("GMS.Core.Core.Domain.Employee");
+
+                    b.ToTable("Administrators", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("10000000-0000-0000-0001-000000000001"),
+                            FitnessClubId = new Guid("f0000000-0000-0000-0000-000000000001"),
+                            IsDeleted = false
+                        },
+                        new
+                        {
+                            Id = new Guid("10000000-0000-0000-0001-000000000002"),
+                            FitnessClubId = new Guid("f0000000-0000-0000-0000-000000000002"),
+                            IsDeleted = false
+                        },
+                        new
+                        {
+                            Id = new Guid("10000000-0000-0000-0001-000000000003"),
+                            FitnessClubId = new Guid("f0000000-0000-0000-0000-000000000003"),
+                            IsDeleted = false
+                        });
+                });
+
+            modelBuilder.Entity("GMS.Core.Core.Domain.Employees.Manager", b =>
+                {
+                    b.HasBaseType("GMS.Core.Core.Domain.Employee");
+
+                    b.ToTable("Managers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("10000000-0000-0000-0006-000000000001"),
+                            FitnessClubId = new Guid("f0000000-0000-0000-0000-000000000001"),
+                            IsDeleted = false
+                        },
+                        new
+                        {
+                            Id = new Guid("10000000-0000-0000-0006-000000000002"),
+                            FitnessClubId = new Guid("f0000000-0000-0000-0000-000000000002"),
+                            IsDeleted = false
+                        },
+                        new
+                        {
+                            Id = new Guid("10000000-0000-0000-0006-000000000003"),
+                            FitnessClubId = new Guid("f0000000-0000-0000-0000-000000000003"),
+                            IsDeleted = false
+                        });
+                });
+
+            modelBuilder.Entity("GMS.Core.Core.Domain.Employees.Trainer", b =>
+                {
+                    b.HasBaseType("GMS.Core.Core.Domain.Employee");
+
+                    b.ToTable("Trainers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("10000000-0000-0000-0005-000000000001"),
+                            FitnessClubId = new Guid("f0000000-0000-0000-0000-000000000001"),
+                            IsDeleted = false
+                        },
+                        new
+                        {
+                            Id = new Guid("10000000-0000-0000-0005-000000000002"),
+                            FitnessClubId = new Guid("f0000000-0000-0000-0000-000000000002"),
+                            IsDeleted = false
+                        },
+                        new
+                        {
+                            Id = new Guid("10000000-0000-0000-0005-000000000003"),
+                            FitnessClubId = new Guid("f0000000-0000-0000-0000-000000000003"),
+                            IsDeleted = false
+                        },
+                        new
+                        {
+                            Id = new Guid("10000000-0000-0000-0005-000000000004"),
+                            FitnessClubId = new Guid("f0000000-0000-0000-0000-000000000003"),
+                            IsDeleted = false
+                        });
                 });
 
             modelBuilder.Entity("GMS.Core.Core.Domain.Area", b =>
@@ -820,11 +972,19 @@ namespace GMS.Core.DataAccess.Migrations
 
             modelBuilder.Entity("GMS.Core.Core.Domain.Contract", b =>
                 {
+                    b.HasOne("GMS.Core.Core.Domain.Employees.Manager", "Manager")
+                        .WithMany("Contracts")
+                        .HasForeignKey("ManagerId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("GMS.Core.Core.Domain.Product", "Product")
                         .WithMany("Contracts")
                         .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.SetNull)
                         .IsRequired();
+
+                    b.Navigation("Manager");
 
                     b.Navigation("Product");
                 });
@@ -854,20 +1014,20 @@ namespace GMS.Core.DataAccess.Migrations
             modelBuilder.Entity("GMS.Core.Core.Domain.TimeSlot", b =>
                 {
                     b.HasOne("GMS.Core.Core.Domain.Area", "Area")
-                        .WithOne("TimeSlot")
-                        .HasForeignKey("GMS.Core.Core.Domain.TimeSlot", "AreaId")
+                        .WithMany("TimeSlots")
+                        .HasForeignKey("AreaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("GMS.Core.Core.Domain.FitnessClub", "FitnessClub")
+                    b.HasOne("GMS.Core.Core.Domain.Employees.Trainer", "Trainer")
                         .WithMany("TimeSlots")
-                        .HasForeignKey("FitnessClubId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("TrainerId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Area");
 
-                    b.Navigation("FitnessClub");
+                    b.Navigation("Trainer");
                 });
 
             modelBuilder.Entity("GMS.Core.Core.Domain.Training", b =>
@@ -875,16 +1035,42 @@ namespace GMS.Core.DataAccess.Migrations
                     b.HasOne("GMS.Core.Core.Domain.TimeSlot", "TimeSlot")
                         .WithOne("Training")
                         .HasForeignKey("GMS.Core.Core.Domain.Training", "TimeSlotId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.SetNull)
                         .IsRequired();
 
                     b.Navigation("TimeSlot");
                 });
 
+            modelBuilder.Entity("GMS.Core.Core.Domain.Employees.Administrator", b =>
+                {
+                    b.HasOne("GMS.Core.Core.Domain.Employee", null)
+                        .WithOne()
+                        .HasForeignKey("GMS.Core.Core.Domain.Employees.Administrator", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("GMS.Core.Core.Domain.Employees.Manager", b =>
+                {
+                    b.HasOne("GMS.Core.Core.Domain.Employee", null)
+                        .WithOne()
+                        .HasForeignKey("GMS.Core.Core.Domain.Employees.Manager", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("GMS.Core.Core.Domain.Employees.Trainer", b =>
+                {
+                    b.HasOne("GMS.Core.Core.Domain.Employee", null)
+                        .WithOne()
+                        .HasForeignKey("GMS.Core.Core.Domain.Employees.Trainer", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("GMS.Core.Core.Domain.Area", b =>
                 {
-                    b.Navigation("TimeSlot")
-                        .IsRequired();
+                    b.Navigation("TimeSlots");
                 });
 
             modelBuilder.Entity("GMS.Core.Core.Domain.FitnessClub", b =>
@@ -894,8 +1080,6 @@ namespace GMS.Core.DataAccess.Migrations
                     b.Navigation("Employees");
 
                     b.Navigation("Products");
-
-                    b.Navigation("TimeSlots");
                 });
 
             modelBuilder.Entity("GMS.Core.Core.Domain.Product", b =>
@@ -907,6 +1091,16 @@ namespace GMS.Core.DataAccess.Migrations
                 {
                     b.Navigation("Training")
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("GMS.Core.Core.Domain.Employees.Manager", b =>
+                {
+                    b.Navigation("Contracts");
+                });
+
+            modelBuilder.Entity("GMS.Core.Core.Domain.Employees.Trainer", b =>
+                {
+                    b.Navigation("TimeSlots");
                 });
 #pragma warning restore 612, 618
         }

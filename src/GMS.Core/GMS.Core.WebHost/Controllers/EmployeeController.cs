@@ -2,7 +2,7 @@
 using GMS.Core.BusinessLogic.Abstractions;
 using GMS.Core.BusinessLogic.Contracts;
 using GMS.Core.WebHost.Controllers.Base;
-using GMS.Core.WebHost.HttpClients;
+using GMS.Core.WebHost.HttpClients.Abstractions;
 using GMS.Core.WebHost.Models;
 using GMS.Core.WebHost.Models.Identity;
 using Microsoft.AspNetCore.Authorization;
@@ -11,24 +11,27 @@ using System.Text.Json;
 
 namespace GMS.Core.WebHost.Controllers
 {
-    [Authorize(Policy = "GymOwner")]
     [Route("api/[controller]")]
     [ApiController]
     public class EmployeeController : BaseController<IEmployeeService>
     {
-        private IUserHttpClient _httpClient;
-        public EmployeeController(IEmployeeService service, IMapper mapper, IUserHttpClient httpClient) : base(service, mapper) 
+        private IUserHttpClient _userHttpClient;
+        private ICoachHttpClient _coachHttpClient;
+
+        public EmployeeController(IEmployeeService service, IMapper mapper, IUserHttpClient httpClient, ICoachHttpClient coachHttpClient) : base(service, mapper) 
         {
-            _httpClient = httpClient;
+            _userHttpClient = httpClient;
+            _coachHttpClient = coachHttpClient;
         }
 
+        [Authorize(Policy = "Administrator")]
         [HttpGet("[action]/{pageNumber}:{pageSize}")]
         public async Task<IActionResult> GetPage(Guid fitnessClubId, int pageNumber = 1, int pageSize = 12)
         {
             var pagedList = await _service.GetPage(UserId, fitnessClubId, pageNumber, pageSize);
 
-            _httpClient.Token = GetToken();
-            var userApiModel = await _httpClient.GetPagedUsersAsync(pagedList.Entities);
+            _userHttpClient.Token = GetToken();
+            var userApiModel = await _userHttpClient.GetUsersAsync(pagedList.Entities);
 
             var result = _mapper.Map<List<EmployeeResponse>>(userApiModel);
 
@@ -36,47 +39,77 @@ namespace GMS.Core.WebHost.Controllers
             return Ok(result);
         }
 
+        [AllowAnonymous]
+        [HttpGet("[action]/{pageNumber}:{pageSize}")]
+        public async Task<IActionResult> GetPageTrainers(Guid fitnessClubId, int pageNumber = 1, int pageSize = 12)
+        {
+            var pagedList = await _service.GetPagedTrainers(fitnessClubId, pageNumber, pageSize);
+
+            _coachHttpClient.Token = GetToken();
+            var coaches = await _coachHttpClient.GetPagedCoachesAsync(pagedList.Entities);
+
+            var result = _mapper.Map<List<TrainerResponse>>(coaches);
+
+            Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(pagedList.Pagination));
+            return Ok(result);
+        }
+
+        [Authorize(Policy = "Administrator")]
+        [HttpGet("[action]/{pageNumber}:{pageSize}")]
+        public async Task<IActionResult> GetPageManagers(Guid fitnessClubId, int pageNumber = 1, int pageSize = 12)
+        {
+            var pagedList = await _service.GetPagedManagers(UserId,fitnessClubId, pageNumber, pageSize);
+
+            _userHttpClient.Token = GetToken();
+            var managers = await _userHttpClient.GetUsersAsync(pagedList.Entities);
+
+            var result = _mapper.Map<List<EmployeeResponse>>(managers);
+
+            Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(pagedList.Pagination));
+            return Ok(result);
+        }
+
+        [Authorize(Policy = "Administrator")]
         [HttpGet("[action]/{id}")]
         public async Task<IActionResult> Get(Guid id)
         {
             await _service.Get(id, UserId);
 
-            _httpClient.Token = GetToken();
-            var userApiModel = await _httpClient.GetUserAsync(id);
+            _userHttpClient.Token = GetToken();
+            var userApiModel = await _userHttpClient.GetUserAsync(id);
 
             var result = _mapper.Map<EmployeeResponse>(userApiModel);
 
             return Ok(result);
         }
 
+        [Authorize(Policy = "Administrator")]
         [HttpPost("[action]")]
         public async Task<IActionResult> Add(EmployeeCreateRequest request)
         {
             var userModel = _mapper.Map<UserCreateApiModel>(request);
 
-            _httpClient.Token = GetToken();
-            var createdUserId = await _httpClient.CreateUserAsync(userModel);
+            _userHttpClient.Token = GetToken();
+            var createdUserId = await _userHttpClient.CreateUserAsync(userModel);
 
             await _service.Create(new EmployeeCreateOrEditDto
             {
                 Id = createdUserId,
                 FitnessClubId = request.FitnessClubId,
-                OwnerId = UserId
+                UserId = UserId,
+                Role = request.Role
             });
 
             return Ok(createdUserId);
         }
 
-        /*[HttpPut("[action]/{id}")]
-        public async Task<IActionResult> Edit(Guid id, AreaEditRequest request)
-        {
-            throw new NotImplementedException();
-        }
-
+        [Authorize(Policy = "Administrator")]
         [HttpDelete("[action]/{id}")]
         public async Task<IActionResult> AddToArchive(Guid id)
         {
-            throw new NotImplementedException();
-        }*/
+            await _service.AddToArchive(id, UserId);
+
+            return NoContent();
+        }
     }
 }

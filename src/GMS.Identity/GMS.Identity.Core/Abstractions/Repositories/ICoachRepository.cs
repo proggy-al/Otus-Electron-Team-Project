@@ -20,5 +20,12 @@ namespace GMS.Identity.Core.Abstractions.Repositories
         /// </summary>
         /// <returns></returns>
         public Task<List<UserApiModel>> GetCoaches();
+
+        /// <summary>
+        /// Get coach by Ids
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        public Task<List<UserApiShortModel>> GetListCoaches(List<Guid> ids);
     }
 }

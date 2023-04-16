@@ -7,7 +7,7 @@ namespace GMS.Core.Core.Abstractions.Repositories
     public interface IEmployeeRepository : IRepository<Employee,Guid>
     {
         /// <summary>
-        /// Получить полный список идентификаторов сотрудников
+        /// Получить постраничный список идентификаторов сотрудников
         /// </summary>
         /// <param name="fitnessClubId">идентификатор фитнес клуба</param>
         /// <param name="pageNumber">номер страницы</param>

@@ -25,6 +25,6 @@ namespace GMS.Core.Core.Domain
         /// <summary>
         /// Временной интервал
         /// </summary>
-        public virtual TimeSlot TimeSlot { get; set; }
+        public virtual List<TimeSlot> TimeSlots { get; set; }
     }
 }

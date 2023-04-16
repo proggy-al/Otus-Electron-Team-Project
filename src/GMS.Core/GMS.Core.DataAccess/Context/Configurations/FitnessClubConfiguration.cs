@@ -21,10 +21,10 @@ namespace GMS.Core.DataAccess.Context.Configurations
                    .WithOne(p => p.FitnessClub)
                    .HasForeignKey(p => p.FitnessClubId)
                    .IsRequired();
-            builder.HasMany(f => f.TimeSlots)
+            /*builder.HasMany(f => f.TimeSlots)
                    .WithOne(t => t.FitnessClub)
                    .HasForeignKey(t => t.FitnessClubId)
-                   .IsRequired();
+                   .IsRequired();*/
 
             builder.Property(p => p.Id)
                    .HasColumnType("uuid")

@@ -12,11 +12,13 @@ namespace GMS.Core.BusinessLogic.Services
     {
         private readonly IMapper _mapper;
         private readonly IFitnessClubRepository _repository;
+        private readonly IEmployeeRepository _employeeRepository;
 
-        public FitnessClubService(IMapper mapper, IFitnessClubRepository repository)
+        public FitnessClubService(IMapper mapper, IFitnessClubRepository repository, IEmployeeRepository employeeRepository)
         {
             _mapper = mapper;
             _repository = repository;
+            _employeeRepository = employeeRepository;
         }
 
         public async Task<PagedList<FitnessClubDto>> GetPage(int pageNumber, int pageSize)
@@ -49,7 +51,7 @@ namespace GMS.Core.BusinessLogic.Services
             return _mapper.Map<FitnessClubDto>(fitnessClub);
         }
 
-        public async Task<Guid> Create(FitnessClubCreateOrEditDto dto)
+        public async Task<Guid> Create(FitnessClubCreateDto dto)
         {
             var fitnessClub = _mapper.Map<FitnessClub>(dto);
 
@@ -59,15 +61,20 @@ namespace GMS.Core.BusinessLogic.Services
             return result.Id;
         }
 
-        public async Task Update(Guid id, FitnessClubCreateOrEditDto dto)
+        public async Task Update(Guid id, FitnessClubEditDto dto)
         {
             var fitnessClub = await _repository.GetAsync(id);
 
             if (fitnessClub == null)
                 throw new NotExistException("FitnessClub", id);
-            else if (fitnessClub.OwnerId != dto.OwnerId) 
-                throw new AccessDeniedException("FitnessClub");
-            else if (fitnessClub.IsDeleted) 
+            else if (fitnessClub.OwnerId != dto.UserId)
+            {
+                var IsEmployeeExist = await _employeeRepository.IsEmployeeWorkingInFitnessClub(fitnessClub.Id, dto.UserId);
+
+                if(!IsEmployeeExist)
+                    throw new AccessDeniedException("FitnessClub");
+            }
+            if (fitnessClub.IsDeleted)
                 throw new EntityLockedException("FitnessClub", id);
 
             _mapper.Map(dto, fitnessClub);

@@ -8,7 +8,8 @@ public class MappingProfile : Profile
 {
     public MappingProfile()
     {
-        CreateMap<User, UserApiModel>(); 
+        CreateMap<User, UserApiModel>();
+        CreateMap<User, UserApiShortModel>();
 
         CreateMap<UserApiModel, User>()
             .ForMember(d => d.Salt, map => map.Ignore())
