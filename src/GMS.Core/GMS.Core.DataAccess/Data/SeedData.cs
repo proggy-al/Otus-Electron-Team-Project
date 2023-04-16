@@ -1,4 +1,5 @@
 ﻿using GMS.Core.Core.Domain;
+using GMS.Core.Core.Domain.Employees;
 
 namespace GMS.Core.DataAccess.Data
 {
@@ -61,16 +62,68 @@ namespace GMS.Core.DataAccess.Data
                 IsDeleted = false
             },
         };
-        public static IEnumerable<Employee> Employees => new List<Employee>()
+        public static IEnumerable<Trainer> Trainers => new List<Trainer>()
         {
             // Gold's Gym
-            new Employee
+            new Trainer
             {
-                Id = Guid.Parse("10000000-0000-0000-0006-000000000001"),
-                FitnessClubId = Guid.Parse("f0000000-0000-0000-0000-000000000001"),  
+                Id = Guid.Parse("10000000-0000-0000-0005-000000000001"),
+                FitnessClubId = Guid.Parse("f0000000-0000-0000-0000-000000000001"),
                 IsDeleted = false
             },
-            new Employee
+
+            // Алмаз
+            new Trainer
+            {
+                Id = Guid.Parse("10000000-0000-0000-0005-000000000002"),
+                FitnessClubId = Guid.Parse("f0000000-0000-0000-0000-000000000002"),
+                IsDeleted = false
+            },
+
+            // Фитнес клуб 3
+            new Trainer
+            {
+                Id = Guid.Parse("10000000-0000-0000-0005-000000000003"),
+                FitnessClubId = Guid.Parse("f0000000-0000-0000-0000-000000000003"),
+                IsDeleted = false
+            },
+            new Trainer
+            {
+                Id = Guid.Parse("10000000-0000-0000-0005-000000000004"),
+                FitnessClubId = Guid.Parse("f0000000-0000-0000-0000-000000000003"),
+                IsDeleted = false
+            },
+        };
+        public static IEnumerable<Manager> Managers => new List<Manager>()
+        {
+            // Gold's Gym
+            new Manager
+            {
+                Id = Guid.Parse("10000000-0000-0000-0006-000000000001"),
+                FitnessClubId = Guid.Parse("f0000000-0000-0000-0000-000000000001"),
+                IsDeleted = false
+            },
+           
+            // Алмаз
+            new Manager
+            {
+                Id = Guid.Parse("10000000-0000-0000-0006-000000000002"),
+                FitnessClubId = Guid.Parse("f0000000-0000-0000-0000-000000000002"),
+                IsDeleted = false
+            },
+
+            // Фитнес клуб 3
+            new Manager
+            {
+                Id = Guid.Parse("10000000-0000-0000-0006-000000000003"),
+                FitnessClubId = Guid.Parse("f0000000-0000-0000-0000-000000000003"),
+                IsDeleted = false
+            },
+        };
+        public static IEnumerable<Administrator> Administrators => new List<Administrator>()
+        {
+            // Gold's Gym
+            new Administrator
             {
                 Id = Guid.Parse("10000000-0000-0000-0001-000000000001"),
                 FitnessClubId = Guid.Parse("f0000000-0000-0000-0000-000000000001"),
@@ -78,31 +131,20 @@ namespace GMS.Core.DataAccess.Data
             },
 
             // Алмаз
-            new Employee
-            {
-                Id = Guid.Parse("10000000-0000-0000-0006-000000000002"),
-                FitnessClubId = Guid.Parse("f0000000-0000-0000-0000-000000000002"),
-                IsDeleted = false
-            },
-            new Employee
+            new Administrator
             {
                 Id = Guid.Parse("10000000-0000-0000-0001-000000000002"),
                 FitnessClubId = Guid.Parse("f0000000-0000-0000-0000-000000000002"),
                 IsDeleted = false
             },
+
             // Фитнес клуб 3
-            new Employee
-            {
-                Id = Guid.Parse("10000000-0000-0000-0006-000000000003"),
-                FitnessClubId = Guid.Parse("f0000000-0000-0000-0000-000000000003"),
-                IsDeleted = false
-            },
-            new Employee
+            new Administrator
             {
                 Id = Guid.Parse("10000000-0000-0000-0001-000000000003"),
                 FitnessClubId = Guid.Parse("f0000000-0000-0000-0000-000000000003"),
                 IsDeleted = false
-            },
+            }
         };
         public static IEnumerable<Area> Areas => new List<Area>()
         {
@@ -234,7 +276,7 @@ namespace GMS.Core.DataAccess.Data
                 Name = "1 personal Training",
                 Description = "Cardio training",
                 Quantity = 1,
-                Price = 100,  
+                Price = 100,
                 FitnessClubId = Guid.Parse("f0000000-0000-0000-0000-000000000001"),
                 IsDeleted = false
             },
@@ -254,7 +296,7 @@ namespace GMS.Core.DataAccess.Data
                 Name = "1 personal Training",
                 Description = "Functional training",
                 Quantity = 1,
-                Price = 100,  
+                Price = 100,
                 FitnessClubId = Guid.Parse("f0000000-0000-0000-0000-000000000001"),
                 IsDeleted = false
             },
@@ -264,7 +306,7 @@ namespace GMS.Core.DataAccess.Data
                 Name = "8 personal Training",
                 Description = "Functional training",
                 Quantity = 8,
-                Price = 600,   
+                Price = 600,
                 FitnessClubId = Guid.Parse("f0000000-0000-0000-0000-000000000001"),
                 IsDeleted = false
             },
@@ -469,7 +511,7 @@ namespace GMS.Core.DataAccess.Data
             {
                 Id = Guid.Parse("c0000000-0000-0000-0000-000000000005"),
                 ProductId = Guid.Parse("b0000000-0000-0000-0000-000000000009"),
-                //ManagerId = Guid.Parse("10000000-0000-0000-0006-000000000003"),
+                ManagerId = Guid.Parse("10000000-0000-0000-0006-000000000003"),
                 UserId = Guid.Parse("00000000-0000-0000-0002-000000000003"),
                 StartDate = DateTime.UtcNow,
                 EndDate = DateTime.UtcNow.AddDays(365),
@@ -480,7 +522,7 @@ namespace GMS.Core.DataAccess.Data
             {
                 Id = Guid.Parse("c0000000-0000-0000-0000-000000000006"),
                 ProductId = Guid.Parse("b0000000-0000-0000-0000-00000000000a"),
-                //ManagerId = Guid.Parse("10000000-0000-0000-0006-000000000003"),
+                ManagerId = Guid.Parse("10000000-0000-0000-0006-000000000003"),
                 UserId = Guid.Parse("00000000-0000-0000-0002-000000000003"),
                 StartDate = DateTime.UtcNow,
                 EndDate = DateTime.UtcNow.AddDays(365),
@@ -491,7 +533,7 @@ namespace GMS.Core.DataAccess.Data
             {
                 Id = Guid.Parse("c0000000-0000-0000-0000-000000000007"),
                 ProductId = Guid.Parse("b0000000-0000-0000-0000-00000000000b"),
-                //ManagerId = Guid.Parse("10000000-0000-0000-0006-000000000003"),
+                ManagerId = Guid.Parse("10000000-0000-0000-0006-000000000003"),
                 UserId = Guid.Parse("00000000-0000-0000-0002-000000000003"),
                 StartDate = DateTime.UtcNow,
                 EndDate = DateTime.UtcNow.AddDays(365),
@@ -542,37 +584,141 @@ namespace GMS.Core.DataAccess.Data
                 IsApproved = true,
                 IsDeleted = false
             },
-            new Contract
+        };
+
+
+        public static IEnumerable<TimeSlot> TimeSlots => new List<TimeSlot>()
+        {
+            // Gold's Gym Venice
+            new TimeSlot
             {
-                Id = Guid.Parse("c0000000-0000-0000-0000-00000000000c"),
-                ProductId = Guid.Parse("b0000000-0000-0000-0000-000000000010"),
-                ManagerId = Guid.Parse("10000000-0000-0000-0001-000000000003"),
-                UserId = Guid.Parse("00000000-0000-0000-0002-000000000002"),
-                StartDate = DateTime.UtcNow,
-                EndDate = DateTime.UtcNow.AddDays(365),
-                IsApproved = true,
+                Id = Guid.Parse("d0000000-0000-0000-0000-000000000001"),
+                Name = "Functional training",
+                Description = "Strength and endurance training",
+                DateTime = new DateTime(2023,06,01,10,0,0).ToUniversalTime(),
+                Duration = 60,
+                TrainerId = Guid.Parse("10000000-0000-0000-0005-000000000001"),
+                AreaId = Guid.Parse("a0000000-0000-0000-0000-000000000003"),
+                IsDeleted = false,
+                IsBusy = false
+            },
+
+            // Алмаз
+            new TimeSlot
+            {
+                Id = Guid.Parse("d0000000-0000-0000-0000-000000000002"),
+                Name = "Кардио",
+                Description = "Тренировка на выносливость",
+                DateTime = new DateTime(2023,06,01,10,0,0).ToUniversalTime(),
+                Duration = 60,
+                TrainerId = Guid.Parse("10000000-0000-0000-0005-000000000002"),
+                AreaId = Guid.Parse("a0000000-0000-0000-0000-000000000007"),
+                IsDeleted = false,
+                IsBusy = false
+            },
+
+            // Фитнес клуб 3
+            new TimeSlot
+            {
+                Id = Guid.Parse("d0000000-0000-0000-0000-000000000003"),
+                Name = "Запись на тренировку 3 ФК3",
+                Description = "Описание тренировки 3 ФК3",
+                DateTime = new DateTime(2023, 06, 01, 10, 0, 0).ToUniversalTime(),
+                Duration = 60,
+                TrainerId = Guid.Parse("10000000-0000-0000-0005-000000000003"),
+                AreaId = Guid.Parse("a0000000-0000-0000-0000-000000000008"),
+                IsDeleted = false,
+                IsBusy = true
+            },
+            new TimeSlot
+            {
+                Id = Guid.Parse("d0000000-0000-0000-0000-000000000004"),
+                Name = "Запись на тренировку 4 ФК3",
+                Description = "Описание тренировки 4 ФК3",
+                DateTime = new DateTime(2023, 06, 01, 12, 0, 0).ToUniversalTime(),
+                Duration = 60,
+                TrainerId = Guid.Parse("10000000-0000-0000-0005-000000000003"),
+                AreaId = Guid.Parse("a0000000-0000-0000-0000-000000000008"),
+                IsDeleted = false,
+                IsBusy = false
+            },
+            new TimeSlot
+            {
+                Id = Guid.Parse("d0000000-0000-0000-0000-000000000005"),
+                Name = "Запись на тренировку 5 ФК3",
+                Description = "Описание тренировки 5 ФК3",
+                DateTime = new DateTime(2023, 06, 01, 13, 0, 0).ToUniversalTime(),
+                Duration = 60,
+                TrainerId = Guid.Parse("10000000-0000-0000-0005-000000000003"),
+                AreaId = Guid.Parse("a0000000-0000-0000-0000-000000000008"),
+                IsDeleted = false,
+                IsBusy = false
+            },
+            new TimeSlot
+            {
+                Id = Guid.Parse("d0000000-0000-0000-0000-000000000006"),
+                Name = "Запись на тренировку 6 ФК3",
+                Description = "Описание тренировки 6 ФК3",
+                DateTime = new DateTime(2023, 06, 01, 10, 0, 0).ToUniversalTime(),
+                Duration = 60,
+                TrainerId = Guid.Parse("10000000-0000-0000-0005-000000000004"),
+                AreaId = Guid.Parse("a0000000-0000-0000-0000-000000000009"),
+                IsDeleted = false,
+                IsBusy = false
+            },
+            new TimeSlot
+            {
+                Id = Guid.Parse("d0000000-0000-0000-0000-000000000007"),
+                Name = "Запись на тренировку 7 ФК3",
+                Description = "Описание тренировки 7 ФК3",
+                DateTime = new DateTime(2023, 01, 01, 10, 0, 0).ToUniversalTime(),
+                Duration = 60,
+                TrainerId = Guid.Parse("10000000-0000-0000-0005-000000000003"),
+                AreaId = Guid.Parse("a0000000-0000-0000-0000-000000000009"),
+                IsDeleted = false,
+                IsBusy = true
+            },
+            new TimeSlot
+            {
+                Id = Guid.Parse("d0000000-0000-0000-0000-000000000008"),
+                Name = "Запись на тренировку 8 ФК3",
+                Description = "Описание тренировки 8 ФК3",
+                DateTime = new DateTime(2023, 01, 01, 11, 0, 0).ToUniversalTime(),
+                Duration = 60,
+                TrainerId = Guid.Parse("10000000-0000-0000-0005-000000000003"),
+                AreaId = Guid.Parse("a0000000-0000-0000-0000-000000000009"),
+                IsDeleted = false,
+                IsBusy = true
+            },
+        };
+
+        public static IEnumerable<Training> Trainings => new List<Training>()
+        {
+            new Training
+            {
+                Id = Guid.Parse("d0000000-0000-0000-0001-000000000001"),
+                UserId = Guid.Parse("00000000-0000-0000-0002-000000000003"),
+                TimeSlotId = Guid.Parse("d0000000-0000-0000-0000-000000000003"),
+                TrainerNotes = "",
+                Points = 0,
                 IsDeleted = false
             },
-            new Contract
+            new Training
             {
-                Id = Guid.Parse("c0000000-0000-0000-0000-00000000000d"),
-                ProductId = Guid.Parse("b0000000-0000-0000-0000-000000000009"),
-                ManagerId = Guid.Parse("10000000-0000-0000-0001-000000000003"),
+                Id = Guid.Parse("d0000000-0000-0000-0001-000000000002"),
                 UserId = Guid.Parse("00000000-0000-0000-0002-000000000003"),
-                StartDate = DateTime.UtcNow,
-                EndDate = DateTime.UtcNow.AddDays(365),
-                IsApproved = true,
+                TimeSlotId = Guid.Parse("d0000000-0000-0000-0000-000000000007"),
+                TrainerNotes = "",
+                Points = 0,
                 IsDeleted = false
             },
-            new Contract
+            new Training
             {
-                Id = Guid.Parse("c0000000-0000-0000-0000-00000000000e"),
-                ProductId = Guid.Parse("b0000000-0000-0000-0000-000000000009"),
-                ManagerId = Guid.Parse("10000000-0000-0000-0001-000000000003"),
+                Id = Guid.Parse("d0000000-0000-0000-0001-000000000003"),
                 UserId = Guid.Parse("00000000-0000-0000-0002-000000000003"),
-                StartDate = DateTime.UtcNow,
-                EndDate = DateTime.UtcNow.AddDays(365),
-                IsApproved = true,
+                TimeSlotId = Guid.Parse("d0000000-0000-0000-0000-000000000008"),
+                TrainerNotes = "",
+                Points = 0,
                 IsDeleted = false
             }
         };

@@ -21,16 +21,16 @@ namespace GMS.Core.WebHost.Configurations
                 cfg.AddProfile<AreaMappingsProfile>();
                 cfg.AddProfile<ProductMappingsProfile>();
                 cfg.AddProfile<ContractMappingsProfile>();
-                //cfg.AddProfile<TimeSlotMappingsProfile>();
-                //cfg.AddProfile<TrainingMappingsProfile>();
+                cfg.AddProfile<TimeSlotMappingsProfile>();
+                cfg.AddProfile<TrainingMappingsProfile>();
 
                 cfg.AddProfile<FitnessClubVmMappingsProfile>();
                 cfg.AddProfile<EmployeeVmMappingsProfile>();
                 cfg.AddProfile<AreaVmMappingsProfile>();
                 cfg.AddProfile<ProductVmMappingsProfile>();              
                 cfg.AddProfile<ContractVmMappingsProfile>();
-                //cfg.AddProfile<TimeSlotVmMappingsProfile>();
-                //cfg.AddProfile<TrainingVmMappingsProfile>();
+                cfg.AddProfile<TimeSlotVmMappingsProfile>();
+                cfg.AddProfile<TrainingVmMappingsProfile>();
             });
 
             configuration.AssertConfigurationIsValid();

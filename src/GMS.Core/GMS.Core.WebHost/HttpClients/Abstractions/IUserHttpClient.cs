@@ -1,16 +1,20 @@
 ﻿using GMS.Core.WebHost.Models.Identity;
 
-namespace GMS.Core.WebHost.HttpClients
+namespace GMS.Core.WebHost.HttpClients.Abstractions
 {
-    public interface IUserHttpClient
+    public interface IUserHttpClient : IBaseHttpClient
     {
-        string? Token { set; }
-
         /// <summary>
         /// GET запрос информации о пользователях
         /// </summary>
         /// <returns>список пользователей</returns>
-        Task<List<UserApiModel>> GetPagedUsersAsync(List<Guid> userIds);
+        Task<List<UserApiModel>> GetUsersAsync(List<Guid> userIds);
+
+        /// <summary>
+        /// GET запрос короткой информации о пользователях
+        /// </summary>
+        /// <returns>список пользователей</returns>
+        Task<List<UserApiShortModel>> GetShortInfoUsersAsync(List<Guid> ids);
 
         /// <summary>
         /// GET запрос информации о пользователе

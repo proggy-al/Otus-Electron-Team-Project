@@ -48,16 +48,17 @@ namespace GMS.Core.BusinessLogic.Services
 
             if (fitnessClub == null)
                 throw new NotExistException("FitnessClub", dto.FitnessClubId);
+            else if (fitnessClub.OwnerId != dto.EmployeeId)
+            {
+                var IsEmployeeExist = await _employeeRepository.IsEmployeeWorkingInFitnessClub(dto.FitnessClubId, dto.EmployeeId);
 
-            var IsEmployeeExist = await _employeeRepository.IsEmployeeWorkingInFitnessClub(dto.FitnessClubId, dto.EmployeeId);
-
-            if (fitnessClub.OwnerId != dto.EmployeeId && !IsEmployeeExist)
-                throw new AccessDeniedException("FitnessClub");
-            else if (fitnessClub.IsDeleted)
+                if(IsEmployeeExist)
+                    throw new AccessDeniedException("FitnessClub");
+            }
+            if (fitnessClub.IsDeleted)
                 throw new EntityLockedException("FitnessClub", fitnessClub.Id);
 
             var product = _mapper.Map<Product>(dto);
-
             var result = await _productRepository.AddAsync(product);
             await _productRepository.SaveChangesAsync();
 
@@ -67,15 +68,17 @@ namespace GMS.Core.BusinessLogic.Services
         public async Task AddToArchive(Guid id, Guid employeeId)
         {
             var product = await _productRepository.GetWithIncludeAsync(X=>X.Id == id, x => x.FitnessClub);
-            
+
             if (product == null)
                 throw new NotExistException("Product", id);
+            else if (product.FitnessClub.OwnerId != employeeId)
+            {
+                var IsEmployeeExist = await _employeeRepository.IsEmployeeWorkingInFitnessClub(product.FitnessClubId, employeeId);
 
-            var IsEmployeeExist = await _employeeRepository.IsEmployeeWorkingInFitnessClub(product.FitnessClubId, employeeId);
-
-            if (product.FitnessClub.OwnerId != employeeId && !IsEmployeeExist)
-                throw new AccessDeniedException("Product");
-            else if (product.FitnessClub.IsDeleted)
+                if(!IsEmployeeExist)
+                    throw new AccessDeniedException("Product");
+            }
+            if (product.FitnessClub.IsDeleted)
                 throw new EntityLockedException("FitnessClub", product.FitnessClub.Id);
 
             product.IsDeleted = true;

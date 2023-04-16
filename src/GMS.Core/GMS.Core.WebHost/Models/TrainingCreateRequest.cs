@@ -1,6 +1,6 @@
 ﻿namespace GMS.Core.WebHost.Models
 {
-    public class TrainingUserSignedUp
+    public class TrainingCreateRequest
     {
         /// <summary>
         /// Идентификатор временного интервала

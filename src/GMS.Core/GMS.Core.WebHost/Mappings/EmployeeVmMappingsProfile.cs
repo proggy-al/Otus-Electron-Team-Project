@@ -15,6 +15,8 @@ namespace GMS.Core.WebHost.Mappings
             CreateMap<UserApiModel, EmployeeResponse>();
 
             CreateMap<EmployeeCreateRequest, UserCreateApiModel>();
+
+            CreateMap<UserApiShortModel, TrainerResponse>();
         }
     }
 }

@@ -3,14 +3,12 @@ using GMS.Core.BusinessLogic.Abstractions;
 using GMS.Core.BusinessLogic.Contracts;
 using GMS.Core.WebHost.Controllers.Base;
 using GMS.Core.WebHost.Models;
-using JWTAuthManager;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
 
 namespace GMS.Core.WebHost.Controllers
 {
-    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class FitnessClubController : BaseController<IFitnessClubService>
@@ -75,7 +73,7 @@ namespace GMS.Core.WebHost.Controllers
         [HttpPost("[action]")]
         public async Task<IActionResult> Add(FitnessClubCreateOrEditRequest request)
         {
-            var fitnessClubDto = _mapper.Map<FitnessClubCreateOrEditDto>(request);
+            var fitnessClubDto = _mapper.Map<FitnessClubCreateDto>(request);
             fitnessClubDto.OwnerId = UserId;
 
             var id = await _service.Create(fitnessClubDto);
@@ -88,12 +86,12 @@ namespace GMS.Core.WebHost.Controllers
         /// <param name="id">идендификатор клуба</param>
         /// <param name="request">информация о клубе</param>
         /// <returns></returns>
-        [Authorize(Policy = "GymOwner")]
+        [Authorize(Policy = "Administrator")]
         [HttpPut("[action]/{id}")]
         public async Task<IActionResult> Edit(Guid id, FitnessClubCreateOrEditRequest request)
         {
-            var fitnessClubDto = _mapper.Map<FitnessClubCreateOrEditDto>(request);
-            fitnessClubDto.OwnerId = UserId;
+            var fitnessClubDto = _mapper.Map<FitnessClubEditDto>(request);
+            fitnessClubDto.UserId = UserId;
 
             await _service.Update(id, fitnessClubDto);
 

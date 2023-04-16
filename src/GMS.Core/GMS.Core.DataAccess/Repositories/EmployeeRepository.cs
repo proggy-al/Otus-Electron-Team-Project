@@ -33,7 +33,9 @@ namespace GMS.Core.DataAccess.Repositories
         public async Task<bool> IsEmployeeWorkingInFitnessClub(Guid fitnessClubId, Guid employeeId)
         {
             return await EntitySet
-                .AnyAsync(e => e.FitnessClubId == fitnessClubId && e.Id == employeeId && e.IsDeleted == false);
+                .AnyAsync(e => e.FitnessClubId == fitnessClubId && 
+                          e.Id == employeeId && 
+                          e.IsDeleted == false);
         }
     }
 }

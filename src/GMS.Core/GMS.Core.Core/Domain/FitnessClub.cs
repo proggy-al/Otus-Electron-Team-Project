@@ -45,6 +45,6 @@ namespace GMS.Core.Core.Domain
         /// <summary>
         /// Временные интервалы
         /// </summary>
-        public virtual ICollection<TimeSlot> TimeSlots { get; set; }
+        //public virtual ICollection<TimeSlot> TimeSlots { get; set; }
     }
 }

@@ -7,6 +7,7 @@ namespace GMS.Core.Core.Domain
     /// </summary>
     public class Employee : BaseEntity
     {
+        
         /// <summary>
         /// Идентификатор фитнес клуба
         /// </summary>

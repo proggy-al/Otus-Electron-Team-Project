@@ -8,6 +8,7 @@ namespace GMS.Core.WebHost.Configurations
         {
             serviceCollection.AddOptions<HttpClientOptions>()
                 .Bind(configuration.GetSection(HttpClientOptions.Position));
+
             return serviceCollection;
         }
     }

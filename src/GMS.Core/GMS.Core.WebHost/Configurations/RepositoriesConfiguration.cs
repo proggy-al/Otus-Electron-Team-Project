@@ -10,6 +10,8 @@ namespace GMS.Core.WebHost.Configurations
             serviceCollection
                 .AddTransient<IFitnessClubRepository, FitnessClubRepository>()
                 .AddTransient<IEmployeeRepository, EmployeeRepository>()
+                .AddTransient<ITrainerRepository, TrainerRepository>()
+                .AddTransient<IManagerRepository, ManagerRepository>()
                 .AddTransient<IAreaRepository, AreaRepository>()
                 .AddTransient<IProductRepository, ProductRepository>()
                 .AddTransient<IContractRepository, ContractRepository>()
