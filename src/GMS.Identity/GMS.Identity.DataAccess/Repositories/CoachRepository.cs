@@ -3,6 +3,7 @@ using GMS.Identity.Client.Models;
 using GMS.Identity.Core.Abstractions.Repositories;
 using GMS.Identity.DataAccess.Context;
 using JWTAuthManager;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -32,6 +33,12 @@ namespace GMS.Identity.DataAccess.Repositories
         {
             var entities = await _context.Users.Where(u=> u.Role == Priviliges.Coach.ToString() || u.Role == Priviliges.ChiefCoach.ToString()).ToListAsync();
             return _mapper.Map<List<UserApiModel>>(entities);
+        }
+
+        public async Task<List<UserApiShortModel>> GetListCoaches(List<Guid> ids)
+        {
+            var entities = await _context.Users.Where(u => u.IsActive == true && u.Role == Priviliges.Coach.ToString() && ids.Contains(u.Id)).ToListAsync();
+            return _mapper.Map<List<UserApiShortModel>>(entities);
         }
     }
 }
