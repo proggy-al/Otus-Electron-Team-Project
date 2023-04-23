@@ -50,9 +50,9 @@ build-job:
     - docker info
     #- DOCKER_BUILDKIT=1 docker build -f Dockerfile --force-rm  -t gmsidentity:dev --target base --label "GMS.Identity.Service" --output type=tar,dest=out.tar  .
     #- docker login -u $USER -p $ACCESS_TOKEN $CI_REGISTRY
-    - DOCKER_BUILDKIT=1 docker build -f Dockerfile --force-rm  -t registry.gitlab.com/otus-electron-team/otus-electron-team-project  --target base --label "GMS.Identity.Service"  .
+    - DOCKER_BUILDKIT=1 docker build -f Dockerfile --force-rm  -t registry.gitlab.com/otus-electron-team/otus-electron-team-project  --target base --label "GMS.Identity.Service"  --tag gms.identity.service:latest  .
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-    - docker push registry.gitlab.com/gms.identity.service 
+    - docker push gms.identity.service 
     - ls
     #- dotnet build  --configuration Release
     #- dotnet publish --configuration Release --output ../publish/
