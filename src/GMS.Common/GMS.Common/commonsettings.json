@@ -1,11 +1,11 @@
 {
-  "Authorization": {    
+  "Authorization": {
     "JwtBearerOptions": {
       "RequireHttpsMetadata": "false",
-       "ValidateIssuer": "true",
-       "ValidateAudience": "true",
-       "ValidateLifetime": "true",
-       "ValidateIssuerSigningKey": "true"
+      "ValidateIssuer": "true",
+      "ValidateAudience": "true",
+      "ValidateLifetime": "true",
+      "ValidateIssuerSigningKey": "true"
     },
     "AditionalOptions": {
       "ISSUER": "MyAuthServer",
