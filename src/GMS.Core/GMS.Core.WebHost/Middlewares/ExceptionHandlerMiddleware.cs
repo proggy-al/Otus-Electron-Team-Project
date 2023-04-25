@@ -53,6 +53,9 @@ namespace GMS.Core.WebHost.Middlewares
                 case UnableToСancelTrainingException:
                     code = HttpStatusCode.BadRequest;
                     break;
+                case TimeslotIsBusyException:
+                    code = HttpStatusCode.BadRequest;
+                    break;
                 case BadRequestException:
                     code = HttpStatusCode.BadRequest;
                     break;

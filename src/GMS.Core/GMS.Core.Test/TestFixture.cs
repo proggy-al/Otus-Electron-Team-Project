@@ -35,7 +35,7 @@ namespace GMS.Core.Test
         }
 
         private IServiceCollection Services => new ServiceCollection()
-            .ConfigureMapper()
+            .AddAutoMapper()
             .AddDbContext<DatabaseContext>(options =>
             {
                 options.UseInMemoryDatabase("GmsCore");

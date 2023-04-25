@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using GMS.Common;
 using GMS.Core.BusinessLogic.Abstractions;
 using GMS.Core.BusinessLogic.Contracts;
 using GMS.Core.BusinessLogic.Exceptions;
@@ -6,7 +7,6 @@ using GMS.Core.Core.Abstractions.Repositories;
 using GMS.Core.Core.Domain;
 using GMS.Core.Core.Domain.Employees;
 using GMS.Core.WebHost.Models;
-using JWTAuthManager;
 
 namespace GMS.Core.BusinessLogic.Services
 {
