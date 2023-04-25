@@ -21,6 +21,8 @@ try
         .AddAutoMapper()
         .AddHttpClients()
         .AddServices()
+        .AddMassTransitRabbitMQ()
+        .AddRabbitMQProducers()
         .AddLogger(builder.Configuration)
         .AddEndpointsApiExplorer()
         .AddCustomJWTAuthentification()
