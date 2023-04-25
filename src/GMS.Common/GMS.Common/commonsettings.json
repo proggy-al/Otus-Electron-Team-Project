@@ -13,5 +13,11 @@
       "KEY": "mysupersecret_secretkey!123",
       "LIFETIME": "525600"
     }
+  },
+  "RabbitMQOptions": {
+    "Host": "localhost",
+    "VirtualHost": "/",
+    "UserName": "guest",
+    "Password": "guest"
   }
 }
