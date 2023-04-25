@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
+using GMS.Common;
 using GMS.Identity.Client.Models;
 using GMS.Identity.Core.Abstractions.Repositories;
 using GMS.Identity.DataAccess.Context;
-using JWTAuthManager;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using System;
