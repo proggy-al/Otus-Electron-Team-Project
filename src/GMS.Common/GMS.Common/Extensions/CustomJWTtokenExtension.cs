@@ -1,19 +1,18 @@
-﻿using JWTAuthManager.Options;
+﻿using GMS.Common.Options;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
-namespace JWTAuthManager;
+namespace GMS.Common.Extensions;
 
 public static class CustomJWTtokenExtension
 {
     public static IServiceCollection AddCustomJWTAuthentification(this IServiceCollection services)
     {
-        var configOptions = new ConfigurationBuilder().AddJsonFile("identitysettings.json").Build();
-        var authOptions = configOptions.GetSection(AuthOptions.Position).Get<AuthOptions>();
-        var jwtOptions = configOptions.GetSection(JwtBearerTokenOptions.Position).Get<JwtBearerTokenOptions>();
+        var authOptions = CommonConfigurationManager.Configuration.GetSection(AuthOptions.Position).Get<AuthOptions>();
+        var jwtOptions = CommonConfigurationManager.Configuration.GetSection(JwtBearerTokenOptions.Position).Get<JwtBearerTokenOptions>();
 
         services.AddSingleton(authOptions);
         services.AddAuthentication(authOpt =>

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using FluentValidation;
+using GMS.Common.Extensions;
 using GMS.Identity.Client.Models;
 using GMS.Identity.Client.Validators;
 using GMS.Identity.Core.Abstractions.Repositories;
@@ -7,7 +8,6 @@ using GMS.Identity.DataAccess.Context;
 using GMS.Identity.DataAccess.Repositories;
 using GMS.Identity.WebHost.Configuration;
 using GMS.Identity.WebHost.Infrastructure;
-using JWTAuthManager;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Swashbuckle.AspNetCore.SwaggerGen;

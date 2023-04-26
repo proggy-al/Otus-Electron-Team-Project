@@ -1,4 +1,4 @@
-﻿using JWTAuthManager;
+﻿using GMS.Common;
 using System.Security.Claims;
 
 namespace GMS.Core.WebHost.Configurations

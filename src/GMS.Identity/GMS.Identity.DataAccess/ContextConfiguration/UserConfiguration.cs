@@ -7,7 +7,6 @@ using System.Text;
 using System.Threading.Tasks;
 using GMS.Identity.Core.Domain.Administration;
 using GMS.Identity.DataAccess.Utils;
-using JWTAuthManager;
 
 namespace GMS.Identity.DataAccess.ContextConfiguration
 {

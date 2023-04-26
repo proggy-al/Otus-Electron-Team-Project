@@ -5,7 +5,7 @@ namespace GMS.Core.WebHost.Configurations
 {
     public static class LoggerConfiguration
     {
-        public static IServiceCollection ConfigureLogger(this IServiceCollection serviceCollection, ConfigurationManager configuration)
+        public static IServiceCollection AddLogger(this IServiceCollection serviceCollection, ConfigurationManager configuration)
         {
             var options = configuration.GetSection(SerilogOptions.Position).Get<SerilogOptions>();
 

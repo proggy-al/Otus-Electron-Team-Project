@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
+using GMS.Common;
+using GMS.Common.Commands;
 using GMS.Core.BusinessLogic.Abstractions;
 using GMS.Core.BusinessLogic.Contracts;
 using GMS.Core.WebHost.Controllers.Base;
 using GMS.Core.WebHost.HttpClients.Abstractions;
 using GMS.Core.WebHost.Models;
-using JWTAuthManager;
+using GMS.Core.WebHost.RabbitMQProducers.Abstractions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
@@ -15,13 +17,17 @@ namespace GMS.Core.WebHost.Controllers
     [ApiController]
     public class TrainingController : BaseController<ITrainingService>
     {
-        private ICoachHttpClient _coachHttpClient;
-        private IUserHttpClient _userHttpClient;
+        private readonly ICoachHttpClient _coachHttpClient;
+        private readonly IUserHttpClient _userHttpClient;
 
-        public TrainingController(ITrainingService service, IMapper mapper,ICoachHttpClient coachHttpClient, IUserHttpClient userHttpClient) : base(service, mapper) 
+        private readonly ITrainingNotificationProducer _producer;
+
+        public TrainingController(ITrainingService service, IMapper mapper,ICoachHttpClient coachHttpClient, 
+            IUserHttpClient userHttpClient, ITrainingNotificationProducer producer) : base(service, mapper) 
         {
             _coachHttpClient = coachHttpClient;
             _userHttpClient = userHttpClient;
+            _producer = producer;
         }
 
         private delegate Task<PagedList<TrainingTrainerDto>> GetPagedByTrainerIdDelegate(Guid trainerId, int pageNumber, int pageSize);
@@ -125,14 +131,18 @@ namespace GMS.Core.WebHost.Controllers
 
         [Authorize(Roles = nameof(Priviliges.User))]
         [HttpPost("[action]")]
-        public async Task<IActionResult> AddTraining(TrainingCreateRequest request)
+        public async Task<IActionResult> Add(TrainingCreateRequest request)
         {
             var trainingDto = _mapper.Map<TrainingCreateDto>(request);
             trainingDto.UserId = UserId;
 
-            var id = await _service.AddTraining(trainingDto);
+            var training = await _service.AddTraining(trainingDto);
 
-            return Ok(id.ToString());
+            // отправляем в микросервис GMS.Communication
+            await _producer.AddNotification(
+                new AddTrainingNotificationCmd(training.Id, training.Name, training.DateTime, UserName, UserEmail));
+
+            return Ok(training.Id);
         }
 
         [Authorize(Roles = nameof(Priviliges.User))]
@@ -141,7 +151,8 @@ namespace GMS.Core.WebHost.Controllers
         {
             await _service.Cancel(id, UserId);
 
-            // ToDo: отправить оповещение тренеру, менеджеру об отмене тренировки
+            // отправляем в микросервис GMS.Communication
+            await _producer.DeleteNotification(id);
 
             return NoContent();
         }

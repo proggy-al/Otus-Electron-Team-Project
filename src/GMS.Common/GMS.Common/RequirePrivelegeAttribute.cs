@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 
-namespace JWTAuthManager;
+namespace GMS.Common;
 
 /// <summary>
 ///  Привилегии доступные для назначения пользователю, если нужно добавить - добавляем сюда

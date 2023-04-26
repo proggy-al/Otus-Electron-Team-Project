@@ -1,6 +1,6 @@
+using GMS.Common.Extensions;
 using GMS.Core.DataAccess.Context;
 using GMS.Core.WebHost.Configurations;
-using JWTAuthManager;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 
@@ -18,14 +18,16 @@ try
         })       
         .AddRepositories()
         .AddOptions(builder.Configuration)
-        .ConfigureMapper()
+        .AddAutoMapper()
         .AddHttpClients()
         .AddServices()
-        .ConfigureLogger(builder.Configuration)
+        .AddMassTransitRabbitMQ()
+        .AddRabbitMQProducers()
+        .AddLogger(builder.Configuration)
         .AddEndpointsApiExplorer()
         .AddCustomJWTAuthentification()
         .AddAuthorizationGMS()
-        .ConfigureSwagger()
+        .AddSwagger()
         .AddControllers();
 
     var app = WebApplicationConfiguration.Configure(builder);

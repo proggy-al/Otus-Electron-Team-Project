@@ -10,10 +10,10 @@ using GMS.Identity.Core.Abstractions.Repositories;
 using GMS.Identity.WebHost.Infrastructure;
 using GMS.Identity.Client;
 using GMS.Identity.Client.Models;
-using JWTAuthManager;
 using FluentValidation;
 using FluentValidation.Results;
-using JWTAuthManager.Options;
+using GMS.Common;
+using GMS.Common.Options;
 
 namespace GMS.Identity.WebHost.Controllers;
 

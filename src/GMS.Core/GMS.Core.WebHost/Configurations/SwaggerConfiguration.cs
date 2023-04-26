@@ -4,9 +4,8 @@ namespace GMS.Core.WebHost.Configurations
 {
     public static class SwaggerConfiguration
     {
-        public static IServiceCollection ConfigureSwagger(this IServiceCollection serviceCollection)
+        public static IServiceCollection AddSwagger(this IServiceCollection serviceCollection)
         {
-            
             serviceCollection.AddSwaggerGen(options =>
             {
                 
@@ -41,6 +40,7 @@ namespace GMS.Core.WebHost.Configurations
                     }
                 });
             });
+
             return serviceCollection;
         }
     }
