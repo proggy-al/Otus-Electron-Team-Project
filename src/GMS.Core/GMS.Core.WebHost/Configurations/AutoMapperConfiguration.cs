@@ -6,7 +6,7 @@ namespace GMS.Core.WebHost.Configurations
 {
     public static class AutoMapperConfiguration
     {
-        public static IServiceCollection ConfigureMapper(this IServiceCollection serviceCollection)
+        public static IServiceCollection AddAutoMapper(this IServiceCollection serviceCollection)
         {
             serviceCollection.AddSingleton<IMapper>(new Mapper(Configuration()));
             return serviceCollection;

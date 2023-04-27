@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
+using GMS.Common;
 using GMS.Core.BusinessLogic.Abstractions;
 using GMS.Core.WebHost.Controllers.Base;
 using GMS.Core.WebHost.HttpClients.Abstractions;
 using GMS.Core.WebHost.Models;
-using JWTAuthManager;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;

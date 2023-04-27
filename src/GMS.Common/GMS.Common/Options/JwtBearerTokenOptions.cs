@@ -1,4 +1,4 @@
-﻿namespace JWTAuthManager.Options;
+﻿namespace GMS.Common.Options;
 
 public class JwtBearerTokenOptions
 {
