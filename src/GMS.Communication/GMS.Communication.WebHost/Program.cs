@@ -68,13 +68,12 @@ namespace GMS.Communication.WebHost
             
             var services = scope.ServiceProvider;
             //IconnectionManager chatHub = services.GetRequiredService<ConnectionManager>();            
-            var Notification = new Notificator(logger, null, (IHubContext)chatHub);
-
+            //var Notification = new Notificator(logger, null, (IHubContext)chatHub);
+            
             TimerCallback callback = new TimerCallback((_) => 
             { 
 
-            });
-            
+            });            
         }
     }
 }
