@@ -1,6 +1,6 @@
 ﻿using GMS.Communication.Core;
-using GMS.Communication.Core.Abstractons;
 using GMS.Communication.Core.Domain;
+using GMS.Communication.WebHost.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace GMS.Communication.DataAccess.Context
@@ -42,6 +42,24 @@ namespace GMS.Communication.DataAccess.Context
                 .HasDefaultValue(MessageStatus.none)
                 .IsRequired();
             modelBuilder.Entity<GmsMessage>().HasKey(x => x.Id);
+            
+            modelBuilder.Entity<TrainingNotification>()
+                .Property(s => s.UserId);
+            modelBuilder.Entity<TrainingNotification>()
+                .Property(s => s.TrainingDateTime)
+                .IsRequired();
+            modelBuilder.Entity<TrainingNotification>()
+                .Property(s => s.NotificationPeriod)
+                .HasDefaultValue(new DateTime().AddHours(24))
+                .IsRequired();
+            modelBuilder.Entity<TrainingNotification>()
+                .Property(s => s.Email);
+            modelBuilder.Entity<TrainingNotification>()
+                .Property(s => s.Content)
+                .HasMaxLength(500)
+                .IsRequired();
+            modelBuilder.Entity<TrainingNotification>()
+                .HasKey(x => x.Id);            
         }
     }
 }

@@ -3,6 +3,7 @@ using System;
 using GMS.Communication.DataAccess.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GMS.Communication.DataAccess.Sqlite.Migrations
 {
     [DbContext(typeof(GmsMessagesDb))]
-    partial class GmsMessagesDbModelSnapshot : ModelSnapshot
+    [Migration("20230501172822_NotificationTable")]
+    partial class NotificationTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.4");
