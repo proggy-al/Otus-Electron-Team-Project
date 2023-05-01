@@ -25,6 +25,7 @@ namespace GMS.Communication.WebHost
             services.AddAutoMapper(typeof(MappingProfile));
             services.AddSingleton<IUserIdProvider, MyUserProvider>();
             services.AddScoped(typeof(IRepository<GmsMessage>), typeof(EfRepository<GmsMessage>));
+            services.AddScoped(typeof(IRepository<TrainingNotification>), typeof(EfRepository<TrainingNotification>));
             services.AddSignalR();
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
