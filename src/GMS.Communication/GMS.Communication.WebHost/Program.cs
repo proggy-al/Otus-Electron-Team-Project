@@ -1,4 +1,5 @@
 using GMS.Communication.Core.Abstractons;
+using GMS.Communication.Core.Domain;
 using GMS.Communication.DataAccess.Context;
 using GMS.Communication.DataAccess.Data;
 using GMS.Communication.WebHost.Hubs;
@@ -72,7 +73,8 @@ namespace GMS.Communication.WebHost
 
             var hubContext = services.GetRequiredService<IHubContext<ChatHub>>();
             var notificationDb = services.GetRequiredService<IRepository<TrainingNotification>>();
-            var notificator = new Notificator(notifacatorlogger, notificationDb, hubContext);
+            var messagesDb = services.GetRequiredService<IRepository<GmsMessage>>();
+            var notificator = new Notificator(notifacatorlogger, notificationDb, messagesDb, hubContext);
             var notificationService = new NotificationService(notificationServiceLogger, notificator, notificationDb);
             notificationService.Start();
         }

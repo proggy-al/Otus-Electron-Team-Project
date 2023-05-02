@@ -10,8 +10,8 @@ namespace GMS.Communication.WebHost.Models
     /// </remarks>
     public class TrainingNotification: BaseEntity
     {
-        // Если заполнен будет сообщение в личный кабинет
-        public Guid? UserId { get; set; }
+        // Всегда отправляется сообщение в личный кабинет
+        public Guid UserId { get; set; }
         // Дата и время тренировки
         public DateTime TrainingDateTime { get; set; }
         // Время до тренировки когода произойдёт рассылка

@@ -44,7 +44,8 @@ namespace GMS.Communication.DataAccess.Context
             modelBuilder.Entity<GmsMessage>().HasKey(x => x.Id);
             
             modelBuilder.Entity<TrainingNotification>()
-                .Property(s => s.UserId);
+                .Property(s => s.UserId)
+                .IsRequired();
             modelBuilder.Entity<TrainingNotification>()
                 .Property(s => s.TrainingDateTime)
                 .IsRequired();
