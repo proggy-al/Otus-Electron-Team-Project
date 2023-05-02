@@ -10,9 +10,9 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GMS.Communication.DataAccess.Sqlite.Migrations
 {
-    [DbContext(typeof(GmsMessagesDb))]
-    [Migration("20230502140603_UserIdBecomeNullable")]
-    partial class UserIdBecomeNullable
+    [DbContext(typeof(CommunicationDb))]
+    [Migration("20230502141920_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

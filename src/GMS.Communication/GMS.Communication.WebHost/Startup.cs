@@ -15,10 +15,10 @@ namespace GMS.Communication.WebHost
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<GmsMessagesDb>(options =>
+            services.AddDbContext<CommunicationDb>(options =>
             {
                 options.UseSqlite(
-                    "Data Source=GmsMessages.db",
+                    "Data Source=Communication.db",
                     x => x.MigrationsAssembly("GMS.Communication.DataAccess.Sqlite")
                     );
             });

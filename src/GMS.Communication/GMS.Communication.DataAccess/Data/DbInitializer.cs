@@ -6,10 +6,10 @@ namespace GMS.Communication.DataAccess.Data
 {
     public class DbInitializer
     {
-        private static GmsMessagesDb _db;
-        private static ILogger<GmsMessagesDb> _logger;
+        private static CommunicationDb _db;
+        private static ILogger<CommunicationDb> _logger;
 
-        public static async Task InitializeAsync(GmsMessagesDb db, ILogger<GmsMessagesDb> logger,
+        public static async Task InitializeAsync(CommunicationDb db, ILogger<CommunicationDb> logger,
             bool restoreDb = false)
         {
             _db = db;

@@ -3,19 +3,16 @@ using System;
 using GMS.Communication.DataAccess.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
 namespace GMS.Communication.DataAccess.Sqlite.Migrations
 {
-    [DbContext(typeof(GmsMessagesDb))]
-    [Migration("20230325152132_Initial")]
-    partial class Initial
+    [DbContext(typeof(CommunicationDb))]
+    partial class CommunicationDbModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.4");
@@ -64,6 +61,36 @@ namespace GMS.Communication.DataAccess.Sqlite.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Messages");
+                });
+
+            modelBuilder.Entity("GMS.Communication.WebHost.Models.TrainingNotification", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("NotificationPeriod")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT")
+                        .HasDefaultValue(new DateTime(1, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified));
+
+                    b.Property<DateTime>("TrainingDateTime")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TrainingNotification");
                 });
 #pragma warning restore 612, 618
         }

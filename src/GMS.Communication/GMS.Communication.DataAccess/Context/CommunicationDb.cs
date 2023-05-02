@@ -5,14 +5,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GMS.Communication.DataAccess.Context
 {
-    public class GmsMessagesDb : DbContext
+    public class CommunicationDb : DbContext
     {
         public DbSet<GmsMessage>  Messages {get;set;}
 
-        public GmsMessagesDb(DbContextOptions<GmsMessagesDb> options) : base(options)
-        {
-            
-        }
+        public CommunicationDb(DbContextOptions<CommunicationDb> options) : base(options)
+        {}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

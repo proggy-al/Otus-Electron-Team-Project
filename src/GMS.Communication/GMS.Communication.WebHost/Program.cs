@@ -20,7 +20,7 @@ namespace GMS.Communication.WebHost
             var host = CreateHostBuilder(args).Build();
             ILoggerFactory loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
             
-            ILogger<GmsMessagesDb> messageDbLogger = loggerFactory.CreateLogger<GmsMessagesDb>();            
+            ILogger<CommunicationDb> messageDbLogger = loggerFactory.CreateLogger<CommunicationDb>();            
             await CreateDbIfNotExist(host, messageDbLogger);
             
             ILogger<Notificator> notificatorLogger = loggerFactory.CreateLogger<Notificator>();
@@ -51,11 +51,11 @@ namespace GMS.Communication.WebHost
         /// <param name="host"></param>
         /// <param name="logger"></param>
         /// <returns></returns>
-        private static async Task CreateDbIfNotExist(IHost host, ILogger<GmsMessagesDb> logger)
+        private static async Task CreateDbIfNotExist(IHost host, ILogger<CommunicationDb> logger)
         {
             await using var scope = host.Services.CreateAsyncScope();
             var services = scope.ServiceProvider;
-            var context = services.GetRequiredService<GmsMessagesDb>();
+            var context = services.GetRequiredService<CommunicationDb>();
             await DbInitializer.InitializeAsync(context, logger, true);
         }
 

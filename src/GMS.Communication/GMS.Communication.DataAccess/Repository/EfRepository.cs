@@ -9,11 +9,11 @@ namespace GMS.Communication.DataAccess.Repository
 {
     public class EfRepository<T> : IRepository<T> where T : BaseEntity
     {
-        private readonly GmsMessagesDb _db;
+        private readonly CommunicationDb _db;
         private readonly ILogger<T> _logger;
         private readonly string _typeName;
 
-        public EfRepository(GmsMessagesDb db, ILogger<T> logger)
+        public EfRepository(CommunicationDb db, ILogger<T> logger)
         {
             _db = db;
             _logger = logger;

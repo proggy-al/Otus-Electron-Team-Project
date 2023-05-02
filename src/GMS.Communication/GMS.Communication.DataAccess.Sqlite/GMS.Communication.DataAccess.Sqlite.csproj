@@ -15,4 +15,8 @@
     <ProjectReference Include="..\GMS.Communication.DataAccess\GMS.Communication.DataAccess.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>
