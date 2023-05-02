@@ -1,9 +1,10 @@
+using GMS.Communication.Core.Abstractons;
 using GMS.Communication.DataAccess.Context;
 using GMS.Communication.DataAccess.Data;
 using GMS.Communication.WebHost.Hubs;
 using GMS.Communication.WebHost.Models;
+using GMS.Communication.WebHost.Services;
 using Microsoft.AspNetCore.SignalR;
-using Microsoft.Web.Management.Client;
 
 namespace GMS.Communication.WebHost
 {
@@ -22,7 +23,8 @@ namespace GMS.Communication.WebHost
             await CreateDbIfNotExist(host, messageDbLogger);
             
             ILogger<Notificator> notificatorLogger = loggerFactory.CreateLogger<Notificator>();
-            await StartNotificationWorker(host, notificatorLogger);
+            ILogger<NotificationService> notificationServiceLogger = loggerFactory.CreateLogger<NotificationService>();
+            await StartNotificationWorker(host, notificatorLogger, notificationServiceLogger);
             
             await host.RunAsync();
         }
@@ -62,18 +64,17 @@ namespace GMS.Communication.WebHost
         /// <param name="host"></param>
         /// <param name="logger"></param>
         /// <returns></returns>
-        private static async Task StartNotificationWorker(IHost host, ILogger<Notificator> logger)
+        private static async Task StartNotificationWorker(IHost host, ILogger<Notificator> notifacatorlogger, ILogger<NotificationService> notificationServiceLogger)
         {
             await using var scope = host.Services.CreateAsyncScope();
             
             var services = scope.ServiceProvider;
-            //IconnectionManager chatHub = services.GetRequiredService<ConnectionManager>();            
-            //var Notification = new Notificator(logger, null, (IHubContext)chatHub);
-            
-            TimerCallback callback = new TimerCallback((_) => 
-            { 
 
-            });            
+            var hubContext = services.GetRequiredService<IHubContext<ChatHub>>();
+            var notificationDb = services.GetRequiredService<IRepository<TrainingNotification>>();
+            var notificator = new Notificator(notifacatorlogger, notificationDb, hubContext);
+            var notificationService = new NotificationService(notificationServiceLogger, notificator, notificationDb);
+            notificationService.Start();
         }
     }
 }
