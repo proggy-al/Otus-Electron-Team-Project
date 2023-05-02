@@ -1,4 +1,7 @@
-﻿using GMS.Communication.Core.Abstractons;
+﻿using GMS.Communication.Core;
+using GMS.Communication.Core.Abstractons;
+using GMS.Communication.Core.Domain;
+using GMS.Communication.DataAccess.Context;
 using GMS.Communication.WebHost.Hubs;
 using Microsoft.AspNetCore.SignalR;
 
@@ -12,10 +15,13 @@ namespace GMS.Communication.WebHost.Models
         private readonly ILogger<Notificator> _logger;
         private readonly IHubContext<ChatHub> _hubContext;
         private readonly IRepository<TrainingNotification> _notificationDb;
-        public Notificator(ILogger<Notificator> logger, IRepository<TrainingNotification> notificationDb, IHubContext<ChatHub> hubContext)
+        private readonly IRepository<GmsMessage> _messagesDb;
+
+        public Notificator(ILogger<Notificator> logger, IRepository<TrainingNotification> notificationDb, IRepository<GmsMessage> messagesDb, IHubContext<ChatHub> hubContext)
         {
             _logger = logger;
             _notificationDb = notificationDb;
+            _messagesDb = messagesDb;
             _hubContext = hubContext;
         }
 
@@ -31,12 +37,22 @@ namespace GMS.Communication.WebHost.Models
 
         public async Task NotificateAsync(TrainingNotification notification)
         {
-            if(notification.UserId is not null)
+            await _messagesDb.CreateAsync(new GmsMessage()
             {
-               await _hubContext.Clients.User(notification.UserId.ToString()).SendAsync(MethodName, notification.Content);
-            }
-
-            if(notification.Email is not null)
+                Body = notification.Content,
+                CreateDate = DateTime.Now,
+                DeliveryDate = null,
+                ReadDate = null,
+                RecipientId = notification.UserId,
+                SenderId = Guid.Empty,
+                Status = MessageStatus.undelivered,
+                Subject = "Уведомление о тренеровке",
+                Type = MessageType.text,
+            });
+            await _hubContext.Clients.User(notification.UserId.ToString()).SendAsync(MethodName, notification.Content);
+            await _notificationDb.DeleteAsync(notification.Id);
+            
+            if (notification.Email is not null)
             {
                 //TODO Логика для email рассылки
             }
