@@ -8,15 +8,15 @@ namespace GMS.Communication.WebHost.Services
 {
     public class NotificationService
     {
-        private readonly Notificator _notificator;
+        private readonly Notifier _notifier;
         private Timer _timer;
         private readonly IRepository<TrainingNotification> _notificationDb;
         private const int Delta = 1;
 
-        public NotificationService(ILogger<NotificationService> logger, Notificator notificator, IRepository<TrainingNotification> notificationDb)
+        public NotificationService(ILogger<NotificationService> logger, Notifier notifier, IRepository<TrainingNotification> notificationDb)
         {
             _notificationDb = notificationDb;
-            _notificator = notificator;
+            _notifier = notifier;
             _timer = null!;
         }
 
@@ -30,7 +30,7 @@ namespace GMS.Communication.WebHost.Services
 
             foreach (var notification in result)
             {
-                await _notificator.NotificateAsync(notification);
+                await _notifier.NotificateAsync(notification);
             }
         }
 

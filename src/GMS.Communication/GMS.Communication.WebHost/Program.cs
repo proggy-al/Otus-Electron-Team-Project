@@ -23,9 +23,9 @@ namespace GMS.Communication.WebHost
             ILogger<CommunicationDb> messageDbLogger = loggerFactory.CreateLogger<CommunicationDb>();            
             await CreateDbIfNotExist(host, messageDbLogger);
             
-            ILogger<Notificator> notificatorLogger = loggerFactory.CreateLogger<Notificator>();
+            ILogger<Notifier> notifierLogger = loggerFactory.CreateLogger<Notifier>();
             ILogger<NotificationService> notificationServiceLogger = loggerFactory.CreateLogger<NotificationService>();
-            await StartNotificationWorker(host, notificatorLogger, notificationServiceLogger);
+            await StartNotificationWorker(host, notifierLogger, notificationServiceLogger);
             
             await host.RunAsync();
         }
@@ -65,7 +65,7 @@ namespace GMS.Communication.WebHost
         /// <param name="host"></param>
         /// <param name="logger"></param>
         /// <returns></returns>
-        private static async Task StartNotificationWorker(IHost host, ILogger<Notificator> notifacatorlogger, ILogger<NotificationService> notificationServiceLogger)
+        private static async Task StartNotificationWorker(IHost host, ILogger<Notifier> notifierlogger, ILogger<NotificationService> notificationServiceLogger)
         {
             await using var scope = host.Services.CreateAsyncScope();
             
@@ -74,8 +74,8 @@ namespace GMS.Communication.WebHost
             var hubContext = services.GetRequiredService<IHubContext<ChatHub>>();
             var notificationDb = services.GetRequiredService<IRepository<TrainingNotification>>();
             var messagesDb = services.GetRequiredService<IRepository<GmsMessage>>();
-            var notificator = new Notificator(notifacatorlogger, notificationDb, messagesDb, hubContext);
-            var notificationService = new NotificationService(notificationServiceLogger, notificator, notificationDb);
+            var notifier = new Notifier(notifierlogger, notificationDb, messagesDb, hubContext);
+            var notificationService = new NotificationService(notificationServiceLogger, notifier, notificationDb);
             notificationService.Start();
         }
     }

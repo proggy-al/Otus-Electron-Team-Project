@@ -8,16 +8,16 @@ using Microsoft.AspNetCore.SignalR;
 namespace GMS.Communication.WebHost.Models
 {
     //TODO Добавить логирование
-    public class Notificator : INotificatable
+    public class Notifier : INotificatable
     {
         // Константа имени метода SignalR
         private const string MethodName = "ReceiveNotification";
-        private readonly ILogger<Notificator> _logger;
+        private readonly ILogger<Notifier> _logger;
         private readonly IHubContext<ChatHub> _hubContext;
         private readonly IRepository<TrainingNotification> _notificationDb;
         private readonly IRepository<GmsMessage> _messagesDb;
 
-        public Notificator(ILogger<Notificator> logger, IRepository<TrainingNotification> notificationDb, IRepository<GmsMessage> messagesDb, IHubContext<ChatHub> hubContext)
+        public Notifier(ILogger<Notifier> logger, IRepository<TrainingNotification> notificationDb, IRepository<GmsMessage> messagesDb, IHubContext<ChatHub> hubContext)
         {
             _logger = logger;
             _notificationDb = notificationDb;
