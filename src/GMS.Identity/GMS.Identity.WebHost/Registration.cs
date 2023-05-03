@@ -6,6 +6,7 @@ using GMS.Identity.Client.Validators;
 using GMS.Identity.Core.Abstractions.Repositories;
 using GMS.Identity.DataAccess.Context;
 using GMS.Identity.DataAccess.Repositories;
+using GMS.Identity.WebHost.Cache;
 using GMS.Identity.WebHost.Configuration;
 using GMS.Identity.WebHost.Infrastructure;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -32,6 +33,8 @@ public static class Registration
         //IMapper mapper = mapperConfig.CreateMapper();
         //services.AddSingleton(mapper);
         services.ConfigureMapper();
+
+        services.AddScoped<ICacheService, CacheService>();
 
         services.AddTransient<IUserRepository, UserRepository>();
         services.AddTransient<ICoachRepository, CoachRepository>();
