@@ -63,7 +63,7 @@ build-job:
   tags: [netcoremd]
 
 
-build-nuget-JWTAuthManager:
+build-nuget-JWTAuthManager-And-Commons:
   stage: build
   image: mcr.microsoft.com/dotnet/sdk:7.0
   script:
