@@ -67,7 +67,7 @@ build-nuget-JWTAuthManager:
   stage: build
   image: mcr.microsoft.com/dotnet/sdk:7.0
   script:
-    - cd src/GMS.Common/JWTAuthManager
+    - cd src/GMS.Common/GMS.Common
     - dotnet pack -c Release
     - dotnet nuget add source "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/nuget/index.json" --name gitlab --username gitlab-ci-token --password $CI_JOB_TOKEN --store-password-in-clear-text
     - dotnet nuget push "bin/Release/*.nupkg" --source gitlab
