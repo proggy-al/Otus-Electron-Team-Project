@@ -4,6 +4,7 @@ using GMS.Core.BusinessLogic.Contracts;
 using GMS.Core.WebHost.Controllers.Base;
 using GMS.Core.WebHost.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
 
@@ -11,6 +12,7 @@ namespace GMS.Core.WebHost.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors("_myAllowSpecificOrigins")]
     public class FitnessClubController : BaseController<IFitnessClubService>
     {
         public FitnessClubController(IFitnessClubService service, IMapper mapper) : base(service, mapper) { }

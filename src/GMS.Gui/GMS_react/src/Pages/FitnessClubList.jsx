@@ -1,22 +1,36 @@
-import axios from '../Axios/core';
+
 import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import fitnessClubApi from '../Api/FitnessClub';
+import FitnessClubListItem from '../Components/FitnessClub/FitnessClubListItem';
+import { useParams, useNavigate } from 'react-router-dom';
 
 function FitnessClubList(){
   const auth = useSelector(state => state.auth.value);
-  const [clubs, useClubs] = useState([]);
+  const navigate = useNavigate();
+  const [clubs, setClubs] = useState([]);
 
+  const fitnessListMarkup = clubs.map((e) => <FitnessClubListItem id={e.id} name={e.name} description={e.description} address={e.address} />)
 
   useEffect(()=>{
-    axios.get("api/FitnessClub/GetPage/1:6")
-      .then(list=> {
-        console.log('clubs', list);
-      })
+    async function GetData(){
+      var data = await fitnessClubApi.GetFitnessClubsAll(1, 6);
+      setClubs(data);
+    }
+    GetData();
   }
   ,[]);
 
-  return <div>
-    <div>Fitness Club  List: ...</div>
+  function toCreateClub(){
+    navigate('/fitness-club/create');
+  }
+
+  return <div class="p-16">
+    {auth.Role === 'GYMOwner' ? 
+      <button className="btn btn-primary mb-16" onClick={toCreateClub}>Добавить клуб</button> : ''}
+    <div className="">
+      {fitnessListMarkup}
+    </div>
   </div>
 }
 
