@@ -4,10 +4,13 @@ using GMS.Core.BusinessLogic.Contracts;
 using GMS.Core.BusinessLogic.Exceptions;
 using GMS.Core.Core.Abstractions.Repositories;
 using GMS.Core.Core.Domain;
+using GMS.Core.WebHost.Attributes;
 using GMS.Core.WebHost.Models;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace GMS.Core.BusinessLogic.Services
 {
+    [Inject(ServiceLifetime.Scoped)]
     public class TrainingService : ITrainingService
     {
         private readonly IMapper _mapper;
@@ -51,11 +54,12 @@ namespace GMS.Core.BusinessLogic.Services
             };
         }
 
-        public async Task<Guid> AddTraining(TrainingCreateDto dto)
+        public async Task<TrainingUserDto> AddTraining(TrainingCreateDto dto)
         {
-            var timeslot = await _timeSlotRepository.GetAsync(dto.TimeSlotId);
+            //var timeslot = await _timeSlotRepository.GetAsync(dto.TimeSlotId);
+            var timeslot = await _timeSlotRepository.GetWithIncludeAsync(t => t.Id == dto.TimeSlotId, t => t.Area, t => t.Area.FitnessClub);
 
-            if(timeslot == null) 
+            if (timeslot == null) 
                 throw new NotExistException("TimeSlot", dto.TimeSlotId);
             else if (timeslot.IsDeleted)
                 throw new EntityLockedException("TimeSlot", timeslot.Id);
@@ -73,7 +77,9 @@ namespace GMS.Core.BusinessLogic.Services
             timeslot.IsBusy = true;
             await _timeSlotRepository.SaveChangesAsync();
 
-            return result.Id;
+            training.TimeSlot = timeslot;
+            var trainingDto = _mapper.Map<Training, TrainingUserDto>(training);
+            return trainingDto;
         }
 
         public async Task AddTrainerNotes(Guid id, TrainingTrainerNotesDto dto)

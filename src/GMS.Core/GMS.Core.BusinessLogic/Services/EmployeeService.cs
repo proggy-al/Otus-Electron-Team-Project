@@ -1,15 +1,18 @@
 ﻿using AutoMapper;
+using GMS.Common;
 using GMS.Core.BusinessLogic.Abstractions;
 using GMS.Core.BusinessLogic.Contracts;
 using GMS.Core.BusinessLogic.Exceptions;
 using GMS.Core.Core.Abstractions.Repositories;
 using GMS.Core.Core.Domain;
 using GMS.Core.Core.Domain.Employees;
+using GMS.Core.WebHost.Attributes;
 using GMS.Core.WebHost.Models;
-using JWTAuthManager;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace GMS.Core.BusinessLogic.Services
 {
+    [Inject(ServiceLifetime.Scoped)]
     public class EmployeeService : IEmployeeService
     {
         private readonly IMapper _mapper;

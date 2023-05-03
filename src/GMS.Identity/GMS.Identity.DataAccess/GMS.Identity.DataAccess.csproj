@@ -14,7 +14,7 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\GMS.Common\JWTAuthManager\JWTAuthManager.csproj" />
+    <ProjectReference Include="..\..\GMS.Common\GMS.Common\GMS.Common.csproj" />
     <ProjectReference Include="..\GMS.Identity.Core\GMS.Identity.Core.csproj" />
   </ItemGroup>
 </Project>

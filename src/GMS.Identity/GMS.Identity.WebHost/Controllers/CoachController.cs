@@ -1,7 +1,6 @@
 ﻿using GMS.Identity.Client.Models;
 using GMS.Identity.Client;
 using GMS.Identity.Core.Abstractions.Repositories;
-using JWTAuthManager;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Controllers;

@@ -4,9 +4,12 @@ using GMS.Core.BusinessLogic.Contracts;
 using GMS.Core.BusinessLogic.Exceptions;
 using GMS.Core.Core.Abstractions.Repositories;
 using GMS.Core.Core.Domain;
+using GMS.Core.WebHost.Attributes;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace GMS.Core.BusinessLogic.Services
 {
+    [Inject(ServiceLifetime.Scoped)]
     public class TimeSlotService : ITimeSlotService
     {
         private readonly IMapper _mapper;

@@ -1,7 +1,8 @@
+using GMS.Common.Extensions;
 using GMS.Core.DataAccess.Context;
 using GMS.Core.WebHost.Configurations;
-using JWTAuthManager;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using Serilog;
 
 try
@@ -15,23 +16,37 @@ try
         .AddDbContext<DatabaseContext>(options =>
         {
             options.UseNpgsql(connectionString);
-        })       
+        })
         .AddRepositories()
         .AddOptions(builder.Configuration)
-        .ConfigureMapper()
+        .AddAutoMapper()
         .AddHttpClients()
         .AddServices()
-        .ConfigureLogger(builder.Configuration)
+        .AddMassTransitRabbitMQ()
+        .AddRabbitMQProducers()
+        .AddLogger(builder.Configuration)
         .AddEndpointsApiExplorer()
         .AddCustomJWTAuthentification()
         .AddAuthorizationGMS()
-        .ConfigureSwagger()
+        .AddSwagger()
         .AddControllers();
+
+    var CorsAllowedOrigins = "_myAllowSpecificOrigins";
+
+    builder.Services.AddCors(options =>
+    {
+        options.AddPolicy(CorsAllowedOrigins,
+            builder =>
+            {
+                builder.AllowAnyOrigin()
+                    .AllowAnyHeader()
+                    .AllowAnyMethod();
+            });
+    });
 
     var app = WebApplicationConfiguration.Configure(builder);
 
     Log.Logger.Information($"The {app.Environment.ApplicationName} started...");
-
     app.Run();
 
     return 0;

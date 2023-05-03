@@ -38,7 +38,7 @@ namespace GMS.Core.BusinessLogic.Abstractions
         /// </summary>
         /// <param name="createDto">ДТО</param>
         /// <returns></returns>
-        Task<Guid> AddTraining(TrainingCreateDto createDto);
+        Task<TrainingUserDto> AddTraining(TrainingCreateDto createDto);
 
         /// <summary>
         /// Добавить заметки тренера

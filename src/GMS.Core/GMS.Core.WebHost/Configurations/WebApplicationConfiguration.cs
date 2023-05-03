@@ -12,6 +12,7 @@ namespace GMS.Core.WebHost.Configurations
             app.UseMiddleware<LoggerMiddleware>();
             app.UseMiddleware<ExceptionHandlerMiddleware>();
             app.UseRouting();
+            app.UseCors("_myAllowSpecificOrigins");
             app.UseAuthentication();
             app.UseAuthorization();
             //if (app.Environment.IsDevelopment())
@@ -27,7 +28,7 @@ namespace GMS.Core.WebHost.Configurations
                     //options.OAuthClientSecret("36a4d0df-d361-4c3c-a3eb-2e519d4c4391");
                 });
             //}
-
+            //app.MapControllers();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
