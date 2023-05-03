@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -78,7 +78,7 @@ public class UserController : ControllerBase
     public async Task<List<UserApiModel>> GetAllUsers()
     {
         //так мы получаем ID авторизованного юзера
-            var id= User.Claims.FirstOrDefault(a => a.Type == "ID").Value;
+            //var id= User.Claims.FirstOrDefault(a => a.Type == "ID").Value;
 
         var res= await _userRepository.GetUsers();
         Response.Headers.Add("Access-Control-Expose-Headers", "X-Total-Count");
@@ -91,7 +91,7 @@ public class UserController : ControllerBase
     /// </summary>
     /// <param name="user"></param>
     /// <returns></returns>
-    [RequirePrivelege(Priviliges.GYMOwner, Priviliges.Administrator, Priviliges.System)]
+    //[RequirePrivelege(Priviliges.GYMOwner, Priviliges.Administrator, Priviliges.System)]
     [HttpPost(IdentityRouting.CreateUser)]
     public async Task<ActionResult<UserApiModel>>CreateUser([FromBody] UserCreateApiModel user)
     {

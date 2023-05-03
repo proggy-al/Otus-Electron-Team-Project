@@ -31,16 +31,22 @@ try
         .AddSwagger()
         .AddControllers();
 
+    var CorsAllowedOrigins = "_myAllowSpecificOrigins";
+
+    builder.Services.AddCors(options =>
+    {
+        options.AddPolicy(CorsAllowedOrigins,
+            builder =>
+            {
+                builder.AllowAnyOrigin()
+                    .AllowAnyHeader()
+                    .AllowAnyMethod();
+            });
+    });
+
     var app = WebApplicationConfiguration.Configure(builder);
 
     Log.Logger.Information($"The {app.Environment.ApplicationName} started...");
-    app.UseCors(options =>
-    {
-        options.AllowAnyMethod()
-        .AllowAnyHeader()
-        .AllowCredentials()
-        .SetIsOriginAllowed(x => true);
-    });
     app.Run();
 
     return 0;

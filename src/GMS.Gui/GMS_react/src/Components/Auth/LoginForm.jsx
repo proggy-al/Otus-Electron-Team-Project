@@ -1,20 +1,20 @@
 
 function LoginForm(props){
 
-  return <div>
-    <h3>Войти</h3>
+  return <div className="flex-vcc">
     <div className="flex-vcc" >
       <label>Логин:</label>
-      <input value={props.userLogin} onChange={props.onLoginChange}/><br/>
+      <input className="min-w-300 font-20" value={props.userLogin} onChange={props.onLoginChange}/>
       <small className="validation-error">{props.userLoginValidationError}</small>
+      <br/>
     </div>
     <div className="flex-vcc">
       <label>Пароль:</label>
-      <input value={props.password} onChange={props.onPasswordChange}/><br/>
+      <input className="min-w-300 font-20" value={props.password} onChange={props.onPasswordChange}/>
       <small className="validation-error">{props.passwordValidationError}</small>
     </div><br/>
     <div className="validation-error">{props.commonLoginError}</div>
-    <button className="btn btn-primary" onClick={props.onLoginButtonClick}>Войти</button>
+    <button className=" min-w-300 btn btn-primary weight-600 font-20" onClick={props.onLoginButtonClick}>Войти</button>
 
   </div>
 }

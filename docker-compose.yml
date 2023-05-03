@@ -6,6 +6,12 @@ version: '3.4'
 services:
   gms.api.gateway:
     image: ${DOCKER_REGISTRY-}gmsapigatewayocelot
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+        reservations:
+          memory: 128M
     container_name: api-gateway
     build:
       context: .
@@ -15,16 +21,16 @@ services:
     networks:
       - backend
 
-  gms.api.communication:
-    image: ${DOCKER_REGISTRY-}gmscommunicationwebhost
-    container_name: api-communication
-    build:
-      context: .
-      dockerfile: src/GMS.Communication/GMS.Communication.WebHost/Dockerfile
-    ports:
-      - "3001:80"
-    networks:
-      - backend
+  #gms.api.communication:
+  #  image: ${DOCKER_REGISTRY-}gmscommunicationwebhost
+  #  container_name: api-communication
+  #  build:
+  #    context: .
+  #    dockerfile: src/GMS.Communication/GMS.Communication.WebHost/Dockerfile
+  #  ports:
+  #    - "3001:80"
+  #  networks:
+  #    - backend
 
   #gms.gui.console:
     #image: ${DOCKER_REGISTRY-}gmsguiconsole
@@ -39,6 +45,12 @@ services:
 
   gms.api.core:
     image: ${DOCKER_REGISTRY-}gmscorewebhost
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+        reservations:
+          memory: 128M
     container_name: core-api
     build:
       context: .
@@ -52,6 +64,12 @@ services:
   
   gms.api.identity:
     image: ${DOCKER_REGISTRY-}gmsidentitywebhost
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+        reservations:
+          memory: 128M
     container_name: identity-api
     build:
       context: .
@@ -66,6 +84,12 @@ services:
   # DB for MICROSERVICES
   gms.core.db:
     image: "postgres:latest"
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+        reservations:
+          memory: 128M
     container_name: gms.core.db
     restart: always
     ports:
@@ -82,6 +106,12 @@ services:
   
   gms.identity.db:
     image: "postgres:latest"
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+        reservations:
+          memory: 128M
     container_name: 'gms.identity.db'
     restart: always
     #ports:
@@ -98,6 +128,12 @@ services:
 
   gms.core.db.admin:
     image: dpage/pgadmin4
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+        reservations:
+          memory: 128M
     environment:
       PGADMIN_DEFAULT_EMAIL: user@mail.com
       PGADMIN_DEFAULT_PASSWORD: 12345678
