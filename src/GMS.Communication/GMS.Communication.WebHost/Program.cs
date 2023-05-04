@@ -46,7 +46,7 @@ namespace GMS.Communication.WebHost
             });
 
         /// <summary>
-        /// Creates a database if it doesn't exist
+        /// Создаём базу данных если она ещё не создана.
         /// </summary>
         /// <param name="host"></param>
         /// <param name="logger"></param>
@@ -60,7 +60,7 @@ namespace GMS.Communication.WebHost
         }
 
         /// <summary>
-        /// Creates a database if it doesn't exist
+        /// Запускаем фоновый процесс для уведомелния о тернировках
         /// </summary>
         /// <param name="host"></param>
         /// <param name="logger"></param>
