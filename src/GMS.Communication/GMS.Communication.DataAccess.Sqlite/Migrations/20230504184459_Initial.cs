@@ -37,8 +37,7 @@ namespace GMS.Communication.DataAccess.Sqlite.Migrations
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     UserId = table.Column<Guid>(type: "TEXT", nullable: false),
-                    TrainingDateTime = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    NotificationPeriod = table.Column<DateTime>(type: "TEXT", nullable: false, defaultValue: new DateTime(1, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified)),
+                    NotificationDateTime = table.Column<DateTime>(type: "TEXT", nullable: false),
                     Email = table.Column<string>(type: "TEXT", nullable: true),
                     Content = table.Column<string>(type: "TEXT", maxLength: 500, nullable: false)
                 },

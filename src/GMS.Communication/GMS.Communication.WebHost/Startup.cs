@@ -37,8 +37,8 @@ namespace GMS.Communication.WebHost
             services.AddSwaggerGen();
             services.AddControllers();
             services.AddCustomJWTAuthentification();
-            services.AddSingleton<INotificatable, Notifier>();
-            services.AddSingleton<NotificationService>();
+            services.AddScoped<INotificatable, Notifier>();
+            services.AddScoped<NotificationService>();
 
             services.AddMassTransit(bus =>
             {

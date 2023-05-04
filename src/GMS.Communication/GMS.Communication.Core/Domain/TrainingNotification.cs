@@ -12,10 +12,8 @@ namespace GMS.Communication.WebHost.Models
     {
         // Всегда отправляется сообщение в личный кабинет
         public Guid UserId { get; set; }
-        // Дата и время тренировки
-        public DateTime TrainingDateTime { get; set; }
-        // Время до тренировки когода произойдёт рассылка
-        public DateTime NotificationPeriod { get; set; }
+        // Дата и время рассылки
+        public DateTime NotificationDateTime { get; set; }        
         // Если заполнен будет оповещение по Email
         public string? Email { get; set; }
         // Текст уведомленния

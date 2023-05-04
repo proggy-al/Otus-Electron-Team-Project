@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GMS.Communication.DataAccess.Sqlite.Migrations
 {
     [DbContext(typeof(CommunicationDb))]
-    [Migration("20230502141920_Initial")]
+    [Migration("20230504184459_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -80,12 +80,7 @@ namespace GMS.Communication.DataAccess.Sqlite.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("NotificationPeriod")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT")
-                        .HasDefaultValue(new DateTime(1, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified));
-
-                    b.Property<DateTime>("TrainingDateTime")
+                    b.Property<DateTime>("NotificationDateTime")
                         .HasColumnType("TEXT");
 
                     b.Property<Guid>("UserId")

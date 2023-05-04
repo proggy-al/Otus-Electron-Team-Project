@@ -45,11 +45,7 @@ namespace GMS.Communication.DataAccess.Context
                 .Property(s => s.UserId)
                 .IsRequired();
             modelBuilder.Entity<TrainingNotification>()
-                .Property(s => s.TrainingDateTime)
-                .IsRequired();
-            modelBuilder.Entity<TrainingNotification>()
-                .Property(s => s.NotificationPeriod)
-                .HasDefaultValue(new DateTime().AddHours(24))
+                .Property(s => s.NotificationDateTime)
                 .IsRequired();
             modelBuilder.Entity<TrainingNotification>()
                 .Property(s => s.Email);

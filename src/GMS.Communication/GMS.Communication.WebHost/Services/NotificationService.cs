@@ -29,7 +29,7 @@ namespace GMS.Communication.WebHost.Services
         private async Task CheckNotifications()
         {
             var today = DateTime.Now;
-            var result = await _notificationDb.GetByPredicateAsync(s => (s.TrainingDateTime - s.NotificationPeriod).Hours <= DateTime.Now.Hour);
+            var result = await _notificationDb.GetByPredicateAsync(s => s.NotificationDateTime.Hour <= DateTime.Now.Hour);
 
             foreach (var notification in result)
             {
