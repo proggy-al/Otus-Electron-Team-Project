@@ -11,10 +11,11 @@ namespace GMS.Core.WebHost.Mappings
     {
         public TrainingVmMappingsProfile()
         {
-            CreateMap<TrainingDto, TrainingResponse>()
-                 .ForMember(d => d.TimeSlot, map => map.Ignore());
-            CreateMap<TrainingResponse, TrainingDto>()
-                .ForMember(d => d.IsDeleted, map => map.Ignore());
+            CreateMap<TrainingCreateRequest, TrainingCreateDto>()
+                .ForMember(d => d.UserId, map => map.Ignore());
+
+            CreateMap<TrainingTrainerNotesRequest, TrainingTrainerNotesDto>()
+                .ForMember(d => d.TrainerId, map => map.Ignore());
         }
     }
 }

@@ -6,7 +6,7 @@ namespace GMS.Core.WebHost.Configurations
 {
     public static class AutoMapperConfiguration
     {
-        public static IServiceCollection ConfigureMapper(this IServiceCollection serviceCollection)
+        public static IServiceCollection AddAutoMapper(this IServiceCollection serviceCollection)
         {
             serviceCollection.AddSingleton<IMapper>(new Mapper(Configuration()));
             return serviceCollection;
@@ -21,16 +21,16 @@ namespace GMS.Core.WebHost.Configurations
                 cfg.AddProfile<AreaMappingsProfile>();
                 cfg.AddProfile<ProductMappingsProfile>();
                 cfg.AddProfile<ContractMappingsProfile>();
-                //cfg.AddProfile<TimeSlotMappingsProfile>();
-                //cfg.AddProfile<TrainingMappingsProfile>();
+                cfg.AddProfile<TimeSlotMappingsProfile>();
+                cfg.AddProfile<TrainingMappingsProfile>();
 
                 cfg.AddProfile<FitnessClubVmMappingsProfile>();
                 cfg.AddProfile<EmployeeVmMappingsProfile>();
                 cfg.AddProfile<AreaVmMappingsProfile>();
                 cfg.AddProfile<ProductVmMappingsProfile>();              
                 cfg.AddProfile<ContractVmMappingsProfile>();
-                //cfg.AddProfile<TimeSlotVmMappingsProfile>();
-                //cfg.AddProfile<TrainingVmMappingsProfile>();
+                cfg.AddProfile<TimeSlotVmMappingsProfile>();
+                cfg.AddProfile<TrainingVmMappingsProfile>();
             });
 
             configuration.AssertConfigurationIsValid();

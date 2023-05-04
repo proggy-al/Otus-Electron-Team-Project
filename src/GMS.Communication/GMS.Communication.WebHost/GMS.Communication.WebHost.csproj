@@ -25,7 +25,7 @@
 
 
   <ItemGroup>
-    <ProjectReference Include="..\..\GMS.Common\JWTAuthManager\JWTAuthManager.csproj" />
+    <ProjectReference Include="..\..\GMS.Common\GMS.Common\GMS.Common.csproj" />
     <ProjectReference Include="..\GMS.Communication.Core\GMS.Communication.Core.csproj" />
     <ProjectReference Include="..\GMS.Communication.DataAccess.Sqlite\GMS.Communication.DataAccess.Sqlite.csproj" />
     <ProjectReference Include="..\GMS.Communication.DataAccess\GMS.Communication.DataAccess.csproj" />

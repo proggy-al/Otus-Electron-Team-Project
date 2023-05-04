@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
+using GMS.Common;
 using GMS.Communication.Core.Abstractons;
 using GMS.Communication.Core.Domain;
 using GMS.Communication.WebHost.Hubs;
 using GMS.Communication.WebHost.Models;
-using JWTAuthManager;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;

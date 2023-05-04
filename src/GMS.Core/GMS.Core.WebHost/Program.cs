@@ -1,41 +1,46 @@
-using GMS.Core.BusinessLogic.Abstractions;
+using GMS.Common.Extensions;
 using GMS.Core.DataAccess.Context;
 using GMS.Core.WebHost.Configurations;
-using GMS.Core.WebHost.Configurations.Options;
-using JWTAuthManager;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using Serilog;
-using System;
 
 try
 {
     var builder = WebApplication.CreateBuilder(args);
     builder.Environment.ApplicationName = typeof(Program).Assembly.FullName;
-    
+
     var connectionString = builder.Configuration.GetConnectionString("GmsCore");
+
     builder.Services
-        .ConfigureLogger()
-        .ConfigureMapper()
         .AddDbContext<DatabaseContext>(options =>
         {
             options.UseNpgsql(connectionString);
         })
-        .AddOptions(builder.Configuration)
         .AddRepositories()
+        .AddOptions(builder.Configuration)
+        .AddAutoMapper()
         .AddHttpClients()
         .AddServices()
+        .AddMassTransitRabbitMQ()
+        .AddRabbitMQProducers()
+        .AddLogger(builder.Configuration)
         .AddEndpointsApiExplorer()
         .AddCustomJWTAuthentification()
         .AddAuthorizationGMS()
-        .ConfigureSwagger()
+        .AddSwagger()
         .AddControllers();
 
     var app = WebApplicationConfiguration.Configure(builder);
 
     Log.Logger.Information($"The {app.Environment.ApplicationName} started...");
-
+    app.UseCors(options =>
+    {
+        options.AllowAnyMethod()
+        .AllowAnyHeader()
+        .AllowCredentials()
+        .SetIsOriginAllowed(x => true);
+    });
     app.Run();
 
     return 0;

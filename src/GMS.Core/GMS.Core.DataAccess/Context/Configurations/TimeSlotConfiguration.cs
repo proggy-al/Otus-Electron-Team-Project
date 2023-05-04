@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
 using GMS.Core.Core.Domain;
+using GMS.Core.DataAccess.Data;
 
 namespace GMS.Core.DataAccess.Context.Configurations
 {
@@ -10,7 +11,8 @@ namespace GMS.Core.DataAccess.Context.Configurations
         {
             builder.HasOne(ts => ts.Training)
                    .WithOne(t => t.TimeSlot)
-                   .HasForeignKey<Training>(t => t.TimeSlotId);
+                   .HasForeignKey<Training>(t => t.TimeSlotId)
+                   .OnDelete(DeleteBehavior.SetNull);
 
             builder.Property(p => p.Id)
                    .HasColumnType("uuid")
@@ -32,14 +34,14 @@ namespace GMS.Core.DataAccess.Context.Configurations
                    .IsRequired();
             builder.Property(p => p.AreaId)
                    .IsRequired();
-            builder.Property(p => p.FitnessClubId)
-                   .IsRequired();
             builder.Property(p => p.IsBusy)
                    .HasDefaultValue(false)
-                   .IsRequired(false);
+                   .IsRequired();
             builder.Property(p => p.IsDeleted)
                    .HasDefaultValue(false)
                    .IsRequired();
+
+           builder.HasData(SeedData.TimeSlots);
         }
     }
 }

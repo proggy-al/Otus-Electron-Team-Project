@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
 using GMS.Core.Core.Domain;
+using GMS.Core.DataAccess.Data;
 
 namespace GMS.Core.DataAccess.Context.Configurations
 {
@@ -16,15 +17,19 @@ namespace GMS.Core.DataAccess.Context.Configurations
                    .IsRequired();
             builder.Property(p => p.TimeSlotId)
                    .IsRequired();
-            builder.Property(p => p.Description)
+            builder.Property(p => p.TrainerNotes)
                    .HasColumnType("character varying(256)")
                    .IsUnicode(false)
-                   .IsRequired(false);
+                   .HasDefaultValue("")
+                   .IsRequired();
             builder.Property(p => p.Points)
-                   .IsRequired(false);
+                   .HasDefaultValue(0)
+                   .IsRequired();
             builder.Property(p => p.IsDeleted)
                    .HasDefaultValue(false)
                    .IsRequired();
+
+            builder.HasData(SeedData.Trainings);
         }
     }
 }

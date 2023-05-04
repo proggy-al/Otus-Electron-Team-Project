@@ -4,10 +4,13 @@ using GMS.Core.BusinessLogic.Contracts;
 using GMS.Core.BusinessLogic.Exceptions;
 using GMS.Core.Core.Abstractions.Repositories;
 using GMS.Core.Core.Domain;
+using GMS.Core.WebHost.Attributes;
 using GMS.Core.WebHost.Models;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace GMS.Core.BusinessLogic.Services
 {
+    [Inject(ServiceLifetime.Scoped)]
     public class AreaService : IAreaService 
     {
         private readonly IMapper _mapper;
@@ -49,16 +52,17 @@ namespace GMS.Core.BusinessLogic.Services
 
             if (fitnessClub == null)
                 throw new NotExistException("FitnessClub", dto.FitnessClubId);
+            else if (fitnessClub.OwnerId != dto.EmployeeId)
+            {
+                var IsEmployeeExist = await _employeeRepository.IsEmployeeWorkingInFitnessClub(dto.FitnessClubId, dto.EmployeeId);
 
-            var IsEmployeeExist = await _employeeRepository.IsEmployeeWorkingInFitnessClub(dto.FitnessClubId, dto.EmployeeId);
-
-            if (fitnessClub.OwnerId != dto.EmployeeId && !IsEmployeeExist)
-                throw new AccessDeniedException("FitnessClub");
-            else if (fitnessClub.IsDeleted)
+                if (!IsEmployeeExist)
+                    throw new AccessDeniedException("FitnessClub");
+            }
+            if (fitnessClub.IsDeleted)
                 throw new EntityLockedException("FitnessClub", fitnessClub.Id);
 
             var area = _mapper.Map<Area>(dto);
-
             var result = await _areaRepository.AddAsync(area);
             await _areaRepository.SaveChangesAsync();
 
@@ -71,18 +75,19 @@ namespace GMS.Core.BusinessLogic.Services
 
             if (area == null)
                 throw new NotExistException("Area", id);
+            else if (area.FitnessClub.OwnerId != dto.EmployeeId)
+            {
+                var IsEmployeeExist = await _employeeRepository.IsEmployeeWorkingInFitnessClub(area.FitnessClub.Id, dto.EmployeeId);
 
-            var IsEmployeeExist = await _employeeRepository.IsEmployeeWorkingInFitnessClub(area.FitnessClub.Id, dto.EmployeeId);
-
-            if (area.FitnessClub.OwnerId != dto.EmployeeId && !IsEmployeeExist)
-                throw new AccessDeniedException("Area");
-            else if (area.FitnessClub.IsDeleted)
+                if (!IsEmployeeExist)
+                    throw new AccessDeniedException("Area");
+            }
+            if (area.FitnessClub.IsDeleted)
                 throw new EntityLockedException("FitnessClub", area.FitnessClub.Id);
             else if (area.IsDeleted)
                 throw new EntityLockedException("Area", id);
 
             _mapper.Map(dto,area);
-
             await _areaRepository.SaveChangesAsync();
         }
 
@@ -92,12 +97,14 @@ namespace GMS.Core.BusinessLogic.Services
 
             if (area == null)
                 throw new NotExistException("Area", id);
-            
-            var IsEmployeeExist = await _employeeRepository.IsEmployeeWorkingInFitnessClub(area.FitnessClub.Id, employeeId);
+            else if (area.FitnessClub.OwnerId != employeeId)
+            {
+                var IsEmployeeExist = await _employeeRepository.IsEmployeeWorkingInFitnessClub(area.FitnessClub.Id, employeeId);
 
-            if (area.FitnessClub.OwnerId != employeeId && !IsEmployeeExist)
-                throw new AccessDeniedException("Area");
-            else if (area.FitnessClub.IsDeleted)
+                if (!IsEmployeeExist)
+                    throw new AccessDeniedException("Area");
+            }
+            if (area.FitnessClub.IsDeleted)
                 throw new EntityLockedException("FitnessClub", area.FitnessClub.Id);
 
             area.IsDeleted = true;

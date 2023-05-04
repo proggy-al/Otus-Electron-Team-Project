@@ -36,14 +36,14 @@
         public Guid TrainerId { get; set; }
 
         /// <summary>
-        /// Идентификатор зоны
+        /// Идентификатор зонй
         /// </summary>
         public Guid AreaId { get; set; }
 
         /// <summary>
-        /// Идентификатор фитнес клуба
+        /// Имя зоны
         /// </summary>
-        public Guid FitnessClubId { get; set; }
+        public string AreaName { get; set; }
 
         /// <summary>
         /// Статус занят/свободен для записи на тренировку

@@ -1,50 +1,59 @@
 ﻿using AutoMapper;
 using GMS.Core.BusinessLogic.Abstractions;
+using GMS.Core.BusinessLogic.Contracts;
 using GMS.Core.WebHost.Controllers.Base;
 using GMS.Core.WebHost.Models;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GMS.Core.WebHost.Controllers
 {
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [Route("api/[controller]")]
     [ApiController]
     public class TimeSlotController : BaseController<ITimeSlotService>
     {
         public TimeSlotController(ITimeSlotService service, IMapper mapper) : base(service, mapper){ }
 
+        [AllowAnonymous]
         [HttpGet("[action]")]
-        public async Task<IActionResult> GetAllPerDay(DateOnly date, Guid fitnessClubId, Guid trainerId)
+        public async Task<IActionResult> GetAllPerDay([FromQuery]DateOnly date, [FromQuery]Guid trainerId)
         {
-            throw new NotImplementedException();
+            var timeSlots = await _service.GetAllPerDay(date, trainerId);
+
+            var result = _mapper.Map<List<TimeSlotResponse>>(timeSlots);
+            return Ok(result);
         }
 
+        [AllowAnonymous]
         [HttpGet("[action]/{id}")]
         public virtual async Task<IActionResult> Get(Guid id)
         {
-            throw new NotImplementedException();
+            var timeSlotDto = await _service.Get(id);
+            var result = _mapper.Map<TimeSlotResponse>(timeSlotDto);
+
+            return Ok(result);
         }
 
+        [Authorize(Policy = "Manager")]
         [HttpPost("[action]")]
-        public async Task<IActionResult> Add(TimeSlotRequest request)
+        public async Task<IActionResult> Add(TimeSlotCreateRequest request)
         {
-            throw new NotImplementedException();
+            var timeSlotDto = _mapper.Map<TimeSlotCreateDto>(request);
+            timeSlotDto.UserId = UserId;
+
+            var id = await _service.Create(timeSlotDto);
+            return Ok(id.ToString());
         }
 
-        [HttpPut("[action]/{id}")]
-        public async Task<IActionResult> Edit(Guid id, TimeSlotRequest request)
-        {
-            throw new NotImplementedException();
-        }
-
+        [Authorize(Policy = "Administrator")]
         [HttpDelete("[action]/{id}")]
         public async Task<IActionResult> Delete(Guid id)
         {
-            // поместить в архив связную Training
+            await _service.AddToArchive(id, UserId);
+
             // ToDo: отправить оповещение пользователю об отмене тренировки
-            throw new NotImplementedException();
+
+            return NoContent();
         }
     }
 }

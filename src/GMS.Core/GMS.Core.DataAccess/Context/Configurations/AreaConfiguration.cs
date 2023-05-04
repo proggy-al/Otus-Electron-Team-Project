@@ -9,9 +9,9 @@ namespace GMS.Core.DataAccess.Context.Configurations
     {
         public void Configure(EntityTypeBuilder<Area> builder)
         {
-            builder.HasOne(a => a.TimeSlot)
+            builder.HasMany(a => a.TimeSlots)
                    .WithOne(t => t.Area)
-                   .HasForeignKey<TimeSlot>(t => t.AreaId)
+                   .HasForeignKey(t => t.AreaId)
                    .IsRequired();
 
             builder.Property(a => a.Id)

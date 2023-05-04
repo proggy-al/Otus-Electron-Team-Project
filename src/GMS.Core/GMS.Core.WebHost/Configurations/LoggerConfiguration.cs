@@ -1,19 +1,17 @@
-﻿using Serilog;
-using Serilog.Events;
-using Serilog.Formatting.Json;
+﻿using GMS.Core.WebHost.Configurations.Options;
+using Serilog;
 
 namespace GMS.Core.WebHost.Configurations
 {
     public static class LoggerConfiguration
     {
-        public static IServiceCollection ConfigureLogger(this IServiceCollection serviceCollection)
+        public static IServiceCollection AddLogger(this IServiceCollection serviceCollection, ConfigurationManager configuration)
         {
-            // ToDo: перенести в настройки
-            string UrlSeq = "http://localhost:5341";
+            var options = configuration.GetSection(SerilogOptions.Position).Get<SerilogOptions>();
 
             Log.Logger = new Serilog.LoggerConfiguration()
                 .WriteTo.Console()
-                .WriteTo.Seq(UrlSeq)
+                .WriteTo.Seq(options.UrlSeq)
                 .CreateLogger();
 
             serviceCollection.AddSingleton(Log.Logger);

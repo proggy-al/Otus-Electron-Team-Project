@@ -33,14 +33,14 @@ namespace GMS.Core.BusinessLogic.Abstractions
         /// </summary>
         /// <param name="dto">ДТО</para
         /// <returns>идентификатор</returns>
-        Task<Guid> Create(FitnessClubCreateOrEditDto dto);
+        Task<Guid> Create(FitnessClubCreateDto dto);
 
         /// <summary>
         /// Изменить
         /// </summary>
         /// <param name="id">идентификатор</param>
         /// <param name="dto">ДТО фитнес клуба</param>
-        Task Update(Guid id, FitnessClubCreateOrEditDto dto);
+        Task Update(Guid id, FitnessClubEditDto dto);
 
         /// <summary>
         /// Поместить в архив

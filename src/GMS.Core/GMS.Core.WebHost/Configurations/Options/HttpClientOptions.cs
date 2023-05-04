@@ -6,6 +6,8 @@
 
         public string BaseUriIdentityUser { get; set; }
 
+        public string BaseUriIdentityCoach { get; set; }
+        
         public int Timeout { get; set; }
     }
 }

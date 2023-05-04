@@ -1,7 +1,6 @@
 ﻿using GMS.Identity.Client.Models;
 using GMS.Identity.Client;
 using GMS.Identity.Core.Abstractions.Repositories;
-using JWTAuthManager;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Controllers;
@@ -48,4 +47,14 @@ public class CoachController: ControllerBase
         return res;
     }
 
+    /// <summary>
+    /// Get list coaches
+    /// </summary>
+    /// <returns></returns>
+    [AllowAnonymous]
+    [HttpGet(IdentityRouting.GetListCoaches)]
+    public async Task<List<UserApiShortModel>> GetCoaches([FromQuery] List<Guid> ids)
+    {
+        return await _userRepository.GetListCoaches(ids);
+    }
 }

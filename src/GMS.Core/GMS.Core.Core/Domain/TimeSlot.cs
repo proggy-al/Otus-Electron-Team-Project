@@ -1,4 +1,5 @@
 ﻿using GMS.Core.Core.Domain.Base;
+using GMS.Core.Core.Domain.Employees;
 
 namespace GMS.Core.Core.Domain
 {
@@ -33,6 +34,11 @@ namespace GMS.Core.Core.Domain
         public Guid TrainerId { get; set; }
 
         /// <summary>
+        /// Тренер
+        /// </summary>
+        public virtual Trainer Trainer { get; set; }
+
+        /// <summary>
         /// Идентификатор зоны
         /// </summary>
         public Guid AreaId { get; set; }
@@ -43,19 +49,9 @@ namespace GMS.Core.Core.Domain
         public virtual Area Area { get; set; }
 
         /// <summary>
-        /// Идентификатор фитнес клуба
-        /// </summary>
-        public Guid FitnessClubId { get; set; }
-
-        /// <summary>
-        /// Фитнес клуб
-        /// </summary>
-        public virtual FitnessClub FitnessClub { get; set; }
-
-        /// <summary>
         /// Статус занят/свободен для записи на тренировку
         /// </summary>
-        public bool? IsBusy { get; set; }
+        public bool IsBusy { get; set; }
 
         /// <summary>
         /// Тренировка

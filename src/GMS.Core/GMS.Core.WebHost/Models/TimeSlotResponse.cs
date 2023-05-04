@@ -26,18 +26,18 @@
         public DateTime DateTime { get; set; }
 
         /// <summary>
-        /// длительноть тренировки
+        /// Длительность тренировки
         /// </summary>
         public int Duration { get; set; }
 
         /// <summary>
-        /// Идентификатор тренера
+        /// Имя зоны
         /// </summary>
-        public Guid TrainerId { get; set; }
+        public string AreaName { get; set; }
 
         /// <summary>
-        /// Идентификатор зоны
+        /// Статус занят/свободен
         /// </summary>
-        public Guid AreaId { get; set; }
+        public bool IsBusy { get; set; }
     }
 }

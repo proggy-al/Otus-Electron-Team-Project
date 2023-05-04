@@ -11,12 +11,17 @@ namespace GMS.Core.BusinessLogic.Mappings
     {
         public TimeSlotMappingsProfile()
         {
-            CreateMap<TimeSlot, TimeSlotDto>();
+            CreateMap<TimeSlot, TimeSlotDto>().IncludeMembers(t => t.Area);
+            CreateMap<Area, TimeSlotDto>(MemberList.None)
+                .ForMember(t => t.AreaName, opt => opt.MapFrom(a => a.Name));
 
-            CreateMap<TimeSlotDto, TimeSlot>()
-                .ForMember(d => d.FitnessClub, map => map.Ignore())
-                .ForMember(d => d.Area, map => map.Ignore())
-                .ForMember(d => d.Training, map => map.Ignore());
+            CreateMap<TimeSlotCreateDto, TimeSlot>()
+                .ForMember(t => t.Id, map => map.Ignore())
+                .ForMember(t => t.IsDeleted, map => map.Ignore())
+                .ForMember(t => t.IsBusy, map => map.Ignore())
+                .ForMember(t => t.Area, map => map.Ignore())
+                .ForMember(t => t.Trainer, map => map.Ignore())
+                .ForMember(t => t.Training, map => map.Ignore());
         }
     }
 }

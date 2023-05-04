@@ -8,7 +8,7 @@ namespace GMS.Core.DataAccess.Context.Configurations
     public class ContractConfiguration : IEntityTypeConfiguration<Contract>
     {
         public void Configure(EntityTypeBuilder<Contract> builder)
-        {           
+        {
             builder.Property(p => p.Id)
                    .HasColumnType("uuid")
                    .HasDefaultValueSql("uuid_generate_v4()")
@@ -16,7 +16,7 @@ namespace GMS.Core.DataAccess.Context.Configurations
             builder.Property(p => p.ProductId)
                    .IsRequired();
             builder.Property(p => p.ManagerId)
-                   .IsRequired(false);
+                   .IsRequired();
             builder.Property(p => p.UserId)
                    .IsRequired();
             builder.Property(p => p.StartDate)
@@ -25,7 +25,7 @@ namespace GMS.Core.DataAccess.Context.Configurations
                    .IsRequired();
             builder.Property(p => p.IsApproved)
                    .HasDefaultValue(false)
-                   .IsRequired(false);
+                   .IsRequired();
             builder.Property(p => p.IsDeleted)
                    .HasDefaultValue(false)
                    .IsRequired();

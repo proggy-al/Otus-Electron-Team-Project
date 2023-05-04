@@ -2,6 +2,7 @@
 using GMS.Core.Core.Domain;
 using GMS.Core.DataAccess.Context;
 using GMS.Core.DataAccess.Repositories.Base;
+using GMS.Core.WebHost.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace GMS.Core.DataAccess.Repositories
@@ -13,50 +14,67 @@ namespace GMS.Core.DataAccess.Repositories
     {
         public TrainingRepository(DatabaseContext context) : base(context) { }
 
-        /// <summary>
-        /// Получить постраничный список
-        /// </summary>
-        /// <param name="pageNumber">номер страницы</param>
-        /// <param name="pageSize">объем страницы</param>
-        /// <returns>список тренировок</returns>
-        public async Task<List<Training>> GetPagedAsync(int pageNumber, int pageSize)
+        public async Task<PagedList<Training>> GetPagedByUserIdAsync(Guid userId, int pageNumber, int pageSize)
         {
-            var query = GetAll();
-            return await query
-                .Skip((pageNumber - 1) * pageSize)
-                .Take(pageSize)
-                .ToListAsync();
+            var query = GetAll(true)
+                .Include(t => t.TimeSlot)
+                    .ThenInclude(t => t.Area)
+                        .ThenInclude(a => a.FitnessClub)
+                .Where(t => t.UserId == userId && t.TimeSlot.IsDeleted == false)
+                .OrderBy(t => t.TimeSlot.DateTime);
+
+            return new PagedList<Training>()
+            {
+                Entities = await query
+                    .Skip((pageNumber - 1) * pageSize)
+                    .Take(pageSize)
+                    .ToListAsync(),
+                Pagination = new Pagination(query.Count(), pageNumber, pageSize)
+            };
         }
 
-
-        /// <summary>
-        /// Получить все сущности по идентификатору пользователя
-        /// </summary>
-        /// <param name="userId">идентификатор пользователя</param>
-        /// <returns>список тренировок</returns>
-        public async Task<List<Training>> GetAllByUserIdAsync(Guid userId)
+        public async Task<PagedList<Training>> GetPagedPastByTrainerIdAsync(Guid trainerId, int pageNumber, int pageSize)
         {
-            var query = GetAll();
-            return await query
-                .Where(c => c.UserId == userId)
-                .ToListAsync();
+            var timeNow = DateTime.Now.ToUniversalTime();
+            var query = GetAll(true)
+                .Include(t => t.TimeSlot)
+                    .ThenInclude(t => t.Area)
+                        .ThenInclude(a => a.FitnessClub)
+                .Where(t => t.TimeSlot.TrainerId == trainerId && 
+                            t.TimeSlot.DateTime <= timeNow &&
+                            t.TimeSlot.IsDeleted == false)
+                .OrderByDescending(t => t.TimeSlot.DateTime);
+
+            return new PagedList<Training>()
+            {
+                Entities = await query
+                    .Skip((pageNumber - 1) * pageSize)
+                    .Take(pageSize)
+                    .ToListAsync(),
+                Pagination = new Pagination(query.Count(), pageNumber, pageSize)
+            };
         }
 
-        /// <summary>
-        /// Получить постраничный список по идентификатору пользователя
-        /// </summary>
-        /// <param name="userId">идентификатор пользователя</param>
-        /// <param name="pageNumber">номер страницы</param>
-        /// <param name="pageSize">объем страницы</param>
-        /// <returns>список тренировок</returns>
-        public async Task<List<Training>> GetPagedByUserIdAsync(Guid userId, int pageNumber, int pageSize)
+        public async Task<PagedList<Training>> GetPagedByTrainerIdAsync(Guid trainerId, int pageNumber, int pageSize)
         {
-            var query = GetAll();
-            return await query
-                .Where(c => c.UserId == userId)
-                .Skip((pageNumber - 1) * pageSize)
-                .Take(pageSize)
-                .ToListAsync();
+            var timeNow = DateTime.Now.ToUniversalTime();
+            var query = GetAll(true)
+                .Include(t => t.TimeSlot)
+                    .ThenInclude(t => t.Area)
+                        .ThenInclude(a => a.FitnessClub)
+                .Where(t => t.TimeSlot.TrainerId == trainerId &&
+                            t.TimeSlot.DateTime > timeNow &&
+                            t.TimeSlot.IsDeleted == false)
+                .OrderBy(t => t.TimeSlot.DateTime);
+
+            return new PagedList<Training>()
+            {
+                Entities = await query
+                    .Skip((pageNumber - 1) * pageSize)
+                    .Take(pageSize)
+                    .ToListAsync(),
+                Pagination = new Pagination(query.Count(), pageNumber, pageSize)
+            };
         }
     }
 }

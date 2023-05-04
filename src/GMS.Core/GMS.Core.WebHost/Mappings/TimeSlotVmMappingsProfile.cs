@@ -12,10 +12,9 @@ namespace GMS.Core.WebHost.Mappings
         public TimeSlotVmMappingsProfile()
         {
             CreateMap<TimeSlotDto, TimeSlotResponse>();
-            CreateMap<TimeSlotResponse, TimeSlotDto>()
-                .ForMember(d => d.IsDeleted, map => map.Ignore())
-                .ForMember(d => d.FitnessClubId, map => map.Ignore())
-                .ForMember(d => d.IsBusy, map => map.Ignore());
+
+            CreateMap<TimeSlotCreateRequest, TimeSlotCreateDto>()
+                .ForMember(d => d.UserId, map => map.Ignore());
         }
     }
 }
