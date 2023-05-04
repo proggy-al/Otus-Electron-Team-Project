@@ -6,12 +6,14 @@ using Timer = System.Threading.Timer;
 
 namespace GMS.Communication.WebHost.Services
 {
+    /// <summary>
+    /// Сервис отправки сообщений уведомления о тренировке
+    /// </summary>
     public class NotificationService
     {
         private readonly Notifier _notifier;
         private Timer _timer;
-        private readonly IRepository<TrainingNotification> _notificationDb;
-        private const int Delta = 1;
+        private readonly IRepository<TrainingNotification> _notificationDb; 
 
         public NotificationService(ILogger<NotificationService> logger, Notifier notifier, IRepository<TrainingNotification> notificationDb)
         {
@@ -20,13 +22,14 @@ namespace GMS.Communication.WebHost.Services
             _timer = null!;
         }
 
+        /// <summary>
+        /// Перебор уведомлений в БД с отправкой по истекшему периоду
+        /// </summary>
+        /// <returns></returns>
         private async Task CheckNotifications()
         {
-            var result = await _notificationDb.GetByPredicateAsync(s => (
-                    s.TrainingDateTime
-                        .Subtract(s.NotificationPeriod)
-                        .Subtract(DateTime.Now.TimeOfDay))
-                .Hours <= Delta);
+            var today = DateTime.Now;
+            var result = await _notificationDb.GetByPredicateAsync(s => (s.TrainingDateTime - s.NotificationPeriod).Hours <= DateTime.Now.Hour);
 
             foreach (var notification in result)
             {
