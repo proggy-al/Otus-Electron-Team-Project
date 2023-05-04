@@ -37,6 +37,7 @@ namespace GMS.Communication.WebHost.Models
 
         public async Task NotificateAsync(TrainingNotification notification)
         {
+            if(notification is null) return;
             await _messagesDb.CreateAsync(new GmsMessage()
             {
                 Body = notification.Content,
@@ -44,7 +45,7 @@ namespace GMS.Communication.WebHost.Models
                 DeliveryDate = null,
                 ReadDate = null,
                 RecipientId = notification.UserId,
-                SenderId = Guid.Empty,
+                SenderId = Guid.Parse("10000000-0000-0000-0001-000000000001"), //Gold's Gym Administrator
                 Status = MessageStatus.undelivered,
                 Subject = "Уведомление о тренеровке",
                 Type = MessageType.text,
