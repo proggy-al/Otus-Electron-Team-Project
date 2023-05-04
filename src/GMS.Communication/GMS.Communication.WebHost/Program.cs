@@ -56,7 +56,7 @@ namespace GMS.Communication.WebHost
             await using var scope = host.Services.CreateAsyncScope();
             var services = scope.ServiceProvider;
             var context = services.GetRequiredService<CommunicationDb>();
-            await DbInitializer.InitializeAsync(context, logger, true);
+            await DbInitializer.InitializeAsync(context, logger, false);
         }
 
         /// <summary>
