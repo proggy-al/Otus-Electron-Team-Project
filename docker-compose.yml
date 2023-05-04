@@ -21,16 +21,22 @@ services:
     networks:
       - backend
 
-  #gms.api.communication:
-  #  image: ${DOCKER_REGISTRY-}gmscommunicationwebhost
-  #  container_name: api-communication
-  #  build:
-  #    context: .
-  #    dockerfile: src/GMS.Communication/GMS.Communication.WebHost/Dockerfile
-  #  ports:
-  #    - "3001:80"
-  #  networks:
-  #    - backend
+  gms.api.communication:
+    image: ${DOCKER_REGISTRY-}gmscommunicationwebhost
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+        reservations:
+          memory: 128M
+    container_name: api-communication
+    build:
+      context: .
+      dockerfile: src/GMS.Communication/GMS.Communication.WebHost/Dockerfile
+    ports:
+      - "3001:80"
+    networks:
+      - backend
 
   #gms.gui.console:
     #image: ${DOCKER_REGISTRY-}gmsguiconsole
@@ -74,10 +80,15 @@ services:
     build:
       context: .
       dockerfile: src/GMS.Identity/GMS.Identity.WebHost/Dockerfile
+    environment:
+      REDIS_HOST: gmsreddis
+      REDIS_PORT: 6379
+      REDIS_PASSWORD: eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
     ports: 
       - "6001:80"  
     depends_on:
       - gms.identity.db
+      - gms.identity.cache.reddis
     networks:
       - backend
 
@@ -145,15 +156,23 @@ services:
       - backend
 
   # NO SQL DB
-  #TODO
-
-  # REDIS
-  # gms.reddis:
-  #   image: "reddis:7.0.8"
-  #   container_name: gmsreddis
-  #   restart: always
-  #   ports: 
-  #     - "6379:6379"
+  gms.identity.cache.reddis:
+    image: "redis:7.0.11"
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+        reservations:
+          memory: 128M
+    container_name: gmsreddis
+    restart: always
+    ports: 
+      - "16379:6379"
+    networks:
+      - backend
+    command: redis-server --save 20 1 --loglevel warning
+    volumes: 
+      - cache:/data
     
 
   # RABBIT MQ
@@ -168,6 +187,24 @@ services:
   #     RABBITMQ_DEFAULT_PASS: 12345678
   #   volumes:
   #   - rabbitvol:/var/lib/rabbit
+  gms.rabbitmq:
+    image: masstransit/rabbitmq:latest
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+        reservations:
+          memory: 128M
+    container_name: gmsmasstransit
+    restart: always
+    ports:
+      - "5672:5672"
+      - "15672:15672" 
+    networks:
+      - backend
+    volumes:
+      - rabbitvol:/var/lib/rabbit
+
 
   # LOGGER 
   #gms.elasticsearch:
@@ -218,6 +255,7 @@ volumes:
   gmscoredb_data:
   gmsidentitydb_data:
   pgadminvol:
+  cache:
   rabbitvol:
   elastic_data: {}
 
