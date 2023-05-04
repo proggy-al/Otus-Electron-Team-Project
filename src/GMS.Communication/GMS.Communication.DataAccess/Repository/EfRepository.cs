@@ -96,8 +96,7 @@ namespace GMS.Communication.DataAccess.Repository
 
         public async Task<ICollection<T>> GetByPredicateAsync(Expression<Func<T, bool>> where)
         {
-            var result = await _db.Set<T>().Where(where).ToListAsync();
-            return result;
+            return await _db.Set<T>().Where(where).ToListAsync();
         }
     }
 }
