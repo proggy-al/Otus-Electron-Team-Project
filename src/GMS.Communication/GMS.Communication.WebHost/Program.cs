@@ -67,15 +67,9 @@ namespace GMS.Communication.WebHost
         /// <returns></returns>
         private static async Task StartNotificationWorker(IHost host, ILogger<Notifier> notifierlogger, ILogger<NotificationService> notificationServiceLogger)
         {
-            await using var scope = host.Services.CreateAsyncScope();
-            
+            await using var scope = host.Services.CreateAsyncScope();            
             var services = scope.ServiceProvider;
-
-            var hubContext = services.GetRequiredService<IHubContext<ChatHub>>();
-            var notificationDb = services.GetRequiredService<IRepository<TrainingNotification>>();
-            var messagesDb = services.GetRequiredService<IRepository<GmsMessage>>();
-            var notifier = new Notifier(notifierlogger, notificationDb, messagesDb, hubContext);
-            var notificationService = new NotificationService(notificationServiceLogger, notifier, notificationDb);
+            var notificationService = services.GetRequiredService<NotificationService>();
             notificationService.Start();
         }
     }

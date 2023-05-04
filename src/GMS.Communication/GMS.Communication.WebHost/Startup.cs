@@ -7,6 +7,7 @@ using GMS.Communication.WebHost.Consumers;
 using GMS.Communication.WebHost.Hubs;
 using GMS.Communication.WebHost.Mapping;
 using GMS.Communication.WebHost.Models;
+using GMS.Communication.WebHost.Services;
 using MassTransit;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
@@ -28,7 +29,7 @@ namespace GMS.Communication.WebHost
                     );
             });
             services.AddAutoMapper(typeof(MappingProfile));
-            services.AddSingleton<IUserIdProvider, MyUserProvider>();
+            services.AddSingleton<IUserIdProvider, MyUserProvider>();            
             services.AddScoped(typeof(IRepository<GmsMessage>), typeof(EfRepository<GmsMessage>));
             services.AddScoped(typeof(IRepository<TrainingNotification>), typeof(EfRepository<TrainingNotification>));
             services.AddSignalR();
@@ -36,6 +37,8 @@ namespace GMS.Communication.WebHost
             services.AddSwaggerGen();
             services.AddControllers();
             services.AddCustomJWTAuthentification();
+            services.AddSingleton<INotificatable, Notifier>();
+            services.AddSingleton<NotificationService>();
 
             services.AddMassTransit(bus =>
             {
