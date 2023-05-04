@@ -140,7 +140,7 @@ namespace GMS.Core.WebHost.Controllers
 
             // отправляем в микросервис GMS.Communication
             await _producer.AddNotification(
-                new AddTrainingNotificationCmd(training.Id, training.Name, training.DateTime, UserName, UserEmail));
+                new AddTrainingNotificationCmd(training.Id, UserId, training.Name, training.DateTime, UserName, UserEmail));
 
             return Ok(training.Id);
         }
