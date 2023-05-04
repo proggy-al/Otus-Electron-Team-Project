@@ -94,7 +94,7 @@ public class UserController : ControllerBase
 
         var expirationTime = DateTimeOffset.Now.AddMinutes(5.0);
         cacheData = await _userRepository.GetUsers();
-        _cacheService.SetData<IEnumerable<UserApiModel>>("product", cacheData, expirationTime);
+        _cacheService.SetData<IEnumerable<UserApiModel>>("users", cacheData, expirationTime);
         return cacheData.ToList();
 
 
