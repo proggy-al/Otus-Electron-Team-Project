@@ -11,11 +11,11 @@ namespace GMS.Communication.WebHost.Services
     /// </summary>
     public class NotificationService
     {
-        private readonly Notifier _notifier;
+        private readonly INotificatable _notifier;
         private Timer _timer;
         private readonly IRepository<TrainingNotification> _notificationDb; 
 
-        public NotificationService(ILogger<NotificationService> logger, Notifier notifier, IRepository<TrainingNotification> notificationDb)
+        public NotificationService(ILogger<NotificationService> logger, INotificatable notifier, IRepository<TrainingNotification> notificationDb)
         {
             _notificationDb = notificationDb;
             _notifier = notifier;
