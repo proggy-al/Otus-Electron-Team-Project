@@ -196,6 +196,10 @@ services:
         reservations:
           memory: 128M
     container_name: gmsmasstransit
+    hostname: rabbitmq
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
     restart: always
     ports:
       - "5672:5672"
