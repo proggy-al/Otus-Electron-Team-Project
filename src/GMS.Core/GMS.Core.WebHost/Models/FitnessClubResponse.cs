@@ -21,5 +21,10 @@
         /// Адрес
         /// </summary>
         public string Address { get; set; }
+
+        /// <summary>
+        /// Идентификатор владельца клуба
+        /// </summary>
+        public Guid OwnerId { get; set; }
     }
 }
