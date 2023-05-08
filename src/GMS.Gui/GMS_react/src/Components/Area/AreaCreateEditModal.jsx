@@ -18,7 +18,7 @@ function AreaCreateEditModal(props){
       return;
     }
 
-    if(areaId.length > 0){
+    if(areaId && areaId.length > 0){
 
       var resp = await areaApi.EditArea(areaId, name);
       if(!resp.success)
