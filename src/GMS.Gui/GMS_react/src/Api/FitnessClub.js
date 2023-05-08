@@ -1,5 +1,4 @@
 import axios from "../Axios/core";
-import Axios from 'axios';
 
 async function GetFitnessClubsAll(page, pageSize){
   try{

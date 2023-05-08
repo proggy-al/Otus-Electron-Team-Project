@@ -19,7 +19,6 @@ function FitnessClubList(){
   const fitnessListMarkup = clubs.map((e) => <FitnessClubListItem id={e.id} name={e.name} description={e.description} address={e.address} key={e.id}/>)
 
   useEffect(()=>{
-    console.log('this auth', auth);
     GetData();
   }
   ,[]);

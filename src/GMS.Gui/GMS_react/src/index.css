@@ -95,6 +95,11 @@ a{
   color: #454545;
 }
 
+.btn-empty{
+  border: 1px solid #454545;
+  color: #454545;
+}
+
 .validation-error{
   color: #FF6000;
 }
@@ -102,6 +107,9 @@ a{
 .max-width500{
   width: 100%;
   max-width: 500px;
+}
+._underlined{
+  border-bottom: 1px solid #454545;
 }
 
 /*FLEX*/
@@ -158,6 +166,9 @@ a{
 
 .p-16{
   padding: 16px;
+}
+.pb-4{
+  padding-bottom: 4px;
 }
 
 /*SIZINGS*/

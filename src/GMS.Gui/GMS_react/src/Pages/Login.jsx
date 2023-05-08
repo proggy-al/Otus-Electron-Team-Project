@@ -93,10 +93,6 @@ function onTelegramNameChange(e){
   
   }
 
-  function info(){
-    console.log('info', userLogin, password);
-  }
-
   function changeMode(mode){
     setActionType(mode);
   }
@@ -140,7 +136,6 @@ function onTelegramNameChange(e){
         }
       </div>
     </div>
-    <button onClick={info}> info</button>
   </div>
 }
 

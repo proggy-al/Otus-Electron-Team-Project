@@ -35,7 +35,6 @@ function App() {
       dispatch(login(authData));
     }
     else{
-      console.log('href', window.location.location);
       navigate("/login");
     }
   }, 

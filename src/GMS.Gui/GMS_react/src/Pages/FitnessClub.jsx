@@ -1,9 +1,13 @@
 import React, {useState, useEffect} from 'react';
 import { useParams } from 'react-router-dom'
-import fitnessClubApi from '../Api/FitnessClub';
-import FitnessClubModals from '../Components/FitnessClub/FitnessClubModals';
-
 import { useSelector } from 'react-redux';
+
+import fitnessClubApi from '../Api/FitnessClub';
+import areasApi from '../Api/Area';
+
+import FitnessClubModals from '../Components/FitnessClub/FitnessClubModals';
+import AreaListItem from '../Components/Area/AreaListItem';
+import AreaModals from '../Components/Area/AreaModals';
 
 function FitnessClub(){
   const auth = useSelector(state => state.auth.value);
@@ -11,22 +15,40 @@ function FitnessClub(){
   const [fitnessId, setFitnessId] = useState(query.id);
   const [fk, setFk] = useState({});
   const [modal, setModal] = useState({});
+  const [areas, setAreas] = useState([]);
+  const [showAddArea, setShowAddArea] = useState(false);
 
   useEffect(()=>{
     getClub();
+    getAreas();
   }, []);
+
+  function onRefresh(){
+    getClub();
+    getAreas();
+    setShowAddArea(false);
+  }
 
   async function getClub(){
     const fk = await fitnessClubApi.GetFitnessClubById(fitnessId);
     setFk(fk);
   }
 
+  async function getAreas(){
+    const areas = await areasApi.GetFitnessClubAreas(fitnessId);
+    setAreas(areas);
+  }
+
   function closeEditModal(){
     setModal({
       show: false
     });
-    getClub();
+    onRefresh();
   }
+
+  const renderAreas = areas.length === 0 ?
+    <div>Зон пока нет</div> :
+    areas.map(e => <AreaListItem key={e.id} id={e.id} fitnessId={fitnessId} name={e.name} isOwner={isOwner()} onRefresh={onRefresh} />);
 
   function editFitnessClub(){
     setModal({
@@ -45,6 +67,14 @@ function FitnessClub(){
 
   function isOwner(){
     return auth.ID == fk.ownerId ? true : false;
+  }
+
+  function onCreateArea(){
+    setShowAddArea(true);
+  }
+
+  function closeCreateArea(){
+    setShowAddArea(false);
   }
 
   return <div className="p-16">
@@ -72,6 +102,15 @@ function FitnessClub(){
 
     <br/>
     <br/>
+
+    <h3>Зоны:</h3>
+    {
+      isOwner() ? <button className="btn btn-primary" onClick={onCreateArea}>Добавить</button> : null
+    }
+    {
+      isOwner() ? <AreaModals show={showAddArea} type="edit" header="Зона клуба" data={{fkId:fitnessId, name:'', onRefreshEvent: onRefresh}} onCloseModal={closeCreateArea} /> : null
+    }
+    {renderAreas}
 
     <h3>Услуги клуба:</h3>
     {/* <div >Fitness Club : id : {fitnessId}</div> */}
