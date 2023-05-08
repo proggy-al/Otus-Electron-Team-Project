@@ -3,6 +3,7 @@ using GMS.Core.BusinessLogic.Abstractions;
 using GMS.Core.BusinessLogic.Contracts;
 using GMS.Core.WebHost.Controllers.Base;
 using GMS.Core.WebHost.Models;
+using GMS.Core.WebHost.Models.Infrastructure;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
@@ -30,8 +31,7 @@ namespace GMS.Core.WebHost.Controllers
             var pagedList = await _service.GetPage(pageNumber, pageSize);
             var result = _mapper.Map<List<FitnessClubResponse>>(pagedList.Entities);
 
-            Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(pagedList.Pagination));
-            return Ok(result);
+            return Ok(new ResponseWrapper<List<FitnessClubResponse>>(result, pagedList.Pagination));
         }
 
         /// <summary>
@@ -47,8 +47,7 @@ namespace GMS.Core.WebHost.Controllers
             var pagedList = await _service.GetPageByOwnerId(UserId, pageNumber, pageSize);
             var result = _mapper.Map<List<FitnessClubResponse>>(pagedList.Entities);
 
-            Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(pagedList.Pagination));
-            return Ok(result);
+            return Ok(new ResponseWrapper<List<FitnessClubResponse>>(result, pagedList.Pagination));
         }
 
         /// <summary>

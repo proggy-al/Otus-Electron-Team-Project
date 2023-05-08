@@ -1,7 +1,13 @@
+import { useParams, useNavigate } from 'react-router-dom';
 
 function FitnessClubListItem(props){
+  const navigate = useNavigate();
 
-  return <div className="frame p-16 mb-16 " key={props.id}>
+  function toFitnessClubDetails(id){
+    navigate('/fitness-club/'+id);
+  }
+
+  return <div className="frame p-16 mb-16 ponter" key={props.id} onClick={()=>toFitnessClubDetails(props.id)}>
     <div className="font-20 weight-600">{props.name}</div>
     <div >{props.description}</div>
     <div><i>{props.address}</i></div>
