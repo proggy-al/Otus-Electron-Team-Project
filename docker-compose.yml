@@ -210,7 +210,20 @@ services:
       - rabbitvol:/var/lib/rabbit
 
 
-  # LOGGER 
+  # LOGGER
+  seq:
+    image: datalust/seq:2021.3.6651
+    container_name: gmsseq
+    ports:
+      - "5342:80"
+    environment:
+      ACCEPT_EULA: "Y"
+    restart: unless-stopped
+    volumes:
+      - seq-data:/data
+    networks:
+      - backend
+
   #gms.elasticsearch:
   #  image: elasticsearch:7.17.9
   #  container_name: gmselasticsearch
@@ -261,6 +274,7 @@ volumes:
   pgadminvol:
   cache:
   rabbitvol:
+  seq-data:
   elastic_data: {}
 
 networks:

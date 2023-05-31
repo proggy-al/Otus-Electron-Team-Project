@@ -1,4 +1,5 @@
 ﻿using Microsoft.OpenApi.Models;
+using System.Reflection;
 
 namespace GMS.Core.WebHost.Configurations
 {
@@ -6,6 +7,8 @@ namespace GMS.Core.WebHost.Configurations
     {
         public static IServiceCollection AddSwagger(this IServiceCollection serviceCollection)
         {
+            var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+
             serviceCollection.AddSwaggerGen(options =>
             {
                 
@@ -39,6 +42,7 @@ namespace GMS.Core.WebHost.Configurations
                         new string[] {}
                     }
                 });
+                options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
             });
 
             return serviceCollection;
