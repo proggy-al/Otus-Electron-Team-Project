@@ -16,6 +16,13 @@ namespace GMS.Core.WebHost.Controllers
     {
         public AreaController(IAreaService service, IMapper mapper) : base(service, mapper) { }
 
+        /// <summary>
+        /// Return list of Areas in fitness club
+        /// </summary>
+        /// <param name="fitnessClubId"></param>
+        /// <param name="pageNumber"></param>
+        /// <param name="pageSize"></param>
+        /// <returns></returns>
         [AllowAnonymous]
         [HttpGet("[action]/{pageNumber}:{pageSize}")]
         public async Task<IActionResult> GetPage(Guid fitnessClubId, int pageNumber = 1, int pageSize = 12)
@@ -27,6 +34,12 @@ namespace GMS.Core.WebHost.Controllers
             return Ok(result);
         }
 
+        /// <summary>
+        /// Get Area by Id
+        /// AllowAnonymous request
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [AllowAnonymous]
         [HttpGet("[action]/{id}")]
         public async Task<IActionResult> Get(Guid id)
@@ -36,7 +49,12 @@ namespace GMS.Core.WebHost.Controllers
 
             return Ok(result);
         }
-
+        /// <summary>
+        /// Create area in GYM
+        /// Should be outhorize as Administrator
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         [Authorize(Policy = "Administrator")]
         [HttpPost("[action]")]
         public async Task<IActionResult> Add(AreaCreateRequest request)
@@ -49,6 +67,12 @@ namespace GMS.Core.WebHost.Controllers
             return Ok(id.ToString());
         }
 
+        /// <summary>
+        /// Edit area in GYM by areaID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="request"></param>
+        /// <returns></returns>
         [Authorize(Policy = "Administrator")]
         [HttpPut("[action]/{id}")]
         public async Task<IActionResult> Edit(Guid id, AreaEditRequest request)
@@ -61,6 +85,11 @@ namespace GMS.Core.WebHost.Controllers
             return NoContent();
         }
 
+        /// <summary>
+        /// Delete Area in  GYM by Area ID.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [Authorize(Policy = "Administrator")]
         [HttpDelete("[action]/{id}")]
         public async Task<IActionResult> AddToArchive(Guid id)
