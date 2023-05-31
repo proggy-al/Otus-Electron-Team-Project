@@ -7,6 +7,7 @@ using GMS.Core.BusinessLogic.Services;
 using GMS.Core.Core.Abstractions.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 using static System.Linq.Enumerable;
+using GMS.Core.BusinessLogic.Exceptions;
 
 namespace GMS.Core.Test.ServicesTests
 {
@@ -129,6 +130,40 @@ namespace GMS.Core.Test.ServicesTests
                 if (c.StartDate != startDate)
                     Assert.Fail("Invalid value of StartDate.");
             });
+        }
+
+        [Fact]
+        public async Task GetPageApproved_Should_Throw_Exception_If_Emploee_Isnt_Work_In_FitnessClub()
+        {
+            // Arrange
+            _fitnessClubRepositoryMock.Setup(m => m.GetAsync(_fitnessClub.Id, true))
+                .Returns(Task.FromResult(_fitnessClub));
+
+            _employeeRepositoryMock.Setup(m => m.IsEmployeeWorkingInFitnessClub(_fitnessClub.Id, _manager.Id))
+                .Returns(Task.FromResult(false));
+
+            // Act
+            var result = await Assert.ThrowsAsync<AccessDeniedException>( async() => 
+                await _contractService.GetPageApproved(_manager.Id, _fitnessClub.Id, 1, 6));
+
+            // Assert
+            Assert.Equal(new AccessDeniedException("Contract").Message, result.Message);
+        }
+
+        [Fact]
+        public async Task GetPageApproved_Should_Throw_Exception_If_FitnessClub_Is_Not_Found()
+        {
+            // Arrange
+            FitnessClub fitnessClub = null;
+            _fitnessClubRepositoryMock.Setup(m => m.GetAsync(_fitnessClub.Id, true))
+                .Returns(Task.FromResult(fitnessClub));
+
+            // Act
+            var result = await Assert.ThrowsAsync<NotExistException>(async () => 
+                await _contractService.GetPageApproved(_manager.Id, _fitnessClub.Id, 1, 6));
+
+            // Assert
+            Assert.Equal(new NotExistException("FitnessClub", _fitnessClub.Id).Message, result.Message);
         }
     }
 }

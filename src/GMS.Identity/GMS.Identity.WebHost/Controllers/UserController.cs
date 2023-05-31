@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -14,6 +14,7 @@ using FluentValidation;
 using FluentValidation.Results;
 using GMS.Common;
 using GMS.Common.Options;
+using GMS.Identity.WebHost.Cache;
 
 namespace GMS.Identity.WebHost.Controllers;
 
@@ -25,12 +26,14 @@ public class UserController : ControllerBase
     private readonly IUserRepository _userRepository;
     private readonly AuthOptions _authOptions;
     private readonly IValidator _validator;
+    private readonly ICacheService _cacheService;
 
-    public UserController(IUserRepository userRepository, AuthOptions authOptions, IValidator<UserCreateApiModel> validator)
+    public UserController(IUserRepository userRepository, AuthOptions authOptions, IValidator<UserCreateApiModel> validator, ICacheService cacheService)
     {
         _userRepository = userRepository;
         _authOptions = authOptions;
         _validator = validator;
+        _cacheService = cacheService;
     }
 
     /// <summary>
@@ -78,12 +81,27 @@ public class UserController : ControllerBase
     public async Task<List<UserApiModel>> GetAllUsers()
     {
         //так мы получаем ID авторизованного юзера
-            var id= User.Claims.FirstOrDefault(a => a.Type == "ID").Value;
+        //var id= User.Claims.FirstOrDefault(a => a.Type == "ID").Value;
 
-        var res= await _userRepository.GetUsers();
-        Response.Headers.Add("Access-Control-Expose-Headers", "X-Total-Count");
-        Response.Headers.Add("X-Total-Count", res.Count.ToString());
-        return res;
+        var cacheData = _cacheService.GetData<IEnumerable<UserApiModel>>("users");
+        if (cacheData != null)
+        {
+            var resFromCache = cacheData.ToList();
+            Response.Headers.Add("Access-Control-Expose-Headers", "X-Total-Count");
+            Response.Headers.Add("X-Total-Count", resFromCache.Count.ToString());
+            return resFromCache;
+        }
+
+        var expirationTime = DateTimeOffset.Now.AddMinutes(5.0);
+        cacheData = await _userRepository.GetUsers();
+        _cacheService.SetData<IEnumerable<UserApiModel>>("users", cacheData, expirationTime);
+        return cacheData.ToList();
+
+
+        //var res= await _userRepository.GetUsers();
+        //Response.Headers.Add("Access-Control-Expose-Headers", "X-Total-Count");
+        //Response.Headers.Add("X-Total-Count", res.Count.ToString());
+        //return res;
     }
 
     /// <summary>
@@ -91,7 +109,7 @@ public class UserController : ControllerBase
     /// </summary>
     /// <param name="user"></param>
     /// <returns></returns>
-    [RequirePrivelege(Priviliges.GYMOwner, Priviliges.Administrator, Priviliges.System)]
+    //[RequirePrivelege(Priviliges.GYMOwner, Priviliges.Administrator, Priviliges.System)]
     [HttpPost(IdentityRouting.CreateUser)]
     public async Task<ActionResult<UserApiModel>>CreateUser([FromBody] UserCreateApiModel user)
     {

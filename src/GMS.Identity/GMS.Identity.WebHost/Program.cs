@@ -17,7 +17,6 @@ builder.Services.AddCors(options =>
 });
 
 
-
 builder.Configuration.AddJsonFile("swaggersettings.json");
 
 Registration.ConfigureServices(builder.Services, builder.Configuration);

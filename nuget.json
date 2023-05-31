@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+ <packageSources>
+     <clear />
+     <add key="gitlab" value="https://gitlab.example.com/api/v4/projects/<your_project_id>/packages/nuget/index.json" />
+ </packageSources>
+ <packageSourceCredentials>
+     <gitlab>
+         <add key="Username" value="%GITLAB_PACKAGE_REGISTRY_USERNAME%" />
+         <add key="ClearTextPassword" value="%GITLAB_PACKAGE_REGISTRY_PASSWORD%" />
+     </gitlab>
+ </packageSourceCredentials>
+</configuration>

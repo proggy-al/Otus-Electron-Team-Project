@@ -15,7 +15,7 @@
     }
   },
   "RabbitMQOptions": {
-    "Host": "localhost",
+    "Host": "rabbitmq",
     "VirtualHost": "/",
     "UserName": "guest",
     "Password": "guest"

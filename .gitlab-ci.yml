@@ -50,9 +50,9 @@ build-job:
     - docker info
     #- DOCKER_BUILDKIT=1 docker build -f Dockerfile --force-rm  -t gmsidentity:dev --target base --label "GMS.Identity.Service" --output type=tar,dest=out.tar  .
     #- docker login -u $USER -p $ACCESS_TOKEN $CI_REGISTRY
-    - DOCKER_BUILDKIT=1 docker build -f Dockerfile --force-rm  -t registry.gitlab.com/otus-electron-team/otus-electron-team-project  --target base --label "GMS.Identity.Service" .
+    - DOCKER_BUILDKIT=1 docker build -f Dockerfile --force-rm  -t registry.gitlab.com/otus-electron-team/otus-electron-team-project/gms.identity.service  --target base --label "GMS.Identity.Service"  .
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-    - docker push registry.gitlab.com/otus-electron-team/otus-electron-team-project 
+    - docker push registry.gitlab.com/otus-electron-team/otus-electron-team-project/gms.identity.service 
     - ls
     #- dotnet build  --configuration Release
     #- dotnet publish --configuration Release --output ../publish/
@@ -62,6 +62,16 @@ build-job:
   #  expire_in: 1 week
   tags: [netcoremd]
 
+
+build-nuget-JWTAuthManager-And-Commons:
+  stage: build
+  image: mcr.microsoft.com/dotnet/sdk:7.0
+  script:
+    - cd src/GMS.Common/GMS.Common
+    - dotnet pack -c Release
+    - dotnet nuget add source "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/nuget/index.json" --name gitlab --username gitlab-ci-token --password $CI_JOB_TOKEN --store-password-in-clear-text
+    - dotnet nuget push "bin/Release/*.nupkg" --source gitlab
+  tags: [netcoremd]
 
 
 test-identity-service:
