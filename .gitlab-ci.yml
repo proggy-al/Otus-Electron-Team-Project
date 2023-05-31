@@ -77,6 +77,36 @@ build-core:
     - docker push registry.gitlab.com/otus-electron-team/otus-electron-team-project/gms.core.service    
   tags: [netcoremd]
 
+build-communication:
+  stage: build
+  image: docker:20.10.23
+  variables:
+    DOCKER_HOST: tcp://docker:2375
+    DOCKER_TLS_CERTDIR: ""    
+  services:
+    - name: docker:20.10.23-dind      
+  script:
+    - cd src/GMS.Communication/GMS.Communication.WebHost/
+    - DOCKER_BUILDKIT=1 docker build -f Dockerfile --force-rm  -t registry.gitlab.com/otus-electron-team/otus-electron-team-project/gms.communication.service  --target base --label "GMS.Communication.Service"  .
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker push registry.gitlab.com/otus-electron-team/otus-electron-team-project/gms.communication.service    
+  tags: [netcoremd]
+
+build-gateway:
+  stage: build
+  image: docker:20.10.23
+  variables:
+    DOCKER_HOST: tcp://docker:2375
+    DOCKER_TLS_CERTDIR: ""    
+  services:
+    - name: docker:20.10.23-dind      
+  script:
+    - cd src/GMS.APIGatewayOcelot/
+    - DOCKER_BUILDKIT=1 docker build -f Dockerfile --force-rm  -t registry.gitlab.com/otus-electron-team/otus-electron-team-project/gms.gateway.service  --target base --label "GMS.Gateway.Service"  .
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker push registry.gitlab.com/otus-electron-team/otus-electron-team-project/gms.gateway.service    
+  tags: [netcoremd]
+
 
 build-nuget-JWTAuthManager-And-Commons:
   stage: build
