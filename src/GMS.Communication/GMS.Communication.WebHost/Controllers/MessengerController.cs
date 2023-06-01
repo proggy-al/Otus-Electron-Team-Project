@@ -26,7 +26,7 @@ namespace GMS.Communication.WebHost.Controllers
         }
 
         [Authorize]
-        [RequirePrivelege(Priviliges.Administrator, Priviliges.System)] //ограничения доступа к ручке
+        [RequirePrivelege(Priviliges.Administrator, Priviliges.System)]
         [Route("SendToAll")]
         [HttpPost]
         public async Task<IActionResult> SendMessageToAll([FromBody]MessageRequestDTO requestMessage)
@@ -37,7 +37,7 @@ namespace GMS.Communication.WebHost.Controllers
             return Ok();
         }
 
-        //[Authorize] //ограничения доступа к ручке
+        [Authorize]
         [Route("SendById")]
         [HttpPost]
         public async Task<IActionResult> SendById([FromBody]MessageRequestDTO requestMessage)
@@ -48,7 +48,7 @@ namespace GMS.Communication.WebHost.Controllers
             return Ok();
         }
 
-        //[Authorize] //ограничения доступа к ручке
+        [Authorize]
         [Route("GetUsersMessagesByUserId")]
         [HttpPost]
         public async Task<IEnumerable<GmsMessage>> GetUsersMessagesByUserId(Guid userId)
@@ -57,12 +57,47 @@ namespace GMS.Communication.WebHost.Controllers
             return messages;
         }
 
-        [Authorize] //ограничения доступа к ручке
-        [Route("SendByGroup")] // Для спринта №4 - будет применяться для чат комнат.
+        [Authorize]
+        [RequirePrivelege(Priviliges.Administrator, Priviliges.System)]
+        [Route("SendByGroup")]
         [HttpPost]
-        public async Task<IActionResult> SendByGroup([FromBody]MessageRequestDTO requestMessage)
+        public async Task<IActionResult> SendByGroup() //TODO добавить DTO объект
         {
             throw new NotImplementedException();
+        }
+
+        [Authorize]
+        [Route("AddToGroup")]
+        [HttpPost]
+        public async Task<IActionResult> AddToGroup() //TODO добавить DTO объект
+        {
+            throw new NotImplementedException();
+        }
+
+        [Authorize]
+        [Route("RemoveFromGroup")]
+        [HttpPost]
+        public async Task<IActionResult> RemoveFromGroup() //TODO добавить DTO объект
+        {
+            throw new NotImplementedException();
+        }
+
+        [Authorize]
+        [RequirePrivelege(Priviliges.Administrator, Priviliges.System)]
+        [Route("AddNewGroup")]
+        [HttpPost]
+        public async Task<IActionResult> AddNewGroup() //TODO добавить DTO объект
+        {
+            throw new NotImplementedException();
+        }
+
+        [Authorize]
+        [RequirePrivelege(Priviliges.Administrator, Priviliges.System)]
+        [Route("DeleteGroup")]
+        [HttpPost]
+        public async Task<IActionResult> DeleteGroup() //TODO добавить DTO объект
+        {
+            throw new NotImplementedException(); 
         }
     }
 }

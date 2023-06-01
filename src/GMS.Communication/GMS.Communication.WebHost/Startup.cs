@@ -7,6 +7,7 @@ using GMS.Communication.WebHost.Consumers;
 using GMS.Communication.WebHost.Hubs;
 using GMS.Communication.WebHost.Mapping;
 using GMS.Communication.WebHost.Models;
+using GMS.Communication.WebHost.Services;
 using MassTransit;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
@@ -20,21 +21,24 @@ namespace GMS.Communication.WebHost
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<GmsMessagesDb>(options =>
+            services.AddDbContext<CommunicationDb>(options =>
             {
                 options.UseSqlite(
-                    "Data Source=GmsMessages.db",
+                    "Data Source=Communication.db",
                     x => x.MigrationsAssembly("GMS.Communication.DataAccess.Sqlite")
                     );
             });
             services.AddAutoMapper(typeof(MappingProfile));
-            services.AddSingleton<IUserIdProvider, MyUserProvider>();
-            services.AddScoped(typeof(IRepository<GmsMessage>), typeof(EfRepository<GmsMessage>));
+            services.AddSingleton<IUserIdProvider, MyUserProvider>();            
+            services.AddSingleton(typeof(IRepository<GmsMessage>), typeof(EfRepository<GmsMessage>));
+            services.AddSingleton(typeof(IRepository<TrainingNotification>), typeof(EfRepository<TrainingNotification>));
             services.AddSignalR();
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
             services.AddControllers();
             services.AddCustomJWTAuthentification();
+            services.AddScoped<INotificatable, Notifier>();
+            services.AddScoped<NotificationService>();
 
             services.AddMassTransit(bus =>
             {

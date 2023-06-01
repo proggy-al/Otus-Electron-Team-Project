@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using GMS.Common.Commands;
+using GMS.Communication.WebHost.Models;
 using MassTransit;
 
 namespace GMS.Communication.WebHost.Consumers
@@ -7,17 +8,18 @@ namespace GMS.Communication.WebHost.Consumers
     public class DeleteTrainingNotificationConsumer : IConsumer<DeleteTrainingNotificationCmd>
     {
         private readonly IMapper _mapper;
+        private readonly INotificatable _notifier;
 
-        public DeleteTrainingNotificationConsumer(IMapper mapper)
+        public DeleteTrainingNotificationConsumer(IMapper mapper, INotificatable notifier)
         {
             _mapper = mapper;
+            _notifier = notifier;
         }
 
         public async Task Consume(ConsumeContext<DeleteTrainingNotificationCmd> context)
         {
             var trainingId = context.Message.TrainingId;
-
-            // ToDo: дальнейшая логика
+            await _notifier.DeleteNotificationAsync(trainingId);
         }
     }
 

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GMS.Communication.DataAccess.Sqlite.Migrations
 {
-    [DbContext(typeof(GmsMessagesDb))]
-    [Migration("20230325152132_Initial")]
+    [DbContext(typeof(CommunicationDb))]
+    [Migration("20230504184459_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -64,6 +64,31 @@ namespace GMS.Communication.DataAccess.Sqlite.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Messages");
+                });
+
+            modelBuilder.Entity("GMS.Communication.WebHost.Models.TrainingNotification", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("NotificationDateTime")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TrainingNotification");
                 });
 #pragma warning restore 612, 618
         }

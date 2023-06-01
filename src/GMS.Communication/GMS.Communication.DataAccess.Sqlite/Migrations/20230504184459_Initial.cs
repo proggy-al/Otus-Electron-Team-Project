@@ -30,6 +30,21 @@ namespace GMS.Communication.DataAccess.Sqlite.Migrations
                 {
                     table.PrimaryKey("PK_Messages", x => x.Id);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "TrainingNotification",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    UserId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    NotificationDateTime = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    Email = table.Column<string>(type: "TEXT", nullable: true),
+                    Content = table.Column<string>(type: "TEXT", maxLength: 500, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TrainingNotification", x => x.Id);
+                });
         }
 
         /// <inheritdoc />
@@ -37,6 +52,9 @@ namespace GMS.Communication.DataAccess.Sqlite.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Messages");
+
+            migrationBuilder.DropTable(
+                name: "TrainingNotification");
         }
     }
 }
