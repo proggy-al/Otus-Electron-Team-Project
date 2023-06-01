@@ -1,0 +1,285 @@
+version: '3.4'
+
+
+
+# MICROSERVICES
+services:
+  gms.api.gateway:
+    image: ${DOCKER_REGISTRY-}gmsapigatewayocelot
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+        reservations:
+          memory: 128M
+    container_name: api-gateway
+    build:
+      context: .
+      dockerfile: src/GMS.APIGatewayOcelot/Dockerfile
+    ports:
+      - "4001:80"
+    networks:
+      - backend
+
+  gms.api.communication:
+    image: ${DOCKER_REGISTRY-}gmscommunicationwebhost
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+        reservations:
+          memory: 128M
+    container_name: api-communication
+    build:
+      context: .
+      dockerfile: src/GMS.Communication/GMS.Communication.WebHost/Dockerfile
+    ports:
+      - "3001:80"
+    networks:
+      - backend
+
+  #gms.gui.console:
+    #image: ${DOCKER_REGISTRY-}gmsguiconsole
+    #container_name: gui-console
+    #build:
+      #context: .
+      #dockerfile: src/GMS.Gui/Console/Dockerfile
+    ##ports:
+    ##  - "2001:80"
+    #networks:
+      #- backend
+
+  gms.api.core:
+    image: ${DOCKER_REGISTRY-}gmscorewebhost
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+        reservations:
+          memory: 128M
+    container_name: core-api
+    build:
+      context: .
+      dockerfile: src/GMS.Core/GMS.Core.WebHost/Dockerfile
+    ports:
+      - "5001:80"
+    depends_on:
+      - gms.core.db
+    networks:
+      - backend
+  
+  gms.api.identity:
+    image: ${DOCKER_REGISTRY-}gmsidentitywebhost
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+        reservations:
+          memory: 128M
+    container_name: identity-api
+    build:
+      context: .
+      dockerfile: src/GMS.Identity/GMS.Identity.WebHost/Dockerfile
+    environment:
+      REDIS_HOST: gmsreddis
+      REDIS_PORT: 6379
+      REDIS_PASSWORD: eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
+    ports: 
+      - "6001:80"  
+    depends_on:
+      - gms.identity.db
+      - gms.identity.cache.reddis
+    networks:
+      - backend
+
+  # DB for MICROSERVICES
+  gms.core.db:
+    image: "postgres:latest"
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+        reservations:
+          memory: 128M
+    container_name: gms.core.db
+    restart: always
+    ports:
+      - "5433:5432"
+    environment: 
+      POSTGRES_DB: "gmscore"
+      POSTGRES_USER: "postrgesuser"
+      POSTGRES_PASSWORD: "12345678"
+      PGDATA: /var/lib/potgresql/core
+    volumes:
+      - gmscoredb_data:/var/lib/potgresql/core
+    networks:
+      - backend
+  
+  gms.identity.db:
+    image: "postgres:latest"
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+        reservations:
+          memory: 128M
+    container_name: 'gms.identity.db'
+    restart: always
+    #ports:
+    #  - "5434:5432"
+    environment: 
+      POSTGRES_DB: "gmsidentity"
+      POSTGRES_USER: "postrgesuser"
+      POSTGRES_PASSWORD: "12345678"
+      PGDATA: /var/lib/postgresql/identity
+    volumes:
+      - gmsidentitydb_data:/var/lib/postgresql/identity 
+    networks:
+      - backend
+
+  gms.core.db.admin:
+    image: dpage/pgadmin4
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+        reservations:
+          memory: 128M
+    environment:
+      PGADMIN_DEFAULT_EMAIL: user@mail.com
+      PGADMIN_DEFAULT_PASSWORD: 12345678
+    ports:
+      - "8889:80"
+    volumes:
+      - pgadminvol:/var/lib/postgresql/pgadmin
+    networks:
+      - backend
+
+  # NO SQL DB
+  gms.identity.cache.reddis:
+    image: "redis:7.0.11"
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+        reservations:
+          memory: 128M
+    container_name: gmsreddis
+    restart: always
+    ports: 
+      - "16379:6379"
+    networks:
+      - backend
+    command: redis-server --save 20 1 --loglevel warning
+    volumes: 
+      - cache:/data
+    
+
+  # RABBIT MQ
+  # gms.rabbit:
+  #   image: "rabbitmq:3.11.8"
+  #   container_name: gmsreddis
+  #   restart: always
+  #   ports: 
+  #     - "8080:8080"
+  #   environment:
+  #     RABBITMQ_DEFAULT_USER: user
+  #     RABBITMQ_DEFAULT_PASS: 12345678
+  #   volumes:
+  #   - rabbitvol:/var/lib/rabbit
+  gms.rabbitmq:
+    image: masstransit/rabbitmq:latest
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+        reservations:
+          memory: 128M
+    container_name: gmsmasstransit
+    hostname: rabbitmq
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+    restart: always
+    ports:
+      - "5672:5672"
+      - "15672:15672" 
+    networks:
+      - backend
+    volumes:
+      - rabbitvol:/var/lib/rabbit
+
+
+  # LOGGER
+  seq:
+    image: datalust/seq:2021.3.6651
+    container_name: gmsseq
+    ports:
+      - "5342:80"
+    environment:
+      ACCEPT_EULA: "Y"
+    restart: unless-stopped
+    volumes:
+      - seq-data:/data
+    networks:
+      - backend
+
+  #gms.elasticsearch:
+  #  image: elasticsearch:7.17.9
+  #  container_name: gmselasticsearch
+  #  restart: always
+  #  volumes:
+  #  - elastic_data:/usr/share/elasticsearch/data/
+  #  environment:
+  #    ES_JAVA_OPTS: "-Xmx256m -Xms256m"
+  #    discovery.type: single-node    
+  #  ports:
+  #  - '9200:9200'
+  #  - '9300:9300'
+  #  networks:
+  #    - elk
+
+  #gms.logstash:
+  #  image: logstash:7.16.2
+  #  container_name: gmslogstash
+  #  restart: always
+  #  volumes:
+  #  - ./logstash/:/logstash_dir
+  #  command: logstash -f /logstash_dir/logstash.conf 
+  #  depends_on:
+  #    - gms.elasticsearch
+  #  ports:
+  #  - '9600:9600'
+  #  environment:
+  #    LS_JAVA_OPTS: "-Xmx256m -Xms256m"    
+  #  networks:
+  #    - elk
+
+  #gms.kibana:
+  #  image: kibana:7.17.9
+  #  container_name: gmskibana
+  #  restart: always       
+  #  ports:
+  #  - '9900:5601'
+  #  environment:
+  #    - ELASTICSEARCH_URL=http://elasticsearch:9200  
+  #  depends_on:
+  #    - gms.elasticsearch  
+  #  networks:
+  #    - elk
+
+volumes:
+  gmscoredb_data:
+  gmsidentitydb_data:
+  pgadminvol:
+  cache:
+  rabbitvol:
+  seq-data:
+  elastic_data: {}
+
+networks:
+  elk:
+  backend:
+
+# after launch run  docker inspect id where id - postrger container and find "IPAddress": "172.19.0.2" and selected port to connect via pgAdmin
+# or use container_name instead IpAddress

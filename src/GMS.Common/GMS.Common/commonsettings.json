@@ -1,0 +1,23 @@
+{
+  "Authorization": {
+    "JwtBearerOptions": {
+      "RequireHttpsMetadata": "false",
+      "ValidateIssuer": "true",
+      "ValidateAudience": "true",
+      "ValidateLifetime": "true",
+      "ValidateIssuerSigningKey": "true"
+    },
+    "AditionalOptions": {
+      "ISSUER": "MyAuthServer",
+      "AUDIENCE": "MyAuthClient",
+      "KEY": "mysupersecret_secretkey!123",
+      "LIFETIME": "525600"
+    }
+  },
+  "RabbitMQOptions": {
+    "Host": "rabbitmq",
+    "VirtualHost": "/",
+    "UserName": "guest",
+    "Password": "guest"
+  }
+}

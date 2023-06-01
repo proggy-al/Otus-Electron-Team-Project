@@ -1,0 +1,46 @@
+{
+	"info": {
+		"_postman_id": "9d9a214e-cf53-4790-a37d-0bd939219af4",
+		"name": "IdentityService",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "26253000-9d9a214e-cf53-4790-a37d-0bd939219af4"
+	},
+	"item": [
+		{
+			"name": "/user/uuthorize_SystemUser",
+			"id": "43a9a33f-1ed7-4534-9854-a54388f8b40d",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"userName\": \"System\",\r\n  \"password\": \"123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:6001/user/authorize",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "6001",
+					"path": [
+						"user",
+						"authorize"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

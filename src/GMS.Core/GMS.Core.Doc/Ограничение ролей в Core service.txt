@@ -1,0 +1,65 @@
+Политика в Core service
+
+AllowAnonymous:
++ смотреть информацию о FitnessClubs
++ смотреть информацию о Areas
++ смотреть информацию о Products
++ смотреть информацию о TimeSlots (без инфо из Trainings)
++ смотреть информацию о Trainers
+
+
+User:
++ действия AllowAnonymous
+
++ смотреть информацию о Contracts(по UserId)
++ добавить Contract(т.е. купить Product, без ManagerId и IsApproved)
+
++ смотреть информацию о Trainings(по UserId)
++ добавить Training(обновить TimeSlot.IsBusy = true)
++ отменить Training не позднее чем за 24 часа(по UserId; обновить TimeSlot.IsBusy = false; отправить оповещение тренеру, менеджеру об отмене тренировки)
+
+
+Trainer:
++ действия AllowAnonymous
+
++ смотреть информацию о прошедших Training
++ смотреть информацию о будущих Training
+
++ редактировать Training(добавить Description, Points)
+
+
+Manager:
++ действия AllowAnonymous
+
++ добавить новый Product
++ поместить в архив Product
+
++ смотреть информацию о неподтвержденных Contracts (по FitnessClubId)
++ смотреть информацию о Contracts(по ManagerId)
++ редактировать Contract (т.е. подтвердить, обновив только IsApproved = true и ManagerId)
+
++ создать TimeSlot
+
+
+Administrator:
++ действия  Manager
+- редактировать Contract(т.е. подтвердить, обновив только IsApproved = true и ManagerId)
+
++ редактировать FitnessClub
+
++ добавить Area
++ редактировать Area
++ поместить в архив Area
+
++ поместить в архив TimeSlot (при этом отправить оповещение пользователю об отмене тренировки и удалить Training)
+
++ смотреть информацию о Emploee
++ добавить Emploee
++ поместить в архив Emploee
+
+
+Owner:
++ действия Administrator
+
++ добавить FitnessClub
++ поместить в архив FitnessClub

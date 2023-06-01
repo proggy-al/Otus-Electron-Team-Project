@@ -1,0 +1,170 @@
+build-identity:
+  stage: build
+  image: docker:20.10.23
+  variables:
+    # When using dind service, you must instruct docker to talk with the
+    # daemon started inside of the service. The daemon is available with
+    # a network connection instead of the default /var/run/docker.sock socket.
+    #
+    # The 'docker' hostname is the alias of the service container as described at
+    # https://docs.gitlab.com/ee/ci/docker/using_docker_images.html#accessing-the-services
+    #
+    # If you're using GitLab Runner 12.7 or earlier with the Kubernetes executor and Kubernetes 1.6 or earlier,
+    # the variable must be set to tcp://localhost:2375 because of how the
+    # Kubernetes executor connects services to the job container
+    #DOCKER_HOST: tcp://localhost:2375
+    #
+    DOCKER_HOST: tcp://docker:2375
+    #
+    # This instructs Docker not to start over TLS.
+    DOCKER_TLS_CERTDIR: ""
+    
+    #DOCKER_DRIVER: overlay2
+  
+
+  services:
+    - name: docker:20.10.23-dind
+      #alias: docker
+      #command: ["--registry-mirror", "https://registry-mirror.example.com"]  # Specify the registry mirror to use
+      #command: ["--tls=false"]
+
+  # This will run a Docker daemon in a container (Docker-In-Docker), which will
+  # be available at thedockerhost:2375. If you make e.g. port 5000 public in Docker
+  # (`docker run -p 5000:5000 yourimage`) it will be exposed at thedockerhost:5000.
+  #services:
+  # - name: docker:dind
+  #   alias: thedockerhost
+
+  #variables:
+    # Tell docker CLI how to talk to Docker daemon; see
+    # https://docs.gitlab.com/ee/ci/docker/using_docker_build.html#use-docker-in-docker-executor
+    #DOCKER_HOST: tcp://thedockerhost:2375/
+    # Use the overlayfs driver for improved performance:
+    #DOCKER_DRIVER: overlay2
+    #DOCKER_TLS_CERTDIR: ""
+
+  script:
+    - cd src/GMS.Identity/GMS.Identity.WebHost/
+    - ls
+    #- dotnet restore Otus.Teaching.PromoCodeFactory.sln --interactive
+    - docker info
+    #- DOCKER_BUILDKIT=1 docker build -f Dockerfile --force-rm  -t gmsidentity:dev --target base --label "GMS.Identity.Service" --output type=tar,dest=out.tar  .
+    #- docker login -u $USER -p $ACCESS_TOKEN $CI_REGISTRY
+    - DOCKER_BUILDKIT=1 docker build -f Dockerfile --force-rm  -t registry.gitlab.com/otus-electron-team/otus-electron-team-project/gms.identity.service  --target base --label "GMS.Identity.Service"  .
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker push registry.gitlab.com/otus-electron-team/otus-electron-team-project/gms.identity.service 
+    - ls
+    #- dotnet build  --configuration Release
+    #- dotnet publish --configuration Release --output ../publish/
+  #artifacts:
+  #  paths:
+  #    - src/GMS.Identity/GMS.Identity.WebHost/out.tar
+  #  expire_in: 1 week
+  tags: [netcoremd]
+
+build-core:
+  stage: build
+  image: docker:20.10.23
+  variables:
+    DOCKER_HOST: tcp://docker:2375
+    DOCKER_TLS_CERTDIR: ""    
+  services:
+    - name: docker:20.10.23-dind      
+  script:
+    - cd src/GMS.Core/GMS.Core.WebHost/
+    - DOCKER_BUILDKIT=1 docker build -f Dockerfile --force-rm  -t registry.gitlab.com/otus-electron-team/otus-electron-team-project/gms.core.service  --target base --label "GMS.Core.Service"  .
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker push registry.gitlab.com/otus-electron-team/otus-electron-team-project/gms.core.service    
+  tags: [netcoremd]
+
+build-communication:
+  stage: build
+  image: docker:20.10.23
+  variables:
+    DOCKER_HOST: tcp://docker:2375
+    DOCKER_TLS_CERTDIR: ""    
+  services:
+    - name: docker:20.10.23-dind      
+  script:
+    - cd src/GMS.Communication/GMS.Communication.WebHost/
+    - DOCKER_BUILDKIT=1 docker build -f Dockerfile --force-rm  -t registry.gitlab.com/otus-electron-team/otus-electron-team-project/gms.communication.service  --target base --label "GMS.Communication.Service"  .
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker push registry.gitlab.com/otus-electron-team/otus-electron-team-project/gms.communication.service    
+  tags: [netcoremd]
+
+build-gateway:
+  stage: build
+  image: docker:20.10.23
+  variables:
+    DOCKER_HOST: tcp://docker:2375
+    DOCKER_TLS_CERTDIR: ""    
+  services:
+    - name: docker:20.10.23-dind      
+  script:
+    - cd src/GMS.APIGatewayOcelot/
+    - DOCKER_BUILDKIT=1 docker build -f Dockerfile --force-rm  -t registry.gitlab.com/otus-electron-team/otus-electron-team-project/gms.gateway.service  --target base --label "GMS.Gateway.Service"  .
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker push registry.gitlab.com/otus-electron-team/otus-electron-team-project/gms.gateway.service    
+  tags: [netcoremd]
+
+
+build-nuget-JWTAuthManager-And-Commons:
+  stage: build
+  image: mcr.microsoft.com/dotnet/sdk:7.0
+  script:
+    - cd src/GMS.Common/GMS.Common
+    - dotnet pack -c Release
+    - dotnet nuget add source "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/nuget/index.json" --name gitlab --username gitlab-ci-token --password $CI_JOB_TOKEN --store-password-in-clear-text
+    - dotnet nuget push "bin/Release/*.nupkg" --source gitlab
+  tags: [netcoremd]
+
+
+test-identity-service:
+  stage: test
+  image: mcr.microsoft.com/dotnet/sdk:7.0
+  script:
+    - cd src/GMS.Identity/GMS.Identity.Test
+    - dotnet test --test-adapter-path:. --logger:"junit;LogFilePath=..\artifacts\{assembly}-test-result.xml;MethodFormat=Class;FailureBodyFormat=Verbose"
+  artifacts:
+    when: always
+    paths:
+      - ./**/*test-result.xml
+    reports:
+      junit: ./**/*test-result.xml
+  tags: [netcoremd]
+
+test-core-service:
+  stage: test
+  image: mcr.microsoft.com/dotnet/sdk:7.0
+  script:
+    - cd src/GMS.Core/GMS.Core.Test
+    - dotnet test --test-adapter-path:. --logger:"junit;LogFilePath=..\artifacts\{assembly}-test-result.xml;MethodFormat=Class;FailureBodyFormat=Verbose"
+  artifacts:
+    when: always
+    paths:
+      - ./**/*test-result.xml
+    reports:
+      junit: ./**/*test-result.xml
+  tags: [netcoremd]
+
+test-communication-service:
+  stage: test
+  image: mcr.microsoft.com/dotnet/sdk:7.0
+  script:
+    - cd src/GMS.Communication/GMS.Communication.Test
+    - dotnet test --test-adapter-path:. --logger:"junit;LogFilePath=..\artifacts\{assembly}-test-result.xml;MethodFormat=Class;FailureBodyFormat=Verbose"
+  artifacts:
+    when: always
+    paths:
+      - ./**/*test-result.xml
+    reports:
+      junit: ./**/*test-result.xml
+  tags: [netcoremd]
+
+#deploy-prod:
+#  stage: deploy
+#  image: mcr.microsoft.com/dotnet/sdk:7.0
+#  script:
+#    - echo "This job deploys something from the $CI_COMMIT_BRANCH branch."
+#  environment: production
+#  tags: [netcoremd]
