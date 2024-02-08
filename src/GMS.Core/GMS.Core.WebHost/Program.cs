@@ -46,7 +46,7 @@ try
 
     var app = WebApplicationConfiguration.Configure(builder);
 
-    Log.Logger.Information($"The {app.Environment.ApplicationName} started...");
+    Log.Logger.Fatal($"The {app.Environment.ApplicationName} started...");
     app.Run();
 
     return 0;
