@@ -7,10 +7,12 @@ namespace GMS.Core.WebHost.Middlewares
     public class ExceptionHandlerMiddleware
     {
         private readonly RequestDelegate _next;
+        private readonly ILogger _logger;
 
-        public ExceptionHandlerMiddleware(RequestDelegate next)
+        public ExceptionHandlerMiddleware(RequestDelegate next, ILogger logger)
         {
             _next = next;
+            _logger = logger;   
         }
 
         public async Task Invoke(HttpContext context)
@@ -59,11 +61,18 @@ namespace GMS.Core.WebHost.Middlewares
                 case BadRequestException:
                     code = HttpStatusCode.BadRequest;
                     break;
+                default: 
+                    code = HttpStatusCode.BadRequest;
+                    break;
+
+
                     //case ValidationException validationException:
                     //    code = HttpStatusCode.BadRequest;
                     //    result = JsonSerializer.Serialize(validationException.Errors);
                     //    break;
             }
+
+            _logger.Error(exception, "Something bad was happen response status code - {@code}",code);
 
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = (int)code;
